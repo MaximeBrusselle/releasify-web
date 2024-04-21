@@ -35,7 +35,7 @@ const FAQPage: React.FC = () => {
       <hr className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400" />
       <div className="accordionsFAQ flex flex-col justify-center items-center">
         {questionsData[selectedCategory].map((question, index) => (
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion type="single" collapsible className="w-full" key={question.id}>
             <AccordionItem value={`item-${index}`}>
               <AccordionTrigger>{question.question}</AccordionTrigger>
               <AccordionContent>{question.answer}</AccordionContent>
