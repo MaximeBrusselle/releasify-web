@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useLocation } from 'react-router-dom'; // Import useLocation
+import examplePfp from '../assets/synthsation_pfp.png';
 
 // Define a type for the navigation items
 interface NavigationItem {
@@ -20,9 +21,11 @@ const NavBar: React.FC = () => {
 
     const navigation: NavigationItem[] = [
         { name: 'Home', href: '/', current: false },
-        { name: 'Overview', href: '/overview', current: false },
-        { name: 'About', href: '/about', current: false },
-        { name: 'Calendar', href: '/calendar', current: false },
+        { name: 'Releases', href: '/releases', current: false },
+        { name: 'Artists', href: '/artists', current: false },
+        { name: 'Labels', href: '/labels', current: false },
+        { name: 'FAQ', href: '/faq', current: false },
+        { name: 'Updates', href: '/updates', current: false },
     ];
 
     navigation.forEach((item) => {
@@ -93,7 +96,7 @@ const NavBar: React.FC = () => {
                                             <span className="sr-only">Open user menu</span>
                                             <img
                                                 className="h-8 w-8 rounded-full"
-                                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                src={examplePfp}
                                                 alt=""
                                             />
                                         </Menu.Button>
