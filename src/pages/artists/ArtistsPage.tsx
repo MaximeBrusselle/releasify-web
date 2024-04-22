@@ -8,7 +8,7 @@ const ArtistsPage = () => {
       <h1 className="text-3xl font-bold underline">
         Welcome to the ArtistsPage
       </h1>
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-center">
         {artists.map((artist) => (
           <div key={artist.id} className="flex flex-col items-center">
             <div className="relative w-48 h-48">
@@ -29,8 +29,6 @@ const ArtistsPage = () => {
           </div>
         ))}
       </div>
-
-
     </div>
   );
 };
