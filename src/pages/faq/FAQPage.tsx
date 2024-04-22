@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ColorCard from "../../components/ColorCard";
-import image from "../../assets/image.png";
+import image from "../../assets/artists/cryex_pfp.png";
 import {
   Accordion,
   AccordionContent,

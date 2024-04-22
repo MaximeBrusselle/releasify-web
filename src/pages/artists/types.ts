@@ -3,19 +3,19 @@ interface Artist {
     artistName: string,
     profilePicture: string,
     genres: Genre[],
-    label: LabelShort
+    label?: LabelShort
 }
 
 interface ArtistDetail {
     id: string,
     artistName: string,
-    realName: string,
+    realName?: string,
     description: string
     profilePicture: string,
     bannerPicture: string,
     socials: SocialInfo[],
     genres: Genre[],
-    label: LabelShort,
+    label?: LabelShort,
     releases: ReleaseShort[]
 }
 
@@ -46,7 +46,13 @@ enum SocialPlatform {
 interface Genre {
     id: string,
     name: string,
-    group: string
+    group: GenreGroup
+}
+
+interface GenreGroup {
+    id: string,
+    name: string
+    color: string
 }
 
 interface LabelShort {
@@ -70,4 +76,4 @@ interface ArtistShort {
     picture: string
 }
 
-export type {Artist, ArtistDetail, Genre, SocialInfo}
+export type { Artist, ArtistDetail, SocialInfo, Social, SocialPlatform, Genre, GenreGroup, LabelShort, ReleaseShort, ArtistShort };
