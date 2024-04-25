@@ -131,6 +131,173 @@ const socials: SocialInfo[] = [
     }
 ];
 
+const releases: ReleaseShort[] = [
+    {
+        id: "1",
+        name: "Don't Let Me Down",
+        artists: [
+            {
+                id: "2",
+                name: "Sparkz",
+                picture: "sparkz_pfp.jpg"
+            },
+        ],
+        picture: "dont_let_me_down_cover.jpeg",
+        genres: [genres[6], genres[4]],
+        releaseDate: new Date("2024-04-11")
+    },
+    {
+        id: "2",
+        name: "Move Your Body",
+        artists: [
+            {
+                id: "2",
+                name: "Sparkz",
+                picture: "sparkz_pfp.jpg"
+            },
+        ],
+        picture: "move_your_body_cover.jpeg",
+        genres: [genres[6], genres[4]],
+        releaseDate: new Date("2024-04-11")
+    },
+    {
+        id: "3",
+        name: "CARNIVAL",
+        artists: [
+            {
+                id: "3",
+                name: "Kenai",
+                picture: "kenai_pfp.jpg"
+            },
+        ],
+        picture: "carinval_cover.jpeg",
+        genres: [genres[4]],
+        releaseDate: new Date("2024-04-18")
+    },
+    {
+        id: "4",
+        name: "Feel Our Love",
+        artists: [
+            {
+                id: "5",
+                name: "Invaderz",
+                picture: "invaderz_pfp.jpg"
+            },
+            {
+                id: "",
+                name: "Inswennity",
+                picture: "default_pfp.jpg"
+            },
+        ],
+        picture: "feel_our_love_cover.jpeg",
+        genres: [genres[2]],
+        releaseDate: new Date("2023-07-27")
+    },
+    {
+        id: "5",
+        name: "Digital Demise",
+        artists: [
+            {
+                id: "5",
+                name: "Invaderz",
+                picture: "invaderz_pfp.jpg"
+            },
+        ],
+        picture: "digital_demise_cover.jpeg",
+        genres: [genres[2]],
+        releaseDate: new Date("2023-03-31")
+    },
+    {
+        id: "6",
+        name: "Mirrors",
+        artists: [
+            {
+                id: "6",
+                name: "Bmberjck",
+                picture: "bmberjck_pfp.jpg"
+            },
+        ],
+        picture: "mirrors_cover.jpeg",
+        genres: [genres[6], genres[4]],
+        releaseDate: new Date("2024-04-11")
+    },
+    {
+        id: "7",
+        name: "Animals (Cryex Remix)",
+        artists: [
+            {
+                id: "7",
+                name: "Cryex",
+                picture: "cryex_pfp2.jpg"
+            },
+        ],
+        picture: "animals_cryex_remix_cover.jpeg",
+        genres: [genres[4]],
+        releaseDate: new Date("2024-03-15")
+    },
+    {
+        id: "8",
+        name: "Worthless",
+        artists: [
+            {
+                id: "9",
+                name: "The Smiler",
+                picture: "the_smiler_pfp.jpg"
+            },
+        ],
+        picture: "worthless_cover.jpeg",
+        genres: [genres[5], genres[4]],
+        releaseDate: new Date("2024-03-28")
+    },
+    {
+        id: "9",
+        name: "Heart Of Steel (Spectrum of Spoontech 2023 OST)",
+        artists: [
+            {
+                id: "10",
+                name: "Chapter V",
+                picture: "chapter_v_pfp.jpg"
+            },
+        ],
+        picture: "heart_of_steel_cover.jpeg",
+        genres: [genres[5], genres[4]],
+        releaseDate: new Date("2024-04-18")
+    },
+    {
+        id: "10",
+        name: "Sinner",
+        artists: [
+            {
+                id: "11",
+                name: "Faceless",
+                picture: "faceless_pfp.jpeg"
+            },
+        ],
+        picture: "Sinner_cover.jpeg",
+        genres: [genres[5], genres[4]],
+        releaseDate: new Date("2024-01-18")
+    },
+    {
+        id: "11",
+        name: "Restless",
+        artists: [
+            {
+                id: "11",
+                name: "Faceless",
+                picture: "faceless_pfp.jpeg"
+            },
+            {
+                id: "",
+                name: "Coldax",
+                picture: "default_pfp.jpg"
+            },
+        ],
+        picture: "restless_cover.jpeg",
+        genres: [genres[5], genres[4]],
+        releaseDate: new Date("2024-03-21")
+    },
+];
+
 type ArtistDetailMap = { [key: string]: ArtistDetail };
 
 const details: ArtistDetailMap = {
@@ -277,4 +444,4 @@ const details: ArtistDetailMap = {
     },
 };
 
-export {details};
+export {details, releases};
