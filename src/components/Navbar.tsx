@@ -29,7 +29,7 @@ const NavBar: React.FC = () => {
     ];
 
     navigation.forEach((item) => {
-        item.current = item.href === location.pathname;
+        item.current = location.pathname === item.href || location.pathname.startsWith(item.href + '/');
     });
 
     return (

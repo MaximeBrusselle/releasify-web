@@ -10,6 +10,7 @@ import UpdatesPage from "./pages/updates/UpdatesPage";
 import ProfilePage from './pages/profile/ProfilePage';
 import SettingsPage from './pages/profile/SettingsPage';
 import SignOutPage from './pages/profile/SignOutPage';
+import ArtistDetailPage from './pages/artists/ArtistDetailPage';
 // Import other pages
 
 const Layout: React.FC = () => (
@@ -26,7 +27,10 @@ const App: React.FC = () => {
           {/* Index route for the default path within the layout */}
           <Route index element={<HomePage />} />
           <Route path="releases" element={<ReleasesPage />} />
-          <Route path="artists" element={<ArtistsPage />} />
+          <Route path="artists">
+            <Route index element={<ArtistsPage />} />
+            <Route path=":artistId" element={<ArtistDetailPage />} />
+          </Route>
           <Route path="labels" element={<LabelsPage />} />
           <Route path="faq" element={<FAQPage />} />
           <Route path="updates" element={<UpdatesPage />} />
