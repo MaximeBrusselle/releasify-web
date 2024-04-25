@@ -17,9 +17,11 @@ interface ArtistDetail {
     genres: Genre[],
     label?: LabelShort,
     releases: ReleaseShort[]
+    bookingEmail?: string
 }
 
 interface SocialInfo {
+    id: string,
     platform: Social,
     url: string
 }
@@ -30,17 +32,17 @@ interface Social {
 }
 
 enum SocialPlatform {
-    spotify,
-    soundcloud,
-    instagram,
-    facebook,
-    apple_music,
-    beatport,
-    tiktok,
-    twitter_x,
-    reddit,
-    tidal,
-    
+    Spotify,
+    Soundcloud,
+    Instagram,
+    Facebook,
+    Apple_music,
+    Beatport,
+    Tiktok,
+    Twitter_x,
+    Reddit,
+    Tidal,
+    Youtube,
 }
 
 interface Genre {
@@ -76,4 +78,5 @@ interface ArtistShort {
     picture: string
 }
 
-export type { Artist, ArtistDetail, SocialInfo, Social, SocialPlatform, Genre, GenreGroup, LabelShort, ReleaseShort, ArtistShort };
+export type { Artist, ArtistDetail, SocialInfo, Social, Genre, GenreGroup, LabelShort, ReleaseShort, ArtistShort };
+export {SocialPlatform};
