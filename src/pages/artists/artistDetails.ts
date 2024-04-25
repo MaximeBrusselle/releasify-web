@@ -90,7 +90,7 @@ const socialPlatforms: Social[] = [
     },
     {
         name: SocialPlatform.Twitter_x,
-        logo: "twitter_logo.png"
+        logo: "twitter_x_logo.jpg"
     },
     {
         name: SocialPlatform.Soundcloud,
