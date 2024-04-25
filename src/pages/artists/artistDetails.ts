@@ -274,3 +274,5 @@ const details: ArtistDetail[] = [
         bookingEmail: "jamie@bad-company.nl",
     },
 ];
+
+export {details};
