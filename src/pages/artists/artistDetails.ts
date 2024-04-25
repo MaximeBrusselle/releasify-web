@@ -99,6 +99,10 @@ const socialPlatforms: Social[] = [
     {
         name: SocialPlatform.Youtube,
         logo: "youtube_logo.png"
+    },
+    {
+        name: SocialPlatform.Spotify,
+        logo: "spotify_logo.png"
     }
 ];
 
@@ -127,7 +131,11 @@ const socials: SocialInfo[] = [
         id: "5",
         platform: socialPlatforms[4],
         url: "https://www.youtube.com"
-    
+    },
+    {
+        id: "6",
+        platform: socialPlatforms[5],
+        url: "https://www.spotify.com"
     }
 ];
 
@@ -305,9 +313,9 @@ const details: ArtistDetailMap = {
         id: "1",
         artistName: "Synthsation",
         description: "Hardstyle / EDM Producer & DJ based in the Netherlands 🇳🇱",
-        bannerPicture: "default_banner.jpeg",
+        bannerPicture: "default_banner.jpg",
         releases: [],
-        socials: [socials[1], socials[2], socials[3]],
+        socials: [socials[1], socials[2], socials[3], socials[5]],
         profilePicture: "synthsation_pfp.png",
         genres: [genres[4], genres[6]],
         bookingEmail: "synthsationzmusic@gmail.com",
@@ -319,7 +327,7 @@ const details: ArtistDetailMap = {
         description: "Rawstyle DJ/Producer 🇳🇱",
         bannerPicture: "sparkz_banner.jpeg",
         releases: [releases[0], releases[1]],
-        socials: [socials[1], socials[2], socials[3]],
+        socials: [socials[1], socials[2], socials[3], socials[5]],
         profilePicture: "sparkz_pfp.jpg",
         genres: [genres[4], genres[6]],
         label: labelShorts[0],
@@ -332,7 +340,7 @@ const details: ArtistDetailMap = {
         description: "Rawstyle DJ/Producer 🇮🇹",
         bannerPicture: "kenai_banner.jpeg",
         releases: [releases[2]],
-        socials: [socials[1], socials[2], socials[3]],
+        socials: [socials[1], socials[2], socials[3], socials[5]],
         profilePicture: "kenai_pfp.jpg",
         genres: [genres[4], genres[6]],
         label: labelShorts[2],
@@ -345,7 +353,7 @@ const details: ArtistDetailMap = {
         description: "Professional noisemaker 🇳🇱",
         bannerPicture: "scarra_banner.jpeg",
         releases: [],
-        socials: [socials[1], socials[2], socials[3]],
+        socials: [socials[1], socials[2], socials[3], socials[5]],
         profilePicture: "scarra_pfp.jpg",
         genres: [genres[4], genres[6]],
         label: labelShorts[2],
@@ -358,7 +366,7 @@ const details: ArtistDetailMap = {
         description: "Uptempo Hardcore Producer 🇳🇱",
         bannerPicture: "invaderz_banner.jpeg",
         releases: [releases[3], releases[4]],
-        socials: [socials[1], socials[2], socials[3]],
+        socials: [socials[1], socials[2], socials[3], socials[5]],
         profilePicture: "invaderz_pfp.jpg",
         genres: [genres[2]],
         label: labelShorts[1],
@@ -371,7 +379,7 @@ const details: ArtistDetailMap = {
         description: "Raw Hardstyle Artist",
         bannerPicture: "bmberjck_banner.jpeg",
         releases: [releases[5]],
-        socials: [socials[1], socials[2], socials[3]],
+        socials: [socials[1], socials[2], socials[3], socials[5]],
         profilePicture: "bmberjck_pfp.jpg",
         genres: [genres[4], genres[6]],
         label: labelShorts[0],
@@ -384,7 +392,7 @@ const details: ArtistDetailMap = {
         description: "HARDSTYLE DJ/PRODUCER 🏳️‍🌈",
         bannerPicture: "cryex_banner.jpeg",
         releases: [releases[6]],
-        socials: [socials[1], socials[2], socials[3]],
+        socials: [socials[1], socials[2], socials[3], socials[5]],
         profilePicture: "cryex_pfp2.jpg",
         genres: [genres[4], genres[6]],
         label: labelShorts[2],
@@ -397,7 +405,7 @@ const details: ArtistDetailMap = {
         description: "⚡️ THIS IS ELEKTRAWAVE",
         bannerPicture: "vasto_banner.jpeg",
         releases: [],
-        socials: [socials[1], socials[2], socials[3]],
+        socials: [socials[1], socials[2], socials[3], socials[5]],
         profilePicture: "vasto_pfp.jpeg",
         genres: [genres[4], genres[6]],
         label: labelShorts[2],
@@ -408,9 +416,9 @@ const details: ArtistDetailMap = {
         artistName: "The Smiler",
         realName: "Alex Grosse",
         description: "DJ/ Producer 🇩🇪",
-        bannerPicture: "default_banner.jpeg",
+        bannerPicture: "default_banner.jpg",
         releases: [releases[7]],
-        socials: [socials[1], socials[2], socials[3]],
+        socials: [socials[1], socials[2], socials[3], socials[5]],
         profilePicture: "the_smiler_pfp.jpg",
         genres: [genres[4], genres[5], genres[6]],
         label: labelShorts[3],
@@ -423,7 +431,7 @@ const details: ArtistDetailMap = {
         description: "📖 Unveiling a unique musical journey",
         bannerPicture: "chapter_v_banner.jpeg",
         releases: [releases[8]],
-        socials: [socials[1], socials[2], socials[3]],
+        socials: [socials[1], socials[2], socials[3], socials[5]],
         profilePicture: "chapter_v_pfp.jpg",
         genres: [genres[4], genres[5], genres[6]],
         label: labelShorts[3],
@@ -436,7 +444,7 @@ const details: ArtistDetailMap = {
         description: "🃏 why so serious?!",
         bannerPicture: "faceless_banner.jpeg",
         releases: [releases[9], releases[10]],
-        socials: [socials[1], socials[2], socials[3]],
+        socials: [socials[1], socials[2], socials[3], socials[5]],
         profilePicture: "faceless_pfp.jpeg",
         genres: [genres[4], genres[5], genres[6]],
         label: labelShorts[3],
