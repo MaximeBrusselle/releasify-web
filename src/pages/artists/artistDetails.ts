@@ -131,8 +131,10 @@ const socials: SocialInfo[] = [
     }
 ];
 
-const details: ArtistDetail[] = [
-    {
+type ArtistDetailMap = { [key: string]: ArtistDetail };
+
+const details: ArtistDetailMap = {
+    "1":{
         id: "1",
         artistName: "Synthsation",
         description: "Hardstyle / EDM Producer & DJ based in the Netherlands 🇳🇱",
@@ -143,7 +145,7 @@ const details: ArtistDetail[] = [
         genres: [genres[4], genres[6]],
         bookingEmail: "synthsationzmusic@gmail.com",
     },
-    {
+    "2":{
         id: "2",
         artistName: "Sparkz",
         realName: "Eloy Willemsen",
@@ -156,7 +158,7 @@ const details: ArtistDetail[] = [
         label: labelShorts[0],
         bookingEmail: "phil@purebookings.nl",
     },
-    {
+    "3":{
         id: "3",
         artistName: "Kenai",
         realName: "Matteo Pellegrinenlli",
@@ -169,7 +171,7 @@ const details: ArtistDetail[] = [
         label: labelShorts[2],
         bookingEmail: "jamie@bad-company.nl",
     },
-    {
+    "4":{
         id: "4",
         artistName: "Scarra",
         realName: "Oscar van der Staak",
@@ -182,7 +184,7 @@ const details: ArtistDetail[] = [
         label: labelShorts[2],
         bookingEmail: "jamie@bad-company.nl",
     },
-    {
+    "5":{
         id: "5",
         artistName: "Invaderz",
         realName: "Lars van der Loo",
@@ -195,7 +197,7 @@ const details: ArtistDetail[] = [
         label: labelShorts[1],
         bookingEmail: "Agency@Triple6.nl",
     },
-    {
+    "6":{
         id: "6",
         artistName: "Bmberjck",
         realName: "Paul Haagmans",
@@ -208,7 +210,7 @@ const details: ArtistDetail[] = [
         label: labelShorts[0],
         bookingEmail: "tom@purebookings.nl / Phil@purebookings.nl",
     },
-    {
+    "7":{
         id: "7",
         artistName: "Cryex",
         realName: "Levi Weidmann",
@@ -221,7 +223,7 @@ const details: ArtistDetail[] = [
         label: labelShorts[2],
         bookingEmail: "INFO@THE-WISHLIST.nl",
     },
-    {
+    "8":{
         id: "8",
         artistName: "Vasto",
         realName: "Marvin de Groot",
@@ -234,7 +236,7 @@ const details: ArtistDetail[] = [
         label: labelShorts[2],
         bookingEmail: "jamie@bad-company.nl",
     },
-    {
+    "9":{
         id: "9",
         artistName: "The Smiler",
         realName: "Alex Grosse",
@@ -247,7 +249,7 @@ const details: ArtistDetail[] = [
         label: labelShorts[3],
         bookingEmail: "jamie@bad-company.nl",
     },
-    {
+    "10":{
         id: "10",
         artistName: "Chapter V",
         realName: "Mitchell de Jonge & Tim Udo",
@@ -260,7 +262,7 @@ const details: ArtistDetail[] = [
         label: labelShorts[3],
         bookingEmail: "jamie@bad-company.nl",
     },
-    {
+    "11":{
         id: "11",
         artistName: "Faceless",
         realName: "Dylan Adriaans & Less Hoesen",
@@ -273,6 +275,6 @@ const details: ArtistDetail[] = [
         label: labelShorts[3],
         bookingEmail: "jamie@bad-company.nl",
     },
-];
+};
 
 export {details};
