@@ -69,8 +69,14 @@ interface ReleaseShort {
     name: string,
     artists: ArtistShort[],
     picture: string,
-    genres: Genre[],
+    urls: ReleasePlatform[],
     releaseDate: Date
+    label: LabelShort,
+}
+
+interface ReleasePlatform {
+    platform: Social,
+    url: string
 }
 
 interface ArtistShort {
@@ -79,5 +85,5 @@ interface ArtistShort {
     picture: string
 }
 
-export type { Artist, ArtistDetail, SocialInfo, Social, Genre, GenreGroup, LabelShort, ReleaseShort, ArtistShort };
+export type { Artist, ArtistDetail, SocialInfo, Social, Genre, GenreGroup, LabelShort, ReleaseShort, ArtistShort, ReleasePlatform };
 export {SocialPlatform};

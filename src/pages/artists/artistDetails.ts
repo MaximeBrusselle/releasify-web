@@ -1,4 +1,4 @@
-import { ArtistDetail, Genre, GenreGroup, LabelShort, SocialInfo, SocialPlatform, Social, ReleaseShort } from "./types";
+import { ArtistDetail, Genre, GenreGroup, LabelShort, SocialInfo, SocialPlatform, Social, ReleaseShort, ReleasePlatform } from "./types";
 
 const groups: GenreGroup[] = [
     {
@@ -106,7 +106,7 @@ const socialPlatforms: Social[] = [
     }
 ];
 
-const socials: SocialInfo[] = [
+const socialsSparkz: SocialInfo[] = [
     {
         id: "1",
         platform: socialPlatforms[0],
@@ -133,6 +133,30 @@ const socials: SocialInfo[] = [
     }
 ];
 
+const dontletmedownurls: ReleasePlatform[] = [
+    {
+        platform: socialPlatforms[5],
+        url: "https://open.spotify.com/track/57FQr6Co0D23GF3ADAy124?si=485a76c21ef14be5"
+    },
+    {
+        platform: socialPlatforms[3],
+        url: "https://soundcloud.com/unfoldrecords/sparkz-dont-let-me-down?in=unfoldrecords/sets/sparkz-into-the-summer-vol-1"
+    }
+
+];
+
+const moveyourbodyurls: ReleasePlatform[] = [
+    {
+        platform: socialPlatforms[5],
+        url: "https://open.spotify.com/track/1mKiqo9Hq9HBMgkHPSsd9n?si=5c3955615de84ec7"
+    },
+    {
+        platform: socialPlatforms[3],
+        url: "https://soundcloud.com/unfoldrecords/sparkz-move-your-body?in=unfoldrecords/sets/sparkz-into-the-summer-vol-1"
+    }
+];
+
+
 const releases: ReleaseShort[] = [
     {
         id: "1",
@@ -145,8 +169,9 @@ const releases: ReleaseShort[] = [
             },
         ],
         picture: "dont_let_me_down_cover.jpeg",
-        genres: [genres[6], genres[4]],
-        releaseDate: new Date("2024-04-11")
+        urls: [...dontletmedownurls],
+        releaseDate: new Date("2024-09-11"),
+        label: labelShorts[0],
     },
     {
         id: "2",
@@ -159,8 +184,9 @@ const releases: ReleaseShort[] = [
             },
         ],
         picture: "move_your_body_cover.jpeg",
-        genres: [genres[6], genres[4]],
-        releaseDate: new Date("2024-04-11")
+        urls: [...moveyourbodyurls],
+        releaseDate: new Date("2024-09-11"),
+        label: labelShorts[0],
     },
     {
         id: "3",
@@ -172,9 +198,10 @@ const releases: ReleaseShort[] = [
                 picture: "kenai_pfp.jpg"
             },
         ],
-        picture: "carinval_cover.jpeg",
-        genres: [genres[4]],
-        releaseDate: new Date("2024-04-18")
+        picture: "carnival_cover.jpeg",
+        urls: [],
+        releaseDate: new Date("2024-04-18"),
+        label: labelShorts[2],
     },
     {
         id: "4",
@@ -192,8 +219,9 @@ const releases: ReleaseShort[] = [
             },
         ],
         picture: "feel_our_love_cover.jpeg",
-        genres: [genres[2]],
-        releaseDate: new Date("2023-07-27")
+        urls: [],
+        releaseDate: new Date("2023-07-27"),
+        label: labelShorts[1],
     },
     {
         id: "5",
@@ -206,8 +234,9 @@ const releases: ReleaseShort[] = [
             },
         ],
         picture: "digital_demise_cover.jpeg",
-        genres: [genres[2]],
-        releaseDate: new Date("2023-03-31")
+        urls: [],
+        releaseDate: new Date("2023-03-31"),
+        label: labelShorts[1],
     },
     {
         id: "6",
@@ -220,8 +249,9 @@ const releases: ReleaseShort[] = [
             },
         ],
         picture: "mirrors_cover.jpeg",
-        genres: [genres[6], genres[4]],
-        releaseDate: new Date("2024-04-11")
+        urls: [],
+        releaseDate: new Date("2024-04-11"),
+        label: labelShorts[0],
     },
     {
         id: "7",
@@ -234,8 +264,9 @@ const releases: ReleaseShort[] = [
             },
         ],
         picture: "animals_cryex_remix_cover.jpeg",
-        genres: [genres[4]],
-        releaseDate: new Date("2024-03-15")
+        urls: [],
+        releaseDate: new Date("2024-03-15"),
+        label: labelShorts[2],
     },
     {
         id: "8",
@@ -248,8 +279,9 @@ const releases: ReleaseShort[] = [
             },
         ],
         picture: "worthless_cover.jpeg",
-        genres: [genres[5], genres[4]],
-        releaseDate: new Date("2024-03-28")
+        urls: [],
+        releaseDate: new Date("2024-03-28"),
+        label: labelShorts[3],
     },
     {
         id: "9",
@@ -262,8 +294,9 @@ const releases: ReleaseShort[] = [
             },
         ],
         picture: "heart_of_steel_cover.jpeg",
-        genres: [genres[5], genres[4]],
-        releaseDate: new Date("2024-04-18")
+        urls: [],
+        releaseDate: new Date("2024-04-18"),
+        label: labelShorts[3],
     },
     {
         id: "10",
@@ -276,8 +309,9 @@ const releases: ReleaseShort[] = [
             },
         ],
         picture: "Sinner_cover.jpeg",
-        genres: [genres[5], genres[4]],
-        releaseDate: new Date("2024-01-18")
+        urls: [],
+        releaseDate: new Date("2024-01-18"),
+        label: labelShorts[3],
     },
     {
         id: "11",
@@ -295,8 +329,9 @@ const releases: ReleaseShort[] = [
             },
         ],
         picture: "restless_cover.jpeg",
-        genres: [genres[5], genres[4]],
-        releaseDate: new Date("2024-03-21")
+        urls: [],
+        releaseDate: new Date("2024-03-21"),
+        label: labelShorts[3],
     },
 ];
 
@@ -321,7 +356,7 @@ const details: ArtistDetailMap = {
         description: "Rawstyle DJ/Producer 🇳🇱",
         bannerPicture: "sparkz_banner.jpeg",
         releases: [releases[0], releases[1]],
-        socials: [...socials],
+        socials: [...socialsSparkz],
         profilePicture: "sparkz_pfp.jpg",
         genres: [genres[4], genres[6]],
         label: labelShorts[0],
@@ -334,7 +369,7 @@ const details: ArtistDetailMap = {
         description: "Rawstyle DJ/Producer 🇮🇹",
         bannerPicture: "kenai_banner.jpeg",
         releases: [releases[2]],
-        socials: [socials[1], socials[2], socials[3], socials[5]],
+        socials: [],
         profilePicture: "kenai_pfp.jpg",
         genres: [genres[4], genres[6]],
         label: labelShorts[2],
@@ -347,7 +382,7 @@ const details: ArtistDetailMap = {
         description: "Professional noisemaker 🇳🇱",
         bannerPicture: "scarra_banner.jpeg",
         releases: [],
-        socials: [socials[1], socials[2], socials[3], socials[5]],
+        socials: [],
         profilePicture: "scarra_pfp.jpg",
         genres: [genres[4], genres[6]],
         label: labelShorts[2],
@@ -360,7 +395,7 @@ const details: ArtistDetailMap = {
         description: "Uptempo Hardcore Producer 🇳🇱",
         bannerPicture: "invaderz_banner.jpeg",
         releases: [releases[3], releases[4]],
-        socials: [socials[1], socials[2], socials[3], socials[5]],
+        socials: [],
         profilePicture: "invaderz_pfp.jpg",
         genres: [genres[2]],
         label: labelShorts[1],
@@ -373,7 +408,7 @@ const details: ArtistDetailMap = {
         description: "Raw Hardstyle Artist",
         bannerPicture: "bmberjck_banner.jpeg",
         releases: [releases[5]],
-        socials: [socials[1], socials[2], socials[3], socials[5]],
+        socials: [],
         profilePicture: "bmberjck_pfp.jpg",
         genres: [genres[4], genres[6]],
         label: labelShorts[0],
@@ -386,7 +421,7 @@ const details: ArtistDetailMap = {
         description: "HARDSTYLE DJ/PRODUCER 🏳️‍🌈",
         bannerPicture: "cryex_banner.jpeg",
         releases: [releases[6]],
-        socials: [socials[1], socials[2], socials[3], socials[5]],
+        socials: [],
         profilePicture: "cryex_pfp2.jpg",
         genres: [genres[4], genres[6]],
         label: labelShorts[2],
@@ -399,7 +434,7 @@ const details: ArtistDetailMap = {
         description: "⚡️ THIS IS ELEKTRAWAVE",
         bannerPicture: "vasto_banner.jpeg",
         releases: [],
-        socials: [socials[1], socials[2], socials[3], socials[5]],
+        socials: [],
         profilePicture: "vasto_pfp.jpeg",
         genres: [genres[4], genres[6]],
         label: labelShorts[2],
@@ -412,7 +447,7 @@ const details: ArtistDetailMap = {
         description: "DJ/ Producer 🇩🇪",
         bannerPicture: "default_banner.jpg",
         releases: [releases[7]],
-        socials: [socials[1], socials[2], socials[3], socials[5]],
+        socials: [],
         profilePicture: "the_smiler_pfp.jpg",
         genres: [genres[4], genres[5], genres[6]],
         label: labelShorts[3],
@@ -425,7 +460,7 @@ const details: ArtistDetailMap = {
         description: "📖 Unveiling a unique musical journey",
         bannerPicture: "chapter_v_banner.jpeg",
         releases: [releases[8]],
-        socials: [socials[1], socials[2], socials[3], socials[5]],
+        socials: [],
         profilePicture: "chapter_v_pfp.jpg",
         genres: [genres[4], genres[5], genres[6]],
         label: labelShorts[3],
@@ -438,7 +473,7 @@ const details: ArtistDetailMap = {
         description: "🃏 why so serious?!",
         bannerPicture: "faceless_banner.jpeg",
         releases: [releases[9], releases[10]],
-        socials: [socials[1], socials[2], socials[3], socials[5]],
+        socials: [],
         profilePicture: "faceless_pfp.jpeg",
         genres: [genres[4], genres[5], genres[6]],
         label: labelShorts[3],

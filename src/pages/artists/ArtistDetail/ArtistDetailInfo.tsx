@@ -1,42 +1,26 @@
-import { useParams } from "react-router-dom";
-import { ArtistDetail } from "./types";
-import { details } from "./artistDetails";
-import { getImageUrl } from "../../lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
-import notifPlus from "../../assets/icon_bell_plus.svg";
-import notifOff from "../../assets/icon_bell_off.svg";
+import notifPlus from "../../../assets/icon_bell_plus.svg";
+import notifOff from "../../../assets/icon_bell_off.svg";
+import { getImageUrl } from "../../../lib/utils";
+import { ArtistDetail } from "../types";
 
-const ArtistDetailPage = () => {
-	const { artistId } = useParams<{ artistId: string }>();
+interface ArtistDetailInfoProps {
+    artist: ArtistDetail;
+    following: boolean;
+    notification: boolean;
+    handleFollow: () => void;
+    handleNotification: () => void;
+}
 
-	// Check if artistId exists before accessing details
-	const artist: ArtistDetail | undefined = artistId ? details[artistId] : undefined;
-
-	// If artistId doesn't exist or details[artistId] is undefined, handle the case accordingly
-	if (!artistId || !artist) {
-		return <div>No artist found for ID: {artistId}</div>;
-	}
-
-	const [following, setFollowing] = useState(false);
-	const [notification, setNotification] = useState(false);
-
-	const handleFollow = () => {
-		setFollowing(!following);
-	};
-
-	const handleNotification = () => {
-		setNotification(!notification);
-	};
-
+const ArtistDetailInfo = (props: ArtistDetailInfoProps) => {
+    const { artist, following, notification, handleFollow, handleNotification } = props;
 	return (
-		<div className="flex flex-col items-center justify-start gap-[28px] font-[Fira Sans]">
-			<div className="flex flex-col items-center justify-start gap-[14px]">
+		<div className="flex flex-col items-center justify-start gap-[14px] w-[75vw]">
 				{/* The banner picture */}
 				<img
 					src={getImageUrl("artists", artist.bannerPicture)}
 					alt="banner picture"
-					className="w-[65vw] object-cover rounded-[20px] border-black border-[6px] border-solid aspect-[1452/412]"
+					className="w-full object-cover rounded-[20px] border-black border-[6px] border-solid aspect-[1452/412]"
 				/>
 				{/* PFP + general info */}
 				<div className="flex flex-row w-full h-full gap-[14px] items-center justify-center border-solid">
@@ -140,12 +124,7 @@ const ArtistDetailPage = () => {
 					</div>
 				</div>
 			</div>
-
-			{/* Announced releases */}
-			<div className="flex flex-col"></div>
-			{/* Previous releases */}
-		</div>
 	);
 };
 
-export default ArtistDetailPage;
+export default ArtistDetailInfo;
