@@ -29,6 +29,7 @@ const ArtistDetailPage = () => {
 	};
 
 	const announcedReleases = artist.releases.filter((release) => release.releaseDate > new Date());
+	const spacing = announcedReleases.length > 2 ? "justify-between" : " justify-start gap-x-6";
 	const previousReleases = artist.releases.filter((release) => release.releaseDate <= new Date());
 
 	return (
@@ -39,7 +40,7 @@ const ArtistDetailPage = () => {
 				<h2 className="text-[48px] font-extrabold">Announced Releases</h2>
 				{announcedReleases.length === 0 && <p className="text-[24px]">No announced releases</p>}
 				{announcedReleases.length > 0 && (
-					<div className="flex flex-row flex-wrap justify-between items-center w-full gap-y-6">
+					<div className={`flex flex-row flex-wrap ${spacing} items-center w-full gap-y-6`}>
 						{announcedReleases.map((release) => (
 							<AnnouncedRelease key={release.id} release={release} />
 						))}

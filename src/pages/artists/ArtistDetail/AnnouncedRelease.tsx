@@ -18,7 +18,7 @@ const announcedRelease = (props: AnnouncedReleaseProps) => {
 	const month = release.releaseDate.toDateString().split(" ")[1];
 
 	return (
-		<div className="w-[670px] h-[182px] rounded-none md:rounded-2xl p-4 shadow-input bg-white dark:bg-black">
+		<div className="w-[640px] h-[182px] rounded-none md:rounded-2xl p-4 shadow-input bg-white dark:bg-black">
 			<div className="flex flex-row items-center justify-between w-full h-full gap-4">
 				<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg" />
 				<div className="flex flex-col items-start justify-center">
