@@ -94,7 +94,7 @@ const socialPlatforms: Social[] = [
     },
     {
         name: SocialPlatform.Soundcloud,
-        logo: "soundcloud_logo.png"
+        logo: "soundcloud_logo.jpg"
     },
     {
         name: SocialPlatform.Youtube,
@@ -110,32 +110,26 @@ const socials: SocialInfo[] = [
     {
         id: "1",
         platform: socialPlatforms[0],
-        url: "https://www.facebook.com"
+        username: "SparkzDj",
+        url: "https://www.facebook.com/SparkzDj"
     },
     {
         id: "2",
         platform: socialPlatforms[1],
-        url: "https://www.instagram.com"
+        username: "Sparkz_dj",
+        url: "https://www.instagram.com/sparkz_dj"
     },
     {
         id: "3",
-        platform: socialPlatforms[2],
-        url: "https://www.twitter.com"
-    },
-    {
-        id: "4",
         platform: socialPlatforms[3],
-        url: "https://www.soundcloud.com"
-    },
-    {
-        id: "5",
-        platform: socialPlatforms[4],
-        url: "https://www.youtube.com"
+        username: "sparkz_raw",
+        url: "https://www.soundcloud.com/sparkz_raw"
     },
     {
         id: "6",
         platform: socialPlatforms[5],
-        url: "https://www.spotify.com"
+        username: "Sparkz",
+        url: "https://open.spotify.com/artist/0kXJAI2hR2vdzVHsu9OLka?si=kb0CCAksR1WFUw4WigqIiw"
     }
 ];
 
@@ -315,7 +309,7 @@ const details: ArtistDetailMap = {
         description: "Hardstyle / EDM Producer & DJ based in the Netherlands 🇳🇱",
         bannerPicture: "default_banner.jpg",
         releases: [],
-        socials: [socials[1], socials[2], socials[3], socials[5]],
+        socials: [],
         profilePicture: "synthsation_pfp.png",
         genres: [genres[4], genres[6]],
         bookingEmail: "synthsationzmusic@gmail.com",
@@ -327,7 +321,7 @@ const details: ArtistDetailMap = {
         description: "Rawstyle DJ/Producer 🇳🇱",
         bannerPicture: "sparkz_banner.jpeg",
         releases: [releases[0], releases[1]],
-        socials: [socials[1], socials[2], socials[3], socials[5]],
+        socials: [...socials],
         profilePicture: "sparkz_pfp.jpg",
         genres: [genres[4], genres[6]],
         label: labelShorts[0],

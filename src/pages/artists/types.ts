@@ -23,6 +23,7 @@ interface ArtistDetail {
 interface SocialInfo {
     id: string,
     platform: Social,
+    username: string,
     url: string
 }
 
