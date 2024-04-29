@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { ArtistDetail } from "../types";
 import { details } from "../artistDetails";
-import { getImageUrl } from "../../../lib/utils";
 import ArtistDetailInfo from "./ArtistDetailInfo";
 import AnnouncedRelease from "./AnnouncedRelease";
 import { useState } from "react";
@@ -30,7 +29,7 @@ const ArtistDetailPage = () => {
 
 	const announcedReleases = artist.releases.filter((release) => release.releaseDate > new Date());
 	const spacing = announcedReleases.length > 2 ? "justify-between" : " justify-start gap-x-6";
-	const previousReleases = artist.releases.filter((release) => release.releaseDate <= new Date());
+	// const previousReleases = artist.releases.filter((release) => release.releaseDate <= new Date());
 
 	return (
 		<div className="flex flex-col items-center justify-start gap-[28px] font-[Fira Sans]">
