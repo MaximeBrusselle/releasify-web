@@ -3,7 +3,12 @@ import { getImageUrl } from "../../lib/utils";
 import { ReleaseArtist } from "@/data/releases/releaseTypes";
 import { Link } from "react-router-dom";
 
-const ReleaseCardArtistHover = ({ artist }: { artist: ReleaseArtist }) => {
+interface ReleaseArtistProps {
+	artist: ReleaseArtist;
+}
+
+const ReleaseCardArtistHover: React.FC<ReleaseArtistProps> = (props: ReleaseArtistProps) => {
+	const { artist } = props;
 	const goToProfile = () => {
 		window.location.href = `/artists/${artist.id}`;
 	};

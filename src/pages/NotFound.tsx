@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
     const { pathname } = useLocation();
 
     return (

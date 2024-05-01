@@ -5,7 +5,7 @@ import ReleaseCard from "../../../components/releases/ReleaseCard";
 import { useState } from "react";
 import ArtistDetailInfo from "./ArtistDetailInfo";
 
-const ArtistDetailPage = () => {
+const ArtistDetailPage: React.FC = () => {
 	const { artistId } = useParams<{ artistId: string }>();
 
 	// Check if artistId exists before accessing details

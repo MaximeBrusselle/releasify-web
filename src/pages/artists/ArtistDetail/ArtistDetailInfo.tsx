@@ -13,7 +13,7 @@ interface ArtistDetailInfoProps {
 	handleNotification: () => void;
 }
 
-const ArtistDetailInfo = (props: ArtistDetailInfoProps) => {
+const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailInfoProps) => {
 	const { artist, following, notification, handleFollow, handleNotification } = props;
 	return (
 		<div className="flex flex-col items-center justify-start gap-[14px] w-[75vw]">

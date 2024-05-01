@@ -12,7 +12,7 @@ interface ReleaseCardProps {
 	release: ReleaseIndex;
 }
 
-const ReleaseCard = (props: ReleaseCardProps) => {
+const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 	const cardRef = useRef<HTMLDivElement>(null);
 	const [fontSize, setFontSize] = useState<string>("4xl");
 

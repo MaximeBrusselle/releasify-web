@@ -3,11 +3,11 @@ import { ArtistIndex } from "../../data/artists/artistTypes";
 import { Link } from "react-router-dom";
 import { getImageUrl } from "@/lib/utils";
 
-interface Props {
+interface ArtistComponentProps {
 	artist: ArtistIndex;
 }
 
-const ArtistComponent = (props: Props) => {
+const ArtistComponent: React.FC<ArtistComponentProps> = (props: ArtistComponentProps) => {
 	const { artist } = props;
 	return (
 		<div key={artist.id} className="flex flex-col items-center">

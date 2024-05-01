@@ -3,11 +3,11 @@ import { LabelIndex } from "../../data/labels/labelTypes";
 import { Link } from "react-router-dom";
 import { getImageUrl } from "@/lib/utils";
 
-interface Props {
+interface LabelComponentProps {
 	label: LabelIndex;
 }
 
-const LabelComponent = (props: Props) => {
+const LabelComponent: React.FC<LabelComponentProps> = (props: LabelComponentProps) => {
 	const { label } = props;
 	return (
 		<div key={label.id} className="flex flex-col items-center">

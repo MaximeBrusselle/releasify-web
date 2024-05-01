@@ -10,7 +10,7 @@ interface ArtistCardProps {
 	artist: ArtistIndex;
 }
 
-const ArtistCard = (props: ArtistCardProps) => {
+const ArtistCard: React.FC<ArtistCardProps> = (props: ArtistCardProps) => {
 	const cardRef = useRef<HTMLDivElement>(null);
 	const [fontSize, setFontSize] = useState<string>("4xl");
 

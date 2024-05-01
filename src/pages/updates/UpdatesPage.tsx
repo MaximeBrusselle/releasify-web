@@ -1,6 +1,6 @@
 import updates from "../../data/updates/updates";
 
-const UpdatesPage = () => {
+const UpdatesPage: React.FC = () => {
 	const sortedUpdates = updates.sort((a, b) => {
 		return a.version.localeCompare(b.version) * -1;
 	});

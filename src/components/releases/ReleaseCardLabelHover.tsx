@@ -3,7 +3,12 @@ import { getImageUrl } from "../../lib/utils";
 import { LabelIndex } from "@/data/labels/labelTypes";
 import { Link } from "react-router-dom";
 
-const ReleaseCardLabelHover = ({ label }: { label: LabelIndex }) => {
+interface ReleaseCardLabelHoverProps {
+	label: LabelIndex;
+}
+
+const ReleaseCardLabelHover: React.FC<ReleaseCardLabelHoverProps> = (props: ReleaseCardLabelHoverProps) => {
+	const { label } = props;
 	const goToProfile = () => {
 		window.location.href = `/labels/${label.id}`;
 	};

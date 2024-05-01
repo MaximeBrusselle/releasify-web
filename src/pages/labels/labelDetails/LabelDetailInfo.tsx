@@ -13,7 +13,7 @@ interface LabelDetailInfoProps {
 	handleNotification: () => void;
 }
 
-const LabelDetailInfo = (props: LabelDetailInfoProps) => {
+const LabelDetailInfo: React.FC<LabelDetailInfoProps> = (props: LabelDetailInfoProps) => {
 	const { label, following, notification, handleFollow, handleNotification } = props;
 	return (
 		<div className="flex flex-col items-center justify-start gap-[14px] w-[75vw]">

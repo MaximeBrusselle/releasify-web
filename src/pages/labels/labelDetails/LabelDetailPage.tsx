@@ -6,7 +6,7 @@ import { useState } from "react";
 import { labelDetails } from "@/data/labels/labelDetails";
 import ArtistCard from "@/components/artists/ArtistCard";
 
-const LabelDetailPage = () => {
+const LabelDetailPage: React.FC = () => {
 	const { labelId } = useParams<{ labelId: string }>();
 
 	const label: LabelDetail | undefined = labelId ? labelDetails[labelId] : undefined;
