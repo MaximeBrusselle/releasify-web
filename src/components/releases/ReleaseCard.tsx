@@ -68,7 +68,7 @@ const ReleaseCard = (props: ReleaseCardProps) => {
 					<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg" />
 					<div className="flex flex-col items-start justify-center h-full">
 						<p className={`font-bold text-${fontSize}`}>{release.name}</p>
-						{isReleased && <p className="text-md leading-4">{release.releaseDate.toDateString()}</p>}
+						{isReleased && <p className="text-md leading-4">📅: {release.releaseDate.toDateString()}</p>}
 						<div className="flex flex-row flex-wrap justify-start items-center gap-x-1">
 							{release.artists.map((artist) => (
 								<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />
