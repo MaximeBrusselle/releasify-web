@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import questionsData from "./questions";
+import questionsData from "./questions"
 
 const FAQPage: React.FC = () => {
   const categories = ["Artist", "Label", "Fan", "Other"];

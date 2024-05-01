@@ -10,7 +10,6 @@ const ArtistDetailPage: React.FC = () => {
 
 	// Check if artistId exists before accessing details
 	const artist: ArtistDetail | undefined = artistId ? details[artistId] : undefined;
-	
 
 	// If artistId doesn't exist or details[artistId] is undefined, handle the case accordingly
 	if (!artistId || !artist) {
