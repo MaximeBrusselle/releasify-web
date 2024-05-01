@@ -61,7 +61,7 @@ const labelShorts: LabelShort[] = [
         id: "1",
         name: "Unfold Records",
         picture: "unfold_pfp.png",
-        description: "UNFOLDING THE FUTURE"
+        description: "📖 UNFOLDING THE FUTURE"
     },
     {
         id: "2",
@@ -73,7 +73,7 @@ const labelShorts: LabelShort[] = [
         id: "3",
         name: "Apex Records",
         picture: "apex_pfp.jpg",
-        description: "We are a unique harddance label that is built on an immensely strong feeling of brotherhood!"
+        description: "🚀 We are the brotherhood!"
     },
     {
         id: "4",

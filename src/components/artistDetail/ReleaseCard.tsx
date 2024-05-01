@@ -39,8 +39,6 @@ const ReleaseCard = (props: ReleaseCardProps) => {
 		const content = contentcontainer.querySelector("div");
 		if (!content) return;
 
-		const inner = content.querySelector("p")?.innerHTML;
-
 		const contentHeight = content.offsetHeight;
 		const cardHeight = card.offsetHeight;
 		if (contentHeight > cardHeight) {

@@ -27,7 +27,7 @@ const ReleaseCardLabelHover = ({ label }: { label: LabelShort }) => {
 			<HoverCardContent className="w-96">
 				<div className="flex flex-row items-center justify-between w-full">
 					<img src={getImageUrl("labels", label.picture)} alt={label.name} className="w-[45%] aspect-square rounded-[12px] border-4 border-black border-solid object-cover" />
-					<div className="flex flex-col items-start justify-center gap-1 p-2">
+					<div className="flex flex-col items-start justify-center gap-1 p-2 w-full">
 						<div className="flex flex-col justify-center items-start gap-1">
 							<p className="text-[32px] font-bold leading-7">{label.name}</p>
 							<p className="text-[16px]">{label.description}</p>

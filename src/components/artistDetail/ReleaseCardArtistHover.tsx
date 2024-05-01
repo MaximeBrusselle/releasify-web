@@ -27,7 +27,7 @@ const ReleaseCardArtistHover = ({ artist }: { artist: ArtistShort }) => {
 			<HoverCardContent className="w-96">
 				<div className="flex flex-row items-center justify-between w-full">
 					<img src={getImageUrl("artists", artist.picture)} alt={artist.name} className="w-[45%] aspect-square rounded-[12px] border-4 border-black border-solid object-cover" />
-					<div className="flex flex-col items-start justify-center gap-1 p-2">
+					<div className="flex flex-col items-start justify-center gap-1 p-2 w-full">
 						<div className="flex flex-col justify-center items-start gap-1">
 							<p className="text-[32px] font-bold leading-4">{artist.name}</p>
 							<p className="text-[16px]">{artist.description}</p>
