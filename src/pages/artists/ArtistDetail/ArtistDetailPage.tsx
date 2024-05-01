@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { ArtistDetail } from "../types";
 import { details } from "../artistDetails";
 import ArtistDetailInfo from "./ArtistDetailInfo";
-import AnnouncedRelease from "./AnnouncedRelease";
+import ReleaseCard from "../../../components/artistDetail/ReleaseCard";
 import { useState } from "react";
 
 const ArtistDetailPage = () => {
@@ -28,8 +28,9 @@ const ArtistDetailPage = () => {
 	};
 
 	const announcedReleases = artist.releases.filter((release) => release.releaseDate > new Date());
-	const spacing = announcedReleases.length > 2 ? "justify-between" : " justify-start gap-x-6";
-	// const previousReleases = artist.releases.filter((release) => release.releaseDate <= new Date());
+	const announcedSpacing = announcedReleases.length > 2 ? "justify-between" : " justify-start gap-x-4";
+	const previousReleases = artist.releases.filter((release) => release.releaseDate <= new Date());
+	const previousSpacing = previousReleases.length > 2 ? "justify-between" : " justify-start gap-x-4";
 
 	return (
 		<div className="flex flex-col items-center justify-start gap-[28px] font-[Fira Sans]">
@@ -39,14 +40,25 @@ const ArtistDetailPage = () => {
 				<h2 className="text-[48px] font-extrabold">Announced Releases</h2>
 				{announcedReleases.length === 0 && <p className="text-[24px]">No announced releases</p>}
 				{announcedReleases.length > 0 && (
-					<div className={`flex flex-row flex-wrap ${spacing} items-center w-full gap-y-6`}>
+					<div className={`flex flex-row flex-wrap ${announcedSpacing} items-center w-full gap-y-6`}>
 						{announcedReleases.map((release) => (
-							<AnnouncedRelease key={release.id} release={release} />
+							<ReleaseCard key={release.id} release={release} />
 						))}
 					</div>
 				)}
 			</div>
 			{/* Previous releases */}
+			<div className="flex flex-col justify-start items-start w-[75vw]">
+				<h2 className="text-[48px] font-extrabold">Previous Releases</h2>
+				{previousReleases.length === 0 && <p className="text-[24px]">No previous releases</p>}
+				{previousReleases.length > 0 && (
+					<div className={`flex flex-row flex-wrap ${previousSpacing} items-center w-full gap-y-6`}>
+						{previousReleases.map((release) => (
+							<ReleaseCard key={release.id} release={release} />
+						))}
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };

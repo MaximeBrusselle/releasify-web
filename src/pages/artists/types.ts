@@ -59,9 +59,10 @@ interface GenreGroup {
 }
 
 interface LabelShort {
-    id: string,
+    id?: string,
     name: string,
-    picture: string
+    picture: string,
+    description?: string
 }
 
 interface ReleaseShort {
@@ -80,8 +81,9 @@ interface ReleasePlatform {
 }
 
 interface ArtistShort {
-    id: string,
+    id?: string,
     name: string,
+    description?: string,
     picture: string
 }
 

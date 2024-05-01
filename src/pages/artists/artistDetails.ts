@@ -60,22 +60,26 @@ const labelShorts: LabelShort[] = [
     {
         id: "1",
         name: "Unfold Records",
-        picture: "unfold_pfp.png"
+        picture: "unfold_pfp.png",
+        description: "UNFOLDING THE FUTURE"
     },
     {
         id: "2",
         name: "New Wave",
-        picture: "newwave_pfp.jpg"
+        picture: "newwave_pfp.jpg",
+        description: "🤝 NEXT-GEN UPTEMPO LABEL"
     },
     {
         id: "3",
         name: "Apex Records",
-        picture: "apex_pfp.jpg"
+        picture: "apex_pfp.jpg",
+        description: "We are a unique harddance label that is built on an immensely strong feeling of brotherhood!"
     },
     {
         id: "4",
         name: "Spoontech Records",
-        picture: "spoontech_pfp.jpeg"
+        picture: "spoontech_pfp.jpeg",
+        description: "🥄 Representing our Underground Identity"
     }
 ];
 
@@ -165,7 +169,8 @@ const releases: ReleaseShort[] = [
             {
                 id: "2",
                 name: "Sparkz",
-                picture: "sparkz_pfp.jpg"
+                picture: "sparkz_pfp.jpg",
+                description: "Rawstyle DJ/Producer 🇳🇱"
             },
         ],
         picture: "dont_let_me_down_cover.jpeg",
@@ -180,7 +185,8 @@ const releases: ReleaseShort[] = [
             {
                 id: "2",
                 name: "Sparkz",
-                picture: "sparkz_pfp.jpg"
+                picture: "sparkz_pfp.jpg",
+                description: "Rawstyle DJ/Producer 🇳🇱"
             },
         ],
         picture: "move_your_body_cover.jpeg",
@@ -195,11 +201,12 @@ const releases: ReleaseShort[] = [
             {
                 id: "3",
                 name: "Kenai",
-                picture: "kenai_pfp.jpg"
+                picture: "kenai_pfp.jpg",
+                description: "Rawstyle DJ/Producer 🇮🇹"
             },
         ],
         picture: "carnival_cover.jpeg",
-        urls: [],
+        urls: [...moveyourbodyurls],
         releaseDate: new Date("2024-04-18"),
         label: labelShorts[2],
     },
@@ -210,16 +217,16 @@ const releases: ReleaseShort[] = [
             {
                 id: "5",
                 name: "Invaderz",
-                picture: "invaderz_pfp.jpg"
+                picture: "invaderz_pfp.jpg",
+                description: "Uptempo Hardcore Producer 🇳🇱"
             },
             {
-                id: "",
                 name: "Inswennity",
-                picture: "default_pfp.jpg"
+                picture: "default_pfp.jpg",
             },
         ],
         picture: "feel_our_love_cover.jpeg",
-        urls: [],
+        urls: [...moveyourbodyurls],
         releaseDate: new Date("2023-07-27"),
         label: labelShorts[1],
     },
@@ -230,11 +237,12 @@ const releases: ReleaseShort[] = [
             {
                 id: "5",
                 name: "Invaderz",
-                picture: "invaderz_pfp.jpg"
+                picture: "invaderz_pfp.jpg",
+                description: "Uptempo Hardcore Producer 🇳🇱"
             },
         ],
         picture: "digital_demise_cover.jpeg",
-        urls: [],
+        urls: [...moveyourbodyurls],
         releaseDate: new Date("2023-03-31"),
         label: labelShorts[1],
     },
@@ -245,11 +253,12 @@ const releases: ReleaseShort[] = [
             {
                 id: "6",
                 name: "Bmberjck",
-                picture: "bmberjck_pfp.jpg"
+                picture: "bmberjck_pfp.jpg",
+                description: "Raw Hardstyle Artist"
             },
         ],
         picture: "mirrors_cover.jpeg",
-        urls: [],
+        urls: [...moveyourbodyurls],
         releaseDate: new Date("2024-04-11"),
         label: labelShorts[0],
     },
@@ -260,11 +269,12 @@ const releases: ReleaseShort[] = [
             {
                 id: "7",
                 name: "Cryex",
-                picture: "cryex_pfp2.jpg"
+                picture: "cryex_pfp2.jpg",
+                description: "HARDSTYLE DJ/PRODUCER 🏳️‍🌈"
             },
         ],
         picture: "animals_cryex_remix_cover.jpeg",
-        urls: [],
+        urls: [...moveyourbodyurls],
         releaseDate: new Date("2024-03-15"),
         label: labelShorts[2],
     },
@@ -275,11 +285,12 @@ const releases: ReleaseShort[] = [
             {
                 id: "9",
                 name: "The Smiler",
-                picture: "the_smiler_pfp.jpg"
+                picture: "the_smiler_pfp.jpg",
+                description: "DJ/ Producer 🇩🇪"
             },
         ],
         picture: "worthless_cover.jpeg",
-        urls: [],
+        urls: [...moveyourbodyurls],
         releaseDate: new Date("2024-03-28"),
         label: labelShorts[3],
     },
@@ -290,11 +301,12 @@ const releases: ReleaseShort[] = [
             {
                 id: "10",
                 name: "Chapter V",
-                picture: "chapter_v_pfp.jpg"
+                picture: "chapter_v_pfp.jpg",
+                description: "📖 Unveiling a unique musical journey"
             },
         ],
         picture: "heart_of_steel_cover.jpeg",
-        urls: [],
+        urls: [...moveyourbodyurls],
         releaseDate: new Date("2024-04-18"),
         label: labelShorts[3],
     },
@@ -305,11 +317,12 @@ const releases: ReleaseShort[] = [
             {
                 id: "11",
                 name: "Faceless",
-                picture: "faceless_pfp.jpeg"
+                picture: "faceless_pfp.jpeg",
+                description: "🃏 why so serious?!"
             },
         ],
-        picture: "Sinner_cover.jpeg",
-        urls: [],
+        picture: "sinner_cover.jpeg",
+        urls: [...moveyourbodyurls],
         releaseDate: new Date("2024-01-18"),
         label: labelShorts[3],
     },
@@ -320,16 +333,16 @@ const releases: ReleaseShort[] = [
             {
                 id: "11",
                 name: "Faceless",
-                picture: "faceless_pfp.jpeg"
+                picture: "faceless_pfp.jpeg",
+                description: "🃏 why so serious?!"
             },
             {
-                id: "",
                 name: "Coldax",
                 picture: "default_pfp.jpg"
             },
         ],
         picture: "restless_cover.jpeg",
-        urls: [],
+        urls: [...moveyourbodyurls],
         releaseDate: new Date("2024-03-21"),
         label: labelShorts[3],
     },
@@ -355,7 +368,7 @@ const details: ArtistDetailMap = {
         realName: "Eloy Willemsen",
         description: "Rawstyle DJ/Producer 🇳🇱",
         bannerPicture: "sparkz_banner.jpeg",
-        releases: [releases[0], releases[1]],
+        releases: [...releases],
         socials: [...socialsSparkz],
         profilePicture: "sparkz_pfp.jpg",
         genres: [genres[4], genres[6]],
