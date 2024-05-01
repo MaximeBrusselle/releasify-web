@@ -1,6 +1,7 @@
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { getImageUrl } from "../../lib/utils";
 import { LabelIndex } from "@/data/labels/labelTypes";
+import { Link } from "react-router-dom";
 
 const ReleaseCardLabelHover = ({ label }: { label: LabelIndex }) => {
 	const goToProfile = () => {
@@ -11,12 +12,12 @@ const ReleaseCardLabelHover = ({ label }: { label: LabelIndex }) => {
 		<HoverCard openDelay={1000}>
 			<HoverCardTrigger asChild>
 				{label.id && label.id !== "" ? (
-					<a href={`/labels/${label.id}`}>
+					<Link to={`/labels/${label.id}`}>
 						<div className="flex flex-row justify-center items-center gap-3">
 							<img src={getImageUrl("labels", label.profilePicture)} alt={label.name} className="w-[43px] rounded-md aspect-square" />
 							<p className="font-semibold text-lg">{label.name}</p>
 						</div>
-					</a>
+					</Link>
 				) : (
 					<div className="flex flex-row justify-center items-center gap-3">
 						<img src={getImageUrl("labels", label.profilePicture)} alt={label.name} className="w-[43px] rounded-md aspect-square" />

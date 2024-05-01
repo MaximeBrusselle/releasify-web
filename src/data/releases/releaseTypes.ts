@@ -20,6 +20,7 @@ interface ReleasePlatform {
 interface ReleaseArtist {
     id?: string,
     artistName: string,
+    label?: LabelIndex,
     profilePicture: string,
     description?: string
 }

@@ -1,15 +1,16 @@
 import { useParams } from "react-router-dom";
 import { ArtistDetail } from "../../../data/artists/artistTypes";
 import { details } from "../../../data/artists/artistDetails";
-import ArtistDetailInfo from "./ArtistDetailInfo";
-import ReleaseCard from "../../../components/artistDetail/ReleaseCard";
+import ReleaseCard from "../../../components/releases/ReleaseCard";
 import { useState } from "react";
+import ArtistDetailInfo from "./ArtistDetailInfo";
 
 const ArtistDetailPage = () => {
 	const { artistId } = useParams<{ artistId: string }>();
 
 	// Check if artistId exists before accessing details
 	const artist: ArtistDetail | undefined = artistId ? details[artistId] : undefined;
+	
 
 	// If artistId doesn't exist or details[artistId] is undefined, handle the case accordingly
 	if (!artistId || !artist) {

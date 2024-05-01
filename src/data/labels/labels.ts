@@ -1,7 +1,7 @@
 import { genres } from "../genres/genres";
 import { LabelIndex } from "./labelTypes";
 
-const labelShorts: LabelIndex[] = [
+const labels: LabelIndex[] = [
     {
         id: "1",
         name: "Unfold Records",
@@ -32,4 +32,4 @@ const labelShorts: LabelIndex[] = [
     }
 ];
 
-export { labelShorts };
+export { labels };

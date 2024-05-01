@@ -1,12 +1,16 @@
+import { labels } from "@/data/labels/labels";
+import LabelComponent from "./LabelComponent";
+
 const LabelsPage = () => {
-    return (
-      <div>
-        <h1 className="text-3xl font-bold underline">
-          Welcome to the LabelsPage
-        </h1>
-        {/* Content */}
-      </div>
-    );
-  };
-  
-  export default LabelsPage;
+	return (
+		<div>
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-center">
+				{labels.map((label) => (
+					<LabelComponent key={label.id} label={label} />
+				))}
+			</div>
+		</div>
+	);
+};
+
+export default LabelsPage;

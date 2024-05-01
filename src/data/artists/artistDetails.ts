@@ -1,5 +1,5 @@
 import { genres } from "../genres/genres";
-import { labelShorts } from "../labels/labels";
+import { labels } from "../labels/labels";
 import { socialsSparkz } from "../other/socials";
 import { releases } from "../releases/releases";
 import { ArtistDetail } from "./artistTypes";
@@ -12,7 +12,9 @@ const details: ArtistDetailMap = {
         artistName: "Synthsation",
         description: "Hardstyle / EDM Producer & DJ based in the Netherlands 🇳🇱",
         bannerPicture: "default_banner.jpg",
-        releases: [],
+        releases: releases.filter(release => {
+            return release.artists.some(artist => artist.id === "1");
+        }),
         socials: [],
         profilePicture: "synthsation_pfp.png",
         genres: [genres[4], genres[6]],
@@ -24,11 +26,13 @@ const details: ArtistDetailMap = {
         realName: "Eloy Willemsen",
         description: "Rawstyle DJ/Producer 🇳🇱",
         bannerPicture: "sparkz_banner.jpeg",
-        releases: [...releases],
+        releases: releases.filter(release => {
+            return release.artists.some(artist => artist.id === "2") === true;
+        }),
         socials: [...socialsSparkz],
         profilePicture: "sparkz_pfp.jpg",
         genres: [genres[4], genres[6]],
-        label: labelShorts[0],
+        label: labels[0],
         bookingEmail: "phil@purebookings.nl",
     },
     "3":{
@@ -37,11 +41,13 @@ const details: ArtistDetailMap = {
         realName: "Matteo Pellegrinenlli",
         description: "Rawstyle DJ/Producer 🇮🇹",
         bannerPicture: "kenai_banner.jpeg",
-        releases: [releases[2]],
+        releases: releases.filter((release) => {
+            return release.artists.some((artist) => artist.id === "3");
+        }),
         socials: [],
         profilePicture: "kenai_pfp.jpg",
         genres: [genres[4], genres[6]],
-        label: labelShorts[2],
+        label: labels[2],
         bookingEmail: "jamie@bad-company.nl",
     },
     "4":{
@@ -50,11 +56,13 @@ const details: ArtistDetailMap = {
         realName: "Oscar van der Staak",
         description: "Professional noisemaker 🇳🇱",
         bannerPicture: "scarra_banner.jpeg",
-        releases: [],
+        releases: releases.filter((release) => {
+            return release.artists.some((artist) => artist.id === "4");
+        }),
         socials: [],
         profilePicture: "scarra_pfp.jpg",
         genres: [genres[4], genres[6]],
-        label: labelShorts[2],
+        label: labels[2],
         bookingEmail: "jamie@bad-company.nl",
     },
     "5":{
@@ -63,11 +71,13 @@ const details: ArtistDetailMap = {
         realName: "Lars van der Loo",
         description: "Uptempo Hardcore Producer 🇳🇱",
         bannerPicture: "invaderz_banner.jpeg",
-        releases: [releases[3], releases[4]],
+        releases: releases.filter((release) => {
+            return release.artists.some((artist) => artist.id === "5");
+        }),
         socials: [],
         profilePicture: "invaderz_pfp.jpg",
         genres: [genres[2]],
-        label: labelShorts[1],
+        label: labels[1],
         bookingEmail: "Agency@Triple6.nl",
     },
     "6":{
@@ -76,11 +86,13 @@ const details: ArtistDetailMap = {
         realName: "Paul Haagmans",
         description: "Raw Hardstyle Artist",
         bannerPicture: "bmberjck_banner.jpeg",
-        releases: [releases[5]],
+        releases: releases.filter((release) => {
+            return release.artists.some((artist) => artist.id === "6");
+        }),
         socials: [],
         profilePicture: "bmberjck_pfp.jpg",
         genres: [genres[4], genres[6]],
-        label: labelShorts[0],
+        label: labels[0],
         bookingEmail: "tom@purebookings.nl / Phil@purebookings.nl",
     },
     "7":{
@@ -89,11 +101,13 @@ const details: ArtistDetailMap = {
         realName: "Levi Weidmann",
         description: "HARDSTYLE DJ/PRODUCER 🏳️‍🌈",
         bannerPicture: "cryex_banner.jpeg",
-        releases: [releases[6]],
+        releases: releases.filter((release) => {
+            return release.artists.some((artist) => artist.id === "7");
+        }),
         socials: [],
         profilePicture: "cryex_pfp2.jpg",
         genres: [genres[4], genres[6]],
-        label: labelShorts[2],
+        label: labels[2],
         bookingEmail: "INFO@THE-WISHLIST.nl",
     },
     "8":{
@@ -102,11 +116,13 @@ const details: ArtistDetailMap = {
         realName: "Marvin de Groot",
         description: "⚡️ THIS IS ELEKTRAWAVE",
         bannerPicture: "vasto_banner.jpeg",
-        releases: [],
+        releases: releases.filter((release) => {
+            return release.artists.some((artist) => artist.id === "8");
+        }),
         socials: [],
         profilePicture: "vasto_pfp.jpeg",
         genres: [genres[4], genres[6]],
-        label: labelShorts[2],
+        label: labels[2],
         bookingEmail: "jamie@bad-company.nl",
     },
     "9":{
@@ -115,11 +131,13 @@ const details: ArtistDetailMap = {
         realName: "Alex Grosse",
         description: "DJ/ Producer 🇩🇪",
         bannerPicture: "default_banner.jpg",
-        releases: [releases[7]],
+        releases: releases.filter((release) => {
+            return release.artists.some((artist) => artist.id === "9");
+        }),
         socials: [],
         profilePicture: "the_smiler_pfp.jpg",
         genres: [genres[4], genres[5], genres[6]],
-        label: labelShorts[3],
+        label: labels[3],
         bookingEmail: "jamie@bad-company.nl",
     },
     "10":{
@@ -128,11 +146,13 @@ const details: ArtistDetailMap = {
         realName: "Mitchell de Jonge & Tim Udo",
         description: "📖 Unveiling a unique musical journey",
         bannerPicture: "chapter_v_banner.jpeg",
-        releases: [releases[8]],
+        releases: releases.filter((release) => {
+            return release.artists.some((artist) => artist.id === "10");
+        }),
         socials: [],
         profilePicture: "chapter_v_pfp.jpg",
         genres: [genres[4], genres[5], genres[6]],
-        label: labelShorts[3],
+        label: labels[3],
         bookingEmail: "jamie@bad-company.nl",
     },
     "11":{
@@ -141,13 +161,16 @@ const details: ArtistDetailMap = {
         realName: "Dylan Adriaans & Less Hoesen",
         description: "🃏 why so serious?!",
         bannerPicture: "faceless_banner.jpeg",
-        releases: [releases[9], releases[10]],
+        releases: releases.filter((release) => {
+            return release.artists.some((artist) => artist.id === "11");
+        }),
         socials: [],
         profilePicture: "faceless_pfp.jpeg",
         genres: [genres[4], genres[5], genres[6]],
-        label: labelShorts[3],
+        label: labels[3],
         bookingEmail: "jamie@bad-company.nl",
     },
 };
+
 
 export {details, releases};

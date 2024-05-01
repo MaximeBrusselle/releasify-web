@@ -6,6 +6,7 @@ import notifoff from "../../assets/icon_bell_off_black.svg";
 import { useRef, useEffect } from "react";
 import ReleaseCardArtistHover from "./ReleaseCardArtistHover";
 import ReleaseCardLabelHover from "./ReleaseCardLabelHover";
+import { Link } from "react-router-dom";
 
 interface ReleaseCardProps {
 	release: ReleaseIndex;
@@ -16,6 +17,7 @@ const ReleaseCard = (props: ReleaseCardProps) => {
 	const [fontSize, setFontSize] = useState<string>("4xl");
 
 	const { release } = props;
+		
 	const [notification, setNotification] = useState(false);
 	const handleNotification = () => {
 		setNotification(!notification);
@@ -71,6 +73,7 @@ const ReleaseCard = (props: ReleaseCardProps) => {
 								<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />
 							))}
 						</div>
+						{isReleased && <p className="text-md">{release.releaseDate.toDateString()}</p>}
 						<ReleaseCardLabelHover label={release.label} />
 					</div>
 				</div>
@@ -81,9 +84,9 @@ const ReleaseCard = (props: ReleaseCardProps) => {
 					<div className="flex flex-col items-center justify-center gap-4 w-[20%] m-2">
 						<div className=" flex flex-wrap justify-center items-center gap-1">
 							{release.urls.map((url) => (
-								<a key={url.platform.name} href={url.url} target="_blank" rel="noreferrer" className="flex-releaseCardSocials hover:cursor-pointer">
+								<Link key={url.platform.name} to={url.url} target="_blank" rel="noreferrer" className="flex-releaseCardSocials hover:cursor-pointer">
 									<img src={getImageUrl("socialplatforms", url.platform.logo)} alt={url.platform.name.toString()} className="aspect-square hover:cursor-pointer" />
-								</a>
+								</Link>
 							))}
 						</div>
 					</div>

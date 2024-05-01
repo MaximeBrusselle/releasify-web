@@ -10,7 +10,8 @@ import UpdatesPage from "./pages/updates/UpdatesPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import SettingsPage from "./pages/profile/SettingsPage";
 import SignOutPage from "./pages/profile/SignOutPage";
-import ArtistDetailPage from "./pages/artists/ArtistDetail/ArtistDetailPage";
+import ArtistDetailPage from "./pages/artists/artistDetail/ArtistDetailPage";
+import LabelDetailPage from "./pages/labels/labelDetails/LabelDetailPage";
 // Import other pages
 
 const Layout: React.FC = () => (
@@ -31,7 +32,10 @@ const App: React.FC = () => {
 						<Route index element={<ArtistsPage />} />
 						<Route path=":artistId" element={<ArtistDetailPage />} />
 					</Route>
-					<Route path="labels" element={<LabelsPage />} />
+					<Route path="labels">
+						<Route index element={<LabelsPage />} />
+						<Route path=":labelId" element={<LabelDetailPage />} />
+					</Route>
 					<Route path="faq" element={<FAQPage />} />
 					<Route path="updates" element={<UpdatesPage />} />
 					<Route path="profile" element={<ProfilePage />} />

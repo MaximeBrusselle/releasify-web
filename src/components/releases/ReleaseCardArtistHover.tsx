@@ -1,6 +1,7 @@
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { getImageUrl } from "../../lib/utils";
 import { ReleaseArtist } from "@/data/releases/releaseTypes";
+import { Link } from "react-router-dom";
 
 const ReleaseCardArtistHover = ({ artist }: { artist: ReleaseArtist }) => {
 	const goToProfile = () => {
@@ -11,16 +12,16 @@ const ReleaseCardArtistHover = ({ artist }: { artist: ReleaseArtist }) => {
 		<HoverCard openDelay={1000}>
 			<HoverCardTrigger asChild>
 				{artist.id && artist.id !== "" ? (
-					<a href={`/artists/${artist.id}`} key={artist.id}>
+					<Link to={`/artists/${artist.id}`} key={artist.id}>
 						<div className="flex flex-row justify-center items-center gap-1 hover:cursor-pointer">
 							<img src={getImageUrl("artists", artist.profilePicture)} alt={artist.artistName} className="w-[16px] aspect-square rounded-full border-1 border-black border-solid" />
-							<p className="text-[16px] underline">{artist.artistName}</p>
+							<p className="text-md underline">{artist.artistName}</p>
 						</div>
-					</a>
+					</Link>
 				) : (
 					<div className="flex flex-row justify-center items-center gap-1 hover:cursor-default" key={`${artist.artistName}notexisting`}>
 						<img src={getImageUrl("artists", artist.profilePicture)} alt={artist.artistName} className="w-[16px] aspect-square rounded-full border-1 border-black border-solid" />
-						<p className="text-[16px]">{artist.artistName}</p>
+						<p className="text-md">{artist.artistName}</p>
 					</div>
 				)}
 			</HoverCardTrigger>
@@ -30,7 +31,7 @@ const ReleaseCardArtistHover = ({ artist }: { artist: ReleaseArtist }) => {
 					<div className="flex flex-col items-start justify-center gap-1 p-2 w-full">
 						<div className="flex flex-col justify-center items-start gap-1">
 							<p className="text-[32px] font-bold leading-4">{artist.artistName}</p>
-							<p className="text-[16px]">{artist.description}</p>
+							<p className="text-md">{artist.description}</p>
 						</div>
 						{artist.id && artist.id !== "" ? (
 							<button className="px-4 py-2 bg-[#1ED760] rounded-[12px] text-white" onClick={goToProfile}>
