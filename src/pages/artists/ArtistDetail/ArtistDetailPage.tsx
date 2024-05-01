@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { ArtistDetail } from "../types";
-import { details } from "../artistDetails";
+import { ArtistDetail } from "../../../data/artists/artistTypes";
+import { details } from "../../../data/artists/artistDetails";
 import ArtistDetailInfo from "./ArtistDetailInfo";
 import ReleaseCard from "../../../components/artistDetail/ReleaseCard";
 import { useState } from "react";

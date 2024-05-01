@@ -1,4 +1,4 @@
-import { ReleaseShort } from "../../pages/artists/types";
+import { ReleaseIndex } from "../../data/releases/releaseTypes";
 import { useState } from "react";
 import { getImageUrl } from "../../lib/utils";
 import notifplus from "../../assets/icon_bell_plus_black.svg";
@@ -7,9 +7,8 @@ import { useRef, useEffect } from "react";
 import ReleaseCardArtistHover from "./ReleaseCardArtistHover";
 import ReleaseCardLabelHover from "./ReleaseCardLabelHover";
 
-
 interface ReleaseCardProps {
-	release: ReleaseShort;
+	release: ReleaseIndex;
 }
 
 const ReleaseCard = (props: ReleaseCardProps) => {
@@ -50,7 +49,7 @@ const ReleaseCard = (props: ReleaseCardProps) => {
 			} else if (scale < 0.75) {
 				setFontSize("lg");
 			} else {
-				const newSize = Math.floor(computedScale)-1;
+				const newSize = Math.floor(computedScale) - 1;
 				if (newSize > 1) {
 					setFontSize(`${newSize}xl`);
 				} else {
@@ -69,7 +68,7 @@ const ReleaseCard = (props: ReleaseCardProps) => {
 						<p className={`font-bold text-${fontSize}`}>{release.name}</p>
 						<div className="flex flex-row flex-wrap justify-start items-center gap-x-1">
 							{release.artists.map((artist) => (
-								<ReleaseCardArtistHover key={artist.id || `${artist.name}notfound`} artist={artist} />
+								<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />
 							))}
 						</div>
 						<ReleaseCardLabelHover label={release.label} />
