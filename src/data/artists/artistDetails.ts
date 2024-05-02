@@ -105,7 +105,7 @@ const details: ArtistDetailMap = {
 		profilePicture: "bmberjck_pfp.jpg",
 		genres: [genres[4], genres[6]],
 		label: labels[0],
-		bookingEmail: "tom@purebookings.nl / Phil@purebookings.nl",
+		bookingEmail: "tom@purebookings.nl, Phil@purebookings.nl",
 	},
 	"7": {
 		id: "7",
