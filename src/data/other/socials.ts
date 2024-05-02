@@ -117,450 +117,462 @@ const socialsKenai: SocialInfo[] = [
     {
         artistId: "3",
         platform: socialPlatforms[0],
-        username: "SparkzDj",
-        url: "https://www.facebook.com/SparkzDj"
+        username: "kenairaw",
+        url: "https://www.facebook.com/kenairaw"
     },
     {
         artistId: "3",
         platform: socialPlatforms[1],
-        username: "Sparkz_dj",
-        url: "https://www.instagram.com/sparkz_dj"
+        username: "kenairaw",
+        url: "https://www.instagram.com/kenairaw/"
+    },
+    {
+        artistId: "3",
+        platform: socialPlatforms[2],
+        username: "dj_kenai",
+        url: "https://twitter.com/dj_kenai"
     },
     {
         artistId: "3",
         platform: socialPlatforms[3],
-        username: "sparkz_raw",
-        url: "https://www.soundcloud.com/sparkz_raw"
+        username: "kenairaw",
+        url: "https://soundcloud.com/kenairaw"
+    },
+    {
+        artistId: "3",
+        platform: socialPlatforms[4],
+        username: "kenaiofficial",
+        url: "https://www.youtube.com/@kenaiofficial"
     },
     {
         artistId: "3",
         platform: socialPlatforms[5],
-        username: "Sparkz",
-        url: "https://open.spotify.com/artist/0kXJAI2hR2vdzVHsu9OLka?si=kb0CCAksR1WFUw4WigqIiw"
+        username: "Kenai",
+        url: "https://open.spotify.com/artist/4ieHqqeITt9Fmhxk20Ueqf"
     },
     {
         artistId: "3",
         platform: socialPlatforms[6],
-        username: "Sparkz",
-        url: "https://music.apple.com/gb/artist/sparkz/1570640221"
+        username: "kenai",
+        url: "https://music.apple.com/gb/artist/kenai/292137263"
     },
     {
         artistId: "3",
         platform: socialPlatforms[7],
-        username: "Sparkz",
-        url: "https://www.beatport.com/it/artist/sparkz/278604"
+        username: "kenai",
+        url: "https://www.beatport.com/it/artist/kenai/456822"
     },
     {
         artistId: "3",
         platform: socialPlatforms[8],
-        username: "Sparkz",
-        url: "https://tidal.com/browse/artist/3831824"
+        username: "Kenai",
+        url: "https://listen.tidal.com/artist/4163657"
     },
     {
         artistId: "3",
         platform: socialPlatforms[9],
-        username: "Sparkz_Dj",
-        url: "https://www.tiktok.com/@sparkz_dj"
+        username: "kenairaw",
+        url: "https://www.tiktok.com/@kenairaw"
     }
 ];
 const socialsScarra: SocialInfo[] = [
     {
         artistId: "4",
         platform: socialPlatforms[0],
-        username: "SparkzDj",
-        url: "https://www.facebook.com/SparkzDj"
+        username: "Scarradj",
+        url: "https://www.facebook.com/Scarradj"
     },
     {
         artistId: "4",
         platform: socialPlatforms[1],
-        username: "Sparkz_dj",
-        url: "https://www.instagram.com/sparkz_dj"
+        username: "scarra_dj",
+        url: "https://www.instagram.com/scarra_dj/"
     },
     {
         artistId: "4",
         platform: socialPlatforms[3],
-        username: "sparkz_raw",
-        url: "https://www.soundcloud.com/sparkz_raw"
+        username: "djscarra",
+        url: "https://soundcloud.com/djscarra"
     },
     {
         artistId: "4",
         platform: socialPlatforms[5],
-        username: "Sparkz",
-        url: "https://open.spotify.com/artist/0kXJAI2hR2vdzVHsu9OLka?si=kb0CCAksR1WFUw4WigqIiw"
+        username: "Scarra",
+        url: "https://open.spotify.com/artist/75CWM6dvHUuLGsQj8fJyXr"
     },
     {
         artistId: "4",
         platform: socialPlatforms[6],
-        username: "Sparkz",
-        url: "https://music.apple.com/gb/artist/sparkz/1570640221"
+        username: "scarra",
+        url: "https://music.apple.com/gb/artist/scarra/1242855122"
     },
     {
         artistId: "4",
         platform: socialPlatforms[7],
-        username: "Sparkz",
-        url: "https://www.beatport.com/it/artist/sparkz/278604"
+        username: "Scarra",
+        url: "https://www.beatport.com/it/artist/scarra/772413"
     },
     {
         artistId: "4",
         platform: socialPlatforms[8],
-        username: "Sparkz",
-        url: "https://tidal.com/browse/artist/3831824"
+        username: "Scarra",
+        url: "https://listen.tidal.com/artist/8807376"
     },
     {
         artistId: "4",
         platform: socialPlatforms[9],
-        username: "Sparkz_Dj",
-        url: "https://www.tiktok.com/@sparkz_dj"
+        username: "scarra_dj",
+        url: "https://www.tiktok.com/@scarra_dj"
     }
 ];
 const socialsInvaderz: SocialInfo[] = [
     {
         artistId: "5",
         platform: socialPlatforms[0],
-        username: "SparkzDj",
-        url: "https://www.facebook.com/SparkzDj"
+        username: "Invaderz",
+        url: "https://www.facebook.com/profile.php?id=100014753824221"
     },
     {
         artistId: "5",
         platform: socialPlatforms[1],
-        username: "Sparkz_dj",
-        url: "https://www.instagram.com/sparkz_dj"
+        username: "invaderz.official",
+        url: "https://www.instagram.com/invaderz.official/"
     },
     {
         artistId: "5",
         platform: socialPlatforms[3],
-        username: "sparkz_raw",
-        url: "https://www.soundcloud.com/sparkz_raw"
+        username: "invaderz_official",
+        url: "https://soundcloud.com/invaderz_official"
+    },
+    {
+        artistId: "5",
+        platform: socialPlatforms[4],
+        username: "Invaderz",
+        url: "https://www.youtube.com/channel/UCI1Tw92xghxYmMxn8guJZGw"
     },
     {
         artistId: "5",
         platform: socialPlatforms[5],
-        username: "Sparkz",
-        url: "https://open.spotify.com/artist/0kXJAI2hR2vdzVHsu9OLka?si=kb0CCAksR1WFUw4WigqIiw"
+        username: "Invaderz",
+        url: "https://open.spotify.com/artist/1eKL2T8Hy0bjjjLWlxGQrD"
     },
     {
         artistId: "5",
         platform: socialPlatforms[6],
-        username: "Sparkz",
-        url: "https://music.apple.com/gb/artist/sparkz/1570640221"
-    },
-    {
-        artistId: "5",
-        platform: socialPlatforms[7],
-        username: "Sparkz",
-        url: "https://www.beatport.com/it/artist/sparkz/278604"
+        username: "Invaderz",
+        url: "https://music.apple.com/gb/artist/invaderz/268050142"
     },
     {
         artistId: "5",
         platform: socialPlatforms[8],
-        username: "Sparkz",
-        url: "https://tidal.com/browse/artist/3831824"
+        username: "Invaderz",
+        url: "https://listen.tidal.com/artist/4026398"
     },
     {
         artistId: "5",
         platform: socialPlatforms[9],
-        username: "Sparkz_Dj",
-        url: "https://www.tiktok.com/@sparkz_dj"
+        username: "invaderz_uptempo",
+        url: "https://www.tiktok.com/@invaderz_uptempo"
     }
 ];
 const socialsBmberjck: SocialInfo[] = [
     {
         artistId: "6",
         platform: socialPlatforms[0],
-        username: "SparkzDj",
-        url: "https://www.facebook.com/SparkzDj"
+        username: "BMBERJCK",
+        url: "https://www.facebook.com/BMBERJCK"
     },
     {
         artistId: "6",
         platform: socialPlatforms[1],
-        username: "Sparkz_dj",
-        url: "https://www.instagram.com/sparkz_dj"
+        username: "bmberjckdj",
+        url: "https://www.instagram.com/bmberjckdj/"
+    },
+    {
+        artistId: "6",
+        platform: socialPlatforms[2],
+        username: "bmberjck",
+        url: "https://twitter.com/bmberjck"
     },
     {
         artistId: "6",
         platform: socialPlatforms[3],
-        username: "sparkz_raw",
-        url: "https://www.soundcloud.com/sparkz_raw"
+        username: "bmberjckdj",
+        url: "https://soundcloud.com/bmberjckdj"
     },
     {
         artistId: "6",
         platform: socialPlatforms[5],
-        username: "Sparkz",
-        url: "https://open.spotify.com/artist/0kXJAI2hR2vdzVHsu9OLka?si=kb0CCAksR1WFUw4WigqIiw"
+        username: "Bmberjck",
+        url: "https://open.spotify.com/artist/4NQTa7bCWWmWlc6SjyGX4G"
     },
     {
         artistId: "6",
         platform: socialPlatforms[6],
-        username: "Sparkz",
-        url: "https://music.apple.com/gb/artist/sparkz/1570640221"
+        username: "Bmberjck",
+        url: "https://music.apple.com/gb/artist/bmberjck/1492677814"
     },
     {
         artistId: "6",
         platform: socialPlatforms[7],
-        username: "Sparkz",
-        url: "https://www.beatport.com/it/artist/sparkz/278604"
+        username: "Bmberjck",
+        url: "https://www.beatport.com/it/artist/bmberjck/831433"
     },
     {
         artistId: "6",
         platform: socialPlatforms[8],
-        username: "Sparkz",
-        url: "https://tidal.com/browse/artist/3831824"
+        username: "Bmberjck",
+        url: "https://listen.tidal.com/artist/18725127"
     },
     {
         artistId: "6",
         platform: socialPlatforms[9],
-        username: "Sparkz_Dj",
-        url: "https://www.tiktok.com/@sparkz_dj"
+        username: "bmberjck",
+        url: "https://www.tiktok.com/@bmberjck"
     }
 ];
 const socialsCryex: SocialInfo[] = [
     {
         artistId: "7",
         platform: socialPlatforms[0],
-        username: "SparkzDj",
-        url: "https://www.facebook.com/SparkzDj"
+        username: "cryexofficial",
+        url: "https://www.facebook.com/cryexofficial"
     },
     {
         artistId: "7",
         platform: socialPlatforms[1],
-        username: "Sparkz_dj",
-        url: "https://www.instagram.com/sparkz_dj"
+        username: "cryexofficial",
+        url: "https://www.instagram.com/cryexofficial/"
     },
     {
         artistId: "7",
         platform: socialPlatforms[3],
-        username: "sparkz_raw",
-        url: "https://www.soundcloud.com/sparkz_raw"
+        username: "cryexofficial",
+        url: "https://soundcloud.com/cryexofficial"
     },
     {
         artistId: "7",
         platform: socialPlatforms[5],
-        username: "Sparkz",
-        url: "https://open.spotify.com/artist/0kXJAI2hR2vdzVHsu9OLka?si=kb0CCAksR1WFUw4WigqIiw"
+        username: "Cryex",
+        url: "https://open.spotify.com/artist/5NkT0VLTEXldi82KVVnG1b"
     },
     {
         artistId: "7",
         platform: socialPlatforms[6],
-        username: "Sparkz",
-        url: "https://music.apple.com/gb/artist/sparkz/1570640221"
+        username: "Cryex",
+        url: "https://music.apple.com/gb/artist/cryex/1180055399"
     },
     {
         artistId: "7",
         platform: socialPlatforms[7],
-        username: "Sparkz",
-        url: "https://www.beatport.com/it/artist/sparkz/278604"
+        username: "Cryex",
+        url: "https://www.beatport.com/it/artist/cryex/676199"
     },
     {
         artistId: "7",
         platform: socialPlatforms[8],
-        username: "Sparkz",
-        url: "https://tidal.com/browse/artist/3831824"
+        username: "Cryex",
+        url: "https://listen.tidal.com/artist/8313640"
     },
     {
         artistId: "7",
         platform: socialPlatforms[9],
-        username: "Sparkz_Dj",
-        url: "https://www.tiktok.com/@sparkz_dj"
+        username: "cryexofficial",
+        url: "https://www.tiktok.com/@cryexofficial"
     }
 ];
 const socialsVasto: SocialInfo[] = [
     {
         artistId: "8",
         platform: socialPlatforms[0],
-        username: "SparkzDj",
-        url: "https://www.facebook.com/SparkzDj"
+        username: "VastoDj",
+        url: "https://www.facebook.com/vastodj"
     },
     {
         artistId: "8",
         platform: socialPlatforms[1],
-        username: "Sparkz_dj",
-        url: "https://www.instagram.com/sparkz_dj"
+        username: "vastodj",
+        url: "https://www.instagram.com/vastodj/"
     },
     {
         artistId: "8",
         platform: socialPlatforms[3],
-        username: "sparkz_raw",
-        url: "https://www.soundcloud.com/sparkz_raw"
+        username: "vasto-official",
+        url: "https://soundcloud.com/vasto-official"
     },
     {
         artistId: "8",
         platform: socialPlatforms[5],
-        username: "Sparkz",
-        url: "https://open.spotify.com/artist/0kXJAI2hR2vdzVHsu9OLka?si=kb0CCAksR1WFUw4WigqIiw"
+        username: "Vasto",
+        url: "https://open.spotify.com/artist/35l9BKzdhvLy5HOC50NECa"
     },
     {
         artistId: "8",
         platform: socialPlatforms[6],
-        username: "Sparkz",
-        url: "https://music.apple.com/gb/artist/sparkz/1570640221"
+        username: "Vasto",
+        url: "https://music.apple.com/gb/artist/vasto/339704435"
     },
     {
         artistId: "8",
         platform: socialPlatforms[7],
-        username: "Sparkz",
-        url: "https://www.beatport.com/it/artist/sparkz/278604"
+        username: "Vasto",
+        url: "https://www.beatport.com/it/artist/vasto/448277"
     },
     {
         artistId: "8",
         platform: socialPlatforms[8],
-        username: "Sparkz",
-        url: "https://tidal.com/browse/artist/3831824"
+        username: "Vasto",
+        url: "https://listen.tidal.com/artist/6793134"
     },
     {
         artistId: "8",
         platform: socialPlatforms[9],
-        username: "Sparkz_Dj",
-        url: "https://www.tiktok.com/@sparkz_dj"
+        username: "vastodj",
+        url: "https://www.tiktok.com/@vastodj"
     }
 ];
 const socialsTheSmiler: SocialInfo[] = [
     {
         artistId: "9",
-        platform: socialPlatforms[0],
-        username: "SparkzDj",
-        url: "https://www.facebook.com/SparkzDj"
-    },
-    {
-        artistId: "9",
         platform: socialPlatforms[1],
-        username: "Sparkz_dj",
-        url: "https://www.instagram.com/sparkz_dj"
+        username: "thesmiler_dj",
+        url: "https://www.instagram.com/thesmiler_dj/"
     },
     {
         artistId: "9",
         platform: socialPlatforms[3],
-        username: "sparkz_raw",
-        url: "https://www.soundcloud.com/sparkz_raw"
+        username: "thesmilerdj",
+        url: "https://soundcloud.com/thesmilerdj"
+    },
+    {
+        artistId: "9",
+        platform: socialPlatforms[4],
+        username: "The Smiler DJ",
+        url: "https://www.youtube.com/channel/UCr6Q_kEzvqtTb9-hY_gUkBQ"
     },
     {
         artistId: "9",
         platform: socialPlatforms[5],
-        username: "Sparkz",
-        url: "https://open.spotify.com/artist/0kXJAI2hR2vdzVHsu9OLka?si=kb0CCAksR1WFUw4WigqIiw"
+        username: "The Smiler",
+        url: "https://open.spotify.com/artist/4YzDJturpsYRQrGx7k2Zmm"
     },
     {
         artistId: "9",
         platform: socialPlatforms[6],
-        username: "Sparkz",
-        url: "https://music.apple.com/gb/artist/sparkz/1570640221"
+        username: "The Smiler",
+        url: "https://music.apple.com/gb/artist/the-smiler/474628129"
     },
     {
         artistId: "9",
         platform: socialPlatforms[7],
-        username: "Sparkz",
-        url: "https://www.beatport.com/it/artist/sparkz/278604"
+        username: "The Smiler",
+        url: "https://www.beatport.com/it/artist/the-smiler/1031708"
     },
     {
         artistId: "9",
         platform: socialPlatforms[8],
-        username: "Sparkz",
-        url: "https://tidal.com/browse/artist/3831824"
+        username: "The Smiler",
+        url: "https://listen.tidal.com/artist/5640541"
     },
     {
         artistId: "9",
         platform: socialPlatforms[9],
-        username: "Sparkz_Dj",
-        url: "https://www.tiktok.com/@sparkz_dj"
+        username: "thesmiler_dj",
+        url: "https://www.tiktok.com/@thesmiler_dj"
     }
 ];
 const socialsChapterV: SocialInfo[] = [
     {
         artistId: "10",
         platform: socialPlatforms[0],
-        username: "SparkzDj",
-        url: "https://www.facebook.com/SparkzDj"
+        username: "Chapter V",
+        url: "https://www.facebook.com/ChapterVDJs"
     },
     {
         artistId: "10",
         platform: socialPlatforms[1],
-        username: "Sparkz_dj",
-        url: "https://www.instagram.com/sparkz_dj"
+        username: "chaptervmusic",
+        url: "https://www.instagram.com/chaptervmusic/"
     },
     {
         artistId: "10",
         platform: socialPlatforms[3],
-        username: "sparkz_raw",
-        url: "https://www.soundcloud.com/sparkz_raw"
+        username: "chaptervmusic",
+        url: "https://soundcloud.com/chaptervmusic"
     },
     {
         artistId: "10",
         platform: socialPlatforms[5],
-        username: "Sparkz",
-        url: "https://open.spotify.com/artist/0kXJAI2hR2vdzVHsu9OLka?si=kb0CCAksR1WFUw4WigqIiw"
+        username: "Chapter V",
+        url: "https://open.spotify.com/artist/1YYs95M2z6CIPc0zWfMrab"
     },
     {
         artistId: "10",
         platform: socialPlatforms[6],
-        username: "Sparkz",
-        url: "https://music.apple.com/gb/artist/sparkz/1570640221"
+        username: "Chapter V",
+        url: "https://music.apple.com/gb/artist/chapter-v/1619622980"
     },
     {
         artistId: "10",
         platform: socialPlatforms[7],
-        username: "Sparkz",
-        url: "https://www.beatport.com/it/artist/sparkz/278604"
+        username: "Chapter V",
+        url: "https://www.beatport.com/it/artist/chapter-v/1052914"
     },
     {
         artistId: "10",
         platform: socialPlatforms[8],
-        username: "Sparkz",
-        url: "https://tidal.com/browse/artist/3831824"
+        username: "Chapter V",
+        url: "https://listen.tidal.com/artist/31944901"
     },
     {
         artistId: "10",
         platform: socialPlatforms[9],
-        username: "Sparkz_Dj",
-        url: "https://www.tiktok.com/@sparkz_dj"
+        username: "chaptervmusic",
+        url: "https://www.tiktok.com/@chaptervmusic"
     }
 ];
 const socialsFaceless: SocialInfo[] = [
     {
         artistId: "11",
-        platform: socialPlatforms[0],
-        username: "SparkzDj",
-        url: "https://www.facebook.com/SparkzDj"
-    },
-    {
-        artistId: "11",
         platform: socialPlatforms[1],
-        username: "Sparkz_dj",
-        url: "https://www.instagram.com/sparkz_dj"
+        username: "facelessnl",
+        url: "https://www.instagram.com/facelessnl/"
     },
     {
         artistId: "11",
         platform: socialPlatforms[3],
-        username: "sparkz_raw",
-        url: "https://www.soundcloud.com/sparkz_raw"
+        username: "faceless_dj",
+        url: "https://soundcloud.com/faceless_dj"
     },
     {
         artistId: "11",
         platform: socialPlatforms[5],
-        username: "Sparkz",
-        url: "https://open.spotify.com/artist/0kXJAI2hR2vdzVHsu9OLka?si=kb0CCAksR1WFUw4WigqIiw"
+        username: "Faceless",
+        url: "https://open.spotify.com/artist/6Tx1eyyk7TnZ8kJsrRaJ2u"
     },
     {
         artistId: "11",
         platform: socialPlatforms[6],
-        username: "Sparkz",
-        url: "https://music.apple.com/gb/artist/sparkz/1570640221"
+        username: "Faceless",
+        url: "https://music.apple.com/gb/artist/faceless/1638767182"
     },
     {
         artistId: "11",
         platform: socialPlatforms[7],
-        username: "Sparkz",
-        url: "https://www.beatport.com/it/artist/sparkz/278604"
+        username: "Faceless",
+        url: "https://www.beatport.com/it/artist/faceless/89055"
     },
     {
         artistId: "11",
         platform: socialPlatforms[8],
-        username: "Sparkz",
-        url: "https://tidal.com/browse/artist/3831824"
+        username: "Faceless",
+        url: "https://listen.tidal.com/artist/4246494"
     },
     {
         artistId: "11",
         platform: socialPlatforms[9],
-        username: "Sparkz_Dj",
-        url: "https://www.tiktok.com/@sparkz_dj"
+        username: "faceless_dj",
+        url: "https://www.tiktok.com/@faceless_dj"
     }
 ];
 
