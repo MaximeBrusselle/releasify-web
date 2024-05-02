@@ -60,6 +60,14 @@ const updates: Update[] = [
             "Add updates overview page",
         ],
     },
+    {
+        version: "0.3.1",
+        date: "2024-05-02",
+        name: "Responsive Design",
+        addedFeatures: [
+            "Added responsive design for mobile devices",
+        ],
+    },
 ];
 
 export default updates;
