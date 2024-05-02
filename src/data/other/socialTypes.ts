@@ -1,13 +1,13 @@
 interface SocialInfo {
-    id: string,
-    platform: Social,
-    username: string,
-    url: string
+    artistId: string;
+    platform: Social;
+    username: string;
+    url: string;
 }
 
 interface Social {
-    name: SocialPlatform,
-    logo: string
+    name: SocialPlatform;
+    logo: string;
 }
 
 enum SocialPlatform {
