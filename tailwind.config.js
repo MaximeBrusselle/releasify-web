@@ -45,6 +45,7 @@ module.exports = {
 			},
 			flex: {
 				releaseCardSocials: "0 0 33.33%",
+				artistSocials: "0 0 50%",
 			},
 		},
 	},

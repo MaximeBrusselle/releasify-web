@@ -17,7 +17,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 	const [fontSize, setFontSize] = useState<string>("4xl");
 
 	const { release } = props;
-		
+
 	const [notification, setNotification] = useState(false);
 	const handleNotification = () => {
 		setNotification(!notification);
@@ -28,6 +28,8 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 	const month = release.releaseDate.toDateString().split(" ")[1];
 
 	useEffect(() => {
+		if (window.innerWidth < 640) setFontSize("3xl");
+
 		const card = cardRef.current;
 		if (!card) return;
 
@@ -62,10 +64,10 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 	}, []);
 
 	return (
-		<div className="w-[640px] h-[182px] rounded-none md:rounded-2xl p-4 shadow-input bg-white dark:bg-black cursor-auto" ref={cardRef}>
-			<div className="flex flex-row items-center justify-start w-full h-full gap-4">
-				<div className="flex flex-row justify-start items-center gap-2 w-full">
-					<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg" />
+		<div className="sm:w-[640px] sm:h-[182px] rounded-2xl p-4 shadow-input bg-white dark:bg-black cursor-auto w-full h-fit" ref={cardRef}>
+			<div className="flex sm:flex-row flex-col items-center sm:justify-start justify-center w-full h-full gap-4">
+				<div className="flex flex-row sm:justify-start justify-center items-center gap-2 w-full">
+					<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
 					<div className="flex flex-col items-start justify-center h-full">
 						<p className={`font-bold text-${fontSize}`}>{release.name}</p>
 						{isReleased && <p className="text-md leading-4">📅 {release.releaseDate.toDateString()}</p>}
@@ -78,28 +80,28 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 					</div>
 				</div>
 
-				<span className="block h-full w-px bg-black"></span>
+				<span className="sm:block h-full w-px bg-black hidden"></span>
 
 				{isReleased ? (
-					<div className="flex flex-col items-center justify-center gap-4 w-[20%] m-2">
-						<div className=" flex flex-wrap justify-center items-center gap-1">
+					<div className="flex sm:flex-col flex-row items-center justify-center gap-4 sm:w-[20%] w-full m-2">
+						<div className=" flex flex-row flex-wrap justify-center items-center gap-1">
 							{release.urls.map((url) => (
-								<Link key={url.platform.name} to={url.url} target="_blank" rel="noreferrer" className="flex-releaseCardSocials hover:cursor-pointer">
-									<img src={getImageUrl("socialplatforms", url.platform.logo)} alt={url.platform.name.toString()} className="aspect-square hover:cursor-pointer" />
+								<Link key={url.platform.name} to={url.url} target="_blank" rel="noreferrer" className="sm:flex-releaseCardSocials hover:cursor-pointer">
+									<img src={getImageUrl("socialplatforms", url.platform.logo)} alt={url.platform.name.toString()} className="w-[30px] aspect-square hover:cursor-pointer" />
 								</Link>
 							))}
 						</div>
 					</div>
 				) : (
-					<div className="flex flex-col items-center justify-center gap-4 w-[20%] m-2">
-						<div className="flex flex-col justify-center items-center">
+					<div className="flex sm:flex-col items-center justify-center gap-4 sm:w-[20%] w-[7.5%] m-2">
+						<div className="flex sm:flex-col flex-row justify-center items-center text-center sm:gap-0 gap-2">
 							<p className="text-4xl font-bold">{month}</p>
 							<p className="text-3xl">{release.releaseDate.getDay()}</p>
 						</div>
 						{notification ? (
 							<img src={notifoff} alt="notif off" onClick={handleNotification} className="w-6 aspect-square" />
 						) : (
-							<img src={notifplus} alt="notif on" onClick={handleNotification} />
+							<img src={notifplus} alt="notif on" onClick={handleNotification} className="w-6 aspect-square" />
 						)}
 					</div>
 				)}

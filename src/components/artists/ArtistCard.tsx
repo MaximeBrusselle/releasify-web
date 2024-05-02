@@ -26,6 +26,8 @@ const ArtistCard: React.FC<ArtistCardProps> = (props: ArtistCardProps) => {
 		setNotification(!notification);
 	};
 	useEffect(() => {
+		if (window.innerWidth < 640) setFontSize("3xl");
+
 		const card = cardRef.current;
 		if (!card) return;
 
@@ -61,9 +63,9 @@ const ArtistCard: React.FC<ArtistCardProps> = (props: ArtistCardProps) => {
 
 	return (
 		<Link to={artist.id && artist.id !== "" ? `/artists/${artist.id}` : ``}>
-			<div className="w-[400px] h-[182px] rounded-none md:rounded-2xl p-4 shadow-input bg-white dark:bg-black cursor-auto" ref={cardRef}>
-				<div className="flex flex-row items-center justify-start w-full h-full gap-4">
-					<div className="flex flex-row justify-start items-center gap-2 w-full">
+			<div className="sm:w-[640px] sm:h-[182px] rounded-2xl p-4 shadow-input bg-white dark:bg-black cursor-auto w-full h-fit" ref={cardRef}>
+				<div className="flex sm:flex-row flex-col items-center sm:justify-start justify-center w-full h-full gap-4">
+					<div className="flex flex-row sm:justify-start justify-center items-center gap-2 w-full">
 						<img
 							src={getImageUrl("artists", artist.profilePicture)}
 							alt={artist.artistName}
@@ -71,7 +73,7 @@ const ArtistCard: React.FC<ArtistCardProps> = (props: ArtistCardProps) => {
 						/>
 						<div className="flex flex-col items-start justify-center h-full">
 							<p className={`font-bold text-${fontSize}`}>{artist.artistName}</p>
-							<p className="font-xl">{artist.description}</p>
+							<p className="text-md">{artist.description}</p>
 							<div className="flex flex-row gap-2 justify-start items-center">
 								{following ? (
 									<button className="px-4 py-2 bg-[#f00] rounded-[12px] text-white" onClick={handleFollow}>

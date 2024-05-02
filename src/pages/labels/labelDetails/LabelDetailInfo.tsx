@@ -16,19 +16,18 @@ interface LabelDetailInfoProps {
 const LabelDetailInfo: React.FC<LabelDetailInfoProps> = (props: LabelDetailInfoProps) => {
 	const { label, following, notification, handleFollow, handleNotification } = props;
 	return (
-		<div className="flex flex-col items-center justify-start gap-[14px] w-[75vw]">
-			{/* The banner picture */}
-			<img src={getImageUrl("labels", label.bannerPicture)} alt="banner picture" className="w-full object-cover rounded-[20px] border-black border-[6px] border-solid aspect-[1452/412]" />
-			{/* PFP + general info */}
-			<div className="flex flex-row w-full h-full gap-[14px] items-center justify-center border-solid">
-				{/* PFP */}
-				<img src={getImageUrl("labels", label.profilePicture)} alt="profile picture" className="w-[240px] object-cover rounded-[50px] border-black border-[6px] border-solid aspect-square" />
-				{/* Info */}
-				<div className="flex flex-row items-center justify-between h-[200px] w-full gap-6">
-					{/* General Info */}
-					<div className="flex flex-col justify-center items-start w-full gap-[7px] h-full">
+		<div className="flex flex-col items-center justify-start gap-[14px] h-full xl:w-[75vw] lg:w-[80vw] md:w-[85vw] w-[90vw]">
+			<img src={getImageUrl("labels", label.bannerPicture)} alt="banner picture" className="w-full object-cover rounded-[20px] border-black border-[6px] border-solid xl:aspect-[1400/400] lg:aspect-[1400/500] md:aspect-[1400/600] aspect-[1400/900]" />
+			<div className="flex xl:flex-row flex-col w-full h-full gap-[14px] items-center justify-center border-solid">
+				<div className="flex xl:flex-row flex-col xl:justify-start justify-center items-center w-full gap-2 h-full">
+					<img
+						src={getImageUrl("labels", label.profilePicture)}
+						alt="profile picture"
+						className="w-[20vh] object-cover rounded-[50px] border-black border-[6px] border-solid aspect-square"
+					/>
+					<div className="flex flex-col justify-center items-start w-fit gap-[7px] h-full">
 						<div className="flex flex-col items-start justify-center gap-0">
-							<p className="text-[36px] font-extrabold">{label.name}</p>
+							<p className="text-4xl font-extrabold">{label.name}</p>
 							<p className="text-[16px]">{label.description}</p>
 							{label.contactEmail && (
 								<p className="text-[16px] flex flex-row gap-1">
@@ -56,46 +55,38 @@ const LabelDetailInfo: React.FC<LabelDetailInfoProps> = (props: LabelDetailInfoP
 									Follow
 								</button>
 							)}
-
 							<button className="p-2 bg-black rounded-[12px]" onClick={handleNotification}>
 								{notification ? <img src={notifOff} alt="hasNotif" /> : <img src={notifPlus} alt="hasNoNotif" />}
 							</button>
 						</div>
 					</div>
-
-					<span className="block h-full w-px bg-black"></span>
-
-					{/* Socials */}
-					<div className="flex flex-col justify-start items-center w-full h-full">
+				</div>
+				<div className="flex xl:flex-row flex-col items-center justify-between xl:h-[200px] w-full gap-6 h-full">
+					<span className="xl:block h-full w-px bg-black hidden"></span>
+					<div className="flex flex-col justify-center items-center w-[70%] h-full">
 						{label.socials.length > 0 && (
 							<div className="flex flex-row justify-end items-end w-full">
 								<button className="rounded-[12px] px-2 bg-white border-[2px] border-black border-solid">More</button>
 							</div>
 						)}
-						<div className="grid grid-cols-2 w-full gap-y-[14px]">
+						<div className="flex flex-row flex-wrap items-center justify-center w-fit gap-y-[14px]">
 							{label.socials.map((social) => (
-								<Link to={social.url} key={social.platform.name}>
-									<div className="flex flex-row justify-start items-center gap-1">
-										<img src={getImageUrl("socialplatforms", social.platform.logo)} alt={social.platform.name.toString()} className="w-[30px] aspect-square" />
-										<p className="text-[16px] font-semibold">{social.username}</p>
-									</div>
+								<Link to={social.url} key={social.platform.name} className="flex-artistSocials h-fit w-fit flex flex-row items-center justify-center">
+									<img src={getImageUrl("socialplatforms", social.platform.logo)} alt={social.platform.name.toString()} className="w-[30px] aspect-square" />
 								</Link>
 							))}
 						</div>
 					</div>
-
-					<span className="block h-full w-px bg-black"></span>
-
-					{/* Stats and label */}
+					<span className="xl:block h-full w-px bg-black hidden"></span>
 					<div className="flex flex-col justify-center items-center w-full h-full">
-						<div className="flex flex-row justify-between items-center w-full">
+						<div className="flex sm:flex-row flex-col justify-between items-center w-full">
 							<div className="flex flex-col items-center justify-center">
 								<p className="text-2xl font-bold">Followers</p>
 								<p className="text-2xl">0</p>
 							</div>
 							<div className="flex flex-col items-center justify-center">
 								<p className="text-2xl font-bold">Releases</p>
-								<p className="text-2xl">0</p>
+								<p className="text-2xl">{label.releases.length}</p>
 							</div>
 							<div className="flex flex-col items-center justify-center">
 								<p className="text-2xl font-bold">Likes</p>

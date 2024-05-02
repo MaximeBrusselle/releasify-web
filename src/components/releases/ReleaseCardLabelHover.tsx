@@ -18,15 +18,15 @@ const ReleaseCardLabelHover: React.FC<ReleaseCardLabelHoverProps> = (props: Rele
 			<HoverCardTrigger asChild>
 				{label.id && label.id !== "" ? (
 					<Link to={`/labels/${label.id}`}>
-						<div className="flex flex-row justify-center items-center gap-3">
-							<img src={getImageUrl("labels", label.profilePicture)} alt={label.name} className="w-[43px] rounded-md aspect-square" />
-							<p className="font-semibold text-lg">{label.name}</p>
+						<div className="flex flex-row justify-center items-center gap-3 w-full">
+							<img src={getImageUrl("labels", label.profilePicture)} alt={label.name} className="sm:w-[43px] w-[36px] rounded-md aspect-square sm:border-4 border-2 border-black border-solid" />
+							<p className="font-semibold sm:text-lg text-md">{label.name}</p>
 						</div>
 					</Link>
 				) : (
-					<div className="flex flex-row justify-center items-center gap-3">
-						<img src={getImageUrl("labels", label.profilePicture)} alt={label.name} className="w-[43px] rounded-md aspect-square" />
-						<p className="font-semibold text-lg">{label.name}</p>
+					<div className="flex flex-row justify-center items-center gap-3 w-full">
+						<img src={getImageUrl("labels", label.profilePicture)} alt={label.name} className="sm:w-[43px] w-[36px] rounded-md aspect-square sm:border-4 border-2 border-black border-solid" />
+						<p className="font-semibold sm:text-lg text-md">{label.name}</p>
 					</div>
 				)}
 			</HoverCardTrigger>
