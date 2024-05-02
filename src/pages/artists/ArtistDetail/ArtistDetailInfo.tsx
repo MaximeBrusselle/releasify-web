@@ -27,11 +27,11 @@ const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailIn
 					/>
 					<div className="flex flex-col justify-center 2xl:items-start items-center w-fit gap-[7px] h-full">
 						<div className="flex flex-col 2xl:items-start items-center justify-center gap-0">
-							<p className="text-4xl font-extrabold">{artist.artistName}</p>
-							{artist.realName && <p className="text-[16px]">{artist.realName}</p>}
-							<p className="text-[16px]">{artist.description}</p>
+							<p className="text-4xl font-extrabold text-center">{artist.artistName}</p>
+							{artist.realName && <p className="text-[16px] text-center">{artist.realName}</p>}
+							<p className="text-[16px] text-center">{artist.description}</p>
 							{artist.bookingEmail && (
-								<p className="text-[16px] flex flex-row gap-1">
+								<p className="text-[16px] flex flex-row gap-1 text-center">
 									Booking:{" "}
 									<Link className="text-[16px] text-blue-600 underline" to={`mailto:${artist.bookingEmail}?subject=Booking ${artist.artistName}`}>
 										{artist.bookingEmail}
@@ -39,7 +39,7 @@ const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailIn
 								</p>
 							)}
 						</div>
-						<div className="flex flex-row gap-2 justify-start items-center">
+						<div className="flex flex-row gap-2 justify-start items-center text-center">
 							{artist.genres.map((genre) => (
 								<Badge key={genre.id} color={genre.group.color} className="mr-1 mb-1">
 									{genre.name}
