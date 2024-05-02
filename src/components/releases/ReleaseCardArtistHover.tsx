@@ -19,8 +19,8 @@ const ReleaseCardArtistHover: React.FC<ReleaseArtistProps> = (props: ReleaseArti
 				{artist.id && artist.id !== "" ? (
 					<Link to={`/artists/${artist.id}`} key={artist.id}>
 						<div className="flex flex-row justify-center items-center gap-1 hover:cursor-pointer">
-							<img src={getImageUrl("artists", artist.profilePicture)} alt={artist.artistName} className="w-[16px] aspect-square rounded-full border-1 border-black border-solid" />
-							<p className="text-md underline">{artist.artistName}</p>
+							<img src={getImageUrl("artists", artist.profilePicture)} alt={artist.artistName} className="sm:w-[16px] w-[24px] aspect-square rounded-full border-1 border-black border-solid" />
+							<p className="sm:text-md text-lg underline">{artist.artistName}</p>
 						</div>
 					</Link>
 				) : (

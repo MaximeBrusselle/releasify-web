@@ -18,15 +18,15 @@ const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailIn
 	return (
 		<div className="flex flex-col items-center justify-start gap-[14px] xl:w-[75vw] h-full lg:w-[80vw] md:w-[85vw] w-[90vw]">
 			<img src={getImageUrl("artists", artist.bannerPicture)} alt="banner picture" className="w-full object-cover rounded-[20px] border-black border-[6px] border-solid xl:aspect-[1400/400] lg:aspect-[1400/500] md:aspect-[1400/600] aspect-[1400/900]" />
-			<div className="flex xl:flex-row flex-col w-full h-full gap-[14px] items-center justify-center border-solid">
-				<div className="flex xl:flex-row flex-col xl:justify-start justify-center items-center w-full gap-2 h-full">
+			<div className="flex 2xl:flex-row flex-col w-full h-full gap-[14px] items-center justify-center border-solid">
+				<div className="flex 2xl:flex-row flex-col 2xl:justify-start justify-center items-center w-full gap-2 h-full">
 					<img
 						src={getImageUrl("artists", artist.profilePicture)}
 						alt="profile picture"
 						className="w-[20vh] object-cover rounded-[50px] border-black border-[6px] border-solid aspect-square"
 					/>
-					<div className="flex flex-col justify-center items-start w-fit gap-[7px] h-full">
-						<div className="flex flex-col items-start justify-center gap-0">
+					<div className="flex flex-col justify-center 2xl:items-start items-center w-fit gap-[7px] h-full">
+						<div className="flex flex-col 2xl:items-start items-center justify-center gap-0">
 							<p className="text-4xl font-extrabold">{artist.artistName}</p>
 							{artist.realName && <p className="text-[16px]">{artist.realName}</p>}
 							<p className="text-[16px]">{artist.description}</p>
@@ -62,8 +62,8 @@ const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailIn
 						</div>
 					</div>
 				</div>
-				<div className="flex xl:flex-row flex-col items-center justify-between xl:h-[200px] w-full gap-6 h-full">
-					<span className="xl:block h-full w-px bg-black hidden"></span>
+				<div className="flex 2xl:flex-row flex-col items-center justify-between 2xl:h-[200px] w-full gap-6 h-full">
+					<span className="2xl:block h-full w-px bg-black hidden"></span>
 					<div className="flex flex-col justify-center items-center w-[70%] h-full">
 						{artist.socials.length > 1 && (
 							<div className="flex flex-row justify-end items-end w-full">
@@ -78,7 +78,7 @@ const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailIn
 							))}
 						</div>
 					</div>
-					<span className="xl:block h-full w-px bg-black hidden"></span>
+					<span className="2xl:block h-full w-px bg-black hidden"></span>
 					<div className="flex flex-col justify-center items-center w-full h-full">
 						<div className="flex sm:flex-row flex-col justify-between items-center w-full">
 							<div className="flex flex-col items-center justify-center">

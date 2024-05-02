@@ -66,7 +66,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 	return (
 		<div className="sm:w-[640px] sm:h-[182px] rounded-2xl p-4 shadow-input bg-white dark:bg-black cursor-auto w-full h-fit" ref={cardRef}>
 			<div className="flex sm:flex-row flex-col items-center sm:justify-start justify-center w-full h-full gap-4">
-				<div className="flex flex-row sm:justify-start justify-center items-center gap-2 w-full">
+				<div className="sm:flex flex-row justify-start items-center gap-2 w-full hidden">
 					<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
 					<div className="flex flex-col items-start justify-center h-full">
 						<p className={`font-bold text-${fontSize}`}>{release.name}</p>
@@ -77,6 +77,21 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 							))}
 						</div>
 						<ReleaseCardLabelHover label={release.label} />
+					</div>
+				</div>
+				<div className="flex flex-col justify-center items-center gap-2 w-full sm:hidden">
+					<p className="font-bold text-3xl text-center">{release.name}</p>
+					<div className="flex flex-row justify-center items-center w-full gap-3">
+						<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
+						<div className="flex flex-col items-start justify-center h-full">
+							{isReleased && <p className="text-md leading-4">📅 {release.releaseDate.toDateString()}</p>}
+							<div className="flex flex-row flex-wrap justify-start items-center gap-x-1">
+								{release.artists.map((artist) => (
+									<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />
+								))}
+							</div>
+							<ReleaseCardLabelHover label={release.label} />
+						</div>
 					</div>
 				</div>
 
