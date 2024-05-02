@@ -4,7 +4,7 @@ import { getImageUrl } from "../../lib/utils";
 import notifPlus from "../../assets/icon_bell_plus.svg";
 import notifOff from "../../assets/icon_bell_off.svg";
 import { useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface ArtistCardProps {
 	artist: ArtistIndex;
