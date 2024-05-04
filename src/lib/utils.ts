@@ -18,3 +18,10 @@ export function handleSocialLinkClick(e: React.MouseEvent<HTMLImageElement>, url
 	e.stopPropagation();
 	window.open(url, "_blank");
 }
+
+export function ignoreClick(event: React.MouseEvent<HTMLElement, MouseEvent>): void {
+	const target = event.target as HTMLElement;
+	if (target.nodeName.toLowerCase() !== "button") {
+		event.stopPropagation();
+	}
+}

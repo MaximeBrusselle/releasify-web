@@ -2,6 +2,8 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import { getImageUrl } from "@/lib/utils";
 import { ReleaseArtist } from "@/data/releases/releaseTypes";
 import { useNavigate } from "react-router-dom";
+import { ignoreClick } from "@/lib/utils";
+
 
 interface ReleaseArtistProps {
 	artist: ReleaseArtist;
@@ -14,7 +16,7 @@ const ReleaseCardArtistHover: React.FC<ReleaseArtistProps> = (props: ReleaseArti
 		navigate(`/artists/${artist.id}`);
 	}
 
-	function handleArtistClicked(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
+	function handleArtistClicked(event: React.MouseEvent<HTMLElement, MouseEvent>): void {
 		event.stopPropagation();
 		if (artist.id && artist.id !== "") {
 			goToProfile();
@@ -37,7 +39,7 @@ const ReleaseCardArtistHover: React.FC<ReleaseArtistProps> = (props: ReleaseArti
 				)}
 			</HoverCardTrigger>
 			<HoverCardContent className="w-96">
-				<div className="flex flex-row items-center justify-between w-full">
+				<div className="flex flex-row items-center justify-between w-full hover:cursor-default" onClick={ignoreClick}>
 					<img src={getImageUrl("artists", artist.profilePicture)} alt={artist.artistName} className="w-[45%] aspect-square rounded-[12px] border-4 border-black border-solid object-cover" />
 					<div className="flex flex-col items-start justify-center gap-1 p-2 w-full">
 						<div className="flex flex-col justify-center items-start gap-1">
@@ -45,7 +47,7 @@ const ReleaseCardArtistHover: React.FC<ReleaseArtistProps> = (props: ReleaseArti
 							<p className="text-md">{artist.description}</p>
 						</div>
 						{artist.id && artist.id !== "" ? (
-							<button className="px-4 py-2 bg-[#1ED760] rounded-[12px] text-white" onClick={goToProfile}>
+							<button className="px-4 py-2 bg-[#1ED760] rounded-[12px] text-white" onClick={handleArtistClicked}>
 								Go to profile
 							</button>
 						) : (
