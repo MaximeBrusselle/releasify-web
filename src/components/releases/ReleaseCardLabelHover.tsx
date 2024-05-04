@@ -1,7 +1,7 @@
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { getImageUrl } from "../../lib/utils";
 import { LabelIndex } from "@/data/labels/labelTypes";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface ReleaseCardLabelHoverProps {
 	label: LabelIndex;
@@ -9,23 +9,37 @@ interface ReleaseCardLabelHoverProps {
 
 const ReleaseCardLabelHover: React.FC<ReleaseCardLabelHoverProps> = (props: ReleaseCardLabelHoverProps) => {
 	const { label } = props;
-	const goToProfile = () => {
-		window.location.href = `/labels/${label.id}`;
+	const navigate = useNavigate();
+	function goToProfile(): void {
+		navigate(`/labels/${label.id}`);
 	};
+
+	function handleLabelCLicked(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
+		event.stopPropagation();
+		if (label.id && label.id !== "") {
+			goToProfile();
+		}
+	}
 
 	return (
 		<HoverCard openDelay={1000}>
 			<HoverCardTrigger asChild>
 				{label.id && label.id !== "" ? (
-					<Link to={`/labels/${label.id}`}>
-						<div className="flex flex-row justify-center items-center gap-3 w-full">
-							<img src={getImageUrl("labels", label.profilePicture)} alt={label.name} className="sm:w-[43px] w-[36px] rounded-md aspect-square sm:border-4 border-2 border-black border-solid" />
-							<p className="font-semibold sm:text-lg text-md">{label.name}</p>
-						</div>
-					</Link>
+					<div className="flex flex-row justify-start items-center gap-3 w-full group hover:cursor-pointer" onClick={handleLabelCLicked}>
+						<img
+							src={getImageUrl("labels", label.profilePicture)}
+							alt={label.name}
+							className="sm:w-[43px] w-[36px] rounded-md aspect-square sm:border-4 border-2 border-black border-solid"
+						/>
+						<p className="font-semibold sm:text-lg text-md group-hover:underline">{label.name}</p>
+					</div>
 				) : (
 					<div className="flex flex-row justify-center items-center gap-3 w-full">
-						<img src={getImageUrl("labels", label.profilePicture)} alt={label.name} className="sm:w-[43px] w-[36px] rounded-md aspect-square sm:border-4 border-2 border-black border-solid" />
+						<img
+							src={getImageUrl("labels", label.profilePicture)}
+							alt={label.name}
+							className="sm:w-[43px] w-[36px] rounded-md aspect-square sm:border-4 border-2 border-black border-solid"
+						/>
 						<p className="font-semibold sm:text-lg text-md">{label.name}</p>
 					</div>
 				)}

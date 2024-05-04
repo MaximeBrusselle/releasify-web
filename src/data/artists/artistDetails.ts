@@ -1,6 +1,6 @@
 import { genres } from "../genres/genres";
 import { labels } from "../labels/labels";
-import { socials } from "../other/socials";
+import { socialsArtists } from "../other/socialsArtists";
 import { releases } from "../releases/releases";
 import { ArtistDetail } from "./artistTypes";
 
@@ -15,8 +15,8 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "1");
 		}),
-		socials: socials.filter((social) => {
-			return social.artistId === "1";
+		socials: socialsArtists.filter((social) => {
+			return social.entityId === "1";
 		}),
 		profilePicture: "synthsation_pfp.png",
 		genres: [genres[4], genres[6]],
@@ -31,8 +31,8 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "2") === true;
 		}),
-		socials: socials.filter((social) => {
-			return social.artistId === "2";
+		socials: socialsArtists.filter((social) => {
+			return social.entityId === "2";
 		}),
 		profilePicture: "sparkz_pfp.jpg",
 		genres: [genres[4], genres[6]],
@@ -48,8 +48,8 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "3");
 		}),
-		socials: socials.filter((social) => {
-			return social.artistId === "3";
+		socials: socialsArtists.filter((social) => {
+			return social.entityId === "3";
 		}),
 		profilePicture: "kenai_pfp.jpg",
 		genres: [genres[4], genres[6]],
@@ -65,8 +65,8 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "4");
 		}),
-		socials: socials.filter((social) => {
-			return social.artistId === "4";
+		socials: socialsArtists.filter((social) => {
+			return social.entityId === "4";
 		}),
 		profilePicture: "scarra_pfp.jpg",
 		genres: [genres[4], genres[6]],
@@ -82,8 +82,8 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "5");
 		}),
-		socials: socials.filter((social) => {
-			return social.artistId === "5";
+		socials: socialsArtists.filter((social) => {
+			return social.entityId === "5";
 		}),
 		profilePicture: "invaderz_pfp.jpg",
 		genres: [genres[2]],
@@ -99,8 +99,8 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "6");
 		}),
-		socials: socials.filter((social) => {
-			return social.artistId === "6";
+		socials: socialsArtists.filter((social) => {
+			return social.entityId === "6";
 		}),
 		profilePicture: "bmberjck_pfp.jpg",
 		genres: [genres[4], genres[6]],
@@ -116,8 +116,8 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "7");
 		}),
-		socials: socials.filter((social) => {
-			return social.artistId === "7";
+		socials: socialsArtists.filter((social) => {
+			return social.entityId === "7";
 		}),
 		profilePicture: "cryex_pfp2.jpg",
 		genres: [genres[4], genres[6]],
@@ -133,8 +133,8 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "8");
 		}),
-		socials: socials.filter((social) => {
-			return social.artistId === "8";
+		socials: socialsArtists.filter((social) => {
+			return social.entityId === "8";
 		}),
 		profilePicture: "vasto_pfp.jpeg",
 		genres: [genres[4], genres[6]],
@@ -150,8 +150,8 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "9");
 		}),
-		socials: socials.filter((social) => {
-			return social.artistId === "9";
+		socials: socialsArtists.filter((social) => {
+			return social.entityId === "9";
 		}),
 		profilePicture: "the_smiler_pfp.jpg",
 		genres: [genres[4], genres[5], genres[6]],
@@ -167,8 +167,8 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "10");
 		}),
-		socials: socials.filter((social) => {
-			return social.artistId === "10";
+		socials: socialsArtists.filter((social) => {
+			return social.entityId === "10";
 		}),
 		profilePicture: "chapter_v_pfp.jpg",
 		genres: [genres[4], genres[5], genres[6]],
@@ -184,8 +184,8 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "11");
 		}),
-		socials: socials.filter((social) => {
-			return social.artistId === "11";
+		socials: socialsArtists.filter((social) => {
+			return social.entityId === "11";
 		}),
 		profilePicture: "faceless_pfp.jpeg",
 		genres: [genres[4], genres[5], genres[6]],

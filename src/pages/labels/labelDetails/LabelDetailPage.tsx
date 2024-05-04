@@ -25,10 +25,12 @@ const LabelDetailPage: React.FC = () => {
 		setNotification(!notification);
 	};
 
-	const announcedReleases = label.releases.filter((release) => release.releaseDate > new Date());
+	const announcedReleases = label.releases.filter((release) => release.releaseDate > new Date()).sort((a, b) => a.releaseDate.getTime() - b.releaseDate.getTime());
 	const announcedSpacing = announcedReleases.length > 2 ? "justify-between" : "justify-start gap-x-4";
-	const previousReleases = label.releases.filter((release) => release.releaseDate <= new Date());
+	const previousReleases = label.releases.filter((release) => release.releaseDate <= new Date()).sort((a, b) => b.releaseDate.getTime() - a.releaseDate.getTime());
 	const previousSpacing = previousReleases.length > 2 ? "justify-between" : "justify-start gap-x-4";
+
+	const sortedArtists = label.artists.sort((a, b) => a.artistName.localeCompare(b.artistName));
 
 	return (
 		<div className="flex flex-col items-center justify-start gap-[28px] font-[Fira Sans]">
@@ -36,10 +38,10 @@ const LabelDetailPage: React.FC = () => {
 			{/* Artists */}
 			<div className="flex flex-col justify-start sm:items-start items-center xl:w-[75vw] lg:w-[80vw] md:w-[85vw] w-[90vw]">
 				<h2 className="text-[48px] font-extrabold text-center">Artists</h2>
-				{label.artists.length === 0 && <p className="text-[24px] text-center">No Artists On This Label</p>}
-				{label.artists.length > 0 && (
+				{sortedArtists.length === 0 && <p className="text-[24px] text-center">No Artists On This Label</p>}
+				{sortedArtists.length > 0 && (
 					<div className={`flex flex-row flex-wrap sm:${announcedSpacing} justify-center items-center w-full gap-y-6`}>
-						{label.artists.map((artist) => (
+						{sortedArtists.map((artist) => (
 							<ArtistCard key={artist.id && artist.id !== "" ? artist.id : `${artist.artistName}notfound`} artist={artist} />
 						))}
 					</div>

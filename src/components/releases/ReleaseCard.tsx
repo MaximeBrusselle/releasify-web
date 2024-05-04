@@ -1,3 +1,4 @@
+"use client";
 import { ReleaseIndex } from "../../data/releases/releaseTypes";
 import { useState } from "react";
 import { getImageUrl } from "../../lib/utils";
@@ -6,26 +7,34 @@ import notifoff from "../../assets/icon_bell_off_black.svg";
 import { useRef, useEffect } from "react";
 import ReleaseCardArtistHover from "./ReleaseCardArtistHover";
 import ReleaseCardLabelHover from "./ReleaseCardLabelHover";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface ReleaseCardProps {
 	release: ReleaseIndex;
 }
 
 const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
+	const navigate = useNavigate();
+
 	const cardRef = useRef<HTMLDivElement>(null);
 	const [fontSize, setFontSize] = useState<string>("4xl");
 
 	const { release } = props;
 
 	const [notification, setNotification] = useState(false);
-	const handleNotification = () => {
+	const handleNotification = (e: React.MouseEvent<HTMLImageElement>) => {
+		e.stopPropagation();
 		setNotification(!notification);
 	};
 
 	const isReleased = release.releaseDate < new Date();
-
 	const month = release.releaseDate.toDateString().split(" ")[1];
+
+	const handleSocialLinkClick = (e: React.MouseEvent<HTMLImageElement>, url: string) => {
+		e.stopPropagation();
+		window.open(url, "_blank");
+	};
 
 	useEffect(() => {
 		if (window.innerWidth < 640) setFontSize("3xl");
@@ -63,8 +72,12 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 		}
 	}, []);
 
+	const handleNavigate = () => {
+		navigate(`/releases/${release.id}`);
+	};
+
 	return (
-		<div className="sm:w-[640px] sm:h-[182px] rounded-2xl p-4 shadow-input bg-white dark:bg-black cursor-auto w-full h-fit" ref={cardRef}>
+		<div className="sm:w-[640px] sm:h-[182px] rounded-2xl p-4 shadow-input bg-white dark:bg-black cursor-auto w-full h-fit hover:cursor-pointer" ref={cardRef} onClick={handleNavigate}>
 			<div className="flex sm:flex-row flex-col items-center sm:justify-start justify-center w-full h-full gap-4">
 				<div className="sm:flex flex-row justify-start items-center gap-2 w-full hidden">
 					<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
@@ -94,16 +107,18 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 						</div>
 					</div>
 				</div>
-
 				<span className="sm:block h-full w-px bg-black hidden"></span>
-
 				{isReleased ? (
 					<div className="flex sm:flex-col flex-row items-center justify-center gap-4 sm:w-[20%] w-full m-2">
 						<div className=" flex flex-row flex-wrap justify-center items-center gap-1">
 							{release.urls.map((url) => (
-								<Link key={url.platform.name} to={url.url} target="_blank" rel="noreferrer" className="sm:flex-releaseCardSocials hover:cursor-pointer">
-									<img src={getImageUrl("socialplatforms", url.platform.logo)} alt={url.platform.name.toString()} className="w-[30px] aspect-square hover:cursor-pointer" />
-								</Link>
+								<img
+									src={getImageUrl("socialplatforms", url.platform.logo)}
+									alt={url.platform.name.toString()}
+									onClick={(event) => handleSocialLinkClick(event, url.url)}
+									className="w-[30px] aspect-square sm:flex-releaseCardSocials hover:cursor-pointer"
+									key={url.platform.name}
+								/>
 							))}
 						</div>
 					</div>

@@ -1,7 +1,7 @@
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { getImageUrl } from "../../lib/utils";
 import { ReleaseArtist } from "@/data/releases/releaseTypes";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface ReleaseArtistProps {
 	artist: ReleaseArtist;
@@ -9,20 +9,26 @@ interface ReleaseArtistProps {
 
 const ReleaseCardArtistHover: React.FC<ReleaseArtistProps> = (props: ReleaseArtistProps) => {
 	const { artist } = props;
-	const goToProfile = () => {
-		window.location.href = `/artists/${artist.id}`;
+	const navigate = useNavigate();
+	function goToProfile(): void {
+		navigate(`/artists/${artist.id}`);
 	};
+
+	function handleArtistClicked(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
+		event.stopPropagation();
+		if (artist.id && artist.id !== "") {
+			goToProfile();
+		}
+	}
 
 	return (
 		<HoverCard openDelay={1000}>
 			<HoverCardTrigger asChild>
 				{artist.id && artist.id !== "" ? (
-					<Link to={`/artists/${artist.id}`} key={artist.id}>
-						<div className="flex flex-row justify-center items-center gap-1 hover:cursor-pointer">
-							<img src={getImageUrl("artists", artist.profilePicture)} alt={artist.artistName} className="w-[24px] aspect-square rounded-full border-1 border-black border-solid" />
-							<p className="text-md underline">{artist.artistName}</p>
-						</div>
-					</Link>
+					<div className="flex flex-row justify-center items-center gap-1 hover:cursor-pointer group" onClick={handleArtistClicked}>
+						<img src={getImageUrl("artists", artist.profilePicture)} alt={artist.artistName} className="w-[24px] aspect-square rounded-full border-1 border-black border-solid" />
+						<p className="text-md group-hover:underline">{artist.artistName}</p>
+					</div>
 				) : (
 					<div className="flex flex-row justify-center items-center gap-1 hover:cursor-default" key={`${artist.artistName}notexisting`}>
 						<img src={getImageUrl("artists", artist.profilePicture)} alt={artist.artistName} className="w-[16px] aspect-square rounded-full border-1 border-black border-solid" />

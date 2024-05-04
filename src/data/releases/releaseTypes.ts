@@ -1,5 +1,6 @@
 import { LabelIndex } from "../labels/labelTypes"
 import { Social } from "../other/socialTypes"
+import { Genre } from "../genres/genreTypes"
 
 
 interface ReleaseIndex {
@@ -8,6 +9,7 @@ interface ReleaseIndex {
     artists: ReleaseArtist[],
     picture: string,
     urls: ReleasePlatform[],
+    genres: Genre[],
     releaseDate: Date
     label: LabelIndex,
 }

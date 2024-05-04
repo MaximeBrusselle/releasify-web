@@ -1,5 +1,5 @@
 interface SocialInfo {
-    artistId: string;
+    entityId: string;
     platform: Social;
     username: string;
     url: string;
