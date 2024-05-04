@@ -1,14 +1,14 @@
 "use client";
 import { ReleaseIndex } from "@/data/releases/releaseTypes";
 import { useState } from "react";
-import { getImageUrl } from "@/lib/utils";
+import { capitalizeFirstLetter, getImageUrl } from "@/lib/utils";
 import notifplus from "@/assets/icon_bell_plus_black.svg";
 import notifoff from "@/assets/icon_bell_off_black.svg";
 import { useRef, useEffect } from "react";
 import ReleaseCardArtistHover from "@/components/releases/ReleaseCardArtistHover";
 import ReleaseCardLabelHover from "@/components/releases/ReleaseCardLabelHover";
-// import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { formattedDateOptions } from "@/lib/formattedDateOptions";
 
 interface ReleaseCardProps {
 	release: ReleaseIndex;
@@ -16,6 +16,7 @@ interface ReleaseCardProps {
 
 const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 	const navigate = useNavigate();
+	const locale = window.navigator.language;
 
 	const cardRef = useRef<HTMLDivElement>(null);
 	const [fontSize, setFontSize] = useState<string>("4xl");
@@ -29,7 +30,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 	};
 
 	const isReleased = release.releaseDate < new Date();
-	const month = release.releaseDate.toDateString().split(" ")[1];
+	const month = capitalizeFirstLetter(release.releaseDate.toDateString().split(" ")[1].toLocaleLowerCase(locale));
 
 	const handleSocialLinkClick = (e: React.MouseEvent<HTMLImageElement>, url: string) => {
 		e.stopPropagation();
@@ -83,7 +84,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 					<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
 					<div className="flex flex-col items-start justify-center h-full gap-y-2">
 						<p className={`font-bold text-${fontSize}`}>{release.name}</p>
-						{isReleased && <p className="text-md leading-4">📅 {release.releaseDate.toLocaleDateString()}</p>}
+						{isReleased && <p className="text-md leading-4">📅 {release.releaseDate.toLocaleDateString(locale, formattedDateOptions)}</p>}
 						<div className="flex flex-row flex-wrap justify-start items-center gap-x-1">
 							{release.artists.map((artist) => (
 								<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />
@@ -97,7 +98,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 					<div className="flex flex-row justify-center items-center w-full gap-3">
 						<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
 						<div className="flex flex-col items-start justify-center h-full gap-y-2">
-							{isReleased && <p className="text-md leading-4">📅 {release.releaseDate.toDateString()}</p>}
+							{isReleased && <p className="text-md leading-4">📅 {release.releaseDate.toLocaleDateString(locale, formattedDateOptions)}</p>}
 							<div className="flex flex-row flex-wrap justify-start items-center gap-x-1">
 								{release.artists.map((artist) => (
 									<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />
@@ -126,7 +127,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 					<div className="flex sm:flex-col items-center justify-center gap-4 sm:w-[20%] w-[7.5%] m-2">
 						<div className="flex sm:flex-col flex-row justify-center items-center text-center sm:gap-0 gap-2">
 							<p className="text-4xl font-bold">{month}</p>
-							<p className="text-3xl">{release.releaseDate.getDay()}</p>
+							<p className="text-3xl">{release.releaseDate.getDay()+1}</p>
 						</div>
 						{notification ? (
 							<img src={notifoff} alt="notif off" onClick={handleNotification} className="w-6 aspect-square" />

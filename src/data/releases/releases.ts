@@ -31,7 +31,7 @@ const releases: ReleaseIndex[] = [
 		picture: "dont_let_me_down_cover.jpeg",
 		urls: dontletmedownurls,
 		genres: [genres[4], genres[6]],
-		releaseDate: new Date("2024-09-11"),
+		releaseDate: new Date("2024/09/03"),
 		label: labels[0],
 	},
 	{
@@ -49,7 +49,7 @@ const releases: ReleaseIndex[] = [
 		picture: "move_your_body_cover.jpeg",
 		urls: moveyourbodyurls,
 		genres: [genres[4], genres[6]],
-		releaseDate: new Date("2024-09-11"),
+		releaseDate: new Date("2024/09/11"),
 		label: labels[0],
 	},
 	{
@@ -67,7 +67,7 @@ const releases: ReleaseIndex[] = [
 		picture: "carnival_cover.jpeg",
 		urls: carnivalurls,
 		genres: [genres[4], genres[6]],
-		releaseDate: new Date("2024-04-18"),
+		releaseDate: new Date("2024/04/18"),
 		label: labels[2],
 	},
 	{
@@ -89,7 +89,7 @@ const releases: ReleaseIndex[] = [
 		picture: "feel_our_love_cover.jpeg",
 		urls: feelourloveurls,
 		genres: [genres[4], genres[6]],
-		releaseDate: new Date("2023-07-27"),
+		releaseDate: new Date("2023/07/27"),
 		label: labels[1],
 	},
 	{
@@ -107,7 +107,7 @@ const releases: ReleaseIndex[] = [
 		picture: "digital_demise_cover.jpeg",
 		urls: digitaldemiseurls,
 		genres: [genres[4], genres[6]],
-		releaseDate: new Date("2023-03-31"),
+		releaseDate: new Date("2023/03/31"),
 		label: labels[1],
 	},
 	{
@@ -125,7 +125,7 @@ const releases: ReleaseIndex[] = [
 		picture: "mirrors_cover.jpeg",
 		urls: mirrorsurls,
 		genres: [genres[4], genres[6]],
-		releaseDate: new Date("2024-04-11"),
+		releaseDate: new Date("2024/04/11"),
 		label: labels[0],
 	},
 	{
@@ -143,7 +143,7 @@ const releases: ReleaseIndex[] = [
 		picture: "animals_cryex_remix_cover.jpeg",
 		urls: animalscryexremixurls,
 		genres: [genres[4], genres[6]],
-		releaseDate: new Date("2024-03-15"),
+		releaseDate: new Date("2024/03/15"),
 		label: labels[2],
 	},
 	{
@@ -161,7 +161,7 @@ const releases: ReleaseIndex[] = [
 		picture: "worthless_cover.jpeg",
 		urls: worthlessurls,
 		genres: [genres[4], genres[6], genres[5]],
-		releaseDate: new Date("2024-03-28"),
+		releaseDate: new Date("2024/03/28"),
 		label: labels[3],
 	},
 	{
@@ -179,7 +179,7 @@ const releases: ReleaseIndex[] = [
 		picture: "heart_of_steel_cover.jpeg",
 		urls: heartofsteelurls,
 		genres: [genres[4], genres[6], genres[5]],
-		releaseDate: new Date("2023-10-12"),
+		releaseDate: new Date("2023/10/12"),
 		label: labels[3],
 	},
 	{
@@ -197,7 +197,7 @@ const releases: ReleaseIndex[] = [
 		picture: "sinner_cover.jpeg",
 		urls: sinnerurls,
 		genres: [genres[4], genres[6], genres[5]],
-		releaseDate: new Date("2024-01-18"),
+		releaseDate: new Date("2024/01/18"),
 		label: labels[3],
 	},
 	{
@@ -219,7 +219,7 @@ const releases: ReleaseIndex[] = [
 		picture: "restless_cover.jpeg",
 		urls: restlessurls,
 		genres: [genres[4], genres[6], genres[5]],
-		releaseDate: new Date("2024-03-21"),
+		releaseDate: new Date("2024/03/21"),
 		label: labels[3],
 	},
 ];

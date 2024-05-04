@@ -1,5 +1,5 @@
 "use client";
-import { formattedDateOptions } from "@/data/formattedDateOptions";
+import { formattedDateOptions } from "@/lib/formattedDateOptions";
 import updates from "@/data/updates/updates";
 
 const UpdatesPage: React.FC = () => {
