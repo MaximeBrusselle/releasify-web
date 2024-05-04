@@ -9,6 +9,7 @@ import ReleaseCardArtistHover from "@/components/releases/ReleaseCardArtistHover
 import ReleaseCardLabelHover from "@/components/releases/ReleaseCardLabelHover";
 import { useNavigate } from "react-router-dom";
 import { formattedDateOptions } from "@/lib/formattedDateOptions";
+import { handleSocialLinkClick } from "@/lib/utils";
 
 interface ReleaseCardProps {
 	release: ReleaseIndex;
@@ -31,11 +32,6 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 
 	const isReleased = release.releaseDate < new Date();
 	const month = capitalizeFirstLetter(release.releaseDate.toDateString().split(" ")[1].toLocaleLowerCase(locale));
-
-	const handleSocialLinkClick = (e: React.MouseEvent<HTMLImageElement>, url: string) => {
-		e.stopPropagation();
-		window.open(url, "_blank");
-	};
 
 	useEffect(() => {
 		if (window.innerWidth < 640) setFontSize("3xl");
@@ -113,13 +109,9 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 					<div className="flex sm:flex-col flex-row items-center justify-center gap-4 sm:w-[20%] w-full m-2">
 						<div className=" flex flex-row flex-wrap justify-center items-center gap-1">
 							{release.urls.map((url) => (
-								<img
-									src={getImageUrl("socialplatforms", url.platform.logo)}
-									alt={url.platform.name.toString()}
-									onClick={(event) => handleSocialLinkClick(event, url.url)}
-									className="w-[30px] aspect-square sm:flex-releaseCardSocials hover:cursor-pointer"
-									key={url.platform.name}
-								/>
+								<button className="w-[30px] aspect-square sm:flex-releaseCardSocials hover:cursor-pointer" key={url.platform.name}>
+									<img src={getImageUrl("socialplatforms", url.platform.logo)} alt={url.platform.name.toString()} onClick={(event) => handleSocialLinkClick(event, url.url)} />
+								</button>
 							))}
 						</div>
 					</div>
@@ -127,7 +119,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 					<div className="flex sm:flex-col items-center justify-center gap-4 sm:w-[20%] w-[7.5%] m-2">
 						<div className="flex sm:flex-col flex-row justify-center items-center text-center sm:gap-0 gap-2">
 							<p className="text-4xl font-bold">{month}</p>
-							<p className="text-3xl">{release.releaseDate.getDay()+1}</p>
+							<p className="text-3xl">{release.releaseDate.getDay() + 1}</p>
 						</div>
 						{notification ? (
 							<img src={notifoff} alt="notif off" onClick={handleNotification} className="w-6 aspect-square" />

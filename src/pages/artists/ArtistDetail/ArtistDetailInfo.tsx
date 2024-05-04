@@ -4,6 +4,7 @@ import notifOff from "@/assets/icon_bell_off.svg";
 import { getImageUrl } from "@/lib/utils";
 import { ArtistDetail } from "@/data/artists/artistTypes";
 import { Link } from "react-router-dom";
+import { handleSocialLinkClick } from "@/lib/utils";
 
 interface ArtistDetailInfoProps {
 	artist: ArtistDetail;
@@ -72,9 +73,9 @@ const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailIn
 						)}
 						<div className="flex flex-row flex-wrap items-center justify-center w-fit gap-y-[14px]">
 							{artist.socials.map((social) => (
-								<Link to={social.url} key={social.platform.name} className="flex-artistSocials h-fit w-fit flex flex-row items-center justify-center">
-									<img src={getImageUrl("socialplatforms", social.platform.logo)} alt={social.platform.name.toString()} className="w-[30px] aspect-square" />
-								</Link>
+								<button key={social.platform.name} className="flex-artistSocials h-fit w-fit flex flex-row items-center justify-center">
+									<img src={getImageUrl("socialplatforms", social.platform.logo)} alt={social.platform.name.toString()} className="w-[30px] aspect-square" onClick={(event) => handleSocialLinkClick(event, social.url)}/>
+								</button>
 							))}
 						</div>
 					</div>
