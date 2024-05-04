@@ -12,6 +12,7 @@ import SettingsPage from "@/pages/profile/SettingsPage";
 import SignOutPage from "@/pages/profile/SignOutPage";
 import ArtistDetailPage from "@/pages/artists/artistDetail/ArtistDetailPage";
 import LabelDetailPage from "@/pages/labels/labelDetails/LabelDetailPage";
+import Test from "@/pages/Test";
 // Import other pages
 
 const Layout: React.FC = () => (
@@ -41,6 +42,7 @@ const App: React.FC = () => {
 					<Route path="profile" element={<ProfilePage />} />
 					<Route path="settings" element={<SettingsPage />} />
 					<Route path="sign-out" element={<SignOutPage />} />
+					<Route path="test" element={<Test />} />
 					<Route path="*" element={<NotFound />} />
 					{/* Define other nested routes */}
 				</Route>

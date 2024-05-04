@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useLocation } from "react-router-dom";
-import examplePfp from "@/assets/artists/synthsation_pfp.png";
+// import examplePfp from "@/assets/artists/synthsation_pfp.png";
 
 // Define a type for the navigation items
 interface NavigationItem {
@@ -86,7 +86,7 @@ const NavBar: React.FC = () => {
 										<Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-text focus:ring-offset-2 focus:ring-offset-text hover:ring-text">
 											<span className="absolute -inset-1.5" />
 											<span className="sr-only">Open user menu</span>
-											<img className="h-8 w-8 rounded-full" src={examplePfp} alt="" />
+											<img className="h-8 w-8 rounded-full" src={"https://i.ibb.co/sPRVVdS/synthsation-pfp.png"} alt="" />
 										</Menu.Button>
 									</div>
 									<Transition
