@@ -1,7 +1,7 @@
-import { ArtistIndex } from "../artists/artistTypes";
-import { Genre } from "../genres/genreTypes"
-import { SocialInfo } from "../other/socialTypes";
-import { ReleaseIndex } from "../releases/releaseTypes";
+import { ArtistIndex } from "@/data/artists/artistTypes";
+import { Genre } from "@/data/genres/genreTypes"
+import { SocialInfo } from "@/data/other/socialTypes";
+import { ReleaseIndex } from "@/data/releases/releaseTypes";
 
 interface LabelDetail {
     id: string,

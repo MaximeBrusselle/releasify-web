@@ -1,4 +1,4 @@
-import { Questions } from "./types";
+import { Questions } from "@/data/faq/types";
 
 const questions: Questions = {
     "Artist": [

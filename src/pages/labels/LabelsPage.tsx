@@ -1,5 +1,6 @@
+"use client";
 import { labels } from "@/data/labels/labels";
-import LabelComponent from "./LabelComponent";
+import LabelComponent from "@/pages/labels/LabelComponent";
 
 const LabelsPage: React.FC = () => {
 	return (

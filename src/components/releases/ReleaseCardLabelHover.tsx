@@ -1,5 +1,5 @@
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { getImageUrl } from "../../lib/utils";
+import { getImageUrl } from "@/lib/utils";
 import { LabelIndex } from "@/data/labels/labelTypes";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const ReleaseCardLabelHover: React.FC<ReleaseCardLabelHoverProps> = (props: Rele
 	const navigate = useNavigate();
 	function goToProfile(): void {
 		navigate(`/labels/${label.id}`);
-	};
+	}
 
 	function handleLabelCLicked(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
 		event.stopPropagation();

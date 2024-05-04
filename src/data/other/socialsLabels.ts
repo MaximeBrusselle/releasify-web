@@ -1,5 +1,5 @@
-import { SocialInfo } from "./socialTypes";
-import { socialPlatforms } from "./socialsArtists";
+import { SocialInfo } from "@/data/other/socialTypes";
+import { socialPlatforms } from "@/data/other/socialsArtists";
 
 const socialsUnfoldRecords: SocialInfo[] = [
     {

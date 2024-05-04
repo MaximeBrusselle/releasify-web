@@ -1,6 +1,6 @@
-import { genres } from "../genres/genres";
-import { labels } from "../labels/labels";
-import { ArtistIndex } from "./artistTypes";
+import { genres } from "@/data/genres/genres";
+import { labels } from "@/data/labels/labels";
+import { ArtistIndex } from "@/data/artists/artistTypes";
 
 const artists: ArtistIndex[] = [
     {

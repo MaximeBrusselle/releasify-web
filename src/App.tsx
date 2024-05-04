@@ -1,17 +1,17 @@
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
-import PageContainer from "./components/PageContainer";
-import HomePage from "./pages/HomePage";
-import NotFound from "./pages/NotFound";
-import FAQPage from "./pages/faq/FAQPage";
-import ReleasesPage from "./pages/releases/ReleasesPage";
-import ArtistsPage from "./pages/artists/ArtistsPage";
-import LabelsPage from "./pages/labels/LabelsPage";
-import UpdatesPage from "./pages/updates/UpdatesPage";
-import ProfilePage from "./pages/profile/ProfilePage";
-import SettingsPage from "./pages/profile/SettingsPage";
-import SignOutPage from "./pages/profile/SignOutPage";
-import ArtistDetailPage from "./pages/artists/artistDetail/ArtistDetailPage";
-import LabelDetailPage from "./pages/labels/labelDetails/LabelDetailPage";
+import PageContainer from "@/components/PageContainer";
+import HomePage from "@/pages/HomePage";
+import NotFound from "@/pages/NotFound";
+import FAQPage from "@/pages/faq/FAQPage";
+import ReleasesPage from "@/pages/releases/ReleasesPage";
+import ArtistsPage from "@/pages/artists/ArtistsPage";
+import LabelsPage from "@/pages/labels/LabelsPage";
+import UpdatesPage from "@/pages/updates/UpdatesPage";
+import ProfilePage from "@/pages/profile/ProfilePage";
+import SettingsPage from "@/pages/profile/SettingsPage";
+import SignOutPage from "@/pages/profile/SignOutPage";
+import ArtistDetailPage from "@/pages/artists/artistDetail/ArtistDetailPage";
+import LabelDetailPage from "@/pages/labels/labelDetails/LabelDetailPage";
 // Import other pages
 
 const Layout: React.FC = () => (

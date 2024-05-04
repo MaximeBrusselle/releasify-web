@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { LabelIndex } from "../../data/labels/labelTypes";
+import { LabelIndex } from "@/data/labels/labelTypes";
 import { Link } from "react-router-dom";
 import { getImageUrl } from "@/lib/utils";
 

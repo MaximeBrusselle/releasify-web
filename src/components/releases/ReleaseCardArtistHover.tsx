@@ -1,5 +1,5 @@
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { getImageUrl } from "../../lib/utils";
+import { getImageUrl } from "@/lib/utils";
 import { ReleaseArtist } from "@/data/releases/releaseTypes";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const ReleaseCardArtistHover: React.FC<ReleaseArtistProps> = (props: ReleaseArti
 	const navigate = useNavigate();
 	function goToProfile(): void {
 		navigate(`/artists/${artist.id}`);
-	};
+	}
 
 	function handleArtistClicked(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
 		event.stopPropagation();

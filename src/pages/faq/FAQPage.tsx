@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import ColorCard from "../../components/ColorCard";
-import image from "../../assets/artists/cryex_pfp.png";
+import ColorCard from "@/components/ColorCard";
+import image from "@/assets/artists/cryex_pfp.png";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import questionsData from "./questions"
+import questionsData from "@/data/faq/questions"
 
 const FAQPage: React.FC = () => {
   const categories = ["Artist", "Label", "Fan", "Other"];

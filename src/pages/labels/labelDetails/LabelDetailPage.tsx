@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-import { LabelDetail } from "../../../data/labels/labelTypes";
-import LabelDetailInfo from "./LabelDetailInfo";
-import ReleaseCard from "../../../components/releases/ReleaseCard";
+import { LabelDetail } from "@/data/labels/labelTypes";
+import LabelDetailInfo from "@/pages/labels/labelDetails/LabelDetailInfo";
+import ReleaseCard from "@/components/releases/ReleaseCard";
 import { useState } from "react";
 import { labelDetails } from "@/data/labels/labelDetails";
 import ArtistCard from "@/components/artists/ArtistCard";

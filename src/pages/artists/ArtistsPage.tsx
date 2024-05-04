@@ -1,5 +1,5 @@
-import { artists } from "../../data/artists/artists";
-import ArtistComponent from "./ArtistComponent";
+import { artists } from "@/data/artists/artists";
+import ArtistComponent from "@/pages/artists/ArtistComponent";
 
 const ArtistsPage: React.FC = () => {
 	return (

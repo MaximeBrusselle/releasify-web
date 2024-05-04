@@ -1,6 +1,9 @@
-import updates from "../../data/updates/updates";
+"use client";
+import { formattedDateOptions } from "@/data/formattedDateOptions";
+import updates from "@/data/updates/updates";
 
 const UpdatesPage: React.FC = () => {
+	const locale = navigator.language;
 	const sortedUpdates = updates.sort((a, b) => {
 		return a.version.localeCompare(b.version) * -1;
 	});
@@ -9,10 +12,10 @@ const UpdatesPage: React.FC = () => {
 			<h1 className="text-5xl font-extrabold mb-4">Updates</h1>
 			{sortedUpdates.map((update, index) => (
 				<div key={index} className="mb-8">
-					<h2 className="text-3xl font-bold">Version {update.version} - {update.name}</h2>
-          <p className="text-lg mb-2 font-light">
-						{update.date}
-					</p>
+					<h2 className="text-3xl font-bold">
+						Version {update.version} - {update.name}
+					</h2>
+					<p className="text-lg mb-2 font-light">{update.date.toLocaleDateString(locale, formattedDateOptions)}</p>
 					{update.changes && (
 						<div>
 							<p className="text-lg mb-2">
@@ -39,10 +42,10 @@ const UpdatesPage: React.FC = () => {
 									</li>
 								))}
 							</ul>
-						</div>  
+						</div>
 					)}
 
-					{index !== updates.length-1 && <hr className="my-4" />}
+					{index !== updates.length - 1 && <hr className="my-4" />}
 				</div>
 			))}
 		</div>

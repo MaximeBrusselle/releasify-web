@@ -1,12 +1,12 @@
 "use client";
-import { ReleaseIndex } from "../../data/releases/releaseTypes";
+import { ReleaseIndex } from "@/data/releases/releaseTypes";
 import { useState } from "react";
-import { getImageUrl } from "../../lib/utils";
-import notifplus from "../../assets/icon_bell_plus_black.svg";
-import notifoff from "../../assets/icon_bell_off_black.svg";
+import { getImageUrl } from "@/lib/utils";
+import notifplus from "@/assets/icon_bell_plus_black.svg";
+import notifoff from "@/assets/icon_bell_off_black.svg";
 import { useRef, useEffect } from "react";
-import ReleaseCardArtistHover from "./ReleaseCardArtistHover";
-import ReleaseCardLabelHover from "./ReleaseCardLabelHover";
+import ReleaseCardArtistHover from "@/components/releases/ReleaseCardArtistHover";
+import ReleaseCardLabelHover from "@/components/releases/ReleaseCardLabelHover";
 // import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -83,7 +83,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 					<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
 					<div className="flex flex-col items-start justify-center h-full gap-y-2">
 						<p className={`font-bold text-${fontSize}`}>{release.name}</p>
-						{isReleased && <p className="text-md leading-4">📅 {release.releaseDate.toDateString()}</p>}
+						{isReleased && <p className="text-md leading-4">📅 {release.releaseDate.toLocaleDateString()}</p>}
 						<div className="flex flex-row flex-wrap justify-start items-center gap-x-1">
 							{release.artists.map((artist) => (
 								<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />

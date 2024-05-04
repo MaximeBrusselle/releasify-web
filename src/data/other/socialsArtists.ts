@@ -1,4 +1,4 @@
-import { Social, SocialInfo, SocialPlatform } from "./socialTypes";
+import { Social, SocialInfo, SocialPlatform } from "@/data/other/socialTypes";
 
 const socialPlatforms: Social[] = [
     {

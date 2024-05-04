@@ -1,7 +1,7 @@
-import { Genre } from "../genres/genreTypes"
-import { LabelIndex } from "../labels/labelTypes"
-import { SocialInfo } from "../other/socialTypes"
-import { ReleaseIndex } from "../releases/releaseTypes"
+import { Genre } from "@/data/genres/genreTypes"
+import { LabelIndex } from "@/data/labels/labelTypes"
+import { SocialInfo } from "@/data/other/socialTypes"
+import { ReleaseIndex } from "@/data/releases/releaseTypes"
 
 interface ArtistIndex {
     id: string,

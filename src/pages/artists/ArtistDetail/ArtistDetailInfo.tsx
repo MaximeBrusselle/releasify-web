@@ -1,8 +1,8 @@
 import { Badge } from "@/components/ui/badge";
-import notifPlus from "../../../assets/icon_bell_plus.svg";
-import notifOff from "../../../assets/icon_bell_off.svg";
-import { getImageUrl } from "../../../lib/utils";
-import { ArtistDetail } from "../../../data/artists/artistTypes";
+import notifPlus from "@/assets/icon_bell_plus.svg";
+import notifOff from "@/assets/icon_bell_off.svg";
+import { getImageUrl } from "@/lib/utils";
+import { ArtistDetail } from "@/data/artists/artistTypes";
 import { Link } from "react-router-dom";
 
 interface ArtistDetailInfoProps {

@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import { ArtistDetail } from "../../../data/artists/artistTypes";
-import { details } from "../../../data/artists/artistDetails";
-import ReleaseCard from "../../../components/releases/ReleaseCard";
+import { ArtistDetail } from "@/data/artists/artistTypes";
+import { details } from "@/data/artists/artistDetails";
+import ReleaseCard from "@/components/releases/ReleaseCard";
 import { useState } from "react";
-import ArtistDetailInfo from "./ArtistDetailInfo";
+import ArtistDetailInfo from "@/pages/artists/artistDetail/ArtistDetailInfo";
 
 const ArtistDetailPage: React.FC = () => {
 	const { artistId } = useParams<{ artistId: string }>();

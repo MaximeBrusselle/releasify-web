@@ -1,6 +1,6 @@
-import { labels } from "../labels/labels";
-import { ReleaseIndex } from "./releaseTypes";
-import { genres } from "../genres/genres";
+import { labels } from "@/data/labels/labels";
+import { ReleaseIndex } from "@/data/releases/releaseTypes";
+import { genres } from "@/data/genres/genres";
 import {
 	dontletmedownurls,
 	moveyourbodyurls,

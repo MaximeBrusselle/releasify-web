@@ -1,8 +1,8 @@
-import { genres } from "../genres/genres";
-import { LabelDetail } from "./labelTypes";
-import { artists } from "../artists/artists";
-import { releases } from "../releases/releases";
-import { socialsLabels } from "../other/socialsLabels";
+import { genres } from "@/data/genres/genres";
+import { LabelDetail } from "@/data/labels/labelTypes";
+import { artists } from "@/data/artists/artists";
+import { releases } from "@/data/releases/releases";
+import { socialsLabels } from "@/data/other/socialsLabels";
 
 type LabelDetailMap = { [key: string]: LabelDetail };
 

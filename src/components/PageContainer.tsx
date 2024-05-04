@@ -1,20 +1,17 @@
-import React from 'react'; // Import React
-import Navbar from './Navbar';
+import React from "react";
+import Navbar from "@/components/Navbar";
 
-// Specify the type of props expected by PageContainer
 interface PageContainerProps {
-    children: React.ReactNode; // Using React.ReactNode for children
+	children: React.ReactNode;
 }
 
 const PageContainer: React.FC<PageContainerProps> = ({ children }) => {
-    return (
-        <div className="flex flex-col h-screen w-screen overflow-x-hidden">
-            <Navbar />
-            <main className="flex-grow m-5 mb-16">
-                {children}
-            </main>
-        </div>
-    );
+	return (
+		<div className="flex flex-col h-screen w-screen overflow-x-hidden">
+			<Navbar />
+			<main className="flex-grow m-5 mb-16">{children}</main>
+		</div>
+	);
 };
 
 export default PageContainer;

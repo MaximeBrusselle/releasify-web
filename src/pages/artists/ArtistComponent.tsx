@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { ArtistIndex } from "../../data/artists/artistTypes";
+import { ArtistIndex } from "@/data/artists/artistTypes";
 import { Link } from "react-router-dom";
 import { getImageUrl } from "@/lib/utils";
 

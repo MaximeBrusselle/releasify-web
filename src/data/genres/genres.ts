@@ -1,4 +1,4 @@
-import { GenreGroup, Genre } from "./genreTypes";
+import { GenreGroup, Genre } from "@/data/genres/genreTypes";
 
 const groups: GenreGroup[] = [
     {

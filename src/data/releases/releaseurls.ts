@@ -1,5 +1,5 @@
-import { socialPlatforms } from "../other/socialsArtists";
-import { ReleasePlatform } from "./releaseTypes";
+import { socialPlatforms } from "@/data/other/socialsArtists";
+import { ReleasePlatform } from "@/data/releases/releaseTypes";
 
 const dontletmedownurls: ReleasePlatform[] = [
 	{

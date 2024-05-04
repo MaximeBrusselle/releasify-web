@@ -1,5 +1,5 @@
-import { genres } from "../genres/genres";
-import { LabelIndex } from "./labelTypes";
+import { genres } from "@/data/genres/genres";
+import { LabelIndex } from "@/data/labels/labelTypes";
 
 const labels: LabelIndex[] = [
     {

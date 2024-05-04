@@ -1,6 +1,6 @@
 interface Update {
     version: string;
-    date: string;
+    date: Date;
     name: string;
     changes?: string[];
     addedFeatures?: string[];

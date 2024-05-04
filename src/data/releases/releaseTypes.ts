@@ -1,6 +1,6 @@
-import { LabelIndex } from "../labels/labelTypes"
-import { Social } from "../other/socialTypes"
-import { Genre } from "../genres/genreTypes"
+import { LabelIndex } from "@/data/labels/labelTypes"
+import { Social } from "@/data/other/socialTypes"
+import { Genre } from "@/data/genres/genreTypes"
 
 
 interface ReleaseIndex {
