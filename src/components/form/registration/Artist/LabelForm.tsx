@@ -6,7 +6,6 @@ import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import LabelSelectCard from "@/components/labels/LabelSelectCard";
-import { Genre } from "@/data/genres/genreTypes";
 import { ValidationFieldErrorMap } from "@/components/form/useMultiStepForm";
 
 type LabelView = "independant" | "label" | "labelNotOnPlatform";

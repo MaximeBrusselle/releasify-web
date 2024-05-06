@@ -61,7 +61,7 @@ export function useMultiStepForm(steps: ReactElement[]) {
 		return { isValid: isValid, errors: errors};
 	}
 
-	function validateSocials(data: ArtistRegistrationData): ValidationReturn {
+	function validateSocials(_: ArtistRegistrationData): ValidationReturn {
 		return { isValid: true };
 	}
 
@@ -74,10 +74,6 @@ export function useMultiStepForm(steps: ReactElement[]) {
 			if (index <= 0) return index;
 			return index - 1;
 		});
-	}
-
-	function goToStep(stepIndex: number) {
-		setCurrentStepIndex(stepIndex);
 	}
 
 	return {
