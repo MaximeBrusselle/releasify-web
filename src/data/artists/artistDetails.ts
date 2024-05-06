@@ -1,6 +1,6 @@
 import { genres } from "@/data/genres/genres";
 import { labels } from "@/data/labels/labels";
-import { socialsArtists } from "@/data/other/socialsArtists";
+import { socialsSynthsation, socialsSparkz, socialsKenai, socialsScarra, socialsInvaderz, socialsBmberjck, socialsCryex, socialsVasto, socialsTheSmiler, socialsChapterV, socialsFaceless } from "@/data/other/socialsArtists";
 import { releases } from "@/data/releases/releases";
 import { ArtistDetail } from "@/data/artists/artistTypes";
 
@@ -15,9 +15,7 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "1");
 		}),
-		socials: socialsArtists.filter((social) => {
-			return social.entityId === "1";
-		}),
+		socials: socialsSynthsation,
 		profilePicture: "synthsation_pfp.png",
 		genres: [genres[4], genres[6]],
 		bookingEmail: "synthsationzmusic@gmail.com",
@@ -31,9 +29,7 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "2") === true;
 		}),
-		socials: socialsArtists.filter((social) => {
-			return social.entityId === "2";
-		}),
+		socials: socialsSparkz,
 		profilePicture: "sparkz_pfp.jpg",
 		genres: [genres[4], genres[6]],
 		label: labels[0],
@@ -48,9 +44,7 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "3");
 		}),
-		socials: socialsArtists.filter((social) => {
-			return social.entityId === "3";
-		}),
+		socials: socialsKenai,
 		profilePicture: "kenai_pfp.jpg",
 		genres: [genres[4], genres[6]],
 		label: labels[2],
@@ -65,9 +59,7 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "4");
 		}),
-		socials: socialsArtists.filter((social) => {
-			return social.entityId === "4";
-		}),
+		socials: socialsScarra,
 		profilePicture: "scarra_pfp.jpg",
 		genres: [genres[4], genres[6]],
 		label: labels[2],
@@ -82,9 +74,7 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "5");
 		}),
-		socials: socialsArtists.filter((social) => {
-			return social.entityId === "5";
-		}),
+		socials: socialsInvaderz,
 		profilePicture: "invaderz_pfp.jpg",
 		genres: [genres[2]],
 		label: labels[1],
@@ -99,9 +89,7 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "6");
 		}),
-		socials: socialsArtists.filter((social) => {
-			return social.entityId === "6";
-		}),
+		socials: socialsBmberjck,
 		profilePicture: "bmberjck_pfp.jpg",
 		genres: [genres[4], genres[6]],
 		label: labels[0],
@@ -116,9 +104,7 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "7");
 		}),
-		socials: socialsArtists.filter((social) => {
-			return social.entityId === "7";
-		}),
+		socials: socialsCryex,
 		profilePicture: "cryex_pfp2.jpg",
 		genres: [genres[4], genres[6]],
 		label: labels[2],
@@ -133,9 +119,7 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "8");
 		}),
-		socials: socialsArtists.filter((social) => {
-			return social.entityId === "8";
-		}),
+		socials: socialsVasto,
 		profilePicture: "vasto_pfp.jpeg",
 		genres: [genres[4], genres[6]],
 		label: labels[2],
@@ -150,9 +134,7 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "9");
 		}),
-		socials: socialsArtists.filter((social) => {
-			return social.entityId === "9";
-		}),
+		socials: socialsTheSmiler,
 		profilePicture: "the_smiler_pfp.jpg",
 		genres: [genres[4], genres[5], genres[6]],
 		label: labels[3],
@@ -167,9 +149,7 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "10");
 		}),
-		socials: socialsArtists.filter((social) => {
-			return social.entityId === "10";
-		}),
+		socials: socialsChapterV,
 		profilePicture: "chapter_v_pfp.jpg",
 		genres: [genres[4], genres[5], genres[6]],
 		label: labels[3],
@@ -184,9 +164,7 @@ const details: ArtistDetailMap = {
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "11");
 		}),
-		socials: socialsArtists.filter((social) => {
-			return social.entityId === "11";
-		}),
+		socials: socialsFaceless,
 		profilePicture: "faceless_pfp.jpeg",
 		genres: [genres[4], genres[5], genres[6]],
 		label: labels[3],

@@ -1,5 +1,4 @@
 interface SocialInfo {
-    entityId: string;
     platform: Social;
     username: string;
     url: string;
