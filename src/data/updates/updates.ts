@@ -81,6 +81,17 @@ const updates: Update[] = [
             "Add releases overview page",
         ],
     },
+    {
+        version: "0.5.0 - beta",
+        date: new Date("2024-05-06"),
+        name: "Registration Form Beta",
+        changes: [
+            "Restructured some social data",
+        ],
+        addedFeatures: [
+            "Add a WIP registration form for artists",
+        ],
+    },
 ];
 
 export default updates;
