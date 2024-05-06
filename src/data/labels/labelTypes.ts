@@ -17,7 +17,7 @@ interface LabelDetail {
 }
 
 interface LabelIndex {
-    id: string,
+    id?: string,
     name: string,
     profilePicture: string,
     description?: string,

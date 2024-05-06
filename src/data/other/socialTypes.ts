@@ -1,11 +1,11 @@
 interface SocialInfo {
     platform: Social;
-    username: string;
     url: string;
 }
 
 interface Social {
-    name: SocialPlatform;
+    platform: SocialPlatform;
+    name: string;
     logo: string;
 }
 

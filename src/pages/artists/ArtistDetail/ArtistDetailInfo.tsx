@@ -3,7 +3,7 @@ import notifPlus from "@/assets/icon_bell_plus.svg";
 import notifOff from "@/assets/icon_bell_off.svg";
 import { getImageUrl } from "@/lib/utils";
 import { ArtistDetail } from "@/data/artists/artistTypes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { handleSocialLinkClick } from "@/lib/utils";
 
 interface ArtistDetailInfoProps {
@@ -16,9 +16,19 @@ interface ArtistDetailInfoProps {
 
 const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailInfoProps) => {
 	const { artist, following, notification, handleFollow, handleNotification } = props;
+	const navigate = useNavigate();
+	function handleLabelClicked() {
+		if(!artist.label) return;
+		if(!artist.label.id) return;
+		navigate(`/labels/${artist.label.id}`);
+	}
 	return (
 		<div className="flex flex-col items-center justify-start gap-[14px] xl:w-[75vw] h-full lg:w-[80vw] md:w-[85vw] w-[90vw]">
-			<img src={getImageUrl("artists", artist.bannerPicture)} alt="banner picture" className="w-full object-cover rounded-[20px] border-black border-[6px] border-solid xl:aspect-[1400/400] lg:aspect-[1400/500] md:aspect-[1400/600] aspect-[1400/900]" />
+			<img
+				src={getImageUrl("artists", artist.bannerPicture)}
+				alt="banner picture"
+				className="w-full object-cover rounded-[20px] border-black border-[6px] border-solid xl:aspect-[1400/400] lg:aspect-[1400/500] md:aspect-[1400/600] aspect-[1400/900]"
+			/>
 			<div className="flex 2xl:flex-row flex-col w-full h-full gap-[14px] items-center justify-center border-solid">
 				<div className="flex 2xl:flex-row flex-col 2xl:justify-start justify-center items-center w-full gap-2 h-full">
 					<img
@@ -74,7 +84,12 @@ const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailIn
 						<div className="flex flex-row flex-wrap items-center justify-center w-fit gap-y-[14px]">
 							{artist.socials.map((social) => (
 								<button key={social.platform.name} className="flex-artistSocials h-fit w-fit flex flex-row items-center justify-center">
-									<img src={getImageUrl("socialplatforms", social.platform.logo)} alt={social.platform.name.toString()} className="w-[30px] aspect-square" onClick={(event) => handleSocialLinkClick(event, social.url)}/>
+									<img
+										src={getImageUrl("socialplatforms", social.platform.logo)}
+										alt={social.platform.name.toString()}
+										className="w-[30px] aspect-square"
+										onClick={(event) => handleSocialLinkClick(event, social.url)}
+									/>
 								</button>
 							))}
 						</div>
@@ -98,12 +113,10 @@ const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailIn
 						<hr className="my-[14px] h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-100 dark:via-neutral-900 w-full" />
 						{!artist.label && <p>Independent Artist</p>}
 						{artist.label && (
-							<Link to={`/labels/${artist.label.id}`}>
-								<div className="flex flex-row items-center justify-center gap-3">
-									<img src={getImageUrl("labels", artist.label.profilePicture)} alt={artist.label.name} className="w-20 aspect-square rounded-md" />
-									<p className="text-2xl font-bold">{artist.label.name}</p>
-								</div>
-							</Link>
+							<div className="flex flex-row items-center justify-center gap-3" onClick={handleLabelClicked}>
+								<img src={getImageUrl("labels", artist.label.profilePicture)} alt={artist.label.name} className="w-20 aspect-square rounded-md" />
+								<p className="text-2xl font-bold">{artist.label.name}</p>
+							</div>
 						)}
 					</div>
 				</div>

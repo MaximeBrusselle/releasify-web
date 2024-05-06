@@ -29,7 +29,7 @@ const labels: LabelIndex[] = [
         profilePicture: "spoontech_pfp.jpeg",
         description: "🥄 Representing our Underground Identity",
         genres: [genres[4], genres[5], genres[6]]
-    }
+    },
 ];
 
 export { labels };

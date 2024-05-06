@@ -3,7 +3,6 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useLocation } from "react-router-dom";
-// import examplePfp from "@/assets/artists/synthsation_pfp.png";
 
 // Define a type for the navigation items
 interface NavigationItem {

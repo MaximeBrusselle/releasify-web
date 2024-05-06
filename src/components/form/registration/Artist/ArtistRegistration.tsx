@@ -1,6 +1,6 @@
 import { useMultiStepForm } from "@/components/form/useMultiStepForm";
 import { Progress } from "@/components/ui/progress";
-import { Label } from "@/components/form/registration/Artist/Label";
+import { LabelForm, LabelFormViewType } from "@/components/form/registration/Artist/LabelForm";
 import { PfpAndGenres } from "@/components/form/registration/Artist/PfpAndGenres";
 import { Socials } from "@/components/form/registration/Artist/Socials";
 import { AccountData } from "@/components/form/registration/Artist/AccountData";
@@ -8,6 +8,7 @@ import { Genre } from "@/data/genres/genreTypes";
 import { SocialInfo } from "@/data/other/socialTypes";
 import { LabelIndex } from "@/data/labels/labelTypes";
 import { useState } from "react";
+import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 
 interface ArtistRegistrationData {
 	artistname: string;
@@ -16,8 +17,9 @@ interface ArtistRegistrationData {
 	password: string;
 	confirmPassword: string;
 	profilePicture: File | null;
-	genres: Genre[];
-	socials: SocialInfo[];
+	artistGenres: Genre[];
+	artistSocials: SocialInfo[];
+	labelType: LabelFormViewType;
 	label: LabelIndex | null;
 }
 
@@ -28,12 +30,14 @@ function ArtistRegistration() {
 		email: "",
 		password: "",
 		confirmPassword: "",
+		labelType: { text: "I'm Signed To A Label", viewType: "label" },
 		profilePicture: null,
-		genres: [],
-		socials: [],
+		artistGenres: [],
+		artistSocials: [],
 		label: null,
 	};
 	const [data, setData] = useState<ArtistRegistrationData>(INITIAL_DATA);
+	const [errors, setErrors] = useState<ValidationFieldErrorMap>({});
 
 	function updateFields(newData: Partial<ArtistRegistrationData>) {
 		setData((prevData) => ({
@@ -42,24 +46,36 @@ function ArtistRegistration() {
 		}));
 	}
 
-	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep } = useMultiStepForm([
-		<AccountData {...data} updateFields={updateFields} />,
-		<PfpAndGenres {...data} updateFields={updateFields} />,
-		<Label {...data} updateFields={updateFields} />,
-		<Socials {...data} updateFields={updateFields} />,
+	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep, validateAccountData, validateLabelForm, validatePfpAndGenres, validateSocials } = useMultiStepForm([
+		<AccountData {...data} updateFields={updateFields} errors={errors}/>,
+		<PfpAndGenres {...data} updateFields={updateFields} errors={errors}/>,
+		<LabelForm {...data} updateFields={updateFields} errors={errors}/>,
+		<Socials {...data} updateFields={updateFields} errors={errors}/>,
 	]);
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		if (!isLastStep) return nextStep();
-		alert("Account created!");
-		console.log(data);
+		
+		// Validate the current step before allowing submission
+		const validationFunctions = [validateAccountData, validatePfpAndGenres, validateLabelForm, validateSocials];
+		const {isValid, errors}: ValidationReturn = validationFunctions[currentStepIndex](data);
+	
+		if (isValid) {
+			if (!isLastStep){
+				setErrors({});
+				return nextStep();
+			}
+			alert("Account created!");
+			console.log(data);
+		} else {
+			setErrors(errors!);
+		}
 	};
 
 	return (
 		<div className="rounded-2xl p-4 shadow-input bg-white dark:bg-black font-sans w-full flex flex-col items-center justify-start gap-5">
 			<Progress value={(100 * (currentStepIndex + 1)) / steps.length} />
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className="w-full">
 				{currentStep}
 				<div className="flex flex-row justify-center items-center gap-4">
 					{!isFirstStep && (
@@ -81,3 +97,4 @@ function ArtistRegistration() {
 }
 
 export default ArtistRegistration;
+export type { ArtistRegistrationData };
