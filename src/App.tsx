@@ -17,6 +17,7 @@ import ArtistRegistration from "@/pages/registration/ArtistRegistration";
 import LabelRegistration from "@/pages/registration/LabelRegistration";
 import { useState } from "react";
 import Registration from "@/pages/registration/Registration";
+import UserRegistration from "./pages/registration/UserRegistration";
 // Import other pages
 
 interface LayoutProps {
@@ -62,6 +63,7 @@ const App: React.FC = () => {
 						<Route index element={<Registration />} />
 						<Route path="artist" element={<ArtistRegistration handleLogin={handleLogin} />} />
 						<Route path="label" element={<LabelRegistration handleLogin={handleLogin} />} />
+						<Route path="user" element={<UserRegistration handleLogin={handleLogin} />} />
 						{/* Define other nested routes */}
 					</Route>
 					<Route path="test" element={<Test />} />

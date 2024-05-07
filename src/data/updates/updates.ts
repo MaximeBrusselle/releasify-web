@@ -89,7 +89,7 @@ const updates: Update[] = [
             "Restructured some social data",
         ],
         addedFeatures: [
-            "Add a WIP registration form for artists",
+            "Add a registration form for artists",
         ],
     },
     {
@@ -97,7 +97,15 @@ const updates: Update[] = [
         date: new Date("2024-05-06"),
         name: "Registration Forms",
         addedFeatures: [
-            "Add a WIP registration form for labels",
+            "Add a registration form for labels",
+        ],
+    },
+    {
+        version: "0.5.2",
+        date: new Date("2024-05-06"),
+        name: "Registration Forms",
+        addedFeatures: [
+            "Add a registration form for users",
         ],
     },
 ];

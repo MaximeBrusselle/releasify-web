@@ -1,6 +1,7 @@
 import { ReactElement, useState } from "react";
 import { ArtistRegistrationData } from "@/pages/registration/ArtistRegistration";
 import { LabelRegistrationData } from "@/pages/registration/LabelRegistration";
+import { UserRegistrationData } from "@/pages/registration/UserRegistration";
 
 type ValidationFieldErrorMap = { [key: string]: string };
 
@@ -14,7 +15,7 @@ export type { ValidationFieldErrorMap, ValidationReturn };
 export function useMultiStepForm(steps: ReactElement[]) {
 	const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
-	function validateAccountData(data: ArtistRegistrationData | LabelRegistrationData): ValidationReturn {
+	function validateAccountData(data: ArtistRegistrationData | LabelRegistrationData | UserRegistrationData): ValidationReturn {
 		let isValid = true;
 		const errors: ValidationFieldErrorMap = {};
 
@@ -48,6 +49,10 @@ export function useMultiStepForm(steps: ReactElement[]) {
 			return data.labelname !== undefined;
 		}
 
+		function isUserRegistrationData(data: any): data is UserRegistrationData {
+			return data.username !== undefined;
+		}
+
 		if (isArtistRegistrationData(data)) {
 			data = data as ArtistRegistrationData;
 			if (data.artistname === "") {
@@ -68,6 +73,16 @@ export function useMultiStepForm(steps: ReactElement[]) {
 				isValid = false;
 				errors["labelname"] = "Username already exists.";
 			}
+		} else if(isUserRegistrationData(data)){
+			data = data as UserRegistrationData;
+			if (data.username === "") {
+				isValid = false;
+				errors["allFields"] = "Fill in the required fields.";
+			}
+			if (!isUsernameUnique) {
+				isValid = false;
+				errors["username"] = "Username already exists.";
+			}
 		}
 
 		if (!isEmailUnique) {
@@ -86,6 +101,10 @@ export function useMultiStepForm(steps: ReactElement[]) {
 			errors["genres"] = "At least one genre is required.";
 		}
 		return { isValid: isValid, errors: errors } /* Add validation logic */;
+	}
+
+	function validatePfp(_: UserRegistrationData): ValidationReturn {
+		return { isValid: true };
 	}
 
 	function validateChooseLabel(data: ArtistRegistrationData): ValidationReturn {
@@ -142,5 +161,6 @@ export function useMultiStepForm(steps: ReactElement[]) {
 		validateChooseLabel,
 		validateChooseArtists,
 		validateSocials,
+		validatePfp
 	};
 }

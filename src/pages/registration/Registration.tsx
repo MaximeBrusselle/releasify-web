@@ -19,6 +19,11 @@ const Registration: React.FC = () => {
 							Register as a Label
 						</Button>
 					</Link>
+					<Link to="/register/user">
+						<Button variant="default" className="text-xl">
+							Register as a User
+						</Button>
+					</Link>
 				</div>
 			</div>
 		</div>

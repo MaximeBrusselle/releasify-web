@@ -1,23 +1,19 @@
 import { FormWrapper } from "@/components/form/FormWrapper";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Genre } from "@/data/genres/genreTypes";
-import React, { useRef, useState } from "react";
-import { genres } from "@/data/genres/genres";
+import { useRef, useState } from "react";
 import { ValidationFieldErrorMap } from "@/components/form/useMultiStepForm";
 
-type PfpAndGenresData = {
+type PfpData = {
 	profilePicture: File | null;
-	genreList: Genre[];
 };
 
-type PfpAndGenresProps = PfpAndGenresData & {
-	updateFields: (newData: Partial<PfpAndGenresData>) => void;
+type PfpProps = PfpData & {
+	updateFields: (newData: Partial<PfpData>) => void;
 	errors: ValidationFieldErrorMap;
 };
 
-export function PfpAndGenres({ profilePicture, genreList, updateFields, errors }: PfpAndGenresProps) {
+export function Pfp({ profilePicture, updateFields, errors }: PfpProps) {
 	const [imageError, setImageError] = useState("");
 	const fileInputRef = useRef<HTMLInputElement>(null);
 	const handleImageUploaded = () => {
@@ -33,18 +29,8 @@ export function PfpAndGenres({ profilePicture, genreList, updateFields, errors }
 			}
 		}
 	};
-
-	const sortedGenres = genres.sort((a, b) => a.name.localeCompare(b.name));
-	const handleGenreClicked = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, newGenre: Genre) => {
-		event.preventDefault();
-		if(genreList.includes(newGenre)){
-			updateFields({genreList: genreList.filter(genre => genre !== newGenre)});
-		} else {
-			updateFields({genreList: [...genreList, newGenre]});
-		}
-	};
 	return (
-		<FormWrapper title="Profile Picture and Genres" allError={errors["allFields"]}>
+		<FormWrapper title="Profile Picture" allError={errors["allFields"]}>
 			<div className="flex flex-col items-start justify-center w-full h-full gap-8 sm:max-w-[30vw]">
 				<div className="flex flex-col gap-2 w-full">
 					<div className="flex flex-row justify-start items-center m-0 p-0">
@@ -67,21 +53,6 @@ export function PfpAndGenres({ profilePicture, genreList, updateFields, errors }
 						/>
 					</div>
 				)}
-				<div className="flex flex-col gap-2 w-full">
-					<div className="flex flex-col gap-2 w-full">
-						<div className="flex flex-row justify-start items-center m-0 p-0">
-							<Label className="font-bold text-lg">Choose Your Genre(s)</Label>
-							<p className="text-red-500">*</p>
-							<p className=" font-extralight ml-1 text-sm">(min 1)</p>
-						</div>
-						{errors.genres && <p className="text-red-500">{errors.genres}</p>}
-					</div>
-					<div className="flex flex-row gap-2 flex-wrap">
-						{sortedGenres.map((genre) => (
-							<Badge variant={genreList.includes(genre) ? "default" : "outline"} onClick={(event) => handleGenreClicked(event, genre)} key={genre.id} className="hover:cursor-pointer">{genre.name}</Badge>
-						))}
-					</div>
-				</div>
 			</div>
 		</FormWrapper>
 	);

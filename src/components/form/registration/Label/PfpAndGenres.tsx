@@ -48,7 +48,8 @@ export function PfpAndGenres({ profilePicture, genreList, updateFields, errors }
 			<div className="flex flex-col items-start justify-center w-full h-full gap-8 sm:max-w-[30vw]">
 				<div className="flex flex-col gap-2 w-full">
 					<div className="flex flex-row justify-start items-center m-0 p-0">
-						<Label htmlFor="confirmpassword" className="font-bold text-lg">Profile Picture (Max 32MB)</Label>
+						<Label htmlFor="confirmpassword" className="font-bold text-lg">Profile Picture</Label>
+						<p className=" font-extralight ml-1 text-sm">(max 32MB)</p>
 					</div>
 					<Input id="confirmpassword" className="border-[1px] border-grey-200 border-solid" type="file" accept="image/*" ref={fileInputRef} onChange={handleImageUploaded} />
 					<p className="text-red-500" hidden={imageError === ""}>
@@ -69,8 +70,9 @@ export function PfpAndGenres({ profilePicture, genreList, updateFields, errors }
 				<div className="flex flex-col gap-2 w-full">
 					<div className="flex flex-col gap-2 w-full">
 						<div className="flex flex-row justify-start items-center m-0 p-0">
-							<Label className="font-bold text-lg">Choose Your Genre(s) (Min 1)</Label>
+							<Label className="font-bold text-lg">Choose Your Genre(s)</Label>
 							<p className="text-red-500">*</p>
+							<p className=" font-extralight ml-1 text-sm">(min 1)</p>
 						</div>
 						{errors.genres && <p className="text-red-500">{errors.genres}</p>}
 					</div>
