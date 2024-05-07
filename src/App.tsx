@@ -16,6 +16,7 @@ import Test from "@/pages/Test";
 import ArtistRegistration from "@/components/form/registration/Artist/ArtistRegistration";
 import LabelRegistration from "@/components/form/registration/Label/LabelRegistration";
 import { useState } from "react";
+import Registration from "@/components/form/registration/Registration";
 // Import other pages
 
 interface LayoutProps {
@@ -40,7 +41,7 @@ const App: React.FC = () => {
 			<Routes>
 				<Route path="/" element={<Layout isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout}/>}>
 					{/* Index route for the default path within the layout */}
-					<Route index element={<HomePage />} />
+					<Route index element={<HomePage handleLogin={handleLogin} handleLogout={handleLogout}/>} />
 					<Route path="releases" element={<ReleasesPage />} />
 					<Route path="artists">
 						<Route index element={<ArtistsPage />} />
@@ -56,7 +57,8 @@ const App: React.FC = () => {
 					<Route path="settings" element={<SettingsPage />} />
 					<Route path="sign-out" element={<SignOutPage />} />
 					<Route path="register">
-						<Route index element={<ArtistRegistration handleLogin={handleLogin}/>} />
+						<Route index element={<Registration/>} />
+						<Route path="artist" element={<ArtistRegistration handleLogin={handleLogin}/>} />
 						<Route path="label" element={<LabelRegistration handleLogin={handleLogin}/>} />
 						{/* Define other nested routes */}
 					</Route>

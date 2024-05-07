@@ -82,14 +82,22 @@ const updates: Update[] = [
         ],
     },
     {
-        version: "0.5.0 - beta",
+        version: "0.5.0",
         date: new Date("2024-05-06"),
-        name: "Registration Form Beta",
+        name: "Registration Forms",
         changes: [
             "Restructured some social data",
         ],
         addedFeatures: [
             "Add a WIP registration form for artists",
+        ],
+    },
+    {
+        version: "0.5.1",
+        date: new Date("2024-05-06"),
+        name: "Registration Forms",
+        addedFeatures: [
+            "Add a WIP registration form for labels",
         ],
     },
 ];
