@@ -27,7 +27,7 @@ const labelDetails: LabelDetailMap = {
 		releases: releases.filter((release) => release.label?.id === "2" || release.artists.some((artist) => artist.label?.id === "2")),
 		artists: artists.filter((artist) => artist.label?.id === "2").sort((a, b) => a.artistName.localeCompare(b.artistName)),
 		description: "🤝 NEXT-GEN UPTEMPO LABEL",
-		genres: [genres[1], genres[3]],
+		genres: [genres[0], genres[2]],
 	},
 	"3": {
 		id: "3",
