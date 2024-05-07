@@ -94,7 +94,7 @@ const updates: Update[] = [
     },
     {
         version: "0.5.1",
-        date: new Date("2024-05-06"),
+        date: new Date("2024-05-07"),
         name: "Registration Forms",
         addedFeatures: [
             "Add a registration form for labels",
@@ -102,7 +102,7 @@ const updates: Update[] = [
     },
     {
         version: "0.5.2",
-        date: new Date("2024-05-06"),
+        date: new Date("2024-05-07"),
         name: "Registration Forms",
         addedFeatures: [
             "Add a registration form for users",
