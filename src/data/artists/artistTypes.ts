@@ -4,10 +4,10 @@ import { SocialInfo } from "@/data/other/socialTypes"
 import { ReleaseIndex } from "@/data/releases/releaseTypes"
 
 interface ArtistIndex {
-    id: string,
+    id?: string,
     artistName: string,
     profilePicture: string,
-    description: string,
+    description?: string,
     genres: Genre[],
     label?: LabelIndex
 }

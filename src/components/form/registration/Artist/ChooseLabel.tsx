@@ -9,15 +9,15 @@ import LabelSelectCard from "@/components/labels/LabelSelectCard";
 import { ValidationFieldErrorMap } from "@/components/form/useMultiStepForm";
 
 type LabelView = "independant" | "label" | "labelNotOnPlatform";
-type LabelFormViewType = {
+type ChooseLabelViewType = {
 	text: string;
 	viewType: LabelView;
 };
 
-export type { LabelFormViewType };
+export type { ChooseLabelViewType };
 
 type LabelData = {
-	labelType: LabelFormViewType;
+	labelType: ChooseLabelViewType;
 	label: LabelIndex | null;
 };
 
@@ -26,7 +26,7 @@ type LabelProps = LabelData & {
 	errors: ValidationFieldErrorMap;
 };
 
-export function LabelForm({ label, labelType, updateFields, errors }: LabelProps) {
+export function ChooseLabel({ label, labelType, updateFields, errors }: LabelProps) {
 	function updateLabel(newLabel: LabelIndex) {
 		updateFields({
 			label: newLabel,
@@ -53,7 +53,7 @@ export function LabelForm({ label, labelType, updateFields, errors }: LabelProps
 		}
 	};
 
-	const viewTypes: LabelFormViewType[] = [
+	const viewTypes: ChooseLabelViewType[] = [
 		{
 			text: "I'm An Independant Artist",
 			viewType: "independant",
@@ -160,11 +160,11 @@ export function LabelForm({ label, labelType, updateFields, errors }: LabelProps
 						</div>
 						<div className="flex flex-col gap-2 w-full">
 							<div className="flex flex-row justify-start items-center m-0 p-0">
-								<Label htmlFor="confirmpassword" className="font-bold text-lg">
+								<Label htmlFor="image" className="font-bold text-lg">
 									Profile Picture (Max 32MB)
 								</Label>
 							</div>
-							<Input id="confirmpassword" className="border-[1px] border-grey-200 border-solid" type="file" accept="image/*" ref={fileInputRef} onChange={handleImageUploaded} />
+							<Input id="image" className="border-[1px] border-grey-200 border-solid" type="file" accept="image/*" ref={fileInputRef} onChange={handleImageUploaded} />
 							<p className="text-red-500" hidden={imageError === ""}>
 								{imageError}
 							</p>

@@ -14,6 +14,7 @@ import ArtistDetailPage from "@/pages/artists/artistDetail/ArtistDetailPage";
 import LabelDetailPage from "@/pages/labels/labelDetails/LabelDetailPage";
 import Test from "@/pages/Test";
 import ArtistRegistration from "@/components/form/registration/Artist/ArtistRegistration";
+import LabelRegistration from "@/components/form/registration/Label/LabelRegistration";
 import { useState } from "react";
 // Import other pages
 
@@ -56,6 +57,7 @@ const App: React.FC = () => {
 					<Route path="sign-out" element={<SignOutPage />} />
 					<Route path="register">
 						<Route index element={<ArtistRegistration handleLogin={handleLogin}/>} />
+						<Route path="label" element={<LabelRegistration handleLogin={handleLogin}/>} />
 						{/* Define other nested routes */}
 					</Route>
 					<Route path="test" element={<Test />} />
