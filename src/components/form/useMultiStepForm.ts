@@ -1,6 +1,6 @@
 import { ReactElement, useState } from "react";
-import { ArtistRegistrationData } from "@/components/form/registration/Artist/ArtistRegistration";
-import { LabelRegistrationData } from "@/components/form/registration/Label/LabelRegistration";
+import { ArtistRegistrationData } from "@/pages/registration/ArtistRegistration";
+import { LabelRegistrationData } from "@/pages/registration/LabelRegistration";
 
 type ValidationFieldErrorMap = { [key: string]: string };
 
@@ -17,40 +17,40 @@ export function useMultiStepForm(steps: ReactElement[]) {
 	function validateAccountData(data: ArtistRegistrationData | LabelRegistrationData): ValidationReturn {
 		let isValid = true;
 		const errors: ValidationFieldErrorMap = {};
-	
+
 		// Basic validation
-		if (!data.email || data.email === "" || !data.password || data.password === "" || !data.confirmPassword || data.confirmPassword === ""){
+		if (!data.email || data.email === "" || !data.password || data.password === "" || !data.confirmPassword || data.confirmPassword === "") {
 			isValid = false;
 			errors["allFields"] = "Fill in the required fields.";
-		} 
-		if (data.password !== data.confirmPassword){
+		}
+		if (data.password !== data.confirmPassword) {
 			isValid = false;
 			errors["confirmPassword"] = "Passwords do not match.";
-		} 
-		if (data.password.length < 6){
+		}
+		if (data.password.length < 6) {
 			isValid = false;
 			errors["password"] = "Password must be at least 6 characters long.";
-		} 
+		}
 		const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-		if (!emailRegex.test(data.email)){
+		if (!emailRegex.test(data.email)) {
 			isValid = false;
 			errors["email"] = "Invalid email format.";
-		} 
-	
+		}
+
 		//TODO: Check if username and email are unique
 		let isUsernameUnique = true;
 		let isEmailUnique = true;
 		function isArtistRegistrationData(data: any): data is ArtistRegistrationData {
 			return data.artistname !== undefined;
 		}
-		
+
 		function isLabelRegistrationData(data: any): data is LabelRegistrationData {
 			return data.labelname !== undefined;
 		}
-	
+
 		if (isArtistRegistrationData(data)) {
 			data = data as ArtistRegistrationData;
-			if(data.artistname === ""){
+			if (data.artistname === "") {
 				isValid = false;
 				errors["allFields"] = "Fill in the required fields.";
 			}
@@ -60,7 +60,7 @@ export function useMultiStepForm(steps: ReactElement[]) {
 			}
 		} else if (isLabelRegistrationData(data)) {
 			data = data as LabelRegistrationData;
-			if(data.labelname === ""){
+			if (data.labelname === "") {
 				isValid = false;
 				errors["allFields"] = "Fill in the required fields.";
 			}
@@ -69,15 +69,14 @@ export function useMultiStepForm(steps: ReactElement[]) {
 				errors["labelname"] = "Username already exists.";
 			}
 		}
-	
+
 		if (!isEmailUnique) {
 			isValid = false;
 			errors["email"] = "Email already exists.";
 		}
-	
+
 		return { isValid: isValid, errors: errors };
 	}
-	
 
 	function validatePfpAndGenres(data: ArtistRegistrationData | LabelRegistrationData): ValidationReturn {
 		let isValid = true;
@@ -112,7 +111,7 @@ export function useMultiStepForm(steps: ReactElement[]) {
 				errors[`newArtists${index}`] = "Artist name is required.";
 			}
 		});
-		return { isValid: isValid, errors: errors};
+		return { isValid: isValid, errors: errors };
 	}
 
 	function validateSocials(_: ArtistRegistrationData | LabelRegistrationData): ValidationReturn {

@@ -13,10 +13,10 @@ import SignOutPage from "@/pages/profile/SignOutPage";
 import ArtistDetailPage from "@/pages/artists/artistDetail/ArtistDetailPage";
 import LabelDetailPage from "@/pages/labels/labelDetails/LabelDetailPage";
 import Test from "@/pages/Test";
-import ArtistRegistration from "@/components/form/registration/Artist/ArtistRegistration";
-import LabelRegistration from "@/components/form/registration/Label/LabelRegistration";
+import ArtistRegistration from "@/pages/registration/ArtistRegistration";
+import LabelRegistration from "@/pages/registration/LabelRegistration";
 import { useState } from "react";
-import Registration from "@/components/form/registration/Registration";
+import Registration from "@/pages/registration/Registration";
 // Import other pages
 
 interface LayoutProps {
@@ -27,9 +27,11 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
 	const { isLoggedIn, handleLogin, handleLogout } = props;
-	return (<PageContainer isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout}>
-		<Outlet /> {/* Placeholder for nested routes */}
-	</PageContainer>);
+	return (
+		<PageContainer isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout}>
+			<Outlet /> {/* Placeholder for nested routes */}
+		</PageContainer>
+	);
 };
 
 const App: React.FC = () => {
@@ -39,9 +41,9 @@ const App: React.FC = () => {
 	return (
 		<Router>
 			<Routes>
-				<Route path="/" element={<Layout isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout}/>}>
+				<Route path="/" element={<Layout isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout} />}>
 					{/* Index route for the default path within the layout */}
-					<Route index element={<HomePage handleLogin={handleLogin} handleLogout={handleLogout}/>} />
+					<Route index element={<HomePage handleLogin={handleLogin} handleLogout={handleLogout} />} />
 					<Route path="releases" element={<ReleasesPage />} />
 					<Route path="artists">
 						<Route index element={<ArtistsPage />} />
@@ -57,9 +59,9 @@ const App: React.FC = () => {
 					<Route path="settings" element={<SettingsPage />} />
 					<Route path="sign-out" element={<SignOutPage />} />
 					<Route path="register">
-						<Route index element={<Registration/>} />
-						<Route path="artist" element={<ArtistRegistration handleLogin={handleLogin}/>} />
-						<Route path="label" element={<LabelRegistration handleLogin={handleLogin}/>} />
+						<Route index element={<Registration />} />
+						<Route path="artist" element={<ArtistRegistration handleLogin={handleLogin} />} />
+						<Route path="label" element={<LabelRegistration handleLogin={handleLogin} />} />
 						{/* Define other nested routes */}
 					</Route>
 					<Route path="test" element={<Test />} />
