@@ -9,6 +9,7 @@ import { SocialInfo } from "@/data/other/socialTypes";
 import { LabelIndex } from "@/data/labels/labelTypes";
 import { useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
+import { useNavigate } from "react-router-dom";
 
 interface ArtistRegistrationData {
 	artistname: string;
@@ -23,7 +24,13 @@ interface ArtistRegistrationData {
 	label: LabelIndex | null;
 }
 
-function ArtistRegistration() {
+interface ArtistRegistrationProps {
+	handleLogin: () => void;
+}
+
+function ArtistRegistration(props: ArtistRegistrationProps) {
+	const {handleLogin} = props;
+	const navigate = useNavigate();
 	const INITIAL_DATA: ArtistRegistrationData = {
 		artistname: "",
 		realname: "",
@@ -65,8 +72,10 @@ function ArtistRegistration() {
 				setErrors({});
 				return nextStep();
 			}
+			handleLogin();
 			alert("Account created!");
 			console.log(data);
+			navigate("/");
 		} else {
 			setErrors(errors!);
 		}

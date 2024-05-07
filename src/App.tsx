@@ -14,19 +14,30 @@ import ArtistDetailPage from "@/pages/artists/artistDetail/ArtistDetailPage";
 import LabelDetailPage from "@/pages/labels/labelDetails/LabelDetailPage";
 import Test from "@/pages/Test";
 import ArtistRegistration from "@/components/form/registration/Artist/ArtistRegistration";
+import { useState } from "react";
 // Import other pages
 
-const Layout: React.FC = () => (
-	<PageContainer>
+interface LayoutProps {
+	isLoggedIn: boolean;
+	handleLogin: () => void;
+	handleLogout: () => void;
+}
+
+const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
+	const { isLoggedIn, handleLogin, handleLogout } = props;
+	return (<PageContainer isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout}>
 		<Outlet /> {/* Placeholder for nested routes */}
-	</PageContainer>
-);
+	</PageContainer>);
+};
 
 const App: React.FC = () => {
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const handleLogin = () => setIsLoggedIn(true);
+	const handleLogout = () => setIsLoggedIn(false);
 	return (
 		<Router>
 			<Routes>
-				<Route path="/" element={<Layout />}>
+				<Route path="/" element={<Layout isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout}/>}>
 					{/* Index route for the default path within the layout */}
 					<Route index element={<HomePage />} />
 					<Route path="releases" element={<ReleasesPage />} />
@@ -44,7 +55,7 @@ const App: React.FC = () => {
 					<Route path="settings" element={<SettingsPage />} />
 					<Route path="sign-out" element={<SignOutPage />} />
 					<Route path="register">
-						<Route index element={<ArtistRegistration />} />
+						<Route index element={<ArtistRegistration handleLogin={handleLogin}/>} />
 						{/* Define other nested routes */}
 					</Route>
 					<Route path="test" element={<Test />} />
