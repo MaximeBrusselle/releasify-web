@@ -11,7 +11,7 @@ const details: ArtistDetailMap = {
 		id: "1",
 		artistName: "Synthsation",
 		description: "Hardstyle / EDM Producer & DJ based in the Netherlands 🇳🇱",
-		bannerPicture: "default_banner.jpg",
+		bannerPicture: "synthsation_banner.png",
 		releases: releases.filter((release) => {
 			return release.artists.some((artist) => artist.id === "1");
 		}),

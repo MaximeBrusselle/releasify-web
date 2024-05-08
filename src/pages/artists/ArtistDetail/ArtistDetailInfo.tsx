@@ -43,7 +43,7 @@ const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailIn
 							<p className="text-[16px] text-center">{artist.description}</p>
 							{artist.bookingEmail && (
 								<p className="text-[16px] text-center">
-									Booking:&nbsp;
+									Bookings:&nbsp;
 									<Link className="text-[16px] text-blue-600 underline" to={`mailto:${artist.bookingEmail}?subject=Booking ${artist.artistName}`}>
 										{artist.bookingEmail}
 									</Link>
