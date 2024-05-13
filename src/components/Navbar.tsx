@@ -1,8 +1,9 @@
 import logo from "@/assets/logo.png";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useLocation } from "react-router-dom";
+import { UserContext } from "@/App";
 
 // Define a type for the navigation items
 interface NavigationItem {
@@ -11,18 +12,14 @@ interface NavigationItem {
 	current: boolean;
 }
 
-interface NavBarProps {
-	isLoggedIn: boolean;
-	handleLogin: () => void;
-	handleLogout: () => void;
-}
-
 function classNames(...classes: (string | boolean)[]): string {
 	return classes.filter(Boolean).join(" ");
 }
 
-const NavBar: React.FC<NavBarProps> = (props) => {
-	const { isLoggedIn, handleLogin, handleLogout } = props;
+const NavBar: React.FC = () => {
+	const { isLoggedIn, handleChange } = useContext(UserContext);
+	const handleLogin = () => handleChange(true);
+	const handleLogout = () => handleChange(false);
 	const location = useLocation();
 
 	const navigation: NavigationItem[] = [

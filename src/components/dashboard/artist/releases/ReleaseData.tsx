@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { ReleaseIndex } from "@/data/releases/releaseTypes";
 import { formattedDateOptions } from "@/lib/formattedDateOptions";
 import { getImageUrl } from "@/lib/utils";
-import { Tab } from "@headlessui/react";
+import { useState } from "react";
 
 interface ReleaseDataProps {
 	releases: ReleaseIndex[];
@@ -18,9 +18,9 @@ interface ReleaseDataProps {
 
 export const ReleaseData = (props: ReleaseDataProps) => {
 	const { handleSelectRow, selectedRow, releases } = props;
-	const announced = releases.filter((release) => new Date(release.releaseDate) > new Date());
-	const released = releases.filter((release) => new Date(release.releaseDate) < new Date());
 	const all = releases;
+
+	const [sortType, setSortType] = useState("");
 
 	const updateSelectedRow = (row: ReleaseIndex) => {
 		if (!selectedRow) {
@@ -31,6 +31,38 @@ export const ReleaseData = (props: ReleaseDataProps) => {
 			handleSelectRow(row);
 		}
 	};
+
+	const changeSortType = (type: string) => {
+		if (type === "date") {
+			sortReleasesByDate();
+		} else if (type === "name") {
+			sortReleasesByName();
+		} else if (type === "labelname") {
+			sortReleasesByLabel();
+		}
+		setSortType(type);
+	}
+
+	const sortReleasesByDate = () => {
+		all.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
+	}
+
+	const sortReleasesByName = () => {
+		all.sort((a, b) => a.name.localeCompare(b.name));
+	}
+
+	const sortReleasesByLabel = () => {
+		all.sort((a, b) => {
+			if (a.label && b.label) {
+				const result = a.label.name.localeCompare(b.label.name);
+				if (result === 0) {
+					return a.name.localeCompare(b.name);
+				}
+				return result;
+			}
+			return 0;
+		});
+	}
 
 	return (
 		<Tabs defaultValue="all">
@@ -51,9 +83,9 @@ export const ReleaseData = (props: ReleaseDataProps) => {
 						<DropdownMenuContent align="end">
 							<DropdownMenuLabel>Sort by</DropdownMenuLabel>
 							<DropdownMenuSeparator />
-							<DropdownMenuCheckboxItem checked>Releasedate</DropdownMenuCheckboxItem>
-							<DropdownMenuCheckboxItem>Name</DropdownMenuCheckboxItem>
-							<DropdownMenuCheckboxItem>Notifications</DropdownMenuCheckboxItem>
+							<DropdownMenuCheckboxItem checked={sortType === "date"} onClick={(_) => changeSortType("date")}>Releasedate</DropdownMenuCheckboxItem>
+							<DropdownMenuCheckboxItem checked={sortType === "name"} onClick={(_) => changeSortType("name")}>Name</DropdownMenuCheckboxItem>
+							<DropdownMenuCheckboxItem checked={sortType === "labelname"} onClick={(_) => changeSortType("labelname")}>Label Name</DropdownMenuCheckboxItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
 				</div>
@@ -62,10 +94,10 @@ export const ReleaseData = (props: ReleaseDataProps) => {
 				<TabCard releases={all} selectedRow={selectedRow} updateSelectedRow={updateSelectedRow} title={"All"} description={"All releases from you."} noData={"No releases found."}/>
 			</TabsContent>
 			<TabsContent value="announced">
-				<TabCard releases={announced} selectedRow={selectedRow} updateSelectedRow={updateSelectedRow} title={"Announced"} description={"All announced releases from you."} noData={"No announced releases found."}/>
+				<TabCard releases={all.filter((release) => new Date(release.releaseDate) > new Date())} selectedRow={selectedRow} updateSelectedRow={updateSelectedRow} title={"Announced"} description={"All announced releases from you."} noData={"No announced releases found."}/>
 			</TabsContent>
 			<TabsContent value="released">
-				<TabCard releases={released} selectedRow={selectedRow} updateSelectedRow={updateSelectedRow} title={"Released"} description={"All previous releases from you."} noData={"No previous releases found."}/>
+				<TabCard releases={all.filter((release) => new Date(release.releaseDate) <= new Date())} selectedRow={selectedRow} updateSelectedRow={updateSelectedRow} title={"Released"} description={"All previous releases from you."} noData={"No previous releases found."}/>
 			</TabsContent>
 		</Tabs>
 	);

@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { UserContext } from "@/App";
+import { useContext } from "react";
 
-interface HomePageProps {
-  handleLogin: () => void;
-  handleLogout: () => void;
-}
-
-const HomePage: React.FC<HomePageProps> = (props: HomePageProps) => {
-  const { handleLogin, handleLogout } = props;
+const HomePage: React.FC = () => {
+	const { handleChange } = useContext(UserContext);
+	const handleLogin = () => handleChange(true);
+	const handleLogout = () => handleChange(false);
 	return (
 		<div className="flex flex-col justify-start items-center w-full h-full">
 			<div className="h-fit w-full flex-col justify-start items-start">

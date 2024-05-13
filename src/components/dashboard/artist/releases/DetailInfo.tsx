@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 import { ReleaseIndex } from "@/data/releases/releaseTypes";
 import { formattedDateOptions } from "@/lib/formattedDateOptions";
 import { getImageUrl } from "@/lib/utils";
-import ReleaseDetailArtistHover from "../releases/ReleaseDetailArtistHover";
-import ReleaseDetailLabelHover from "../releases/ReleaseDetailLabelHover";
+import ReleaseDetailArtistHover from "./ReleaseDetailArtistHover";
+import ReleaseDetailLabelHover from "./ReleaseDetailLabelHover";
 
 type DetailInfoProps = {
 	selected: ReleaseIndex | null;
@@ -90,13 +90,7 @@ export const DetailInfo = (props: DetailInfoProps) => {
 						<Separator className="my-4" />
 						<div className="flex flex-col items-start justify-center gap-4">
 							<div className="font-bold">Label</div>
-							<div className="flex flex-row gap-4 flex-wrap">
-								{selected.label ? (
-									<ReleaseDetailLabelHover label={selected.label} />
-								) : (
-									<></>
-								)}
-							</div>
+							<div className="flex flex-row gap-4 flex-wrap">{selected.label ? <ReleaseDetailLabelHover label={selected.label} /> : <></>}</div>
 						</div>
 						<Separator className="my-4" />
 						<div className="grid grid-cols-2 gap-4">

@@ -6,10 +6,11 @@ import { Socials } from "@/components/form/registration/Label/Socials";
 import { AccountData } from "@/components/form/registration/Label/AccountData";
 import { Genre } from "@/data/genres/genreTypes";
 import { SocialInfo } from "@/data/other/socialTypes";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
 import { ArtistIndex } from "@/data/artists/artistTypes";
+import { UserContext } from "@/App";
 
 interface LabelRegistrationData {
 	labelname: string;
@@ -23,12 +24,10 @@ interface LabelRegistrationData {
 	newArtists: ArtistIndex[];
 }
 
-interface LabelRegistrationProps {
-	handleLogin: () => void;
-}
 
-function LabelRegistration(props: LabelRegistrationProps) {
-	const { handleLogin } = props;
+function LabelRegistration() {
+	const { handleChange } = useContext(UserContext);
+	const handleLogin = () => handleChange(true);
 	const navigate = useNavigate();
 	const INITIAL_DATA: LabelRegistrationData = {
 		labelname: "",

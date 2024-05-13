@@ -108,6 +108,14 @@ const updates: Update[] = [
             "Add a registration form for users",
         ],
     },
+    {
+        version: "0.6.0",
+        date: new Date("2024-05-13"),
+        name: "Artist Dashboard",
+        addedFeatures: [
+            "Example artist dashboard (home and releases page)",
+        ],
+    },
 ];
 
 export default updates;

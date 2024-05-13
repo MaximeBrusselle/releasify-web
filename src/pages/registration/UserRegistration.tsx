@@ -2,9 +2,10 @@ import { useMultiStepForm } from "@/components/form/useMultiStepForm";
 import { Progress } from "@/components/ui/progress";
 import { Pfp } from "@/components/form/registration/User/Pfp";
 import { AccountData } from "@/components/form/registration/User/AccountData";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "@/App";
 
 interface UserRegistrationData {
 	username: string;
@@ -14,12 +15,9 @@ interface UserRegistrationData {
 	profilePicture: File | null;
 }
 
-interface UserRegistrationProps {
-	handleLogin: () => void;
-}
-
-function UserRegistration(props: UserRegistrationProps) {
-	const { handleLogin } = props;
+function UserRegistration() {
+	const { handleChange } = useContext(UserContext);
+	const handleLogin = () => handleChange(true);
 	const navigate = useNavigate();
 	const INITIAL_DATA: UserRegistrationData = {
 		username: "",

@@ -7,9 +7,10 @@ import { AccountData } from "@/components/form/registration/Artist/AccountData";
 import { Genre } from "@/data/genres/genreTypes";
 import { SocialInfo } from "@/data/other/socialTypes";
 import { LabelIndex } from "@/data/labels/labelTypes";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "@/App";
 
 interface ArtistRegistrationData {
 	artistname: string;
@@ -24,12 +25,9 @@ interface ArtistRegistrationData {
 	label: LabelIndex | null;
 }
 
-interface ArtistRegistrationProps {
-	handleLogin: () => void;
-}
-
-function ArtistRegistration(props: ArtistRegistrationProps) {
-	const { handleLogin } = props;
+function ArtistRegistration() {
+	const { handleChange } = useContext(UserContext);
+	const handleLogin = () => handleChange(true);
 	const navigate = useNavigate();
 	const INITIAL_DATA: ArtistRegistrationData = {
 		artistname: "",
