@@ -4,7 +4,7 @@ import { ReleasePlatform } from "@/data/releases/releaseTypes";
 const dontletmedownurls: ReleasePlatform[] = [
 	{
 		platform: socialPlatforms[3],
-		url: "https://soundcloud.com/unfoldrecords/sparkz-dont-let-me-down?in=unfoldrecords/sets/sparkz-into-the-summer-vol-1",
+		url: "https://soundcloud.com/unfoldrecords/sparkz-dont-let-me-down",
 	},
 	{
 		platform: socialPlatforms[4],
@@ -30,7 +30,7 @@ const dontletmedownurls: ReleasePlatform[] = [
 const moveyourbodyurls: ReleasePlatform[] = [
 	{
 		platform: socialPlatforms[3],
-		url: "https://soundcloud.com/unfoldrecords/sparkz-move-your-body?in=unfoldrecords/sets/sparkz-into-the-summer-vol-1",
+		url: "https://soundcloud.com/unfoldrecords/sparkz-move-your-body",
 	},
 	{
 		platform: socialPlatforms[4],

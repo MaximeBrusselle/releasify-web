@@ -10,8 +10,9 @@ interface ReleaseIndex {
     picture: string,
     urls: ReleasePlatform[],
     genres: Genre[],
-    releaseDate: Date
-    label: LabelIndex,
+    releaseDate: Date,
+    announcementDate: Date,
+    label?: LabelIndex,
 }
 
 interface ReleasePlatform {

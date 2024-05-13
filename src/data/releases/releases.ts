@@ -32,6 +32,7 @@ const releases: ReleaseIndex[] = [
 		urls: dontletmedownurls,
 		genres: [genres[4], genres[6]],
 		releaseDate: new Date("2024/09/03"),
+		announcementDate: new Date(),
 		label: labels[0],
 	},
 	{
@@ -50,6 +51,7 @@ const releases: ReleaseIndex[] = [
 		urls: moveyourbodyurls,
 		genres: [genres[4], genres[6]],
 		releaseDate: new Date("2024/09/11"),
+		announcementDate: new Date(),
 		label: labels[0],
 	},
 	{
@@ -68,6 +70,7 @@ const releases: ReleaseIndex[] = [
 		urls: carnivalurls,
 		genres: [genres[4], genres[6]],
 		releaseDate: new Date("2024/04/18"),
+		announcementDate: new Date(),
 		label: labels[2],
 	},
 	{
@@ -90,6 +93,7 @@ const releases: ReleaseIndex[] = [
 		urls: feelourloveurls,
 		genres: [genres[4], genres[6]],
 		releaseDate: new Date("2023/07/27"),
+		announcementDate: new Date(),
 		label: labels[1],
 	},
 	{
@@ -108,6 +112,7 @@ const releases: ReleaseIndex[] = [
 		urls: digitaldemiseurls,
 		genres: [genres[4], genres[6]],
 		releaseDate: new Date("2023/03/31"),
+		announcementDate: new Date(),
 		label: labels[1],
 	},
 	{
@@ -126,6 +131,7 @@ const releases: ReleaseIndex[] = [
 		urls: mirrorsurls,
 		genres: [genres[4], genres[6]],
 		releaseDate: new Date("2024/04/11"),
+		announcementDate: new Date(),
 		label: labels[0],
 	},
 	{
@@ -144,6 +150,7 @@ const releases: ReleaseIndex[] = [
 		urls: animalscryexremixurls,
 		genres: [genres[4], genres[6]],
 		releaseDate: new Date("2024/03/15"),
+		announcementDate: new Date(),
 		label: labels[2],
 	},
 	{
@@ -162,6 +169,7 @@ const releases: ReleaseIndex[] = [
 		urls: worthlessurls,
 		genres: [genres[4], genres[6], genres[5]],
 		releaseDate: new Date("2024/03/28"),
+		announcementDate: new Date(),
 		label: labels[3],
 	},
 	{
@@ -180,6 +188,7 @@ const releases: ReleaseIndex[] = [
 		urls: heartofsteelurls,
 		genres: [genres[4], genres[6], genres[5]],
 		releaseDate: new Date("2023/10/12"),
+		announcementDate: new Date(),
 		label: labels[3],
 	},
 	{
@@ -198,6 +207,7 @@ const releases: ReleaseIndex[] = [
 		urls: sinnerurls,
 		genres: [genres[4], genres[6], genres[5]],
 		releaseDate: new Date("2024/01/18"),
+		announcementDate: new Date(),
 		label: labels[3],
 	},
 	{
@@ -220,6 +230,7 @@ const releases: ReleaseIndex[] = [
 		urls: restlessurls,
 		genres: [genres[4], genres[6], genres[5]],
 		releaseDate: new Date("2024/03/21"),
+		announcementDate: new Date(),
 		label: labels[3],
 	},
 ];

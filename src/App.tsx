@@ -18,6 +18,7 @@ import LabelRegistration from "@/pages/registration/LabelRegistration";
 import { useState } from "react";
 import Registration from "@/pages/registration/Registration";
 import UserRegistration from "./pages/registration/UserRegistration";
+import { Dashboard } from "./pages/dashboard/test/Dashboard";
 // Import other pages
 
 interface LayoutProps {
@@ -56,7 +57,7 @@ const App: React.FC = () => {
 					</Route>
 					<Route path="faq" element={<FAQPage />} />
 					<Route path="updates" element={<UpdatesPage />} />
-					<Route path="profile" element={<ProfilePage />} />
+					{/* <Route path="profile" element={<ProfilePage />} /> */}
 					<Route path="settings" element={<SettingsPage />} />
 					<Route path="sign-out" element={<SignOutPage />} />
 					<Route path="register">
@@ -70,6 +71,7 @@ const App: React.FC = () => {
 					<Route path="*" element={<NotFound />} />
 					{/* Define other nested routes */}
 				</Route>
+				<Route path="profile" element={<Dashboard />} />
 			</Routes>
 		</Router>
 	);

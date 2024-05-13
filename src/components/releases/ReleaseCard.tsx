@@ -86,7 +86,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 								<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />
 							))}
 						</div>
-						<ReleaseCardLabelHover label={release.label} />
+						{release.label && <ReleaseCardLabelHover label={release.label} />}
 					</div>
 				</div>
 				<div className="flex flex-col justify-center items-center gap-2 w-full sm:hidden">
@@ -100,7 +100,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 									<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />
 								))}
 							</div>
-							<ReleaseCardLabelHover label={release.label} />
+							{release.label && <ReleaseCardLabelHover label={release.label} />}
 						</div>
 					</div>
 				</div>
