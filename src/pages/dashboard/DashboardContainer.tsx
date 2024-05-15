@@ -184,17 +184,32 @@ export function DashboardContainer(props: DashboardProps) {
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<Button variant="outline" size="icon" className="overflow-hidden rounded-full">
-								<img src={getImageUrl("artists", "synthsation_pfp.png")} alt="Avatar" className="overflow-hidden rounded-full w-[36px] h-[36px] object-cover" />
+								<img
+									src={getImageUrl("artists", isLoggedIn ? "synthsation_pfp.png" : "default_pfp.jpg")}
+									alt="Avatar"
+									className="overflow-hidden rounded-full w-[36px] h-[36px] object-cover"
+								/>
 							</Button>
 						</DropdownMenuTrigger>
-						<DropdownMenuContent align="end">
-							<DropdownMenuLabel>My Account</DropdownMenuLabel>
-							<DropdownMenuSeparator />
-							<DropdownMenuItem>Settings</DropdownMenuItem>
-							<DropdownMenuItem>Support</DropdownMenuItem>
-							<DropdownMenuSeparator />
-							<DropdownMenuItem onClick={(_) => handleLogout()}>Logout</DropdownMenuItem>
-						</DropdownMenuContent>
+						{isLoggedIn ? (
+							<DropdownMenuContent align="end">
+								<DropdownMenuLabel>My Account</DropdownMenuLabel>
+								<DropdownMenuSeparator />
+								<DropdownMenuItem>Settings</DropdownMenuItem>
+								<DropdownMenuItem>Support</DropdownMenuItem>
+								<DropdownMenuSeparator />
+								<DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+							</DropdownMenuContent>
+						) : (
+							<DropdownMenuContent align="end">
+								<DropdownMenuLabel>My account</DropdownMenuLabel>
+								<DropdownMenuSeparator />
+								<DropdownMenuItem onClick={handleLogin}>Log in</DropdownMenuItem>
+								<Link to="/register">
+									<DropdownMenuItem>Register</DropdownMenuItem>
+								</Link>
+							</DropdownMenuContent>
+						)}
 					</DropdownMenu>
 				</header>
 				{isLoggedIn ? (
