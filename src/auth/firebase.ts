@@ -17,12 +17,12 @@ type FirebaseConfig = {
 };
 
 const firebaseConfig: FirebaseConfig = {
-  apiKey: "AIzaSyBSIboJJiBwBD9EN0SFNME_qYF0BhsJdZc",
-  authDomain: "releasifyweb.firebaseapp.com",
-  projectId: "releasifyweb",
-  storageBucket: "releasifyweb.appspot.com",
-  messagingSenderId: "295987711543",
-  appId: "1:295987711543:web:66c5cd8b89dfe9fd38b9b2"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY as string,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN as string,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID as string,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET as string,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID as string,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID as string,
 };
 
 // Initialize Firebase
