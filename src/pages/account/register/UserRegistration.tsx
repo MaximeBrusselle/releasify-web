@@ -2,10 +2,9 @@ import { useMultiStepForm } from "@/components/form/useMultiStepForm";
 import { Progress } from "@/components/ui/progress";
 import { Pfp } from "@/components/form/registration/User/Pfp";
 import { AccountData } from "@/components/form/registration/User/AccountData";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "@/App";
 
 interface UserRegistrationData {
 	username: string;
@@ -16,8 +15,6 @@ interface UserRegistrationData {
 }
 
 function UserRegistration() {
-	const { handleChange } = useContext(UserContext);
-	const handleLogin = () => handleChange(true);
 	const navigate = useNavigate();
 	const INITIAL_DATA: UserRegistrationData = {
 		username: "",
@@ -53,7 +50,6 @@ function UserRegistration() {
 				setErrors({});
 				return nextStep();
 			}
-			handleLogin();
 			alert("Account created!");
 			console.log(data);
 			navigate("/");

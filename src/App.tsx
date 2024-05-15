@@ -12,20 +12,21 @@ import SignOutPage from "@/pages/profile/SignOutPage";
 import ArtistDetailPage from "@/pages/artists/artistDetail/ArtistDetailPage";
 import LabelDetailPage from "@/pages/labels/labelDetails/LabelDetailPage";
 import Test from "@/pages/Test";
-import ArtistRegistration from "@/pages/registration/ArtistRegistration";
-import LabelRegistration from "@/pages/registration/LabelRegistration";
+import ArtistRegistration from "@/pages/account/register/ArtistRegistration";
+import LabelRegistration from "@/pages/account/register/LabelRegistration";
 import React, { createContext, useState } from "react";
-import Registration from "@/pages/registration/Registration";
-import UserRegistration from "./pages/registration/UserRegistration";
+import Registration from "@/pages/account/register/Registration";
+import UserRegistration from "./pages/account/register/UserRegistration";
 import { DashboardContainer } from "./pages/dashboard/DashboardContainer";
 import { ArtistDashboardHome } from "./pages/dashboard/artist/ArtistDashboardHome";
 import ArtistDashboardReleases from "./pages/dashboard/artist/ArtistDashboardReleases";
+import { ArtistDashboardUser } from "./pages/dashboard/artist/ArtistDashboardUser";
+import { ArtistDashboardRequests } from "./pages/dashboard/artist/ArtistDashboardRequests";
+import { ArtistDashboardAnalytics } from "./pages/dashboard/artist/ArtistDashboardAnalytics";
+import { ArtistDashboardSettings } from "./pages/dashboard/artist/ArtistDashboardSettings";
+import { LoginPage } from "./pages/account/login/LoginPage";
+import { AuthProvider } from "@/auth/AuthProvider";
 // Import other pages
-
-export const UserContext = createContext({
-	isLoggedIn: false,
-	handleChange: (value: boolean) => {},
-});
 
 const Layout: React.FC = () => {
 	return (
@@ -44,10 +45,8 @@ const DashboardLayout: React.FC = () => {
 };
 
 const App: React.FC = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const handleChange = (value: boolean) => setIsLoggedIn(value);
 	return (
-		<UserContext.Provider value={{ isLoggedIn, handleChange }}>
+		<AuthProvider>
 			<Router>
 				<Routes>
 					<Route path="/" element={<Layout />}>
@@ -64,9 +63,9 @@ const App: React.FC = () => {
 						</Route>
 						<Route path="faq" element={<FAQPage />} />
 						<Route path="updates" element={<UpdatesPage />} />
-						{/* <Route path="profile" element={<ProfilePage />} /> */}
 						<Route path="settings" element={<SettingsPage />} />
 						<Route path="sign-out" element={<SignOutPage />} />
+						<Route path="login" element={<LoginPage />} />
 						<Route path="register">
 							<Route index element={<Registration />} />
 							<Route path="artist" element={<ArtistRegistration />} />
@@ -80,16 +79,16 @@ const App: React.FC = () => {
 					</Route>
 					<Route path="profile" element={<DashboardLayout />}>
 						<Route index element={<ArtistDashboardHome />} />
-						<Route path="user" element={<ArtistDashboardHome />} />
+						<Route path="user" element={<ArtistDashboardUser />} />
 						<Route path="releases" element={<ArtistDashboardReleases />} />
-						<Route path="requests" element={<ArtistDashboardHome />} />
-						<Route path="analytics" element={<ArtistDashboardHome />} />
-						<Route path="settings" element={<SettingsPage />} />
+						<Route path="requests" element={<ArtistDashboardRequests />} />
+						<Route path="analytics" element={<ArtistDashboardAnalytics />} />
+						<Route path="settings" element={<ArtistDashboardSettings />} />
 						<Route path="*" element={<NotFound />} />
 					</Route>
 				</Routes>
 			</Router>
-		</UserContext.Provider>
+		</AuthProvider>
 	);
 };
 

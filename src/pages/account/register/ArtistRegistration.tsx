@@ -1,67 +1,66 @@
 import { useMultiStepForm } from "@/components/form/useMultiStepForm";
 import { Progress } from "@/components/ui/progress";
-import { ChooseArtists } from "@/components/form/registration/Label/ChooseArtists";
-import { PfpAndGenres } from "@/components/form/registration/Label/PfpAndGenres";
-import { Socials } from "@/components/form/registration/Label/Socials";
-import { AccountData } from "@/components/form/registration/Label/AccountData";
+import { ChooseLabel, ChooseLabelViewType } from "@/components/form/registration/Artist/ChooseLabel";
+import { PfpAndGenres } from "@/components/form/registration/Artist/PfpAndGenres";
+import { Socials } from "@/components/form/registration/Artist/Socials";
+import { AccountData } from "@/components/form/registration/Artist/AccountData";
 import { Genre } from "@/data/genres/genreTypes";
 import { SocialInfo } from "@/data/other/socialTypes";
-import { useContext, useState } from "react";
+import { LabelIndex } from "@/data/labels/labelTypes";
+import { useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
-import { ArtistIndex } from "@/data/artists/artistTypes";
-import { UserContext } from "@/App";
+import { registerArtist } from "@/data/api/registerArtist";
 
-interface LabelRegistrationData {
-	labelname: string;
+interface ArtistRegistrationData {
+	artistname: string;
+	realname: string;
 	email: string;
 	password: string;
 	confirmPassword: string;
 	profilePicture: File | null;
 	genreList: Genre[];
-	labelSocials: SocialInfo[];
-	artists: ArtistIndex[];
-	newArtists: ArtistIndex[];
+	artistSocials: SocialInfo[];
+	labelType: ChooseLabelViewType;
+	label: LabelIndex | null;
 }
 
-
-function LabelRegistration() {
-	const { handleChange } = useContext(UserContext);
-	const handleLogin = () => handleChange(true);
+function ArtistRegistration() {
 	const navigate = useNavigate();
-	const INITIAL_DATA: LabelRegistrationData = {
-		labelname: "",
+	const INITIAL_DATA: ArtistRegistrationData = {
+		artistname: "",
+		realname: "",
 		email: "",
 		password: "",
 		confirmPassword: "",
+		labelType: { text: "I'm Signed To A Label", viewType: "label" },
 		profilePicture: null,
 		genreList: [],
-		labelSocials: [],
-		artists: [],
-		newArtists: []
+		artistSocials: [],
+		label: null,
 	};
-	const [data, setData] = useState<LabelRegistrationData>(INITIAL_DATA);
+	const [data, setData] = useState<ArtistRegistrationData>(INITIAL_DATA);
 	const [errors, setErrors] = useState<ValidationFieldErrorMap>({});
 
-	function updateFields(newData: Partial<LabelRegistrationData>) {
+	function updateFields(newData: Partial<ArtistRegistrationData>) {
 		setData((prevData) => ({
 			...prevData,
 			...newData,
 		}));
 	}
 
-	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep, validateAccountData, validateChooseArtists, validatePfpAndGenres, validateSocials } = useMultiStepForm([
+	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep, validateAccountData, validateChooseLabel, validatePfpAndGenres, validateSocials } = useMultiStepForm([
 		<AccountData {...data} updateFields={updateFields} errors={errors} />,
 		<PfpAndGenres {...data} updateFields={updateFields} errors={errors} />,
-		<ChooseArtists {...data} updateFields={updateFields} errors={errors} />,
+		<ChooseLabel {...data} updateFields={updateFields} errors={errors} />,
 		<Socials {...data} updateFields={updateFields} errors={errors} />,
 	]);
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		// Validate the current step before allowing submission
-		const validationFunctions = [validateAccountData, validatePfpAndGenres, validateChooseArtists, validateSocials];
+		const validationFunctions = [validateAccountData, validatePfpAndGenres, validateChooseLabel, validateSocials];
 		const { isValid, errors }: ValidationReturn = validationFunctions[currentStepIndex](data);
 
 		if (isValid) {
@@ -69,9 +68,11 @@ function LabelRegistration() {
 				setErrors({});
 				return nextStep();
 			}
-			handleLogin();
-			alert("Account created!");
-			console.log(data);
+			const result = await registerArtist(data);
+			if(result?.message) {
+				setErrors({ all: result.message });
+				return;
+			}
 			navigate("/");
 		} else {
 			setErrors(errors!);
@@ -102,5 +103,5 @@ function LabelRegistration() {
 	);
 }
 
-export default LabelRegistration;
-export type { LabelRegistrationData };
+export default ArtistRegistration;
+export type { ArtistRegistrationData };

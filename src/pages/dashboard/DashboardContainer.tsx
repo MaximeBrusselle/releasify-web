@@ -7,8 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { getImageUrl } from "@/lib/utils";
-import { UserContext } from "@/App";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { doSignOut } from "@/auth/auth";
+import { AuthContext } from "@/auth/AuthProvider";
 
 type DashboardProps = {
 	children: React.ReactNode;
@@ -33,9 +34,16 @@ type BreadCrumbEntry = {
 export function DashboardContainer(props: DashboardProps) {
 	const { children } = props;
 	const location = useLocation();
-	const { isLoggedIn, handleChange } = useContext(UserContext);
-	const handleLogin = () => handleChange(true);
-	const handleLogout = () => handleChange(false);
+	const { isLoggedIn, userData } = useContext(AuthContext);
+	const [pfpUrl, setPfpUrl] = useState<string>("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
+
+	useEffect(() => {
+		if (isLoggedIn && userData) {
+			if (userData.profilePicture) setPfpUrl(userData.profilePicture);
+		} else {
+			setPfpUrl("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
+		}
+	}, [userData]);
 
 	const navigationItems: NavigationItem[] = [
 		{ name: "Dashboard", href: "/profile", current: false, icon: <Home className="h-5 w-5" /> },
@@ -185,7 +193,7 @@ export function DashboardContainer(props: DashboardProps) {
 						<DropdownMenuTrigger asChild>
 							<Button variant="outline" size="icon" className="overflow-hidden rounded-full">
 								<img
-									src={getImageUrl("artists", isLoggedIn ? "synthsation_pfp.png" : "default_pfp.jpg")}
+									src={pfpUrl}
 									alt="Avatar"
 									className="overflow-hidden rounded-full w-[36px] h-[36px] object-cover"
 								/>
@@ -198,13 +206,15 @@ export function DashboardContainer(props: DashboardProps) {
 								<DropdownMenuItem>Settings</DropdownMenuItem>
 								<DropdownMenuItem>Support</DropdownMenuItem>
 								<DropdownMenuSeparator />
-								<DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+								<DropdownMenuItem onClick={doSignOut}>Logout</DropdownMenuItem>
 							</DropdownMenuContent>
 						) : (
 							<DropdownMenuContent align="end">
 								<DropdownMenuLabel>My account</DropdownMenuLabel>
 								<DropdownMenuSeparator />
-								<DropdownMenuItem onClick={handleLogin}>Log in</DropdownMenuItem>
+								<Link to={"/login"}>
+									<DropdownMenuItem>Log in</DropdownMenuItem>
+								</Link>
 								<Link to="/register">
 									<DropdownMenuItem>Register</DropdownMenuItem>
 								</Link>
@@ -220,9 +230,11 @@ export function DashboardContainer(props: DashboardProps) {
 							<div className="p-4 bg-white rounded-lg shadow-sm">
 								<h2 className="text-2xl font-semibold text-foreground">Welcome to your dashboard!</h2>
 								<p className="mt-2 text-lg text-muted-foreground">Please log in to access your dashboard.</p>
-								<Button onClick={handleLogin} className="mt-4">
-									Log in
-								</Button>
+								<Link to={"login"}>
+									<Button className="mt-4">
+										Log in
+									</Button>
+								</Link>
 							</div>
 						</div>
 					</main>

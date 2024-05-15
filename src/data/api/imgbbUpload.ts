@@ -12,8 +12,7 @@ const imgbbUpload = async (image: File) => {
         throw new Error("Image is required");
     };
     if(process.env.ENVIRONMENT === "development") {
-        console.log("Development environment detected, skipping image upload");
-        return "https://via.placeholder.com/150";
+        throw new Error("Image upload is disabled in development mode");
     }
 	const formData = new FormData();
 	formData.append("image", image);
@@ -24,8 +23,6 @@ const imgbbUpload = async (image: File) => {
 			"Content-Type": "multipart/form-data",
 		},
 	});
-
-    console.log(response.data.data.url);
     return response.data.data.url;
 };
 

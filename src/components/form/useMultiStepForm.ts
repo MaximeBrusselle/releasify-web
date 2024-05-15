@@ -1,7 +1,7 @@
 import { ReactElement, useState } from "react";
-import { ArtistRegistrationData } from "@/pages/registration/ArtistRegistration";
-import { LabelRegistrationData } from "@/pages/registration/LabelRegistration";
-import { UserRegistrationData } from "@/pages/registration/UserRegistration";
+import { ArtistRegistrationData } from "@/pages/account/register/ArtistRegistration";
+import { LabelRegistrationData } from "@/pages/account/register/LabelRegistration";
+import { UserRegistrationData } from "@/pages/account/register/UserRegistration";
 
 type ValidationFieldErrorMap = { [key: string]: string };
 
@@ -73,7 +73,7 @@ export function useMultiStepForm(steps: ReactElement[]) {
 				isValid = false;
 				errors["labelname"] = "Username already exists.";
 			}
-		} else if(isUserRegistrationData(data)){
+		} else if (isUserRegistrationData(data)) {
 			data = data as UserRegistrationData;
 			if (data.username === "") {
 				isValid = false;
@@ -161,6 +161,6 @@ export function useMultiStepForm(steps: ReactElement[]) {
 		validateChooseLabel,
 		validateChooseArtists,
 		validateSocials,
-		validatePfp
+		validatePfp,
 	};
 }

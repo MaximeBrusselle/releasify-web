@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { UserContext } from "@/App";
+import { doSignOut } from "@/auth/auth";
 import { useContext } from "react";
+import { AuthContext } from "@/auth/AuthProvider";
 
 const HomePage: React.FC = () => {
-	const { handleChange } = useContext(UserContext);
-	const handleLogin = () => handleChange(true);
-	const handleLogout = () => handleChange(false);
+	const { isLoggedIn } = useContext(AuthContext);
 	return (
 		<div className="flex flex-col justify-start items-center w-full h-full">
 			<div className="h-fit w-full flex-col justify-start items-start">
@@ -14,17 +13,19 @@ const HomePage: React.FC = () => {
 			</div>
 			<div className="flex w-full sm:max-w-[40vw] h-full items-center justify-center">
 				<div className="flex flex-row flex-wrap justify-center gap-2">
-					<Button variant="default" className="text-xl" onClick={handleLogin}>
-						Login
-					</Button>
-					<Button variant="default" className="text-xl" onClick={handleLogout}>
+					{!isLoggedIn && <Link to={"/login"}>
+						<Button variant="default" className="text-xl">
+							Login
+						</Button>
+					</Link>}
+					{isLoggedIn && <Button variant="default" className="text-xl" onClick={doSignOut}>
 						Logout
-					</Button>
-					<Link to="/register">
+					</Button>}
+					{!isLoggedIn && <Link to="/register">
 						<Button variant="default" className="text-xl">
 							Register
 						</Button>
-					</Link>
+					</Link>}
 					<Link to="/releases">
 						<Button variant="default" className="text-xl">
 							View Releases

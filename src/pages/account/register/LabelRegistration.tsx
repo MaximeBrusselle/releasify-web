@@ -1,60 +1,56 @@
 import { useMultiStepForm } from "@/components/form/useMultiStepForm";
 import { Progress } from "@/components/ui/progress";
-import { ChooseLabel, ChooseLabelViewType } from "@/components/form/registration/Artist/ChooseLabel";
-import { PfpAndGenres } from "@/components/form/registration/Artist/PfpAndGenres";
-import { Socials } from "@/components/form/registration/Artist/Socials";
-import { AccountData } from "@/components/form/registration/Artist/AccountData";
+import { ChooseArtists } from "@/components/form/registration/Label/ChooseArtists";
+import { PfpAndGenres } from "@/components/form/registration/Label/PfpAndGenres";
+import { Socials } from "@/components/form/registration/Label/Socials";
+import { AccountData } from "@/components/form/registration/Label/AccountData";
 import { Genre } from "@/data/genres/genreTypes";
 import { SocialInfo } from "@/data/other/socialTypes";
-import { LabelIndex } from "@/data/labels/labelTypes";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "@/App";
+import { ArtistIndex } from "@/data/artists/artistTypes";
 
-interface ArtistRegistrationData {
-	artistname: string;
-	realname: string;
+interface LabelRegistrationData {
+	labelname: string;
 	email: string;
 	password: string;
 	confirmPassword: string;
 	profilePicture: File | null;
 	genreList: Genre[];
-	artistSocials: SocialInfo[];
-	labelType: ChooseLabelViewType;
-	label: LabelIndex | null;
+	labelSocials: SocialInfo[];
+	artists: ArtistIndex[];
+	newArtists: ArtistIndex[];
 }
 
-function ArtistRegistration() {
-	const { handleChange } = useContext(UserContext);
-	const handleLogin = () => handleChange(true);
+
+function LabelRegistration() {
 	const navigate = useNavigate();
-	const INITIAL_DATA: ArtistRegistrationData = {
-		artistname: "",
-		realname: "",
+	const INITIAL_DATA: LabelRegistrationData = {
+		labelname: "",
 		email: "",
 		password: "",
 		confirmPassword: "",
-		labelType: { text: "I'm Signed To A Label", viewType: "label" },
 		profilePicture: null,
 		genreList: [],
-		artistSocials: [],
-		label: null,
+		labelSocials: [],
+		artists: [],
+		newArtists: []
 	};
-	const [data, setData] = useState<ArtistRegistrationData>(INITIAL_DATA);
+	const [data, setData] = useState<LabelRegistrationData>(INITIAL_DATA);
 	const [errors, setErrors] = useState<ValidationFieldErrorMap>({});
 
-	function updateFields(newData: Partial<ArtistRegistrationData>) {
+	function updateFields(newData: Partial<LabelRegistrationData>) {
 		setData((prevData) => ({
 			...prevData,
 			...newData,
 		}));
 	}
 
-	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep, validateAccountData, validateChooseLabel, validatePfpAndGenres, validateSocials } = useMultiStepForm([
+	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep, validateAccountData, validateChooseArtists, validatePfpAndGenres, validateSocials } = useMultiStepForm([
 		<AccountData {...data} updateFields={updateFields} errors={errors} />,
 		<PfpAndGenres {...data} updateFields={updateFields} errors={errors} />,
-		<ChooseLabel {...data} updateFields={updateFields} errors={errors} />,
+		<ChooseArtists {...data} updateFields={updateFields} errors={errors} />,
 		<Socials {...data} updateFields={updateFields} errors={errors} />,
 	]);
 
@@ -62,7 +58,7 @@ function ArtistRegistration() {
 		event.preventDefault();
 
 		// Validate the current step before allowing submission
-		const validationFunctions = [validateAccountData, validatePfpAndGenres, validateChooseLabel, validateSocials];
+		const validationFunctions = [validateAccountData, validatePfpAndGenres, validateChooseArtists, validateSocials];
 		const { isValid, errors }: ValidationReturn = validationFunctions[currentStepIndex](data);
 
 		if (isValid) {
@@ -70,7 +66,6 @@ function ArtistRegistration() {
 				setErrors({});
 				return nextStep();
 			}
-			handleLogin();
 			alert("Account created!");
 			console.log(data);
 			navigate("/");
@@ -103,5 +98,5 @@ function ArtistRegistration() {
 	);
 }
 
-export default ArtistRegistration;
-export type { ArtistRegistrationData };
+export default LabelRegistration;
+export type { LabelRegistrationData };

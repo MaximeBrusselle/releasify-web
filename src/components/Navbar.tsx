@@ -1,9 +1,13 @@
 import logo from "@/assets/logo.png";
-import { Fragment, useContext } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useLocation } from "react-router-dom";
-import { UserContext } from "@/App";
+import { Link, useLocation } from "react-router-dom";
+import { doSignOut } from "@/auth/auth";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "@/auth/AuthProvider";
+import { useContext } from "react";
+import { getUserData } from "@/data/api/getUserData";
 
 // Define a type for the navigation items
 interface NavigationItem {
@@ -17,10 +21,22 @@ function classNames(...classes: (string | boolean)[]): string {
 }
 
 const NavBar: React.FC = () => {
-	const { isLoggedIn, handleChange } = useContext(UserContext);
-	const handleLogin = () => handleChange(true);
-	const handleLogout = () => handleChange(false);
+	const navigate = useNavigate();
+	const { isLoggedIn, userData } = useContext(AuthContext);
+	const [pfpUrl, setPfpUrl] = useState<string>("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
+	useEffect(() => {
+		if (isLoggedIn && userData) {
+			if (userData.profilePicture) setPfpUrl(userData.profilePicture);
+		} else {
+			setPfpUrl("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
+		}
+	}, [userData]);
 	const location = useLocation();
+
+	const handleSignOut = async () => {
+		await doSignOut();
+		navigate("/");
+	};
 
 	const navigation: NavigationItem[] = [
 		{ name: "Home", href: "/", current: false },
@@ -89,7 +105,7 @@ const NavBar: React.FC = () => {
 										<Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-text focus:ring-offset-2 focus:ring-offset-text hover:ring-text">
 											<span className="absolute -inset-1.5" />
 											<span className="sr-only">Open user menu</span>
-											<img className="h-8 w-8 rounded-full" src={isLoggedIn ? "https://i.ibb.co/sPRVVdS/synthsation-pfp.png" : "https://i.ibb.co/nPh6PCt/default-pfp.jpg"} alt="" />
+											<img className="h-8 w-8 rounded-full" src={pfpUrl} alt="profile picture" />
 										</Menu.Button>
 									</div>
 									<Transition
@@ -119,7 +135,10 @@ const NavBar: React.FC = () => {
 												</Menu.Item>
 												<Menu.Item>
 													{({ active }) => (
-														<div onClick={handleLogout} className={classNames(active ? "bg-primary text-primary hover:text-[#f00]" : "", "block px-4 py-2 text-sm text-[#f00]")}>
+														<div
+															onClick={handleSignOut}
+															className={classNames(active ? "bg-primary text-primary hover:text-[#f00]" : "", "block px-4 py-2 text-sm text-[#f00]")}
+														>
 															Sign out
 														</div>
 													)}
@@ -129,9 +148,9 @@ const NavBar: React.FC = () => {
 											<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-background py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 												<Menu.Item>
 													{({ active }) => (
-														<div onClick={handleLogin} className={classNames(active ? "bg-primary text-primary hover:text-text" : "", "block px-4 py-2 text-sm text-text")}>
-															Log in
-														</div>
+														<Link to={"/login"}>
+															<div className={classNames(active ? "bg-primary text-primary hover:text-text" : "", "block px-4 py-2 text-sm text-text")}>Log in</div>
+														</Link>
 													)}
 												</Menu.Item>
 												<Menu.Item>
