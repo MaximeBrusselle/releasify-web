@@ -7,10 +7,12 @@ import { AccountData } from "@/components/form/registration/Artist/AccountData";
 import { Genre } from "@/data/genres/genreTypes";
 import { SocialInfo } from "@/data/other/socialTypes";
 import { LabelIndex } from "@/data/labels/labelTypes";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
 import { registerArtist } from "@/data/api/registerArtist";
+import { AuthContext } from "@/auth/AuthProvider";
+import { doSignOut } from "@/auth/auth";
 
 interface ArtistRegistrationData {
 	artistname: string;
@@ -26,6 +28,7 @@ interface ArtistRegistrationData {
 }
 
 function ArtistRegistration() {
+	const { isLoggedIn } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const INITIAL_DATA: ArtistRegistrationData = {
 		artistname: "",
@@ -67,6 +70,9 @@ function ArtistRegistration() {
 			if (!isLastStep) {
 				setErrors({});
 				return nextStep();
+			}
+			if(isLoggedIn) {
+				await doSignOut();
 			}
 			const result = await registerArtist(data);
 			if(result?.message) {

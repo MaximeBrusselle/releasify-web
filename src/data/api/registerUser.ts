@@ -35,6 +35,7 @@ export const registerUser = async (data: UserRegistrationData): Promise<any> => 
 			requests: [],
 		};
 		await setDoc(doc(db, "userData", result.user.uid), userData);
+		localStorage.setItem("userData", JSON.stringify(userData));
 	} catch (error) {
 		return{
 			message: `${error}`,

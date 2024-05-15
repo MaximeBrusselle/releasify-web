@@ -1,3 +1,4 @@
+"use client";
 import logo from "@/assets/logo.png";
 import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
@@ -21,15 +22,23 @@ function classNames(...classes: (string | boolean)[]): string {
 
 const NavBar: React.FC = () => {
 	const navigate = useNavigate();
-	const { isLoggedIn, userData } = useContext(AuthContext);
+	const { isLoggedIn } = useContext(AuthContext);
 	const [pfpUrl, setPfpUrl] = useState<string>("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
+
 	useEffect(() => {
-		if (isLoggedIn && userData) {
-			if (userData.profilePicture) setPfpUrl(userData.profilePicture);
+		if (isLoggedIn) {
+			const userData = localStorage.getItem("userData");
+			if (userData) {
+				const data = JSON.parse(userData);
+				setPfpUrl(data.profilePicture);
+			} else {
+				setPfpUrl("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
+			}
 		} else {
 			setPfpUrl("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
 		}
-	}, [userData]);
+	}, [isLoggedIn]);
+
 	const location = useLocation();
 
 	const handleSignOut = async () => {

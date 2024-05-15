@@ -1,3 +1,4 @@
+"use client";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowLeftToLine, Home, LineChart, PanelLeft, Search, Settings, Disc3, MailPlus, User } from "lucide-react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -9,7 +10,6 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { useContext, useEffect, useState } from "react";
 import { doSignOut } from "@/auth/auth";
 import { AuthContext } from "@/auth/AuthProvider";
-import { getUserData } from "@/data/api/getUserData";
 
 type DashboardProps = {
 	children: React.ReactNode;
@@ -34,16 +34,22 @@ type BreadCrumbEntry = {
 export function DashboardContainer(props: DashboardProps) {
 	const { children } = props;
 	const location = useLocation();
-	const { isLoggedIn, userData } = useContext(AuthContext);
+	const { isLoggedIn } = useContext(AuthContext);
 	const [pfpUrl, setPfpUrl] = useState<string>("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
 
 	useEffect(() => {
-		if (isLoggedIn && userData) {
-			if (userData.profilePicture) setPfpUrl(userData.profilePicture);
+		if (isLoggedIn) {
+			const userData = localStorage.getItem("userData");
+			if (userData) {
+				const data = JSON.parse(userData);
+				setPfpUrl(data.profilePicture);
+			} else {
+				setPfpUrl("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
+			}
 		} else {
 			setPfpUrl("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
 		}
-	}, [userData]);
+	}, [isLoggedIn]);
 
 	const navigationItems: NavigationItem[] = [
 		{ name: "Dashboard", href: "/profile", current: false, icon: <Home className="h-5 w-5" /> },
@@ -192,7 +198,7 @@ export function DashboardContainer(props: DashboardProps) {
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<Button variant="outline" size="icon" className="overflow-hidden rounded-full">
-								<img src={pfpUrl} alt="Avatar" className="overflow-hidden rounded-full w-[36px] h-[36px] object-cover" />
+								<img src={pfpUrl} alt="Avatar" className="overflow-hidden rounded-full w-24 aspect-square object-cover border-2 border-solid border-black" />
 							</Button>
 						</DropdownMenuTrigger>
 						{isLoggedIn ? (

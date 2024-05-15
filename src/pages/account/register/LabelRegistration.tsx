@@ -6,11 +6,13 @@ import { Socials } from "@/components/form/registration/Label/Socials";
 import { AccountData } from "@/components/form/registration/Label/AccountData";
 import { Genre } from "@/data/genres/genreTypes";
 import { SocialInfo } from "@/data/other/socialTypes";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
 import { ArtistIndex } from "@/data/artists/artistTypes";
 import { registerLabel } from "@/data/api/registerLabel";
+import { AuthContext } from "@/auth/AuthProvider";
+import { doSignOut } from "@/auth/auth";
 
 interface LabelRegistrationData {
 	labelname: string;
@@ -26,6 +28,7 @@ interface LabelRegistrationData {
 
 
 function LabelRegistration() {
+	const { isLoggedIn } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const INITIAL_DATA: LabelRegistrationData = {
 		labelname: "",
@@ -66,6 +69,9 @@ function LabelRegistration() {
 			if (!isLastStep) {
 				setErrors({});
 				return nextStep();
+			}
+			if(isLoggedIn) {
+				await doSignOut();
 			}
 			const result = await registerLabel(data);
 			if(result?.message) {

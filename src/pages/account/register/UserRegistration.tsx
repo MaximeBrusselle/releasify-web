@@ -2,10 +2,12 @@ import { useMultiStepForm } from "@/components/form/useMultiStepForm";
 import { Progress } from "@/components/ui/progress";
 import { Pfp } from "@/components/form/registration/User/Pfp";
 import { AccountData } from "@/components/form/registration/User/AccountData";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "@/data/api/registerUser";
+import { doSignOut } from "@/auth/auth";
+import { AuthContext } from "@/auth/AuthProvider";
 
 interface UserRegistrationData {
 	username: string;
@@ -16,6 +18,7 @@ interface UserRegistrationData {
 }
 
 function UserRegistration() {
+	const { isLoggedIn } = useContext(AuthContext)
 	const navigate = useNavigate();
 	const INITIAL_DATA: UserRegistrationData = {
 		username: "",
@@ -50,6 +53,9 @@ function UserRegistration() {
 			if (!isLastStep) {
 				setErrors({});
 				return nextStep();
+			}
+			if(isLoggedIn) {
+				await doSignOut();
 			}
 			const result = await registerUser(data);
 			if(result?.message) {
