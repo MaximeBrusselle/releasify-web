@@ -14,7 +14,7 @@ import LabelDetailPage from "@/pages/labels/labelDetails/LabelDetailPage";
 import Test from "@/pages/Test";
 import ArtistRegistration from "@/pages/account/register/ArtistRegistration";
 import LabelRegistration from "@/pages/account/register/LabelRegistration";
-import React, { createContext, useState } from "react";
+import React from "react";
 import Registration from "@/pages/account/register/Registration";
 import UserRegistration from "./pages/account/register/UserRegistration";
 import { DashboardContainer } from "./pages/dashboard/DashboardContainer";
