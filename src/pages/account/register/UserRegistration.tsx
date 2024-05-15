@@ -5,6 +5,7 @@ import { AccountData } from "@/components/form/registration/User/AccountData";
 import { useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "@/data/api/registerUser";
 
 interface UserRegistrationData {
 	username: string;
@@ -38,7 +39,7 @@ function UserRegistration() {
 		<Pfp {...data} updateFields={updateFields} errors={errors} />,
 	]);
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		// Validate the current step before allowing submission
@@ -50,8 +51,11 @@ function UserRegistration() {
 				setErrors({});
 				return nextStep();
 			}
-			alert("Account created!");
-			console.log(data);
+			const result = await registerUser(data);
+			if(result?.message) {
+				setErrors({ all: result.message });
+				return;
+			}
 			navigate("/");
 		} else {
 			setErrors(errors!);

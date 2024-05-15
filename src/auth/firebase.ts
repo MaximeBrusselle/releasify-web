@@ -14,17 +14,15 @@ type FirebaseConfig = {
   storageBucket: string;
   messagingSenderId: string;
   appId: string;
-  measurementId: string;
 };
 
 const firebaseConfig: FirebaseConfig = {
-  apiKey: "AIzaSyBBhM1fKydBFbXycjToEwq-GAG7gRQ4LBw",
-  authDomain: "releasify-web.firebaseapp.com",
-  projectId: "releasify-web",
-  storageBucket: "releasify-web.appspot.com",
-  messagingSenderId: "500431081328",
-  appId: "1:500431081328:web:7010cf0e8468a20529c9b5",
-  measurementId: "G-X1Q5B8M5K5"
+  apiKey: "AIzaSyBSIboJJiBwBD9EN0SFNME_qYF0BhsJdZc",
+  authDomain: "releasifyweb.firebaseapp.com",
+  projectId: "releasifyweb",
+  storageBucket: "releasifyweb.appspot.com",
+  messagingSenderId: "295987711543",
+  appId: "1:295987711543:web:66c5cd8b89dfe9fd38b9b2"
 };
 
 // Initialize Firebase

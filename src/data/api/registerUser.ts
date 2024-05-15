@@ -1,12 +1,11 @@
 import { FireBaseError, doCreateUserWithEmailAndPassword } from "@/auth/auth";
-import { ArtistRegistrationData } from "@/pages/account/register/ArtistRegistration";
 import imgbbUpload from "@/data/api/imgbbUpload";
 import { db } from "@/auth/firebase";
-import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { UserCredential } from "firebase/auth";
+import { UserRegistrationData } from "@/pages/account/register/UserRegistration";
 
-export const registerArtist = async (data: ArtistRegistrationData): Promise<any> => {
-	//TODO: Change Label to reference
+export const registerUser = async (data: UserRegistrationData): Promise<any> => {
 	//register user
 	const result: UserCredential | FireBaseError = await doCreateUserWithEmailAndPassword(data.email, data.password);
 	if ("message" in result && "code" in result) {
@@ -27,35 +26,10 @@ export const registerArtist = async (data: ArtistRegistrationData): Promise<any>
 	} else {
 		pfp = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 	}
-	// let bannerPicture;
-	// if (data.bannerPicture) {
-	// 	try {
-	// 		bannerPicture = await imgbbUpload(data.bannerPicture!);
-	// 	} catch (error) {
-	// 		console.error(`Failed to upload banner picture: ${error}`);
-	// 		bannerPicture = "https://i.ibb.co/MM4463X/default-banner.jpg";
-	// 	}
-	// } else {
-	// 	bannerPicture = "https://i.ibb.co/MM4463X/default-banner.jpg";
-	// }
-
 	try {
-		const artistObject = {
-			artistName: data.artistname,
-			realName: data.realname,
-			// description: data.description,
-			// bookingEmail: data.bookingEmail,
-			profilePicture: pfp,
-			// bannerPicture: bannerPicture,
-			genres: data.genreList,
-			socials: data.artistSocials,
-			releases: [],
-		};
-		const docRef = await addDoc(collection(db, "artists"), artistObject);
 		const userData = {
-			type: "artist",
+			type: "user",
 			profilePicture: pfp,
-			artistObject: docRef,
 			notifications: [],
 			following: [],
 			requests: [],

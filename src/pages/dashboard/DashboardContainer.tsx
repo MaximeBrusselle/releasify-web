@@ -9,6 +9,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { useContext, useEffect, useState } from "react";
 import { doSignOut } from "@/auth/auth";
 import { AuthContext } from "@/auth/AuthProvider";
+import { getUserData } from "@/data/api/getUserData";
 
 type DashboardProps = {
 	children: React.ReactNode;
@@ -191,11 +192,7 @@ export function DashboardContainer(props: DashboardProps) {
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<Button variant="outline" size="icon" className="overflow-hidden rounded-full">
-								<img
-									src={pfpUrl}
-									alt="Avatar"
-									className="overflow-hidden rounded-full w-[36px] h-[36px] object-cover"
-								/>
+								<img src={pfpUrl} alt="Avatar" className="overflow-hidden rounded-full w-[36px] h-[36px] object-cover" />
 							</Button>
 						</DropdownMenuTrigger>
 						{isLoggedIn ? (
@@ -230,9 +227,7 @@ export function DashboardContainer(props: DashboardProps) {
 								<h2 className="text-2xl font-semibold text-foreground">Welcome to your dashboard!</h2>
 								<p className="mt-2 text-lg text-muted-foreground">Please log in to access your dashboard.</p>
 								<Link to={"login"}>
-									<Button className="mt-4">
-										Log in
-									</Button>
+									<Button className="mt-4">Log in</Button>
 								</Link>
 							</div>
 						</div>

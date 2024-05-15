@@ -10,6 +10,7 @@ import { useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
 import { ArtistIndex } from "@/data/artists/artistTypes";
+import { registerLabel } from "@/data/api/registerLabel";
 
 interface LabelRegistrationData {
 	labelname: string;
@@ -54,7 +55,7 @@ function LabelRegistration() {
 		<Socials {...data} updateFields={updateFields} errors={errors} />,
 	]);
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		// Validate the current step before allowing submission
@@ -66,8 +67,11 @@ function LabelRegistration() {
 				setErrors({});
 				return nextStep();
 			}
-			alert("Account created!");
-			console.log(data);
+			const result = await registerLabel(data);
+			if(result?.message) {
+				setErrors({ all: result.message });
+				return;
+			}
 			navigate("/");
 		} else {
 			setErrors(errors!);

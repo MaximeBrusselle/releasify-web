@@ -1,11 +1,11 @@
 import { FireBaseError, doCreateUserWithEmailAndPassword } from "@/auth/auth";
-import { ArtistRegistrationData } from "@/pages/account/register/ArtistRegistration";
 import imgbbUpload from "@/data/api/imgbbUpload";
 import { db } from "@/auth/firebase";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { UserCredential } from "firebase/auth";
+import { LabelRegistrationData } from "@/pages/account/register/LabelRegistration";
 
-export const registerArtist = async (data: ArtistRegistrationData): Promise<any> => {
+export const registerLabel = async (data: LabelRegistrationData): Promise<any> => {
 	//TODO: Change Label to reference
 	//register user
 	const result: UserCredential | FireBaseError = await doCreateUserWithEmailAndPassword(data.email, data.password);
@@ -27,35 +27,33 @@ export const registerArtist = async (data: ArtistRegistrationData): Promise<any>
 	} else {
 		pfp = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 	}
-	// let bannerPicture;
-	// if (data.bannerPicture) {
-	// 	try {
-	// 		bannerPicture = await imgbbUpload(data.bannerPicture!);
-	// 	} catch (error) {
-	// 		console.error(`Failed to upload banner picture: ${error}`);
-	// 		bannerPicture = "https://i.ibb.co/MM4463X/default-banner.jpg";
-	// 	}
-	// } else {
-	// 	bannerPicture = "https://i.ibb.co/MM4463X/default-banner.jpg";
-	// }
-
+    // let bannerPicture;
+    // if (data.bannerPicture) {
+    //     try {
+    //         bannerPicture = await imgbbUpload(data.bannerPicture!);
+    //     } catch (error) {
+    //         console.error(`Failed to upload banner picture: ${error}`);
+    //         bannerPicture = "https://i.ibb.co/MM4463X/default-banner.jpg";
+    //     }
+    // } else {
+    //     bannerPicture = "https://i.ibb.co/MM4463X/default-banner.jpg";
+    // }
 	try {
 		const artistObject = {
-			artistName: data.artistname,
-			realName: data.realname,
-			// description: data.description,
-			// bookingEmail: data.bookingEmail,
+			name: data.labelname,
 			profilePicture: pfp,
-			// bannerPicture: bannerPicture,
+            // description: data.description,
+            // bannerPicture: bannerPicture,
+            artists: data.artists,
+            releases: [],
 			genres: data.genreList,
-			socials: data.artistSocials,
-			releases: [],
+			socials: data.labelSocials,
 		};
-		const docRef = await addDoc(collection(db, "artists"), artistObject);
+		const docRef = await addDoc(collection(db, "labels"), artistObject);
 		const userData = {
-			type: "artist",
+			type: "label",
 			profilePicture: pfp,
-			artistObject: docRef,
+			labelObject: docRef,
 			notifications: [],
 			following: [],
 			requests: [],
