@@ -7,7 +7,6 @@ import { doSignOut } from "@/auth/auth";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "@/auth/AuthProvider";
 import { useContext } from "react";
-import { getUserData } from "@/data/api/getUserData";
 
 // Define a type for the navigation items
 interface NavigationItem {

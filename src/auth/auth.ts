@@ -1,5 +1,5 @@
 import { auth } from "@/auth/firebase";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, AuthCredential, UserCredential } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, UserCredential } from "firebase/auth";
 
 type FireBaseError = {
     code: string;

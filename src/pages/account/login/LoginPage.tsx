@@ -2,12 +2,9 @@ import { FormWrapper } from "@/components/form/FormWrapper";
 import { useState } from "react";
 import { doSignInWithEmailAndPassword } from "@/auth/auth";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "@/auth/AuthProvider";
-import { useContext } from "react";
 
 export const LoginPage = () => {
     const navigate = useNavigate();
-    const { isLoggedIn } = useContext(AuthContext);
 
     const handleFormSubmitted = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
