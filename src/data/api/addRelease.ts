@@ -1,9 +1,8 @@
 import imgbbUpload from "@/data/api/imgbbUpload";
 import { db, auth } from "@/auth/firebase";
-import { setDoc, doc, getDoc, addDoc, collection, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, getDoc, addDoc, collection, updateDoc, arrayUnion } from "firebase/firestore";
 import { AddReleaseData } from "@/pages/dashboard/artist/forms/ArtistAddRelease";
 import { UserData } from "./getArtistReleases";
-import { getArtistById } from "./getArtistById";
 import { formatDateToYYYYMMDD } from "@/lib/utils";
 
 export const addRelease = async (data: AddReleaseData): Promise<any> => {

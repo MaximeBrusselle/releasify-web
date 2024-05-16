@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { getImageUrl } from "@/lib/utils";
 import { useRef, useEffect } from "react";
 import { LabelDetail } from "@/data/labels/labelTypes";
 
