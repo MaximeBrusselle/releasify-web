@@ -2,7 +2,7 @@ import { FireBaseError, doCreateUserWithEmailAndPassword } from "@/auth/auth";
 import { ArtistRegistrationData } from "@/pages/account/register/ArtistRegistration";
 import imgbbUpload from "@/data/api/imgbbUpload";
 import { db } from "@/auth/firebase";
-import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, updateDoc } from "firebase/firestore";
 import { UserCredential } from "firebase/auth";
 
 export const registerArtist = async (data: ArtistRegistrationData): Promise<any> => {
@@ -52,6 +52,8 @@ export const registerArtist = async (data: ArtistRegistrationData): Promise<any>
 			releases: [],
 		};
 		const docRef = await addDoc(collection(db, "artists"), artistObject);
+		const newDocId = docRef.id;
+		await updateDoc(docRef, { id: newDocId });
 		const userData = {
 			type: "artist",
 			profilePicture: pfp,
@@ -63,7 +65,7 @@ export const registerArtist = async (data: ArtistRegistrationData): Promise<any>
 		await setDoc(doc(db, "userData", result.user.uid), userData);
 		localStorage.setItem("userData", JSON.stringify(userData));
 	} catch (error) {
-		return{
+		return {
 			message: `${error}`,
 		};
 	}

@@ -69,6 +69,10 @@ export function DashboardContainer(props: DashboardProps) {
 			name: "Releases",
 			href: "/profile/releases",
 		},
+		add: {
+			name: "Add Release",
+			href: "/profile/releases/add",
+		},
 		user: {
 			name: "User",
 			href: "/profile/user",
@@ -214,7 +218,7 @@ export function DashboardContainer(props: DashboardProps) {
 							<DropdownMenuContent align="end">
 								<DropdownMenuLabel>My account</DropdownMenuLabel>
 								<DropdownMenuSeparator />
-								<Link to={"/login"}>
+								<Link to="/login">
 									<DropdownMenuItem>Log in</DropdownMenuItem>
 								</Link>
 								<Link to="/register">
@@ -232,7 +236,7 @@ export function DashboardContainer(props: DashboardProps) {
 							<div className="p-4 bg-white rounded-lg shadow-sm">
 								<h2 className="text-2xl font-semibold text-foreground">Welcome to your dashboard!</h2>
 								<p className="mt-2 text-lg text-muted-foreground">Please log in to access your dashboard.</p>
-								<Link to={"login"}>
+								<Link to="/login">
 									<Button className="mt-4">Log in</Button>
 								</Link>
 							</div>

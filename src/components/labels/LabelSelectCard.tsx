@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { getImageUrl } from "@/lib/utils";
 import { useRef, useEffect } from "react";
-import { LabelIndex } from "@/data/labels/labelTypes";
+import { LabelDetail } from "@/data/labels/labelTypes";
 
 interface LabelSelectCardProps {
-	label: LabelIndex;
-	handleSelect: (label: LabelIndex) => void;
+	label: LabelDetail;
+	handleSelect: (label: LabelDetail) => void;
 	selectedId: string | null;
 }
 
@@ -55,7 +55,7 @@ const LabelSelectCard: React.FC<LabelSelectCardProps> = (props: LabelSelectCardP
 		<div className={`rounded-2xl p-4 shadow-input ${selectedId === label.id ? "bg-slate-400" : "bg-white"} dark:bg-black hover:cursor-pointer w-full h-fit`} ref={cardRef} onClick={(_) => handleSelect(label)}>
 			<div className="flex sm:flex-row flex-col items-center sm:justify-start justify-center w-full h-full gap-4">
 				<div className="flex flex-col justify-center items-center gap-2 w-full">
-					<img src={getImageUrl("labels", label.profilePicture)} alt={label.name} className="w-[148px] aspect-square border-[4px] border-solid border-black rounded-lg object-cover" />
+					<img src={label.profilePicture} alt={label.name} className="w-[148px] aspect-square border-[4px] border-solid border-black rounded-lg object-cover" />
 					<div className="flex flex-col items-center justify-center h-full">
 						<p className={`font-bold text-${fontSize} text-center`}>{label.name}</p>
 					</div>

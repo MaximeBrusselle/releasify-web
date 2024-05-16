@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardFooter, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 type GeneralInfoProps = {
 	announcedAmount: number;
@@ -19,13 +20,9 @@ export const GeneralInfo = (props: GeneralInfoProps) => {
 					<CardDescription className="max-w-lg text-balance leading-relaxed">Get an overview of your releases and create new ones, manage old ones, and more.</CardDescription>
 				</CardHeader>
 				<CardFooter>
-					<Button
-						onClick={() => {
-							toast("Feature not implemented yet", { icon: "🚧" });
-						}}
-					>
-						Add new release
-					</Button>
+					<Link to={"/profile/releases/add"}>
+						<Button>Add new release</Button>
+					</Link>
 				</CardFooter>
 			</Card>
 			<Card x-chunk="dashboard-05-chunk-1">

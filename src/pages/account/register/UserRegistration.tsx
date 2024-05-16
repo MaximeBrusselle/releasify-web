@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "@/data/api/registerUser";
 import { doSignOut } from "@/auth/auth";
 import { AuthContext } from "@/auth/AuthProvider";
+import { validateAccountData, validatePfp } from "@/components/form/validations";
 
 interface UserRegistrationData {
 	username: string;
@@ -37,7 +38,7 @@ function UserRegistration() {
 		}));
 	}
 
-	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep, validateAccountData, validatePfp } = useMultiStepForm([
+	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep } = useMultiStepForm([
 		<AccountData {...data} updateFields={updateFields} errors={errors} />,
 		<Pfp {...data} updateFields={updateFields} errors={errors} />,
 	]);

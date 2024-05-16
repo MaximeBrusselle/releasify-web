@@ -16,17 +16,18 @@ import ArtistRegistration from "@/pages/account/register/ArtistRegistration";
 import LabelRegistration from "@/pages/account/register/LabelRegistration";
 import React from "react";
 import Registration from "@/pages/account/register/Registration";
-import UserRegistration from "./pages/account/register/UserRegistration";
-import { DashboardContainer } from "./pages/dashboard/DashboardContainer";
-import { ArtistDashboardHome } from "./pages/dashboard/artist/ArtistDashboardHome";
-import ArtistDashboardReleases from "./pages/dashboard/artist/ArtistDashboardReleases";
-import { ArtistDashboardUser } from "./pages/dashboard/artist/ArtistDashboardUser";
-import { ArtistDashboardRequests } from "./pages/dashboard/artist/ArtistDashboardRequests";
-import { ArtistDashboardAnalytics } from "./pages/dashboard/artist/ArtistDashboardAnalytics";
-import { ArtistDashboardSettings } from "./pages/dashboard/artist/ArtistDashboardSettings";
-import { LoginPage } from "./pages/account/login/LoginPage";
+import UserRegistration from "@/pages/account/register/UserRegistration";
+import { DashboardContainer } from "@/pages/dashboard/DashboardContainer";
+import { ArtistDashboardHome } from "@/pages/dashboard/artist/ArtistDashboardHome";
+import ArtistDashboardReleases from "@/pages/dashboard/artist/ArtistDashboardReleases";
+import { ArtistDashboardUser } from "@/pages/dashboard/artist/ArtistDashboardUser";
+import { ArtistDashboardRequests } from "@/pages/dashboard/artist/ArtistDashboardRequests";
+import { ArtistDashboardAnalytics } from "@/pages/dashboard/artist/ArtistDashboardAnalytics";
+import { ArtistDashboardSettings } from "@/pages/dashboard/artist/ArtistDashboardSettings";
+import { LoginPage } from "@/pages/account/login/LoginPage";
 import { AuthProvider } from "@/auth/AuthProvider";
 import { Toaster } from "react-hot-toast";
+import { ArtistAddRelease } from "@/pages/dashboard/artist/forms/ArtistAddRelease";
 // Import other pages
 
 const Layout: React.FC = () => {
@@ -82,7 +83,10 @@ const App: React.FC = () => {
 					<Route path="profile" element={<DashboardLayout />}>
 						<Route index element={<ArtistDashboardHome />} />
 						<Route path="user" element={<ArtistDashboardUser />} />
-						<Route path="releases" element={<ArtistDashboardReleases />} />
+						<Route path="releases">
+							<Route index element={<ArtistDashboardReleases />} />
+							<Route path="add" element={<ArtistAddRelease />} />
+						</Route>
 						<Route path="requests" element={<ArtistDashboardRequests />} />
 						<Route path="analytics" element={<ArtistDashboardAnalytics />} />
 						<Route path="settings" element={<ArtistDashboardSettings />} />

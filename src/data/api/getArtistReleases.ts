@@ -2,6 +2,8 @@ import { auth, db } from "@/auth/firebase";
 import { getDoc, doc } from "firebase/firestore";
 import { ReleaseIndex } from "../releases/releaseTypes";
 import { getArtistById } from "./getArtistById";
+import { getReleaseById } from "./getReleaseById";
+import { getLabelById } from "./getLabelById";
 
 type UserData = {
     artistObject: {
@@ -12,6 +14,8 @@ type UserData = {
         };
     };
 }
+
+export type { UserData };
 
 export const getArtistReleases = async (): Promise<any> => {
 	const user = auth.currentUser;
@@ -24,14 +28,19 @@ export const getArtistReleases = async (): Promise<any> => {
 	const artistId = segments[segments.length - 1];
 	const result = await getDoc(doc(db, "artists", artistId));
 	if (result.exists()) {
-		const releases = result.data().releases.map(async(release: any) => {
-			const artistObjects = await getArtistsFromReference(release);
+		// first transform the releases to the correct data and not references
+		const releases = await getReleasesFromReference(result.data().releases);
+		// then get the artists from the releases
+		const artistObjects = releases.map(async (release: ReleaseIndex) => {
+			const artists = await getArtistsFromReference(release);
+			const label = await getLabelFromReference(release.label);
 			return {
 				...release,
-				artists: artistObjects
-			}
+				artists: artists,
+				label: label,
+			};
 		});
-		return Promise.all(releases);
+		return Promise.all(artistObjects);
 	} else {
 		throw new Error("User data not found");
 	}
@@ -48,4 +57,25 @@ async function getArtistsFromReference(release: ReleaseIndex) {
 		
 	});
 	return Promise.all(artistObjects);
+}
+
+async function getReleasesFromReference(releaseRefs: any) {
+	const releases = releaseRefs.map(async (ref: any) => {
+		const releaseId = ref.id;
+		try {
+			return await getReleaseById(releaseId);
+		} catch (error: any) {
+			throw new Error(error);
+		}
+	});
+	return Promise.all(releases);
+}
+
+async function getLabelFromReference(labelRef: any) {
+	const labelId = labelRef.id;
+	try {
+		return await getLabelById(labelId);
+	} catch (error: any) {
+		throw new Error(error);
+	}
 }

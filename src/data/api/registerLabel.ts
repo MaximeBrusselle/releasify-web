@@ -1,7 +1,7 @@
 import { FireBaseError, doCreateUserWithEmailAndPassword } from "@/auth/auth";
 import imgbbUpload from "@/data/api/imgbbUpload";
 import { db } from "@/auth/firebase";
-import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, updateDoc } from "firebase/firestore";
 import { UserCredential } from "firebase/auth";
 import { LabelRegistrationData } from "@/pages/account/register/LabelRegistration";
 
@@ -50,6 +50,8 @@ export const registerLabel = async (data: LabelRegistrationData): Promise<any> =
 			socials: data.labelSocials,
 		};
 		const docRef = await addDoc(collection(db, "labels"), artistObject);
+		const newDocId = docRef.id;
+		await updateDoc(docRef, { id: newDocId });
 		const userData = {
 			type: "label",
 			profilePicture: pfp,

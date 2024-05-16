@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { getImageUrl } from "@/lib/utils";
 import { useRef, useEffect } from "react";
-import { ArtistIndex } from "@/data/artists/artistTypes";
+import { ArtistDetail, ArtistIndex } from "@/data/artists/artistTypes";
 
-interface LabelSelectCardProps {
-	artist: ArtistIndex;
-	handleSelect: (artist: ArtistIndex) => void;
+interface ArtistSelectCardProps {
+	artist: ArtistDetail;
+	handleSelect: (artist: ArtistDetail) => void;
 	selectedIds: string[];
 }
 
-const LabelSelectCard: React.FC<LabelSelectCardProps> = (props: LabelSelectCardProps) => {
+const ArtistSelectCard: React.FC<ArtistSelectCardProps> = (props: ArtistSelectCardProps) => {
 	const cardRef = useRef<HTMLDivElement>(null);
 	const [fontSize, setFontSize] = useState<string>("4xl");
 
@@ -55,7 +55,7 @@ const LabelSelectCard: React.FC<LabelSelectCardProps> = (props: LabelSelectCardP
 		<div className={`rounded-2xl p-4 shadow-input ${selectedIds.includes(artist.id!) ? "bg-slate-400" : "bg-white"} dark:bg-black hover:cursor-pointer w-full h-fit`} ref={cardRef} onClick={(_) => handleSelect(artist)}>
 			<div className="flex sm:flex-row flex-col items-center sm:justify-start justify-center w-full h-full gap-4">
 				<div className="flex flex-col justify-center items-center gap-2 w-full">
-					<img src={getImageUrl("artists", artist.profilePicture)} alt={artist.artistName} className="w-[148px] aspect-square border-[4px] border-solid border-black rounded-lg object-cover" />
+					<img src={artist.profilePicture} alt={artist.artistName} className="w-[148px] aspect-square border-[4px] border-solid border-black rounded-lg object-cover" />
 					<div className="flex flex-col items-center justify-center h-full">
 						<p className={`font-bold text-${fontSize} text-center`}>{artist.artistName}</p>
 					</div>
@@ -65,4 +65,4 @@ const LabelSelectCard: React.FC<LabelSelectCardProps> = (props: LabelSelectCardP
 	);
 };
 
-export default LabelSelectCard;
+export default ArtistSelectCard;

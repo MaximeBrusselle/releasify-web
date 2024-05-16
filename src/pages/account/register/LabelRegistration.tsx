@@ -13,6 +13,7 @@ import { ArtistIndex } from "@/data/artists/artistTypes";
 import { registerLabel } from "@/data/api/registerLabel";
 import { AuthContext } from "@/auth/AuthProvider";
 import { doSignOut } from "@/auth/auth";
+import { validateAccountData, validatePfpAndGenres, validateChooseArtists, validateSocials } from "@/components/form/validations";
 
 interface LabelRegistrationData {
 	labelname: string;
@@ -51,7 +52,7 @@ function LabelRegistration() {
 		}));
 	}
 
-	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep, validateAccountData, validateChooseArtists, validatePfpAndGenres, validateSocials } = useMultiStepForm([
+	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep } = useMultiStepForm([
 		<AccountData {...data} updateFields={updateFields} errors={errors} />,
 		<PfpAndGenres {...data} updateFields={updateFields} errors={errors} />,
 		<ChooseArtists {...data} updateFields={updateFields} errors={errors} />,

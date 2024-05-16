@@ -14,8 +14,11 @@ const ArtistDashboardReleases = () => {
 	useEffect(() => {
 		async function getReleases() {
 			try {
-				const releases = await getArtistReleases();
-				setReleases(releases);
+				const releasesFromArtist = await getArtistReleases();
+				if (!releasesFromArtist) {
+					throw new Error("No releases found");
+				}
+				setReleases(releasesFromArtist);
 			} catch (error: any) {
 				toast.error(error.message);
 			}

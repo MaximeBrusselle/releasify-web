@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { registerArtist } from "@/data/api/registerArtist";
 import { AuthContext } from "@/auth/AuthProvider";
 import { doSignOut } from "@/auth/auth";
+import { validateAccountData, validatePfpAndGenres, validateChooseLabel, validateSocials } from "@/components/form/validations";
 
 interface ArtistRegistrationData {
 	artistname: string;
@@ -52,7 +53,7 @@ function ArtistRegistration() {
 		}));
 	}
 
-	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep, validateAccountData, validateChooseLabel, validatePfpAndGenres, validateSocials } = useMultiStepForm([
+	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep } = useMultiStepForm([
 		<AccountData {...data} updateFields={updateFields} errors={errors} />,
 		<PfpAndGenres {...data} updateFields={updateFields} errors={errors} />,
 		<ChooseLabel {...data} updateFields={updateFields} errors={errors} />,
