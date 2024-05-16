@@ -30,8 +30,8 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 		setNotification(!notification);
 	};
 
-	const isReleased = release.releaseDate < new Date();
-	const month = capitalizeFirstLetter(release.releaseDate.toDateString().split(" ")[1].toLocaleLowerCase(locale));
+	const isReleased = new Date(release.releaseDate) < new Date();
+	const month = capitalizeFirstLetter(new Date(release.releaseDate).toDateString().split(" ")[1].toLocaleLowerCase(locale));
 
 	useEffect(() => {
 		if (window.innerWidth < 640) setFontSize("3xl");
@@ -80,7 +80,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 					<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
 					<div className="flex flex-col items-start justify-center h-full gap-y-2">
 						<p className={`font-bold text-${fontSize}`}>{release.name}</p>
-						{isReleased && <p className="text-md leading-4">📅 {release.releaseDate.toLocaleDateString(locale, formattedDateOptions)}</p>}
+						{isReleased && <p className="text-md leading-4">📅 {new Date(release.releaseDate).toLocaleDateString(locale, formattedDateOptions)}</p>}
 						<div className="flex flex-row flex-wrap justify-start items-center gap-x-1">
 							{release.artists.map((artist) => (
 								<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />
@@ -94,7 +94,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 					<div className="flex flex-row justify-center items-center w-full gap-3">
 						<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
 						<div className="flex flex-col items-start justify-center h-full gap-y-2">
-							{isReleased && <p className="text-md leading-4">📅 {release.releaseDate.toLocaleDateString(locale, formattedDateOptions)}</p>}
+							{isReleased && <p className="text-md leading-4">📅 {new Date(release.releaseDate).toLocaleDateString(locale, formattedDateOptions)}</p>}
 							<div className="flex flex-row flex-wrap justify-start items-center gap-x-1">
 								{release.artists.map((artist) => (
 									<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />
@@ -119,7 +119,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 					<div className="flex sm:flex-col items-center justify-center gap-4 sm:w-[20%] w-[7.5%] m-2">
 						<div className="flex sm:flex-col flex-row justify-center items-center text-center sm:gap-0 gap-2">
 							<p className="text-4xl font-bold">{month}</p>
-							<p className="text-3xl">{release.releaseDate.getDay() + 1}</p>
+							<p className="text-3xl">{new Date(release.releaseDate).getDay() + 1}</p>
 						</div>
 						{notification ? (
 							<img src={notifoff} alt="notif off" onClick={handleNotification} className="w-6 aspect-square" />

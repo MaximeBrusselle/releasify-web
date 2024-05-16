@@ -26,6 +26,7 @@ import { ArtistDashboardAnalytics } from "./pages/dashboard/artist/ArtistDashboa
 import { ArtistDashboardSettings } from "./pages/dashboard/artist/ArtistDashboardSettings";
 import { LoginPage } from "./pages/account/login/LoginPage";
 import { AuthProvider } from "@/auth/AuthProvider";
+import { Toaster } from "react-hot-toast";
 // Import other pages
 
 const Layout: React.FC = () => {
@@ -47,6 +48,7 @@ const DashboardLayout: React.FC = () => {
 const App: React.FC = () => {
 	return (
 		<AuthProvider>
+			<Toaster position="top-center" reverseOrder={false}/>
 			<Router>
 				<Routes>
 					<Route path="/" element={<Layout />}>

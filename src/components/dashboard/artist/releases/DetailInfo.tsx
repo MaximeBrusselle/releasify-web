@@ -35,7 +35,7 @@ export const DetailInfo = (props: DetailInfoProps) => {
 									<span className="sr-only">Copy Release Name</span>
 								</Button>
 							</CardTitle>
-							<CardDescription>📆 {selected.releaseDate.toLocaleDateString(locale, formattedDateOptions)}</CardDescription>
+							<CardDescription>📆 {new Date(selected.releaseDate).toLocaleDateString(locale, formattedDateOptions)}</CardDescription>
 						</div>
 						<div className="ml-auto flex items-center gap-1">
 							<Button size="sm" variant="outline" className="h-8 gap-1">
@@ -70,11 +70,11 @@ export const DetailInfo = (props: DetailInfoProps) => {
 								</li>
 								<li className="flex items-center justify-between">
 									<span className="text-muted-foreground">Announcement Date</span>
-									<span>{selected.announcementDate.toLocaleString(locale, formattedDateOptions)}</span>
+									<span>{new Date(selected.announcementDate).toLocaleString(locale, formattedDateOptions)}</span>
 								</li>
 								<li className="flex items-center justify-between">
-									<span className="text-muted-foreground">{selected.releaseDate > new Date() ? "Planned Release Date" : "Release Date"}</span>
-									<span>{selected.releaseDate.toLocaleString(locale, formattedDateOptions)}</span>
+									<span className="text-muted-foreground">{new Date(selected.releaseDate) > new Date() ? "Planned Release Date" : "Release Date"}</span>
+									<span>{new Date(selected.releaseDate).toLocaleString(locale, formattedDateOptions)}</span>
 								</li>
 							</ul>
 							<Separator className="my-2" />

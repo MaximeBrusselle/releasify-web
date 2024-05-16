@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { doSignOut } from "@/auth/auth";
 import { useContext } from "react";
 import { AuthContext } from "@/auth/AuthProvider";
+import toast from "react-hot-toast";
 
 const HomePage: React.FC = () => {
 	const { isLoggedIn } = useContext(AuthContext);
@@ -13,19 +14,25 @@ const HomePage: React.FC = () => {
 			</div>
 			<div className="flex w-full sm:max-w-[40vw] h-full items-center justify-center">
 				<div className="flex flex-row flex-wrap justify-center gap-2">
-					{!isLoggedIn && <Link to={"/login"}>
-						<Button variant="default" className="text-xl">
-							Login
+					{!isLoggedIn && (
+						<Link to={"/login"}>
+							<Button variant="default" className="text-xl">
+								Login
+							</Button>
+						</Link>
+					)}
+					{isLoggedIn && (
+						<Button variant="default" className="text-xl" onClick={doSignOut}>
+							Logout
 						</Button>
-					</Link>}
-					{isLoggedIn && <Button variant="default" className="text-xl" onClick={doSignOut}>
-						Logout
-					</Button>}
-					{!isLoggedIn && <Link to="/register">
-						<Button variant="default" className="text-xl">
-							Register
-						</Button>
-					</Link>}
+					)}
+					{!isLoggedIn && (
+						<Link to="/register">
+							<Button variant="default" className="text-xl">
+								Register
+							</Button>
+						</Link>
+					)}
 					<Link to="/releases">
 						<Button variant="default" className="text-xl">
 							View Releases
@@ -46,6 +53,15 @@ const HomePage: React.FC = () => {
 							Faq
 						</Button>
 					</Link>
+					<Button
+						variant="default"
+						className="text-xl"
+						onClick={() => {
+							toast.success("Test Toast");
+						}}
+					>
+						Test Toast
+					</Button>
 				</div>
 			</div>
 		</div>

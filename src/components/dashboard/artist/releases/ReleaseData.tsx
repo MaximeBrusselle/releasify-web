@@ -7,7 +7,6 @@ import { ListFilter } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ReleaseIndex } from "@/data/releases/releaseTypes";
 import { formattedDateOptions } from "@/lib/formattedDateOptions";
-import { getImageUrl } from "@/lib/utils";
 import { useState } from "react";
 
 interface ReleaseDataProps {
@@ -143,22 +142,22 @@ const TabCard = (props: TabCardProps) => {
 						)}
 						{releases.length > 0 &&
 							releases.map((release) => (
-								<TableRow key={release.name} className={`${release.id === selectedRow?.id ? "bg-green-200" : ""}`} onClick={(_) => updateSelectedRow(release)}>
+								<TableRow key={`${release.name}tablerow`} className={`${release.id === selectedRow?.id ? "bg-green-200" : ""}`} onClick={(_) => updateSelectedRow(release)}>
 									<TableCell>
-										<img className="h-12 w-12 rounded-lg border-2 border-solid border-black" src={getImageUrl("releases", release.picture)} alt="" />
+										<img className="h-12 w-12 rounded-lg border-2 border-solid border-black" src={release.picture} alt="" />
 									</TableCell>
 									<TableCell className="text-right sm:text-left sm:table-cell">{release.name}</TableCell>
 									<TableCell className="hidden sm:table-cell">
 										{release.artists.map((artist) => (
-											<p key={artist.artistName} className="text-xs">
+											<p key={`${artist.artistName}artists`} className="text-xs">
 												{artist.artistName}
 											</p>
 										))}
 									</TableCell>
-									<TableCell className="hidden md:table-cell">{release.releaseDate.toLocaleDateString(locale, formattedDateOptions)}</TableCell>
+									<TableCell className="hidden md:table-cell">{new Date(release.releaseDate).toLocaleDateString(locale, formattedDateOptions)}</TableCell>
 									<TableCell className="hidden lg:table-cell">
 										{release.genres.map((genre) => (
-											<Badge key={genre.name} className="text-xs w-fit text-center" variant="default">
+											<Badge key={`${genre.name}genrebadge`} className="text-xs w-fit text-center" variant="default">
 												{genre.name}
 											</Badge>
 										))}

@@ -1,5 +1,4 @@
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { getImageUrl } from "@/lib/utils";
 import { ReleaseArtist } from "@/data/releases/releaseTypes";
 import { useNavigate } from "react-router-dom";
 import { ignoreClick } from "@/lib/utils";
@@ -26,13 +25,13 @@ const ReleaseDetailArtistHover: React.FC<ReleaseArtistProps> = (props: ReleaseAr
 		<HoverCard openDelay={1000}>
 			<HoverCardTrigger asChild>
 				<div className="flex flex-col justify-center items-center gap-1 hover:cursor-pointer group" onClick={handleArtistClicked}>
-					<img src={getImageUrl("artists", artist.profilePicture)} alt={artist.artistName} className="w-16 aspect-square rounded-full border-2 border-black border-solid object-cover" />
+					<img src={artist.profilePicture} alt={artist.artistName} className="w-16 aspect-square rounded-full border-2 border-black border-solid object-cover" />
 					<p className="text-md group-hover:underline text-center font-semibold">{artist.artistName}</p>
 				</div>
 			</HoverCardTrigger>
 			<HoverCardContent className="w-96">
 				<div className="flex flex-row items-center justify-between w-full hover:cursor-default" onClick={ignoreClick}>
-					<img src={getImageUrl("artists", artist.profilePicture)} alt={artist.artistName} className="w-[45%] aspect-square rounded-[12px] border-2 border-black border-solid object-cover" />
+					<img src={artist.profilePicture} alt={artist.artistName} className="w-[45%] aspect-square rounded-[12px] border-2 border-black border-solid object-cover" />
 					<div className="flex flex-col items-start justify-center gap-1 p-2 w-full">
 						<div className="flex flex-col justify-center items-start gap-1">
 							<p className="text-[32px] font-bold leading-4">{artist.artistName}</p>

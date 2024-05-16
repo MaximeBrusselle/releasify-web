@@ -27,9 +27,9 @@ const ArtistDetailPage: React.FC = () => {
 		setNotification(!notification);
 	};
 
-	const announcedReleases = artist.releases.filter((release) => release.releaseDate > new Date());
+	const announcedReleases = artist.releases.filter((release) => new Date(release.releaseDate) > new Date());
 	const announcedSpacing = announcedReleases.length > 2 ? "justify-between" : "justify-start gap-x-4";
-	const previousReleases = artist.releases.filter((release) => release.releaseDate <= new Date());
+	const previousReleases = artist.releases.filter((release) => new Date(release.releaseDate) <= new Date());
 	const previousSpacing = previousReleases.length > 2 ? "justify-between" : "justify-start gap-x-4";
 
 	return (

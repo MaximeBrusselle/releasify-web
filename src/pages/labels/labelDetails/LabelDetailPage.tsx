@@ -25,9 +25,9 @@ const LabelDetailPage: React.FC = () => {
 		setNotification(!notification);
 	};
 
-	const announcedReleases = label.releases.filter((release) => release.releaseDate > new Date()).sort((a, b) => a.releaseDate.getTime() - b.releaseDate.getTime());
+	const announcedReleases = label.releases.filter((release) => new Date(release.releaseDate) > new Date()).sort((a, b) => a.releaseDate.getTime() - b.releaseDate.getTime());
 	const announcedSpacing = announcedReleases.length > 2 ? "justify-between" : "justify-start gap-x-4";
-	const previousReleases = label.releases.filter((release) => release.releaseDate <= new Date()).sort((a, b) => b.releaseDate.getTime() - a.releaseDate.getTime());
+	const previousReleases = label.releases.filter((release) => new Date(release.releaseDate) <= new Date()).sort((a, b) => b.releaseDate.getTime() - a.releaseDate.getTime());
 	const previousSpacing = previousReleases.length > 2 ? "justify-between" : "justify-start gap-x-4";
 
 	const sortedArtists = label.artists.sort((a, b) => a.artistName.localeCompare(b.artistName));

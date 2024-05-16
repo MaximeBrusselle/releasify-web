@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardFooter, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import toast from "react-hot-toast";
 
 type GeneralInfoProps = {
 	announcedAmount: number;
@@ -18,7 +19,13 @@ export const GeneralInfo = (props: GeneralInfoProps) => {
 					<CardDescription className="max-w-lg text-balance leading-relaxed">Get an overview of your releases and create new ones, manage old ones, and more.</CardDescription>
 				</CardHeader>
 				<CardFooter>
-					<Button>Add new release</Button>
+					<Button
+						onClick={() => {
+							toast("Feature not implemented yet", { icon: "🚧" });
+						}}
+					>
+						Add new release
+					</Button>
 				</CardFooter>
 			</Card>
 			<Card x-chunk="dashboard-05-chunk-1">
@@ -30,7 +37,7 @@ export const GeneralInfo = (props: GeneralInfoProps) => {
 					<div className="text-xs text-muted-foreground">coming out soon</div>
 				</CardContent>
 				<CardFooter>
-					<Progress value={announcedAmount * 100 / total} aria-label="1 coming out" />
+					<Progress value={(announcedAmount * 100) / total} aria-label="1 coming out" />
 				</CardFooter>
 			</Card>
 			<Card x-chunk="dashboard-05-chunk-2">
@@ -42,7 +49,7 @@ export const GeneralInfo = (props: GeneralInfoProps) => {
 					<div className="text-xs text-muted-foreground">already released</div>
 				</CardContent>
 				<CardFooter>
-					<Progress value={releasedAmount * 100 / total} aria-label="0 already released" />
+					<Progress value={(releasedAmount * 100) / total} aria-label="0 already released" />
 				</CardFooter>
 			</Card>
 		</div>

@@ -3,7 +3,7 @@ import { Social } from "@/data/other/socialTypes"
 import { Genre } from "@/data/genres/genreTypes"
 
 
-interface ReleaseIndex {
+type ReleaseIndex = {
     id: string,
     name: string,
     artists: ReleaseArtist[],

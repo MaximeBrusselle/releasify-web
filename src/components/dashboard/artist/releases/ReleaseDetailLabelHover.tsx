@@ -28,7 +28,7 @@ const ReleaseDetailLabelHover: React.FC<ReleaseDetailLabelHoverProps> = (props: 
 				{label.id && label.id !== "" ? (
 					<div className="flex flex-row justify-start items-center gap-3 w-full group hover:cursor-pointer" onClick={handleLabelCLicked}>
 						<img
-							src={getImageUrl("labels", label.profilePicture)}
+							src={label.profilePicture}
 							alt={label.name}
 							className="w-16 rounded-md aspect-square sm:border-4 border-2 border-black border-solid"
 						/>
@@ -37,7 +37,7 @@ const ReleaseDetailLabelHover: React.FC<ReleaseDetailLabelHoverProps> = (props: 
 				) : (
 					<div className="flex flex-row justify-center items-center gap-3 w-full">
 						<img
-							src={getImageUrl("labels", label.profilePicture)}
+							src={label.profilePicture}
 							alt={label.name}
 							className="w-24 rounded-md aspect-square sm:border-4 border-2 border-black border-solid"
 						/>

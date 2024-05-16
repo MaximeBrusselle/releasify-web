@@ -1,12 +1,28 @@
 import { DetailInfo } from "@/components/dashboard/artist/releases/DetailInfo";
 import { GeneralInfo } from "@/components/dashboard/artist/releases/GeneralInfo";
 import { ReleaseData } from "@/components/dashboard/artist/releases/ReleaseData";
+import { getArtistReleases } from "@/data/api/getArtistReleases";
 import { ReleaseIndex } from "@/data/releases/releaseTypes";
-import { releases } from "@/data/releases/releases";
-import { useState } from "react";
+// import { releases } from "@/data/releases/releases";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const ArtistDashboardReleases = () => {
+	const [releases, setReleases] = useState<ReleaseIndex[]>([]);
 	const [selectedRow, setSelectedRow] = useState<ReleaseIndex | null>(null);
+
+	useEffect(() => {
+		async function getReleases() {
+			try {
+				const releases = await getArtistReleases();
+				setReleases(releases);
+			} catch (error: any) {
+				toast.error(error.message);
+			}
+		}
+		getReleases();
+	}, []);
+
 	const handleSelectRow = (row?: ReleaseIndex) => {
 		if (row) {
 			setSelectedRow(row);
