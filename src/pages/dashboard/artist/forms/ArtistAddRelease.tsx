@@ -2,14 +2,14 @@ import { ValidationFieldErrorMap, ValidationReturn, useMultiStepForm } from "@/c
 import { Progress } from "@/components/ui/progress";
 import { addRelease } from "@/data/api/addRelease";
 import { Genre } from "@/data/genres/genreTypes";
-import { LabelDetail, LabelIndex } from "@/data/labels/labelTypes";
+import { LabelDetail } from "@/data/labels/labelTypes";
 import { ReleasePlatform } from "@/data/releases/releaseTypes";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { validateReleaseGeneral, validateReleaseArtists, validateReleaseLabel, validateReleaseUrls, validateReleasePfpAndGenres } from "@/components/form/validations";
 import { PfpAndGenres } from "@/components/form/release/artist/PfpAndGenres";
 import { ReleaseGeneral } from "@/components/form/release/artist/ReleaseGeneral";
-import { ArtistDetail, ArtistIndex } from "@/data/artists/artistTypes";
+import { ArtistDetail } from "@/data/artists/artistTypes";
 import { ChooseArtists } from "@/components/form/release/artist/ChooseArtists";
 import { ChooseLabelViewType } from "@/components/form/registration/Artist/ChooseLabel";
 import { ChooseLabel } from "@/components/form/release/artist/ChooseLabel";
@@ -36,7 +36,6 @@ type AddReleaseData = {
 export type { AddReleaseData };
 
 export const ArtistAddRelease = () => {
-	const navigate = useNavigate();
 	const [firebaseArtists, setFirebaseArtists] = useState<ArtistDetail[]>([]);
 	const [firebaseLabels, setFirebaseLabels] = useState<LabelDetail[]>([]);
 	useEffect(() => {
@@ -66,7 +65,6 @@ export const ArtistAddRelease = () => {
 	};
 	const [data, setData] = useState<AddReleaseData>(INITIAL_DATA);
 	const [errors, setErrors] = useState<ValidationFieldErrorMap>({});
-	const [loading, setLoading] = useState(false);
 	const [done, setDone] = useState(false);
 
 	function updateFields(newData: Partial<AddReleaseData>) {
@@ -96,7 +94,6 @@ export const ArtistAddRelease = () => {
 				setErrors({});
 				return nextStep();
 			}
-			setLoading(true);
 			toast.promise(
 				new Promise(async (resolve, reject) => {
 					const result = await addRelease(data);
@@ -118,12 +115,6 @@ export const ArtistAddRelease = () => {
 			setErrors(errors!);
 		}
 	};
-
-	useEffect(() => {
-		if (done) {
-			setLoading(false);
-		}
-	}, [done]);
 
 	return (
 		<div className="flex flex-col justify-center items-center">

@@ -44,7 +44,7 @@ export function ChooseArtists({ releaseArtists, newArtists, updateFields, errors
 			releaseArtists: newArtists,
 		});
 	}
-	function handleArtistSelect(artist: ArtistDetail) {
+	function handleArtistSelect(artist: ArtistDetail | ArtistIndex) {
 		if (releaseArtists.includes(artist.id!)) {
 			updateArtists(releaseArtists.filter((el) => el !== artist.id!));
 		} else {

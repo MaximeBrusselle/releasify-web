@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useRef, useEffect } from "react";
-import { LabelDetail } from "@/data/labels/labelTypes";
+import { LabelDetail, LabelIndex } from "@/data/labels/labelTypes";
 
 interface LabelSelectCardProps {
-	label: LabelDetail;
-	handleSelect: (label: LabelDetail) => void;
+	label: LabelDetail | LabelIndex;
+	handleSelect: (label: LabelDetail | LabelIndex) => void;
 	selectedId: string | null;
 }
 

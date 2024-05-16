@@ -21,7 +21,7 @@ type LabelProps = LabelData & {
 };
 
 export function ChooseLabel({ label, labelType, updateFields, errors, firebaseLabels }: LabelProps) {
-	function updateLabel(newLabel: LabelDetail) {
+	function updateLabel(newLabel: LabelDetail | LabelIndex) {
 		updateFields({
 			label: newLabel.id!,
 		});

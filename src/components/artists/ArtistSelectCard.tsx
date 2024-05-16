@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useRef, useEffect } from "react";
-import { ArtistDetail } from "@/data/artists/artistTypes";
+import { ArtistDetail, ArtistIndex } from "@/data/artists/artistTypes";
 
 interface ArtistSelectCardProps {
-	artist: ArtistDetail;
-	handleSelect: (artist: ArtistDetail) => void;
+	artist: ArtistDetail | ArtistIndex;
+	handleSelect: (artist: ArtistDetail | ArtistIndex) => void;
 	selectedIds: string[];
 }
 
