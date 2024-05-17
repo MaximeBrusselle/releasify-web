@@ -131,7 +131,12 @@ export const addRelease = async (data: AddReleaseData): Promise<any> => {
 
     try {
         await updateDoc(currentArtistRef, { releases: arrayUnion(releaseRef)});
-        
+        for(const artistRef of artistRefs){
+            await updateDoc(artistRef, { releases: arrayUnion(releaseRef)});
+        }
+        if(data.label){
+            await updateDoc(chosenLabelRef!, { releases: arrayUnion(releaseRef)});
+        }
 
         return {
             code: "success",
