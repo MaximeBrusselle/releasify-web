@@ -1,34 +1,55 @@
 import { useMultiStepForm } from "@/components/form/useMultiStepForm";
 import { Progress } from "@/components/ui/progress";
-import { ChooseArtists } from "@/components/form/registration/Label/ChooseArtists";
-import { PfpAndGenres } from "@/components/form/registration/Label/PfpAndGenres";
+import { ChooseArtists, CreatedArtist } from "@/components/form/registration/Label/ChooseArtists";
+import { BannerAndGenres } from "@/components/form/registration/Label/BannerAndGenres";
 import { Socials } from "@/components/form/registration/Label/Socials";
 import { AccountData } from "@/components/form/registration/Label/AccountData";
 import { Genre } from "@/data/genres/genreTypes";
 import { SocialInfo } from "@/data/other/socialTypes";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
-import { ArtistIndex } from "@/data/artists/artistTypes";
+import { ArtistDetail, ArtistIndex } from "@/data/artists/artistTypes";
 import { registerLabel } from "@/data/api/registerLabel";
 import { AuthContext } from "@/auth/AuthProvider";
 import { doSignOut } from "@/auth/auth";
-import { validateAccountData, validatePfpAndGenres, validateChooseArtists, validateSocials } from "@/components/form/validations";
+import { validateAccountData, validateBannerAndGenres, validateChooseArtists, validateGeneralInfo, validateSocials } from "@/components/form/validations";
+import toast from "react-hot-toast";
+import { getArtists } from "@/data/api/getArtists";
+import { GeneralInfo } from "@/components/form/registration/Label/GeneralInfo";
 
 interface LabelRegistrationData {
 	labelname: string;
 	email: string;
 	password: string;
 	confirmPassword: string;
+	description: string;
+	contactEmail: string;
 	profilePicture: File | null;
+	bannerPicture: File | null;
 	genreList: Genre[];
 	labelSocials: SocialInfo[];
-	artists: ArtistIndex[];
-	newArtists: ArtistIndex[];
+	artists: ArtistDetail[];
+	newArtists: CreatedArtist[];
 }
 
-
 function LabelRegistration() {
+	let initialized = useRef(false);
+	const [firebaseArtists, setFirebaseArtists] = useState<ArtistDetail[]>([]);
+	useEffect(() => {
+		if (!initialized.current) {
+			initialized.current = true;
+			async function fetchData() {
+				const fetchedArtists = await getArtists();
+				setFirebaseArtists(fetchedArtists);
+			}
+			toast.promise(fetchData(), {
+				loading: "Fetching artists...",
+				success: "Artists fetched",
+				error: "Error fetching artists",
+			});
+		}
+	}, []);
 	const { isLoggedIn } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const INITIAL_DATA: LabelRegistrationData = {
@@ -36,11 +57,14 @@ function LabelRegistration() {
 		email: "",
 		password: "",
 		confirmPassword: "",
+		description: "",
+		contactEmail: "",
 		profilePicture: null,
+		bannerPicture: null,
 		genreList: [],
 		labelSocials: [],
 		artists: [],
-		newArtists: []
+		newArtists: [],
 	};
 	const [data, setData] = useState<LabelRegistrationData>(INITIAL_DATA);
 	const [errors, setErrors] = useState<ValidationFieldErrorMap>({});
@@ -54,8 +78,9 @@ function LabelRegistration() {
 
 	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep } = useMultiStepForm([
 		<AccountData {...data} updateFields={updateFields} errors={errors} />,
-		<PfpAndGenres {...data} updateFields={updateFields} errors={errors} />,
-		<ChooseArtists {...data} updateFields={updateFields} errors={errors} />,
+		<GeneralInfo {...data} updateFields={updateFields} errors={errors} />,
+		<BannerAndGenres {...data} updateFields={updateFields} errors={errors} />,
+		<ChooseArtists {...data} updateFields={updateFields} errors={errors} existingArtists={firebaseArtists} />,
 		<Socials {...data} updateFields={updateFields} errors={errors} />,
 	]);
 
@@ -63,7 +88,7 @@ function LabelRegistration() {
 		event.preventDefault();
 
 		// Validate the current step before allowing submission
-		const validationFunctions = [validateAccountData, validatePfpAndGenres, validateChooseArtists, validateSocials];
+		const validationFunctions = [validateAccountData, validateGeneralInfo, validateBannerAndGenres, validateChooseArtists, validateSocials];
 		const { isValid, errors }: ValidationReturn = validationFunctions[currentStepIndex](data);
 
 		if (isValid) {
@@ -71,12 +96,19 @@ function LabelRegistration() {
 				setErrors({});
 				return nextStep();
 			}
-			if(isLoggedIn) {
+			if (isLoggedIn) {
 				await doSignOut();
 			}
-			const result = await registerLabel(data);
-			if(result?.message) {
-				setErrors({ all: result.message });
+			try {
+				const result = await registerLabel(data);
+				if (result?.message) {
+					toast.error(result.message);
+					setErrors({ all: result.message });
+					return;
+				}
+			} catch (error: any) {
+				console.error(error.message);
+				setErrors({ all: error.message });
 				return;
 			}
 			navigate("/");

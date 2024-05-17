@@ -1,11 +1,10 @@
 import { FormWrapper } from "@/components/form/FormWrapper";
 import { Label } from "@/components/ui/label";
-import { artists as existingArtists } from "@/data/artists/artists";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ValidationFieldErrorMap } from "@/components/form/useMultiStepForm";
-import { ArtistIndex } from "@/data/artists/artistTypes";
+import { ArtistDetail, ArtistIndex } from "@/data/artists/artistTypes";
 import ArtistSelectCard from "@/components/artists/ArtistSelectCard";
 import CreateArtist from "@/components/artists/CreateArtist";
 
@@ -16,24 +15,30 @@ type ChooseArtistsViewType = {
 };
 
 export type { ChooseArtistsViewType };
+type CreatedArtist = {
+	artistName: string;
+	profilePicture: File | string;
+};
+export type { CreatedArtist };
 
 type ChooseArtistData = {
-	artists: ArtistIndex[];
-	newArtists: ArtistIndex[];
+	artists: ArtistDetail[];
+	newArtists: CreatedArtist[];
 };
 
 type ChooseArtistsProps = ChooseArtistData & {
 	updateFields: (newData: Partial<ChooseArtistData>) => void;
 	errors: ValidationFieldErrorMap;
+	existingArtists: ArtistDetail[];
 };
 
-export function ChooseArtists({ artists, newArtists, updateFields, errors }: ChooseArtistsProps) {
-	function updateArtists(newArtists: ArtistIndex[]) {
+export function ChooseArtists({ artists, newArtists, updateFields, errors, existingArtists }: ChooseArtistsProps) {
+	function updateArtists(newArtists: ArtistDetail[]) {
 		updateFields({
 			artists: newArtists,
 		});
 	}
-	function handleArtistSelect(artist: ArtistIndex) {
+	function handleArtistSelect(artist: ArtistDetail) {
 		if (artists.includes(artist)) {
 			updateArtists(artists.filter((el) => el !== artist));
 		} else {
@@ -41,8 +46,8 @@ export function ChooseArtists({ artists, newArtists, updateFields, errors }: Cho
 		}
 	}
 
-	const [createdArtists, setCreatedArtists] = useState<ArtistIndex[]>([]);
-	function handleCreatedArtistChange(artist: ArtistIndex, index: number) {
+	const [createdArtists, setCreatedArtists] = useState<CreatedArtist[]>([]);
+	function handleCreatedArtistChange(artist: CreatedArtist, index: number) {
 		const newCreatedArtists = createdArtists;
 		newCreatedArtists[index] = artist;
 		setCreatedArtists(newCreatedArtists);
@@ -58,9 +63,9 @@ export function ChooseArtists({ artists, newArtists, updateFields, errors }: Cho
 	function addCreateArtist(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
 		event.preventDefault();
 		setCreatedArtists((prev) => {
-			return [...prev, { artistName: "", profilePicture: "https://i.ibb.co/nPh6PCt/default-pfp.jpg", genres: [] }];
+			return [...prev, { artistName: "", profilePicture: "https://i.ibb.co/nPh6PCt/default-pfp.jpg" }];
 		});
-		updateFields({ newArtists: [...createdArtists, { artistName: "", profilePicture: "https://i.ibb.co/nPh6PCt/default-pfp.jpg", genres: [] }] });
+		updateFields({ newArtists: [...createdArtists, { artistName: "", profilePicture: "https://i.ibb.co/nPh6PCt/default-pfp.jpg" }] });
 	}
 
 	const viewTypes: ChooseArtistsViewType[] = [
@@ -89,7 +94,7 @@ export function ChooseArtists({ artists, newArtists, updateFields, errors }: Cho
 		setView(viewTypes[index]);
 	}
 
-	const [filteredArtists, setFilteredArtists] = useState<ArtistIndex[]>(existingArtists);
+	const [filteredArtists, setFilteredArtists] = useState<ArtistDetail[]>(existingArtists);
 	const artistIds = artists.map((artist) => artist.id).filter((el) => el !== undefined) as string[];
 
 	const [search, setSearch] = useState<string>("");

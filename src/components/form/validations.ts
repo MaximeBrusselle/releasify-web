@@ -82,7 +82,7 @@ function validateAccountData(data: ArtistRegistrationData | LabelRegistrationDat
     return { isValid: isValid, errors: errors };
 }
 
-function validatePfpAndGenres(data: ArtistRegistrationData | LabelRegistrationData): ValidationReturn {
+function validateBannerAndGenres(data: ArtistRegistrationData | LabelRegistrationData): ValidationReturn {
     let isValid = true;
     const errors: ValidationFieldErrorMap = {};
     if (data.genreList.length === 0) {
@@ -180,4 +180,8 @@ function validateReleasePfpAndGenres(data: AddReleaseData): ValidationReturn {
     return { isValid: isValid, errors: errors } 
 }
 
-export { validateAccountData, validatePfpAndGenres, validateChooseLabel, validateChooseArtists, validateSocials, validatePfp, validateReleaseGeneral, validateReleaseArtists, validateReleaseLabel, validateReleaseUrls, validateReleasePfpAndGenres};
+function validateGeneralInfo(_: any): ValidationReturn {
+    return { isValid: true };
+}
+
+export { validateAccountData, validateBannerAndGenres, validateGeneralInfo, validateChooseLabel, validateChooseArtists, validateSocials, validatePfp, validateReleaseGeneral, validateReleaseArtists, validateReleaseLabel, validateReleaseUrls, validateReleasePfpAndGenres};

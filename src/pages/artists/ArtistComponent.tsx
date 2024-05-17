@@ -1,7 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { ArtistIndex } from "@/data/artists/artistTypes";
 import { Link } from "react-router-dom";
-import { getImageUrl } from "@/lib/utils";
 
 interface ArtistComponentProps {
 	artist: ArtistIndex;
@@ -12,7 +11,7 @@ const ArtistComponent: React.FC<ArtistComponentProps> = (props: ArtistComponentP
 	return (
 		<div key={artist.id} className="flex flex-col items-center">
 			<div className="relative w-48 h-48">
-				<img src={getImageUrl("artists", artist.profilePicture)} alt={artist.artistName} className="object-cover w-full h-full rounded-lg" />
+				<img src={artist.profilePicture} alt={artist.artistName} className="object-cover w-full h-full rounded-lg" />
 			</div>
 			<Link to={`/artists/${artist.id}`}>
 				<h2 className="mt-2 text-center font-bold">{artist.artistName}</h2>

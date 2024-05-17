@@ -1,6 +1,5 @@
 import { ArtistIndex } from "@/data/artists/artistTypes";
 import { useState } from "react";
-import { getImageUrl } from "@/lib/utils";
 import notifPlus from "@/assets/icon_bell_plus.svg";
 import notifOff from "@/assets/icon_bell_off.svg";
 import { useRef, useEffect } from "react";
@@ -77,7 +76,7 @@ const ArtistCard: React.FC<ArtistCardProps> = (props: ArtistCardProps) => {
 			<div className="flex sm:flex-row flex-col items-center sm:justify-start justify-center w-full h-full gap-4">
 				<div className="flex flex-row sm:justify-start justify-center items-center gap-2 w-full">
 					<img
-						src={getImageUrl("artists", artist.profilePicture)}
+						src={artist.profilePicture}
 						alt={artist.artistName}
 						className="w-[148px] aspect-square border-[4px] border-solid border-black rounded-lg object-cover"
 					/>

@@ -8,7 +8,8 @@ import { ArtistDetail, ArtistIndex } from "@/data/artists/artistTypes";
 import ArtistSelectCard from "@/components/artists/ArtistSelectCard";
 import CreateArtist from "@/components/artists/CreateArtist";
 import { AuthContext } from "@/auth/AuthProvider";
-import { UserData } from "@/data/api/getArtistReleases";
+import { UserData } from "@/data/api/getLoginUserReleases";
+import { CreatedArtist } from "../../registration/Label/ChooseArtists";
 
 type ChooseArtistsView = "noArtists" | "existingArtists" | "newArtists";
 type ChooseArtistsViewType = {
@@ -20,31 +21,31 @@ export type { ChooseArtistsViewType };
 
 type ChooseArtistData = {
 	releaseArtists: string[];
-	newArtists: ArtistIndex[];
+	newArtists: CreatedArtist[];
 };
 
 type ChooseArtistsProps = ChooseArtistData & {
 	updateFields: (newData: Partial<ChooseArtistData>) => void;
 	errors: ValidationFieldErrorMap;
-    firebaseArtists: ArtistDetail[];
+	firebaseArtists: ArtistDetail[];
 };
 
 export function ChooseArtists({ releaseArtists, newArtists, updateFields, errors, firebaseArtists }: ChooseArtistsProps) {
-    const { isLoggedIn } = useContext(AuthContext);
-    let currUserArtistId: string;
-    if (isLoggedIn){
-        const userData = localStorage.getItem("userData");
-        const parsedUserData: UserData = userData ? JSON.parse(userData) : null;
-        const segments = parsedUserData?.artistObject._key.path.segments;
-        currUserArtistId = segments[segments.length - 1];
-        firebaseArtists = firebaseArtists.filter((artist) => artist.id !== currUserArtistId);
-    }
+	const { isLoggedIn } = useContext(AuthContext);
+	let currUserArtistId: string;
+	if (isLoggedIn) {
+		const userData = localStorage.getItem("userData");
+		const parsedUserData: UserData = userData ? JSON.parse(userData) : null;
+		const segments = parsedUserData?.artistObject._key.path.segments;
+		currUserArtistId = segments[segments.length - 1];
+		firebaseArtists = firebaseArtists.filter((artist) => artist.id !== currUserArtistId);
+	}
 	function updateArtists(newArtists: string[]) {
 		updateFields({
 			releaseArtists: newArtists,
 		});
 	}
-	function handleArtistSelect(artist: ArtistDetail | ArtistIndex) {
+	function handleArtistSelect(artist: ArtistDetail) {
 		if (releaseArtists.includes(artist.id!)) {
 			updateArtists(releaseArtists.filter((el) => el !== artist.id!));
 		} else {
@@ -52,8 +53,8 @@ export function ChooseArtists({ releaseArtists, newArtists, updateFields, errors
 		}
 	}
 
-	const [createdArtists, setCreatedArtists] = useState<ArtistIndex[]>([]);
-	function handleCreatedArtistChange(artist: ArtistIndex, index: number) {
+	const [createdArtists, setCreatedArtists] = useState<CreatedArtist[]>([]);
+	function handleCreatedArtistChange(artist: CreatedArtist, index: number) {
 		const newCreatedArtists = createdArtists;
 		newCreatedArtists[index] = artist;
 		setCreatedArtists(newCreatedArtists);
@@ -69,9 +70,9 @@ export function ChooseArtists({ releaseArtists, newArtists, updateFields, errors
 	function addCreateArtist(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
 		event.preventDefault();
 		setCreatedArtists((prev) => {
-			return [...prev, { artistName: "", profilePicture: "https://i.ibb.co/nPh6PCt/default-pfp.jpg", genres: [] }];
+			return [...prev, { artistName: "", profilePicture: "https://i.ibb.co/nPh6PCt/default-pfp.jpg" }];
 		});
-		updateFields({ newArtists: [...createdArtists, { artistName: "", profilePicture: "https://i.ibb.co/nPh6PCt/default-pfp.jpg", genres: [] }] });
+		updateFields({ newArtists: [...createdArtists, { artistName: "", profilePicture: "https://i.ibb.co/nPh6PCt/default-pfp.jpg"}] });
 	}
 
 	const viewTypes: ChooseArtistsViewType[] = [
@@ -142,10 +143,8 @@ export function ChooseArtists({ releaseArtists, newArtists, updateFields, errors
 						</div>
 						<Input className="w-full" value={search} onChange={handleSearchChange} placeholder="Search for an artist..."></Input>
 						<div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-4 max-h-[50vh] h-fit overflow-y-scroll p-2 w-full gap-y-4 place-items-center">
-                            {filteredArtists.length === 0 && <p>No artists found</p>}
-							{filteredArtists.length > 0 && filteredArtists.map((el) => (
-								<ArtistSelectCard key={el.id} artist={el} handleSelect={handleArtistSelect} selectedIds={releaseArtists} />
-							))}
+							{filteredArtists.length === 0 && <p>No artists found</p>}
+							{filteredArtists.length > 0 && filteredArtists.map((el) => <ArtistSelectCard key={el.id} artist={el} handleSelect={handleArtistSelect} selectedIds={releaseArtists} />)}
 						</div>
 					</div>
 				)}
@@ -162,7 +161,7 @@ export function ChooseArtists({ releaseArtists, newArtists, updateFields, errors
 							</Button>
 						</div>
 						{newArtists.map((artist, index) => (
-							<CreateArtist key={index} index={index} artist={artist} fieldChange={handleCreatedArtistChange} artistDelete={handleDelete} errors={errors}/>
+							<CreateArtist key={index} index={index} artist={artist} fieldChange={handleCreatedArtistChange} artistDelete={handleDelete} errors={errors} />
 						))}
 					</div>
 				)}

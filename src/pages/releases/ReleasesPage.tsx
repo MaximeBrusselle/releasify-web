@@ -1,10 +1,40 @@
 "use client";
 import ReleaseCard from "@/components/releases/ReleaseCard";
-import { releases } from "@/data/releases/releases";
+import { getReleases } from "@/data/api/getReleases";
+import { ReleaseIndex } from "@/data/releases/releaseTypes";
+import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 const ReleasesPage: React.FC = () => {
+	const initialized = useRef(false);
+	const [releases, setReleases] = useState<ReleaseIndex[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
+	useEffect(() => {
+		if (!initialized.current) {
+			initialized.current = true;
+			async function fetchData() {
+				try {
+					const fetchedReleases = await getReleases();
+					setReleases(fetchedReleases);
+					setLoading(false);
+				} catch (error: any) {
+					setError(true);
+					console.error(error.message);
+					throw new Error(error.message);
+				}
+			}
+			if (loading && !error) {
+				toast.promise(fetchData(), {
+					loading: "Fetching releases...",
+					success: "Releases fetched",
+					error: "Error fetching releases",
+				});
+			}
+		}
+	}, []);
 	const announcedReleases = releases.filter((release) => new Date(release.releaseDate) > new Date()).sort((a, b) => a.releaseDate.getTime() - b.releaseDate.getTime());
-  const previousReleases = releases.filter((release) => new Date(release.releaseDate) <= new Date()).sort((a, b) => b.releaseDate.getTime() - a.releaseDate.getTime());
+  	const previousReleases = releases.filter((release) => new Date(release.releaseDate) <= new Date()).sort((a, b) => b.releaseDate.getTime() - a.releaseDate.getTime());
 
 	return (
 		<div className="flex flex-col items-center justify-start gap-[28px] font-[Fira Sans] w-full">

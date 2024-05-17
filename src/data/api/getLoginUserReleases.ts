@@ -17,7 +17,7 @@ type UserData = {
 
 export type { UserData };
 
-export const getArtistReleases = async (): Promise<any> => {
+export const getLoginUserReleases = async (): Promise<any> => {
 	const user = auth.currentUser;
 	if (!user) {
 		throw new Error("User not logged in");
@@ -31,7 +31,7 @@ export const getArtistReleases = async (): Promise<any> => {
 		// first transform the releases to the correct data and not references
 		const releases = await getReleasesFromReference(result.data().releases);
 		// then get the artists from the releases
-		const artistObjects = releases.map(async (release: ReleaseIndex) => {
+		const fullRelease = releases.map(async (release: ReleaseIndex) => {
 			const artists = await getArtistsFromReference(release);
 			const label = await getLabelFromReference(release.label);
 			return {
@@ -40,14 +40,17 @@ export const getArtistReleases = async (): Promise<any> => {
 				label: label,
 			};
 		});
-		return Promise.all(artistObjects);
+		return Promise.all(fullRelease);
 	} else {
 		throw new Error("User data not found");
 	}
 };
 
-async function getArtistsFromReference(release: ReleaseIndex) {
+export async function getArtistsFromReference(release: ReleaseIndex) {
 	const artistObjects = release.artists.map(async (ref: any) => {
+		if(!ref.id){
+			return ref;
+		}
 		const releaseArtistId = ref.id;
 		try {
 			return await getArtistById(releaseArtistId);
@@ -59,7 +62,7 @@ async function getArtistsFromReference(release: ReleaseIndex) {
 	return Promise.all(artistObjects);
 }
 
-async function getReleasesFromReference(releaseRefs: any) {
+export async function getReleasesFromReference(releaseRefs: any): Promise<ReleaseIndex[]> {
 	const releases = releaseRefs.map(async (ref: any) => {
 		const releaseId = ref.id;
 		try {
@@ -71,7 +74,7 @@ async function getReleasesFromReference(releaseRefs: any) {
 	return Promise.all(releases);
 }
 
-async function getLabelFromReference(labelRef: any) {
+export async function getLabelFromReference(labelRef: any) {
 	const labelId = labelRef.id;
 	try {
 		return await getLabelById(labelId);

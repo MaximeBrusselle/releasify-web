@@ -2,17 +2,36 @@ import { useParams } from "react-router-dom";
 import { LabelDetail } from "@/data/labels/labelTypes";
 import LabelDetailInfo from "@/pages/labels/labelDetails/LabelDetailInfo";
 import ReleaseCard from "@/components/releases/ReleaseCard";
-import { useState } from "react";
-import { labelDetails } from "@/data/labels/labelDetails";
+import { useEffect, useRef, useState } from "react";
 import ArtistCard from "@/components/artists/ArtistCard";
+import { getLabelById } from "@/data/api/getLabelById";
+import toast from "react-hot-toast";
 
 const LabelDetailPage: React.FC = () => {
+	const initialized = useRef(false);
 	const { labelId } = useParams<{ labelId: string }>();
+	const [label, setLabel] = useState<LabelDetail>();
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
 
-	const label: LabelDetail | undefined = labelId ? labelDetails[labelId] : undefined;
-	if (!labelId || !label) {
-		return <div>No Label Found For ID: {labelId}</div>;
-	}
+	// Check if artistId exists before accessing details
+	useEffect(() => {
+		if (!initialized.current) {
+			initialized.current = true;
+			async function fetchData() {
+				const fetchedLabel = await getLabelById(labelId!);
+				setLabel(fetchedLabel);
+				setLoading(false);
+			}
+			if (labelId) {
+				toast.promise(fetchData(), {
+					loading: "Fetching label...",
+					success: "Label fetched",
+					error: "Error fetching label",
+				});
+			}
+		}
+	}, []);
 
 	const [following, setFollowing] = useState(false);
 	const [notification, setNotification] = useState(false);
@@ -25,16 +44,16 @@ const LabelDetailPage: React.FC = () => {
 		setNotification(!notification);
 	};
 
-	const announcedReleases = label.releases.filter((release) => new Date(release.releaseDate) > new Date()).sort((a, b) => a.releaseDate.getTime() - b.releaseDate.getTime());
+	const announcedReleases = label ? label.releases.filter((release) => new Date(release.releaseDate) > new Date()).sort((a, b) => a.releaseDate.getTime() - b.releaseDate.getTime()) : [];
 	const announcedSpacing = announcedReleases.length > 2 ? "justify-between" : "justify-start gap-x-4";
-	const previousReleases = label.releases.filter((release) => new Date(release.releaseDate) <= new Date()).sort((a, b) => b.releaseDate.getTime() - a.releaseDate.getTime());
+	const previousReleases = label ? label.releases.filter((release) => new Date(release.releaseDate) <= new Date()).sort((a, b) => b.releaseDate.getTime() - a.releaseDate.getTime()) : [];
 	const previousSpacing = previousReleases.length > 2 ? "justify-between" : "justify-start gap-x-4";
 
-	const sortedArtists = label.artists.sort((a, b) => a.artistName.localeCompare(b.artistName));
+	const sortedArtists = label ? label.artists.sort((a, b) => a.artistName.localeCompare(b.artistName)) : [];
 
 	return (
 		<div className="flex flex-col items-center justify-start gap-[28px] font-[Fira Sans]">
-			<LabelDetailInfo label={label} following={following} notification={notification} handleFollow={handleFollow} handleNotification={handleNotification} />
+			{label && <LabelDetailInfo label={label} following={following} notification={notification} handleFollow={handleFollow} handleNotification={handleNotification} />}
 			{/* Artists */}
 			<div className="flex flex-col justify-start sm:items-start items-center xl:w-[75vw] lg:w-[80vw] md:w-[85vw] w-[90vw]">
 				<h2 className="text-[48px] font-extrabold text-center">Artists</h2>

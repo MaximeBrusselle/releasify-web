@@ -1,7 +1,7 @@
 import { auth, db } from "@/auth/firebase";
-import { getDoc,doc } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 import { ArtistDetail } from "../artists/artistTypes";
-import { UserData } from "./getArtistReleases";
+import { UserData } from "./getLoginUserReleases";
 
 export const getLoggedInArtist = async (): Promise<ArtistDetail[]> => {
 	try {
@@ -14,11 +14,11 @@ export const getLoggedInArtist = async (): Promise<ArtistDetail[]> => {
 		const segments = parsedUserData?.artistObject._key.path.segments;
 		const artistId = segments[segments.length - 1];
 		const result = await getDoc(doc(db, "artists", artistId));
-        if(result.exists()){
-            return result.data() as ArtistDetail[];
-        } else {
-            throw new Error("Artist not found");
-        }
+		if (result.exists()) {
+			return result.data() as ArtistDetail[];
+		} else {
+			throw new Error("Artist not found");
+		}
 	} catch (error: any) {
 		throw new Error(error);
 	}

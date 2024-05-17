@@ -1,7 +1,7 @@
 import { DetailInfo } from "@/components/dashboard/artist/releases/DetailInfo";
 import { GeneralInfo } from "@/components/dashboard/artist/releases/GeneralInfo";
 import { ReleaseData } from "@/components/dashboard/artist/releases/ReleaseData";
-import { getArtistReleases } from "@/data/api/getArtistReleases";
+import { getLoginUserReleases } from "@/data/api/getLoginUserReleases";
 import { ReleaseIndex } from "@/data/releases/releaseTypes";
 // import { releases } from "@/data/releases/releases";
 import { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ const ArtistDashboardReleases = () => {
 	useEffect(() => {
 		async function getReleases() {
 			try {
-				const releasesFromArtist = await getArtistReleases();
+				const releasesFromArtist = await getLoginUserReleases();
 				if (!releasesFromArtist) {
 					throw new Error("No releases found");
 				}

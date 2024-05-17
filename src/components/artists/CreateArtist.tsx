@@ -1,15 +1,15 @@
-import { ArtistIndex } from "@/data/artists/artistTypes";
 import { useRef, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { ValidationFieldErrorMap } from "../form/useMultiStepForm";
+import { CreatedArtist } from "../form/registration/Label/ChooseArtists";
 
 interface CreateArtistProps {
-	artist: ArtistIndex;
+	artist: CreatedArtist;
 	index: number;
-	fieldChange: (artist: ArtistIndex, index: number) => void;
+	fieldChange: (artist: CreatedArtist, index: number) => void;
 	artistDelete: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, index: number) => void;
 	errors: ValidationFieldErrorMap;
 }
@@ -22,7 +22,7 @@ const CreateArtist = (props: CreateArtistProps) => {
 		if (fileInputRef.current?.files && fileInputRef.current.files.length > 0) {
 			const file = fileInputRef.current.files[0];
 			if (file.size <= 32 * 1024 * 1024) {
-				fieldChange({ ...artist, profilePicture: URL.createObjectURL(file) }, index);
+				fieldChange({ ...artist, profilePicture: file }, index);
 				setImageError("");
 			} else {
 				setImageError("Image size exceeds the limit.");
@@ -38,7 +38,7 @@ const CreateArtist = (props: CreateArtistProps) => {
 		<div className="w-full h-fit rounded-2xl p-4 shadow-input bg-white dark:bg-black flex md:flex-row flex-col items-center justify-start gap-2 relative">
 			<img
 				id="profilePicturePreview"
-				src={artist.profilePicture}
+				src={artist.profilePicture instanceof File ? URL.createObjectURL(artist.profilePicture) : artist.profilePicture}
 				alt={"Profile Picture Preview"}
 				className="w-[148px] aspect-square border-[4px] border-solid border-black rounded-lg object-cover"
 			/>

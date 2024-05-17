@@ -1,7 +1,6 @@
 import { FormWrapper } from "@/components/form/FormWrapper";
-import { LabelIndex } from "@/data/labels/labelTypes";
+import { LabelDetail, LabelIndex } from "@/data/labels/labelTypes";
 import { Label } from "@/components/ui/label";
-import { labels } from "@/data/labels/labels";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,9 +23,10 @@ type LabelData = {
 type LabelProps = LabelData & {
 	updateFields: (newData: Partial<LabelData>) => void;
 	errors: ValidationFieldErrorMap;
+	labels: LabelDetail[];
 };
 
-export function ChooseLabel({ label, labelType, updateFields, errors }: LabelProps) {
+export function ChooseLabel({ label, labelType, updateFields, errors, labels }: LabelProps) {
 	function updateLabel(newLabel: LabelIndex) {
 		updateFields({
 			label: newLabel,

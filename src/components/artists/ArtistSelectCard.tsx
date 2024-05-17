@@ -3,8 +3,8 @@ import { useRef, useEffect } from "react";
 import { ArtistDetail, ArtistIndex } from "@/data/artists/artistTypes";
 
 interface ArtistSelectCardProps {
-	artist: ArtistDetail | ArtistIndex;
-	handleSelect: (artist: ArtistDetail | ArtistIndex) => void;
+	artist: ArtistDetail;
+	handleSelect: (artist: ArtistDetail) => void;
 	selectedIds: string[];
 }
 

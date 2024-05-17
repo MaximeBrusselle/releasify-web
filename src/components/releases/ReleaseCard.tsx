@@ -77,7 +77,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 		<div className="sm:w-[640px] sm:h-[182px] rounded-2xl p-4 shadow-input bg-white dark:bg-black cursor-auto w-full h-fit hover:cursor-pointer" ref={cardRef} onClick={handleNavigate}>
 			<div className="flex sm:flex-row flex-col items-center sm:justify-start justify-center w-full h-full gap-4">
 				<div className="sm:flex flex-row justify-start items-center gap-2 w-full hidden">
-					<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
+					<img src={release.picture} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
 					<div className="flex flex-col items-start justify-center h-full gap-y-2">
 						<p className={`font-bold text-${fontSize}`}>{release.name}</p>
 						{isReleased && <p className="text-md leading-4">📅 {new Date(release.releaseDate).toLocaleDateString(locale, formattedDateOptions)}</p>}
@@ -92,7 +92,7 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 				<div className="flex flex-col justify-center items-center gap-2 w-full sm:hidden">
 					<p className="font-bold text-3xl text-center">{release.name}</p>
 					<div className="flex flex-row justify-center items-center w-full gap-3">
-						<img src={getImageUrl("releases", release.picture)} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
+						<img src={release.picture} alt={release.name} className="w-[148px] aspect-square border-[2px] border-solid border-black rounded-lg object-cover" />
 						<div className="flex flex-col items-start justify-center h-full gap-y-2">
 							{isReleased && <p className="text-md leading-4">📅 {new Date(release.releaseDate).toLocaleDateString(locale, formattedDateOptions)}</p>}
 							<div className="flex flex-row flex-wrap justify-start items-center gap-x-1">
@@ -104,8 +104,8 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 						</div>
 					</div>
 				</div>
-				<span className="sm:block h-full w-px bg-black hidden"></span>
-				{isReleased ? (
+				{(!isReleased || (isReleased && release.urls.length > 0)) && <span className="sm:block h-full w-px bg-black hidden"></span>}
+				{isReleased && release.urls.length > 0 && (
 					<div className="flex sm:flex-col flex-row items-center justify-center gap-4 sm:w-[20%] w-full m-2">
 						<div className=" flex flex-row flex-wrap justify-center items-center gap-1">
 							{release.urls.map((url) => (
@@ -115,7 +115,8 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 							))}
 						</div>
 					</div>
-				) : (
+				)}
+				{!isReleased && (
 					<div className="flex sm:flex-col items-center justify-center gap-4 sm:w-[20%] w-[7.5%] m-2">
 						<div className="flex sm:flex-col flex-row justify-center items-center text-center sm:gap-0 gap-2">
 							<p className="text-4xl font-bold">{month}</p>

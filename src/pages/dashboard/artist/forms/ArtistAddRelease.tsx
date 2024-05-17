@@ -17,12 +17,13 @@ import { Socials } from "@/components/form/release/artist/Socials";
 import toast from "react-hot-toast";
 import { getArtists } from "@/data/api/getArtists";
 import { getLabels } from "@/data/api/getLabels";
+import { CreatedArtist } from "@/components/form/registration/Label/ChooseArtists";
 
 type AddReleaseData = {
 	name: string;
 	description: string;
 	releaseArtists: string[];
-	newArtists: any[];
+	newArtists: CreatedArtist[];
 	picture: File | null;
 	urls: ReleasePlatform[];
 	genreList: Genre[];

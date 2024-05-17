@@ -1,6 +1,8 @@
 import { auth } from "@/auth/firebase";
 import { getUserData } from "@/data/api/getUserData";
+import { FirebaseError } from "firebase/app";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, UserCredential } from "firebase/auth";
+import toast from "react-hot-toast";
 
 type FireBaseError = {
     code: string;
@@ -28,9 +30,23 @@ export const doCreateUserWithEmailAndPassword = async (email: string, password: 
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         return userCredential;
     } catch (error: any) {
+        let err: FirebaseError = error;
+        switch (error.code) {
+            case "auth/email-already-in-use":
+                err.message = "Email already in use";
+                break;
+            case "auth/invalid-email":
+                err.message = "Invalid email";
+                break;
+            case "auth/weak-password":
+                err.message = "Weak password";
+                break;
+            default:
+                err.message = "An unknown error occurred";
+        }
         return {
-            code: error.code ? error.code : "unknown",
-            message: error.message ? error.message : "An unknown error occurred",
+            code: err.code,
+            message: err.message,
         }
     }
 }

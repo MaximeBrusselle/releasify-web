@@ -1,19 +1,22 @@
 import { useMultiStepForm } from "@/components/form/useMultiStepForm";
 import { Progress } from "@/components/ui/progress";
 import { ChooseLabel, ChooseLabelViewType } from "@/components/form/registration/Artist/ChooseLabel";
-import { PfpAndGenres } from "@/components/form/registration/Artist/PfpAndGenres";
+import { GeneralInfo } from "@/components/form/registration/Artist/GeneralInfo";
 import { Socials } from "@/components/form/registration/Artist/Socials";
 import { AccountData } from "@/components/form/registration/Artist/AccountData";
 import { Genre } from "@/data/genres/genreTypes";
 import { SocialInfo } from "@/data/other/socialTypes";
-import { LabelIndex } from "@/data/labels/labelTypes";
-import { useContext, useState } from "react";
+import { LabelDetail, LabelIndex } from "@/data/labels/labelTypes";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
 import { registerArtist } from "@/data/api/registerArtist";
 import { AuthContext } from "@/auth/AuthProvider";
 import { doSignOut } from "@/auth/auth";
-import { validateAccountData, validatePfpAndGenres, validateChooseLabel, validateSocials } from "@/components/form/validations";
+import { validateAccountData, validateBannerAndGenres, validateChooseLabel, validateGeneralInfo, validateSocials } from "@/components/form/validations";
+import toast from "react-hot-toast";
+import { getLabels } from "@/data/api/getLabels";
+import { BannerAndGenres } from "@/components/form/registration/Artist/BannerAndGenres";
 
 interface ArtistRegistrationData {
 	artistname: string;
@@ -21,7 +24,10 @@ interface ArtistRegistrationData {
 	email: string;
 	password: string;
 	confirmPassword: string;
+	description: string;
+	bookingEmail: string;
 	profilePicture: File | null;
+	bannerPicture: File | null;
 	genreList: Genre[];
 	artistSocials: SocialInfo[];
 	labelType: ChooseLabelViewType;
@@ -29,6 +35,22 @@ interface ArtistRegistrationData {
 }
 
 function ArtistRegistration() {
+	let initialized = useRef(false);
+	const [firebaseLabels, setFirebaseLabels] = useState<LabelDetail[]>([]);
+	useEffect(() => {
+		if (!initialized.current) {
+			initialized.current = true;
+			async function fetchData() {
+				const fetchedLabels = await getLabels();
+				setFirebaseLabels(fetchedLabels);
+			}
+			toast.promise(fetchData(), {
+				loading: "Fetching labels...",
+				success: "Labels fetched",
+				error: "Error fetching labels",
+			});
+		}
+	}, []);
 	const { isLoggedIn } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const INITIAL_DATA: ArtistRegistrationData = {
@@ -37,14 +59,18 @@ function ArtistRegistration() {
 		email: "",
 		password: "",
 		confirmPassword: "",
+		description: "",
+		bookingEmail: "",
 		labelType: { text: "I'm Signed To A Label", viewType: "label" },
 		profilePicture: null,
+		bannerPicture: null,
 		genreList: [],
 		artistSocials: [],
 		label: null,
 	};
 	const [data, setData] = useState<ArtistRegistrationData>(INITIAL_DATA);
 	const [errors, setErrors] = useState<ValidationFieldErrorMap>({});
+
 
 	function updateFields(newData: Partial<ArtistRegistrationData>) {
 		setData((prevData) => ({
@@ -55,8 +81,9 @@ function ArtistRegistration() {
 
 	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep } = useMultiStepForm([
 		<AccountData {...data} updateFields={updateFields} errors={errors} />,
-		<PfpAndGenres {...data} updateFields={updateFields} errors={errors} />,
-		<ChooseLabel {...data} updateFields={updateFields} errors={errors} />,
+		<GeneralInfo {...data} updateFields={updateFields} errors={errors} />,
+		<BannerAndGenres {...data} updateFields={updateFields} errors={errors} />,
+		<ChooseLabel {...data} updateFields={updateFields} errors={errors} labels={firebaseLabels}/>,
 		<Socials {...data} updateFields={updateFields} errors={errors} />,
 	]);
 
@@ -64,7 +91,7 @@ function ArtistRegistration() {
 		event.preventDefault();
 
 		// Validate the current step before allowing submission
-		const validationFunctions = [validateAccountData, validatePfpAndGenres, validateChooseLabel, validateSocials];
+		const validationFunctions = [validateAccountData, validateGeneralInfo, validateBannerAndGenres, validateChooseLabel, validateSocials];
 		const { isValid, errors }: ValidationReturn = validationFunctions[currentStepIndex](data);
 
 		if (isValid) {
@@ -77,6 +104,7 @@ function ArtistRegistration() {
 			}
 			const result = await registerArtist(data);
 			if(result?.message) {
+				toast.error(result.message);
 				setErrors({ all: result.message });
 				return;
 			}
@@ -85,6 +113,7 @@ function ArtistRegistration() {
 			setErrors(errors!);
 		}
 	};
+
 
 	return (
 		<div className="rounded-2xl p-4 shadow-input bg-white dark:bg-black font-sans w-full flex flex-col items-center justify-start gap-5">

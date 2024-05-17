@@ -1,10 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import notifPlus from "@/assets/icon_bell_plus.svg";
 import notifOff from "@/assets/icon_bell_off.svg";
-import { getImageUrl } from "@/lib/utils";
 import { ArtistDetail } from "@/data/artists/artistTypes";
 import { Link, useNavigate } from "react-router-dom";
-import { handleSocialLinkClick } from "@/lib/utils";
+import { getImageUrl, handleSocialLinkClick } from "@/lib/utils";
 
 interface ArtistDetailInfoProps {
 	artist: ArtistDetail;
@@ -25,14 +24,14 @@ const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailIn
 	return (
 		<div className="flex flex-col items-center justify-start gap-[14px] xl:w-[75vw] h-full lg:w-[80vw] md:w-[85vw] w-[90vw]">
 			<img
-				src={getImageUrl("artists", artist.bannerPicture)}
+				src={artist.bannerPicture ? artist.bannerPicture : "https://i.ibb.co/MM4463X/default-banner.jpg"}
 				alt="banner picture"
 				className="w-full object-cover rounded-[20px] border-black border-[6px] border-solid xl:aspect-[1400/400] lg:aspect-[1400/500] md:aspect-[1400/600] aspect-[1400/900]"
 			/>
 			<div className="flex 2xl:flex-row flex-col w-full h-full gap-[14px] items-center justify-center border-solid">
 				<div className="flex 2xl:flex-row flex-col 2xl:justify-start justify-center items-center w-full gap-2 h-full">
 					<img
-						src={getImageUrl("artists", artist.profilePicture)}
+						src={artist.profilePicture}
 						alt="profile picture"
 						className="w-[20vh] object-cover rounded-[50px] border-black border-[6px] border-solid aspect-square"
 					/>
@@ -114,7 +113,7 @@ const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailIn
 						{!artist.label && <p>Independent Artist</p>}
 						{artist.label && (
 							<div className="flex flex-row items-center justify-center gap-3" onClick={handleLabelClicked}>
-								<img src={getImageUrl("labels", artist.label.profilePicture)} alt={artist.label.name} className="w-20 aspect-square rounded-md" />
+								<img src={artist.label.profilePicture} alt={artist.label.name} className="w-20 aspect-square rounded-md" />
 								<p className="text-2xl font-bold">{artist.label.name}</p>
 							</div>
 						)}

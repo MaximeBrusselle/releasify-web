@@ -1,12 +1,13 @@
 import { LabelIndex } from "@/data/labels/labelTypes"
 import { Social } from "@/data/other/socialTypes"
 import { Genre } from "@/data/genres/genreTypes"
+import { ArtistDetail } from "../artists/artistTypes"
 
 
 type ReleaseIndex = {
     id: string,
     name: string,
-    artists: ReleaseArtist[],
+    artists: ArtistDetail[],
     picture: string,
     urls: ReleasePlatform[],
     genres: Genre[],
