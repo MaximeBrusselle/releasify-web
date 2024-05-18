@@ -4,21 +4,34 @@ import { ReleaseData } from "@/components/dashboard/artist/releases/ReleaseData"
 import { getLoginUserReleases } from "@/data/api/getLoginUserReleases";
 import { ReleaseIndex } from "@/data/releases/releaseTypes";
 // import { releases } from "@/data/releases/releases";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { useUser } from "../DashboardContainer";
+import { DashboardNotAllowed } from "../DashboardNotAllowed";
 
 const ArtistDashboardReleases = () => {
+	const { userType } = useUser();
+	if(userType === "user"){
+		return <DashboardNotAllowed />;
+	}
+	let initialized = useRef(false);
 	const [releases, setReleases] = useState<ReleaseIndex[]>([]);
 	const [selectedRow, setSelectedRow] = useState<ReleaseIndex | null>(null);
 
 	useEffect(() => {
+		if (initialized.current) {
+			return;
+		}
+		initialized.current = true;
+
 		async function getReleases() {
 			try {
-				const releasesFromArtist = await getLoginUserReleases();
+				const releasesFromArtist = await getLoginUserReleases(userType);
 				if (!releasesFromArtist) {
 					throw new Error("No releases found");
 				}
 				setReleases(releasesFromArtist);
+				toast.success("Got releases");
 			} catch (error: any) {
 				toast.error(error.message);
 			}

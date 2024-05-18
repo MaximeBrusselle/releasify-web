@@ -8,13 +8,6 @@ import toast from "react-hot-toast";
 
 export const registerLabel = async (data: LabelRegistrationData): Promise<any> => {
 	try {
-		const result: UserCredential | FireBaseError = await doCreateUserWithEmailAndPassword(data.email, data.password);
-		if ("message" in result && "code" in result) {
-			return {
-				code: result.code,
-				message: result.message,
-			};
-		}
 		let pfp;
 		if (data.profilePicture) {
 			try {
@@ -26,6 +19,16 @@ export const registerLabel = async (data: LabelRegistrationData): Promise<any> =
 		} else {
 			pfp = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 		}
+		localStorage.setItem("pfp", pfp);
+		localStorage.setItem("userType", "label");
+		const result: UserCredential | FireBaseError = await doCreateUserWithEmailAndPassword(data.email, data.password, data.labelname, pfp);
+		if ("message" in result && "code" in result) {
+			return {
+				code: result.code,
+				message: result.message,
+			};
+		}
+		
 		let bannerPicture;
 		if (data.bannerPicture) {
 		    try {
@@ -82,7 +85,6 @@ export const registerLabel = async (data: LabelRegistrationData): Promise<any> =
 		await updateDoc(docRef, { id: newDocId });
 		const userData = {
 			type: "label",
-			profilePicture: pfp,
 			labelObject: docRef,
 			notifications: [],
 			following: [],

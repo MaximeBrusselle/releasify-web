@@ -6,7 +6,6 @@ import { UserData } from "./getLoginUserReleases";
 import { formatDateToYYYYMMDD } from "@/lib/utils";
 
 export const addRelease = async (data: AddReleaseData): Promise<any> => {
-	//TODO: Add release to all collaborators
 	const user = auth.currentUser;
 	if (!user) {
 		return {

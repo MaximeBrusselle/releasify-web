@@ -1,7 +1,5 @@
-import { ArtistDashboardNotImplemented } from "./ArtistDashboardNotImplemented";
+import { DashboardNotImplemented  } from "../DashboardNotImplemented";
 
 export const ArtistDashboardAnalytics = () => {
-    return (
-        <ArtistDashboardNotImplemented/>
-    );
+	return <DashboardNotImplemented  />;
 };

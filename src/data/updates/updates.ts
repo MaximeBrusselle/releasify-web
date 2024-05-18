@@ -116,6 +116,19 @@ const updates: Update[] = [
             "Example artist dashboard (home and releases page)",
         ],
     },
+    {
+        version: "0.7.0",
+        date: new Date("2024-05-13"),
+        name: "Artist Dashboard",
+        changes: [
+            "Fixed profile picture not showing after registration/login",
+            "Fixed getting releases for label in dashboard",
+            "All of the data now comes from the database instead of sampledata",
+        ],
+        addedFeatures: [
+            "You can now add releases from the dashboard as an artist",
+        ],
+    },
 ];
 
 export default updates;

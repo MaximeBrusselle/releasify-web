@@ -13,20 +13,35 @@ type UserData = {
             };
         };
     };
+	labelObject: {
+        _key: {
+            path: {
+                segments: string[];
+            };
+        };
+    };
 }
 
 export type { UserData };
 
-export const getLoginUserReleases = async (): Promise<any> => {
+export const getLoginUserReleases = async (userType: string): Promise<any> => {
 	const user = auth.currentUser;
 	if (!user) {
 		throw new Error("User not logged in");
 	}
+	if(userType === "user"){
+		throw new Error("You can't have releases");
+	}
 	const userData = localStorage.getItem("userData");
 	const parsedUserData: UserData = userData ? JSON.parse(userData) : null;
-	const segments = parsedUserData?.artistObject._key.path.segments;
-	const artistId = segments[segments.length - 1];
-	const result = await getDoc(doc(db, "artists", artistId));
+	let segments;
+	if(userType === "artist"){
+		segments = parsedUserData?.artistObject._key.path.segments;
+	} else {
+		segments = parsedUserData?.labelObject._key.path.segments;
+	}
+	const objectId = segments[segments.length - 1];
+	const result = await getDoc(doc(db, `${userType}s`, objectId));
 	if (result.exists()) {
 		// first transform the releases to the correct data and not references
 		const releases = await getReleasesFromReference(result.data().releases);
@@ -42,7 +57,7 @@ export const getLoginUserReleases = async (): Promise<any> => {
 		});
 		return Promise.all(fullRelease);
 	} else {
-		throw new Error("User data not found");
+		throw new Error("Unable to access data");
 	}
 };
 

@@ -71,7 +71,6 @@ function ArtistRegistration() {
 	const [data, setData] = useState<ArtistRegistrationData>(INITIAL_DATA);
 	const [errors, setErrors] = useState<ValidationFieldErrorMap>({});
 
-
 	function updateFields(newData: Partial<ArtistRegistrationData>) {
 		setData((prevData) => ({
 			...prevData,
@@ -83,7 +82,7 @@ function ArtistRegistration() {
 		<AccountData {...data} updateFields={updateFields} errors={errors} />,
 		<GeneralInfo {...data} updateFields={updateFields} errors={errors} />,
 		<BannerAndGenres {...data} updateFields={updateFields} errors={errors} />,
-		<ChooseLabel {...data} updateFields={updateFields} errors={errors} labels={firebaseLabels}/>,
+		<ChooseLabel {...data} updateFields={updateFields} errors={errors} labels={firebaseLabels} />,
 		<Socials {...data} updateFields={updateFields} errors={errors} />,
 	]);
 
@@ -99,21 +98,28 @@ function ArtistRegistration() {
 				setErrors({});
 				return nextStep();
 			}
-			if(isLoggedIn) {
+			if (isLoggedIn) {
 				await doSignOut();
 			}
-			const result = await registerArtist(data);
-			if(result?.message) {
-				toast.error(result.message);
-				setErrors({ all: result.message });
+			try {
+				const result = await registerArtist(data);
+				if (result?.message) {
+					toast.error(result.message);
+					setErrors({ all: result.message });
+					return;
+				}
+			} catch (error: any) {
+				console.error(`Failed to register artist: ${error}`);
+				toast.error("Failed to register artist");
+				setErrors({ all: "Failed to register artist" });
 				return;
 			}
+			toast.success("Account created successfully");
 			navigate("/");
 		} else {
 			setErrors(errors!);
 		}
 	};
-
 
 	return (
 		<div className="rounded-2xl p-4 shadow-input bg-white dark:bg-black font-sans w-full flex flex-col items-center justify-start gap-5">

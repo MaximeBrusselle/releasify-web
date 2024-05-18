@@ -7,14 +7,6 @@ import { UserRegistrationData } from "@/pages/account/register/UserRegistration"
 
 export const registerUser = async (data: UserRegistrationData): Promise<any> => {
 	//register user
-	const result: UserCredential | FireBaseError = await doCreateUserWithEmailAndPassword(data.email, data.password);
-	if ("message" in result && "code" in result) {
-		console.error(`Failed to create user: ${result.code} - ${result.message}`);
-		return {
-			code: result.code,
-			message: result.message,
-		};
-	}
 	let pfp;
 	if (data.profilePicture) {
 		try {
@@ -26,10 +18,20 @@ export const registerUser = async (data: UserRegistrationData): Promise<any> => 
 	} else {
 		pfp = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 	}
+	localStorage.setItem("pfp", pfp);
+	localStorage.setItem("userType", "user");
+	const result: UserCredential | FireBaseError = await doCreateUserWithEmailAndPassword(data.email, data.password, "", pfp);
+	if ("message" in result && "code" in result) {
+		console.error(`Failed to create user: ${result.code} - ${result.message}`);
+		return {
+			code: result.code,
+			message: result.message,
+		};
+	}
+	
 	try {
 		const userData = {
 			type: "user",
-			profilePicture: pfp,
 			notifications: [],
 			following: [],
 			requests: [],

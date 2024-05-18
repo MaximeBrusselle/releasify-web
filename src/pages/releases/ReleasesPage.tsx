@@ -33,8 +33,8 @@ const ReleasesPage: React.FC = () => {
 			}
 		}
 	}, []);
-	const announcedReleases = releases.filter((release) => new Date(release.releaseDate) > new Date()).sort((a, b) => a.releaseDate.getTime() - b.releaseDate.getTime());
-  	const previousReleases = releases.filter((release) => new Date(release.releaseDate) <= new Date()).sort((a, b) => b.releaseDate.getTime() - a.releaseDate.getTime());
+	const announcedReleases = releases.filter((release) => new Date(release.releaseDate) > new Date()).sort((a, b) => new Date(a.releaseDate).getTime() - new Date(b.releaseDate).getTime());
+  	const previousReleases = releases.filter((release) => new Date(release.releaseDate) <= new Date()).sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
 
 	return (
 		<div className="flex flex-col items-center justify-start gap-[28px] font-[Fira Sans] w-full">

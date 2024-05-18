@@ -22,22 +22,27 @@ function classNames(...classes: (string | boolean)[]): string {
 
 const NavBar: React.FC = () => {
 	const navigate = useNavigate();
-	const { isLoggedIn } = useContext(AuthContext);
+	const { isLoggedIn, currentUser } = useContext(AuthContext);
 	const [pfpUrl, setPfpUrl] = useState<string>("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
 
 	useEffect(() => {
 		if (isLoggedIn) {
-			const userData = localStorage.getItem("userData");
-			if (userData) {
-				const data = JSON.parse(userData);
-				setPfpUrl(data.profilePicture);
+			if(currentUser.photoURL === null){
+				//NOTE: This is a fix for older profiles that don't have a photoURL
+				if(localStorage.getItem("pfp") !== null){
+					setPfpUrl(localStorage.getItem("pfp")!);
+					localStorage.removeItem("pfp");
+				} else {
+					const userData: any = JSON.parse(localStorage.getItem("userData")!);
+					setPfpUrl(userData!.profilePicture);
+				}
 			} else {
-				setPfpUrl("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
+				setPfpUrl(currentUser.photoURL);
 			}
 		} else {
 			setPfpUrl("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
 		}
-	}, [isLoggedIn]);
+	}, [currentUser]);
 
 	const location = useLocation();
 

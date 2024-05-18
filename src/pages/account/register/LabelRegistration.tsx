@@ -9,7 +9,7 @@ import { SocialInfo } from "@/data/other/socialTypes";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
-import { ArtistDetail, ArtistIndex } from "@/data/artists/artistTypes";
+import { ArtistDetail } from "@/data/artists/artistTypes";
 import { registerLabel } from "@/data/api/registerLabel";
 import { AuthContext } from "@/auth/AuthProvider";
 import { doSignOut } from "@/auth/auth";
@@ -108,6 +108,7 @@ function LabelRegistration() {
 				}
 			} catch (error: any) {
 				console.error(error.message);
+				toast.error("Failed to create label");
 				setErrors({ all: error.message });
 				return;
 			}

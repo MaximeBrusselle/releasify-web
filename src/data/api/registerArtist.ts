@@ -8,13 +8,6 @@ import toast from "react-hot-toast";
 
 export const registerArtist = async (data: ArtistRegistrationData): Promise<any> => {
 	try {
-		const result: UserCredential | FireBaseError = await doCreateUserWithEmailAndPassword(data.email, data.password);
-		if ("message" in result && "code" in result) {
-			return {
-				code: result.code,
-				message: result.message,
-			};
-		}
 		let pfp;
 		if (data.profilePicture) {
 			try {
@@ -26,6 +19,16 @@ export const registerArtist = async (data: ArtistRegistrationData): Promise<any>
 		} else {
 			pfp = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 		}
+		localStorage.setItem("pfp", pfp);
+		localStorage.setItem("userType", "artist");
+		const result: UserCredential | FireBaseError = await doCreateUserWithEmailAndPassword(data.email, data.password, data.artistname, pfp);
+		if ("message" in result && "code" in result) {
+			return {
+				code: result.code,
+				message: result.message,
+			};
+		}
+		
 		let banner;
 		if (data.bannerPicture) {
 			try {
@@ -72,7 +75,6 @@ export const registerArtist = async (data: ArtistRegistrationData): Promise<any>
 		await updateDoc(docRef, { id: newDocId });
 		const userData = {
 			type: "artist",
-			profilePicture: pfp,
 			artistObject: docRef,
 			notifications: [],
 			following: [],

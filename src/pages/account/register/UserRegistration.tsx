@@ -9,6 +9,7 @@ import { registerUser } from "@/data/api/registerUser";
 import { doSignOut } from "@/auth/auth";
 import { AuthContext } from "@/auth/AuthProvider";
 import { validateAccountData, validatePfp } from "@/components/form/validations";
+import toast from "react-hot-toast";
 
 interface UserRegistrationData {
 	username: string;
@@ -19,7 +20,7 @@ interface UserRegistrationData {
 }
 
 function UserRegistration() {
-	const { isLoggedIn } = useContext(AuthContext)
+	const { isLoggedIn } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const INITIAL_DATA: UserRegistrationData = {
 		username: "",
@@ -55,14 +56,24 @@ function UserRegistration() {
 				setErrors({});
 				return nextStep();
 			}
-			if(isLoggedIn) {
+			if (isLoggedIn) {
 				await doSignOut();
 			}
-			const result = await registerUser(data);
-			if(result?.message) {
-				setErrors({ all: result.message });
+			try {
+				const result = await registerUser(data);
+				if (result?.message) {
+					console.error(result.message);
+					toast.error("Failed to create user");
+					setErrors({ all: result.message });
+					return;
+				}
+			} catch (error: any) {
+				console.error(error.message);
+				toast.error("Failed to create user");
+				setErrors({ all: error.message });
 				return;
 			}
+			toast.success("User created successfully");
 			navigate("/");
 		} else {
 			setErrors(errors!);
