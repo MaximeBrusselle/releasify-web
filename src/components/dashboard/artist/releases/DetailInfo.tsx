@@ -99,8 +99,17 @@ export const DetailInfo = (props: DetailInfoProps) => {
 									<Link to={`/releases/${selected!.id}`}>
 										<DropdownMenuItem>Go to Page</DropdownMenuItem>
 									</Link>
-									<DropdownMenuItem>Export to csv</DropdownMenuItem>
+									<DropdownMenuItem
+										onClick={(_) => {
+											toast("Not implemented yet", {
+												icon: "🚧",
+											});
+										}}
+									>
+										Embed
+									</DropdownMenuItem>
 									<DropdownMenuSeparator />
+									<DropdownMenuItem>Other options</DropdownMenuItem>
 								</DropdownMenuContent>
 							</DropdownMenu>
 						</div>
