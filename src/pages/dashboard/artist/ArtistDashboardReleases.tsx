@@ -1,43 +1,40 @@
 import { DetailInfo } from "@/components/dashboard/artist/releases/DetailInfo";
 import { GeneralInfo } from "@/components/dashboard/artist/releases/GeneralInfo";
 import { ReleaseData } from "@/components/dashboard/artist/releases/ReleaseData";
-import { getLoginUserReleases } from "@/data/api/getLoginUserReleases";
+import { getLoginUserReleases } from "@/data/api/release/getLoginUserReleases";
 import { ReleaseIndex } from "@/data/releases/releaseTypes";
-// import { releases } from "@/data/releases/releases";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { useUser } from "../DashboardContainer";
 import { DashboardNotAllowed } from "../DashboardNotAllowed";
 
 const ArtistDashboardReleases = () => {
-	const { userType } = useUser();
-	if(userType === "user"){
-		return <DashboardNotAllowed />;
-	}
 	let initialized = useRef(false);
 	const [releases, setReleases] = useState<ReleaseIndex[]>([]);
 	const [selectedRow, setSelectedRow] = useState<ReleaseIndex | null>(null);
-
 	useEffect(() => {
 		if (initialized.current) {
 			return;
 		}
 		initialized.current = true;
-
-		async function getReleases() {
-			try {
-				const releasesFromArtist = await getLoginUserReleases(userType);
-				if (!releasesFromArtist) {
-					throw new Error("No releases found");
-				}
-				setReleases(releasesFromArtist);
-				toast.success("Got releases");
-			} catch (error: any) {
-				toast.error(error.message);
-			}
-		}
 		getReleases();
 	}, []);
+	const userType = JSON.parse(localStorage.getItem("userData")!).type;
+	if (userType === "user") {
+		return <DashboardNotAllowed />;
+	}
+
+	async function getReleases() {
+		try {
+			const releasesFromArtist = await getLoginUserReleases(userType);
+			if (!releasesFromArtist) {
+				throw new Error("No releases found");
+			}
+			setReleases(releasesFromArtist);
+			toast.success("Got releases");
+		} catch (error: any) {
+			toast.error(error.message);
+		}
+	}
 
 	const handleSelectRow = (row?: ReleaseIndex) => {
 		if (row) {
@@ -45,6 +42,10 @@ const ArtistDashboardReleases = () => {
 			return;
 		}
 		setSelectedRow(null);
+	};
+	const handleRowDeleted = () => {
+		setSelectedRow(null);
+		getReleases();
 	};
 	const announcedAmount = releases.filter((release) => new Date(release.releaseDate) > new Date()).length;
 	const releasedAmount = releases.filter((release) => new Date(release.releaseDate) <= new Date()).length;
@@ -55,7 +56,7 @@ const ArtistDashboardReleases = () => {
 				<ReleaseData handleSelectRow={handleSelectRow} selectedRow={selectedRow} releases={releases} />
 			</div>
 			<div>
-				<DetailInfo selected={selectedRow} />
+				<DetailInfo selected={selectedRow} handleRowDeleted={handleRowDeleted} />
 			</div>
 		</main>
 	);

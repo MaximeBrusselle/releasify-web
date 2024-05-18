@@ -17,7 +17,7 @@ export type { ChooseLabelViewType };
 
 type LabelData = {
 	labelType: ChooseLabelViewType;
-	label: LabelIndex | null;
+	label: any;
 };
 
 type LabelProps = LabelData & {
@@ -33,10 +33,9 @@ export function ChooseLabel({ label, labelType, updateFields, errors, labels }: 
 		});
 	}
 
-	const [createdLabel, setCreatedLabel] = useState<LabelIndex>({
+	const [createdLabel, setCreatedLabel] = useState<any>({
 		name: "",
 		profilePicture: "https://i.ibb.co/8m050zG/default.png",
-		genres: [],
 	});
 	const [imageError, setImageError] = useState("");
 	const fileInputRef = useRef<HTMLInputElement>(null);
@@ -45,7 +44,7 @@ export function ChooseLabel({ label, labelType, updateFields, errors, labels }: 
 			const file = fileInputRef.current.files[0];
 			if (file.size <= 32 * 1024 * 1024) {
 				setCreatedLabel({ ...createdLabel, profilePicture: URL.createObjectURL(file) });
-				updateFields({ label: { ...createdLabel, profilePicture: URL.createObjectURL(file) } });
+				updateFields({ label: { ...createdLabel, profilePicture: file } });
 				setImageError("");
 			} else {
 				setImageError("Image size exceeds the limit.");
@@ -148,7 +147,6 @@ export function ChooseLabel({ label, labelType, updateFields, errors, labels }: 
 								type="text"
 								id="artistname"
 								className="border-[1px] border-grey-200 border-solid"
-								// required
 								autoFocus
 								value={createdLabel.name}
 								onChange={(e) => {

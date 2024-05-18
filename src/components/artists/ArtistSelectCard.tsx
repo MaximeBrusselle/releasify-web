@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRef, useEffect } from "react";
-import { ArtistDetail, ArtistIndex } from "@/data/artists/artistTypes";
+import { ArtistDetail } from "@/data/artists/artistTypes";
 
 interface ArtistSelectCardProps {
 	artist: ArtistDetail;

@@ -1,6 +1,6 @@
 import { db } from "@/auth/firebase";
 import { getDoc, doc } from "firebase/firestore";
-import { ArtistDetail } from "../artists/artistTypes";
+import { ArtistDetail } from "../../artists/artistTypes";
 
 export const getArtistIndex = async (artistId: string): Promise<any> => {
 	try {

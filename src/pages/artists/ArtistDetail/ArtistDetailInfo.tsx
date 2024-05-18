@@ -112,9 +112,9 @@ const ArtistDetailInfo: React.FC<ArtistDetailInfoProps> = (props: ArtistDetailIn
 						<hr className="my-[14px] h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-100 dark:via-neutral-900 w-full" />
 						{!artist.label && <p>Independent Artist</p>}
 						{artist.label && (
-							<div className="flex flex-row items-center justify-center gap-3" onClick={handleLabelClicked}>
+							<div className={`flex flex-row items-center justify-center gap-3 group ${artist.label?.id ? 'cursor-pointer' : ''}`} onClick={handleLabelClicked}>
 								<img src={artist.label.profilePicture} alt={artist.label.name} className="w-20 aspect-square rounded-md" />
-								<p className="text-2xl font-bold">{artist.label.name}</p>
+								<p className={`text-2xl font-bold ${artist.label?.id ? 'group-hover:underline' : ''}`}>{artist.label.name}</p>
 							</div>
 						)}
 					</div>

@@ -6,17 +6,18 @@ import { Socials } from "@/components/form/registration/Artist/Socials";
 import { AccountData } from "@/components/form/registration/Artist/AccountData";
 import { Genre } from "@/data/genres/genreTypes";
 import { SocialInfo } from "@/data/other/socialTypes";
-import { LabelDetail, LabelIndex } from "@/data/labels/labelTypes";
+import { LabelDetail } from "@/data/labels/labelTypes";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
-import { registerArtist } from "@/data/api/registerArtist";
+import { registerArtist } from "@/data/api/artist/registerArtist";
 import { AuthContext } from "@/auth/AuthProvider";
 import { doSignOut } from "@/auth/auth";
 import { validateAccountData, validateBannerAndGenres, validateChooseLabel, validateGeneralInfo, validateSocials } from "@/components/form/validations";
 import toast from "react-hot-toast";
-import { getLabels } from "@/data/api/getLabels";
+import { getLabels } from "@/data/api/label/getLabels";
 import { BannerAndGenres } from "@/components/form/registration/Artist/BannerAndGenres";
+import { deleteCreatedUser } from "@/data/api/other/deleteCreatedUser";
 
 interface ArtistRegistrationData {
 	artistname: string;
@@ -31,7 +32,7 @@ interface ArtistRegistrationData {
 	genreList: Genre[];
 	artistSocials: SocialInfo[];
 	labelType: ChooseLabelViewType;
-	label: LabelIndex | null;
+	label: any;
 }
 
 function ArtistRegistration() {
@@ -106,6 +107,7 @@ function ArtistRegistration() {
 				if (result?.message) {
 					toast.error(result.message);
 					setErrors({ all: result.message });
+					await deleteCreatedUser();
 					return;
 				}
 			} catch (error: any) {
@@ -114,7 +116,7 @@ function ArtistRegistration() {
 				setErrors({ all: "Failed to register artist" });
 				return;
 			}
-			toast.success("Account created successfully");
+			toast.success("Artist created successfully");
 			navigate("/");
 		} else {
 			setErrors(errors!);

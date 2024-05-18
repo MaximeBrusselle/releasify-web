@@ -38,6 +38,7 @@ export function ReleaseGeneral({ name, releaseDate, description, updateFields, e
 				<div className="flex flex-col gap-2 w-full">
 					<div className="flex flex-row justify-start items-center m-0 p-0">
 						<Label htmlFor="description" className="font-bold text-lg">Description</Label>
+						<p className=" font-extralight ml-1 text-sm">(max 300 characters)</p>
 					</div>
 					<Input
 						type="text"
@@ -47,6 +48,7 @@ export function ReleaseGeneral({ name, releaseDate, description, updateFields, e
 						value={description}
 						onChange={(e) => updateFields({ description: e.target.value })}
 					/>
+					{errors.description && <p className="text-red-500">{errors.description}</p>}
 				</div>
 				<div className="flex flex-col gap-2 w-full">
 					<div className="flex flex-row justify-start items-center m-0 p-0">

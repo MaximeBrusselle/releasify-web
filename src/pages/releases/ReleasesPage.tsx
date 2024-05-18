@@ -1,6 +1,6 @@
 "use client";
 import ReleaseCard from "@/components/releases/ReleaseCard";
-import { getReleases } from "@/data/api/getReleases";
+import { getReleases } from "@/data/api/release/getReleases";
 import { ReleaseIndex } from "@/data/releases/releaseTypes";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -33,12 +33,14 @@ const ReleasesPage: React.FC = () => {
 			}
 		}
 	}, []);
+	if (error) {
+		return <p>Error fetching releases</p>;
+	}
 	const announcedReleases = releases.filter((release) => new Date(release.releaseDate) > new Date()).sort((a, b) => new Date(a.releaseDate).getTime() - new Date(b.releaseDate).getTime());
-  	const previousReleases = releases.filter((release) => new Date(release.releaseDate) <= new Date()).sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
+	const previousReleases = releases.filter((release) => new Date(release.releaseDate) <= new Date()).sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
 
 	return (
 		<div className="flex flex-col items-center justify-start gap-[28px] font-[Fira Sans] w-full">
-
 			<div className="flex flex-col justify-start sm:items-start items-center xl:w-[75vw] lg:w-[80vw] md:w-[85vw] w-[90vw]">
 				<h2 className="text-[48px] font-extrabold text-center">Announced Releases</h2>
 				{announcedReleases.length === 0 && <p className="text-[24px] text-center">No announced releases</p>}

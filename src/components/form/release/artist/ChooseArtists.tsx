@@ -4,11 +4,11 @@ import { useContext, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ValidationFieldErrorMap } from "@/components/form/useMultiStepForm";
-import { ArtistDetail, ArtistIndex } from "@/data/artists/artistTypes";
+import { ArtistDetail } from "@/data/artists/artistTypes";
 import ArtistSelectCard from "@/components/artists/ArtistSelectCard";
 import CreateArtist from "@/components/artists/CreateArtist";
 import { AuthContext } from "@/auth/AuthProvider";
-import { UserData } from "@/data/api/getLoginUserReleases";
+import { UserData } from "@/data/api/release/getLoginUserReleases";
 import { CreatedArtist } from "../../registration/Label/ChooseArtists";
 
 type ChooseArtistsView = "noArtists" | "existingArtists" | "newArtists";
@@ -72,7 +72,7 @@ export function ChooseArtists({ releaseArtists, newArtists, updateFields, errors
 		setCreatedArtists((prev) => {
 			return [...prev, { artistName: "", profilePicture: "https://i.ibb.co/nPh6PCt/default-pfp.jpg" }];
 		});
-		updateFields({ newArtists: [...createdArtists, { artistName: "", profilePicture: "https://i.ibb.co/nPh6PCt/default-pfp.jpg"}] });
+		updateFields({ newArtists: [...createdArtists, { artistName: "", profilePicture: "https://i.ibb.co/nPh6PCt/default-pfp.jpg" }] });
 	}
 
 	const viewTypes: ChooseArtistsViewType[] = [

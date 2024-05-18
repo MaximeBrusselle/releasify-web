@@ -60,6 +60,7 @@ export function GeneralInfo({ profilePicture, description, bookingEmail, updateF
 						<Label htmlFor="description" className="font-bold text-lg">
 							Description
 						</Label>
+						<p className=" font-extralight ml-1 text-sm">(max 100 characters)</p>
 					</div>
 					<Input
 						type="text"

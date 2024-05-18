@@ -7,7 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { createContext, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { doSignOut } from "@/auth/auth";
 import { AuthContext } from "@/auth/AuthProvider";
 
@@ -31,38 +31,32 @@ type BreadCrumbEntry = {
 	href: string;
 };
 
-const UserContext = createContext({
-	userType: "user",
-});
-export const useUser = () => useContext(UserContext);
-
 export function DashboardContainer(props: DashboardProps) {
 	const { children } = props;
 	const location = useLocation();
 	const { isLoggedIn, currentUser } = useContext(AuthContext);
 	const [pfpUrl, setPfpUrl] = useState<string>("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
-	const [userType, setUserType] = useState<string>("user");
+	// const [userType, setUserType] = useState<string>("user");
 	useEffect(() => {
 		if (isLoggedIn) {
 			if (currentUser.photoURL === null) {
-				//NOTE: This is a fix for older profiles that don't have a photoURL
-				if(localStorage.getItem("pfp") !== null){
+				if (localStorage.getItem("pfp") !== null) {
 					setPfpUrl(localStorage.getItem("pfp")!);
 					localStorage.removeItem("pfp");
 				} else {
-					const userData: any = JSON.parse(localStorage.getItem("userData")!);
-					setPfpUrl(userData!.profilePicture);
+					setPfpUrl("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
 				}
 			} else {
 				setPfpUrl(currentUser.photoURL);
 			}
-			if(localStorage.getItem("userType") !== null){
-				setUserType(localStorage.getItem("userType")!);
+			if (localStorage.getItem("userType") !== null) {
+				// setUserType(localStorage.getItem("userType")!);
 				localStorage.removeItem("userType");
-			} else {
-				const userData: any = JSON.parse(localStorage.getItem("userData")!);
-				setUserType(userData!.type);
 			}
+			// } else {
+			// 	// const userData: any = JSON.parse(localStorage.getItem("userData")!);
+			// 	// setUserType(userData!.type);
+			// }
 		} else {
 			setPfpUrl("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
 		}
@@ -246,7 +240,7 @@ export function DashboardContainer(props: DashboardProps) {
 					</DropdownMenu>
 				</header>
 				{isLoggedIn ? (
-					<UserContext.Provider value={{userType: userType}}>{children}</UserContext.Provider>
+					children
 				) : (
 					<main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
 						<div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">

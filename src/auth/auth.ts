@@ -1,5 +1,5 @@
 import { auth } from "@/auth/firebase";
-import { getUserData } from "@/data/api/getUserData";
+import { getUserData } from "@/data/api/other/getUserData";
 import { FirebaseError } from "firebase/app";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, UserCredential, updateProfile } from "firebase/auth";
 
@@ -44,6 +44,7 @@ export const doSignInWithEmailAndPassword = async (email: string, password: stri
 export const doCreateUserWithEmailAndPassword = async (email: string, password: string, displayName: string, profilePicture: string): Promise<UserCredential | FireBaseError> => {
 	try {
 		const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+		localStorage.setItem("userId", userCredential.user.uid);
         const user = userCredential.user;
         if (user) {
             await updateProfile(user, {
@@ -55,7 +56,7 @@ export const doCreateUserWithEmailAndPassword = async (email: string, password: 
 	} catch (error: any) {
 		let err: FirebaseError = error;
 		switch (error.code) {
-			case "auth/email-already-exists":
+			case "auth/email-already-in-use":
 				err.message = "Email already in use";
 				break;
 			case "auth/invalid-email":

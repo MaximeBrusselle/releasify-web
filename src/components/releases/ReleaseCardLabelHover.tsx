@@ -1,10 +1,10 @@
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { LabelIndex } from "@/data/labels/labelTypes";
+import { LabelDetail } from "@/data/labels/labelTypes";
 import { useNavigate } from "react-router-dom";
 import { ignoreClick } from "@/lib/utils";
 
 interface ReleaseCardLabelHoverProps {
-	label: LabelIndex;
+	label: LabelDetail;
 }
 
 const ReleaseCardLabelHover: React.FC<ReleaseCardLabelHoverProps> = (props: ReleaseCardLabelHoverProps) => {

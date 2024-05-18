@@ -4,15 +4,13 @@ import LabelDetailInfo from "@/pages/labels/labelDetails/LabelDetailInfo";
 import ReleaseCard from "@/components/releases/ReleaseCard";
 import { useEffect, useRef, useState } from "react";
 import ArtistCard from "@/components/artists/ArtistCard";
-import { getLabelById } from "@/data/api/getLabelById";
+import { getLabelById } from "@/data/api/label/getLabelById";
 import toast from "react-hot-toast";
 
 const LabelDetailPage: React.FC = () => {
 	const initialized = useRef(false);
 	const { labelId } = useParams<{ labelId: string }>();
 	const [label, setLabel] = useState<LabelDetail>();
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(false);
 
 	// Check if artistId exists before accessing details
 	useEffect(() => {
@@ -21,7 +19,6 @@ const LabelDetailPage: React.FC = () => {
 			async function fetchData() {
 				const fetchedLabel = await getLabelById(labelId!);
 				setLabel(fetchedLabel);
-				setLoading(false);
 			}
 			if (labelId) {
 				toast.promise(fetchData(), {

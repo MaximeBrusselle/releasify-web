@@ -1,5 +1,5 @@
 import { FireBaseError, doCreateUserWithEmailAndPassword } from "@/auth/auth";
-import imgbbUpload from "@/data/api/imgbbUpload";
+import imgbbUpload from "@/data/api/other/imgbbUpload";
 import { db } from "@/auth/firebase";
 import { setDoc, doc } from "firebase/firestore";
 import { UserCredential } from "firebase/auth";
@@ -28,7 +28,7 @@ export const registerUser = async (data: UserRegistrationData): Promise<any> => 
 			message: result.message,
 		};
 	}
-	
+
 	try {
 		const userData = {
 			type: "user",
@@ -38,8 +38,9 @@ export const registerUser = async (data: UserRegistrationData): Promise<any> => 
 		};
 		await setDoc(doc(db, "userData", result.user.uid), userData);
 		localStorage.setItem("userData", JSON.stringify(userData));
+		localStorage.removeItem("userId");
 	} catch (error) {
-		return{
+		return {
 			message: `${error}`,
 		};
 	}

@@ -28,6 +28,7 @@ import { LoginPage } from "@/pages/account/login/LoginPage";
 import { AuthProvider } from "@/auth/AuthProvider";
 import { Toaster } from "react-hot-toast";
 import { ArtistAddRelease } from "@/pages/dashboard/artist/forms/ArtistAddRelease";
+import { ReleaseDetails } from "@/pages/releases/ReleaseDetails";
 // Import other pages
 
 const Layout: React.FC = () => {
@@ -55,7 +56,10 @@ const App: React.FC = () => {
 					<Route path="/" element={<Layout />}>
 						{/* Index route for the default path within the layout */}
 						<Route index element={<HomePage />} />
-						<Route path="releases" element={<ReleasesPage />} />
+						<Route path="releases">
+							<Route index element={<ReleasesPage />} />
+							<Route path=":releaseId" element={<ReleaseDetails />} />
+						</Route>
 						<Route path="artists">
 							<Route index element={<ArtistsPage />} />
 							<Route path=":artistId" element={<ArtistDetailPage />} />

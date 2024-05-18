@@ -3,7 +3,7 @@ import { ArtistDetail } from "@/data/artists/artistTypes";
 import ReleaseCard from "@/components/releases/ReleaseCard";
 import { useEffect, useRef, useState } from "react";
 import ArtistDetailInfo from "@/pages/artists/artistDetail/ArtistDetailInfo";
-import { getArtistById } from "@/data/api/getArtistById";
+import { getArtistById } from "@/data/api/artist/getArtistById";
 import toast from "react-hot-toast";
 
 const ArtistDetailPage: React.FC = () => {

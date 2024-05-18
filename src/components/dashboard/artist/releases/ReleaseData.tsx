@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { ReleaseIndex } from "@/data/releases/releaseTypes";
 import { formattedDateOptions } from "@/lib/formattedDateOptions";
 import { useState } from "react";
+import { LabelDetail } from "@/data/labels/labelTypes";
+import { ArtistDetail } from "@/data/artists/artistTypes";
 
 interface ReleaseDataProps {
 	releases: ReleaseIndex[];
@@ -40,20 +42,20 @@ export const ReleaseData = (props: ReleaseDataProps) => {
 			sortReleasesByLabel();
 		}
 		setSortType(type);
-	}
+	};
 
 	const sortReleasesByDate = () => {
 		all.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
-	}
+	};
 
 	const sortReleasesByName = () => {
 		all.sort((a, b) => a.name.localeCompare(b.name));
-	}
+	};
 
 	const sortReleasesByLabel = () => {
 		all.sort((a, b) => {
 			if (a.label && b.label) {
-				const result = a.label.name.localeCompare(b.label.name);
+				const result = (a.label as LabelDetail).name.localeCompare((b.label as LabelDetail).name);
 				if (result === 0) {
 					return a.name.localeCompare(b.name);
 				}
@@ -61,7 +63,7 @@ export const ReleaseData = (props: ReleaseDataProps) => {
 			}
 			return 0;
 		});
-	}
+	};
 
 	return (
 		<Tabs defaultValue="all">
@@ -82,21 +84,41 @@ export const ReleaseData = (props: ReleaseDataProps) => {
 						<DropdownMenuContent align="end">
 							<DropdownMenuLabel>Sort by</DropdownMenuLabel>
 							<DropdownMenuSeparator />
-							<DropdownMenuCheckboxItem checked={sortType === "date"} onClick={(_) => changeSortType("date")}>Releasedate</DropdownMenuCheckboxItem>
-							<DropdownMenuCheckboxItem checked={sortType === "name"} onClick={(_) => changeSortType("name")}>Name</DropdownMenuCheckboxItem>
-							<DropdownMenuCheckboxItem checked={sortType === "labelname"} onClick={(_) => changeSortType("labelname")}>Label Name</DropdownMenuCheckboxItem>
+							<DropdownMenuCheckboxItem checked={sortType === "date"} onClick={(_) => changeSortType("date")}>
+								Releasedate
+							</DropdownMenuCheckboxItem>
+							<DropdownMenuCheckboxItem checked={sortType === "name"} onClick={(_) => changeSortType("name")}>
+								Name
+							</DropdownMenuCheckboxItem>
+							<DropdownMenuCheckboxItem checked={sortType === "labelname"} onClick={(_) => changeSortType("labelname")}>
+								Label Name
+							</DropdownMenuCheckboxItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
 				</div>
 			</div>
 			<TabsContent value="all">
-				<TabCard releases={all} selectedRow={selectedRow} updateSelectedRow={updateSelectedRow} title={"All"} description={"All releases from you."} noData={"No releases found."}/>
+				<TabCard releases={all} selectedRow={selectedRow} updateSelectedRow={updateSelectedRow} title={"All"} description={"All releases from you."} noData={"No releases found."} />
 			</TabsContent>
 			<TabsContent value="announced">
-				<TabCard releases={all.filter((release) => new Date(release.releaseDate) > new Date())} selectedRow={selectedRow} updateSelectedRow={updateSelectedRow} title={"Announced"} description={"All announced releases from you."} noData={"No announced releases found."}/>
+				<TabCard
+					releases={all.filter((release) => new Date(release.releaseDate) > new Date())}
+					selectedRow={selectedRow}
+					updateSelectedRow={updateSelectedRow}
+					title={"Announced"}
+					description={"All announced releases from you."}
+					noData={"No announced releases found."}
+				/>
 			</TabsContent>
 			<TabsContent value="released">
-				<TabCard releases={all.filter((release) => new Date(release.releaseDate) <= new Date())} selectedRow={selectedRow} updateSelectedRow={updateSelectedRow} title={"Released"} description={"All previous releases from you."} noData={"No previous releases found."}/>
+				<TabCard
+					releases={all.filter((release) => new Date(release.releaseDate) <= new Date())}
+					selectedRow={selectedRow}
+					updateSelectedRow={updateSelectedRow}
+					title={"Released"}
+					description={"All previous releases from you."}
+					noData={"No previous releases found."}
+				/>
 			</TabsContent>
 		</Tabs>
 	);
@@ -148,11 +170,14 @@ const TabCard = (props: TabCardProps) => {
 									</TableCell>
 									<TableCell className="text-right sm:text-left sm:table-cell">{release.name}</TableCell>
 									<TableCell className="hidden sm:table-cell">
-										{release.artists.map((artist) => (
-											<p key={`${artist.artistName}artists`} className="text-xs">
-												{artist.artistName}
-											</p>
-										))}
+										{release.artists.map((artist) => {
+											artist = artist as ArtistDetail;
+											return (
+												<p key={`${artist.artistName}artists`} className="text-xs">
+													{artist.artistName}
+												</p>
+											);
+										})}
 									</TableCell>
 									<TableCell className="hidden md:table-cell">{new Date(release.releaseDate).toLocaleDateString(locale, formattedDateOptions)}</TableCell>
 									<TableCell className="hidden lg:table-cell">
@@ -162,7 +187,7 @@ const TabCard = (props: TabCardProps) => {
 											</Badge>
 										))}
 									</TableCell>
-									<TableCell className="hidden md:table-cell">{release.label ? release.label.name : "No Label"}</TableCell>
+									<TableCell className="hidden md:table-cell">{release.label ? (release.label as LabelDetail).name : "No Label"}</TableCell>
 								</TableRow>
 							))}
 					</TableBody>

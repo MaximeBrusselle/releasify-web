@@ -18,7 +18,7 @@ const details: ArtistDetailMap = {
 		socials: socialsSynthsation,
 		profilePicture: "synthsation_pfp.png",
 		genres: [genres[4], genres[6]],
-		bookingEmail: "synthsationzmusic@gmail.com",
+		bookingEmail: "synthsationmusic@gmail.com",
 	},
 	"2": {
 		id: "2",

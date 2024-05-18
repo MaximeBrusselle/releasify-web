@@ -5,9 +5,10 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useLocation } from "react-router-dom";
 import { doSignOut } from "@/auth/auth";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { AuthContext } from "@/auth/AuthProvider";
 import { useContext } from "react";
+import toast from "react-hot-toast";
 
 // Define a type for the navigation items
 interface NavigationItem {
@@ -21,20 +22,18 @@ function classNames(...classes: (string | boolean)[]): string {
 }
 
 const NavBar: React.FC = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const { isLoggedIn, currentUser } = useContext(AuthContext);
 	const [pfpUrl, setPfpUrl] = useState<string>("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
 
 	useEffect(() => {
 		if (isLoggedIn) {
-			if(currentUser.photoURL === null){
-				//NOTE: This is a fix for older profiles that don't have a photoURL
-				if(localStorage.getItem("pfp") !== null){
+			if (currentUser.photoURL === null) {
+				if (localStorage.getItem("pfp") !== null) {
 					setPfpUrl(localStorage.getItem("pfp")!);
 					localStorage.removeItem("pfp");
 				} else {
-					const userData: any = JSON.parse(localStorage.getItem("userData")!);
-					setPfpUrl(userData!.profilePicture);
+					setPfpUrl("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
 				}
 			} else {
 				setPfpUrl(currentUser.photoURL);
@@ -47,8 +46,12 @@ const NavBar: React.FC = () => {
 	const location = useLocation();
 
 	const handleSignOut = async () => {
-		await doSignOut();
-		navigate("/");
+		try {
+			await doSignOut();
+		} catch (error) {
+			toast.error("Error signing out");
+		}
+		toast.success("Signed out");
 	};
 
 	const navigation: NavigationItem[] = [

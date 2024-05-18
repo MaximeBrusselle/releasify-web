@@ -1,26 +1,26 @@
 import { auth, db } from "@/auth/firebase";
 import { getDoc, doc } from "firebase/firestore";
-import { ReleaseIndex } from "../releases/releaseTypes";
-import { getArtistById } from "./getArtistById";
+import { ReleaseIndex } from "../../releases/releaseTypes";
+import { getArtistById } from "../artist/getArtistById";
 import { getReleaseById } from "./getReleaseById";
-import { getLabelById } from "./getLabelById";
+import { getLabelById } from "../label/getLabelById";
 
 type UserData = {
-    artistObject: {
-        _key: {
-            path: {
-                segments: string[];
-            };
-        };
-    };
+	artistObject: {
+		_key: {
+			path: {
+				segments: string[];
+			};
+		};
+	};
 	labelObject: {
-        _key: {
-            path: {
-                segments: string[];
-            };
-        };
-    };
-}
+		_key: {
+			path: {
+				segments: string[];
+			};
+		};
+	};
+};
 
 export type { UserData };
 
@@ -29,13 +29,13 @@ export const getLoginUserReleases = async (userType: string): Promise<any> => {
 	if (!user) {
 		throw new Error("User not logged in");
 	}
-	if(userType === "user"){
+	if (userType === "user") {
 		throw new Error("You can't have releases");
 	}
 	const userData = localStorage.getItem("userData");
 	const parsedUserData: UserData = userData ? JSON.parse(userData) : null;
 	let segments;
-	if(userType === "artist"){
+	if (userType === "artist") {
 		segments = parsedUserData?.artistObject._key.path.segments;
 	} else {
 		segments = parsedUserData?.labelObject._key.path.segments;
@@ -63,16 +63,15 @@ export const getLoginUserReleases = async (userType: string): Promise<any> => {
 
 export async function getArtistsFromReference(release: ReleaseIndex) {
 	const artistObjects = release.artists.map(async (ref: any) => {
-		if(!ref.id){
+		const releaseArtistId = ref.id;
+		if(!releaseArtistId) {
 			return ref;
 		}
-		const releaseArtistId = ref.id;
 		try {
 			return await getArtistById(releaseArtistId);
 		} catch (error: any) {
 			throw new Error(error);
 		}
-		
 	});
 	return Promise.all(artistObjects);
 }
@@ -90,7 +89,13 @@ export async function getReleasesFromReference(releaseRefs: any): Promise<Releas
 }
 
 export async function getLabelFromReference(labelRef: any) {
+	if (!labelRef) {
+		return null;
+	}
 	const labelId = labelRef.id;
+	if(!labelId) {
+		return labelRef;
+	}
 	try {
 		return await getLabelById(labelId);
 	} catch (error: any) {

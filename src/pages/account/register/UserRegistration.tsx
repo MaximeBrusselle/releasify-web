@@ -5,11 +5,12 @@ import { AccountData } from "@/components/form/registration/User/AccountData";
 import { useContext, useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "@/data/api/registerUser";
+import { registerUser } from "@/data/api/user/registerUser";
 import { doSignOut } from "@/auth/auth";
 import { AuthContext } from "@/auth/AuthProvider";
 import { validateAccountData, validatePfp } from "@/components/form/validations";
 import toast from "react-hot-toast";
+import { deleteCreatedUser } from "@/data/api/other/deleteCreatedUser";
 
 interface UserRegistrationData {
 	username: string;
@@ -71,6 +72,7 @@ function UserRegistration() {
 				console.error(error.message);
 				toast.error("Failed to create user");
 				setErrors({ all: error.message });
+				await deleteCreatedUser();
 				return;
 			}
 			toast.success("User created successfully");

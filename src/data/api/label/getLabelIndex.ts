@@ -1,6 +1,6 @@
 import { db } from "@/auth/firebase";
 import { getDoc, doc } from "firebase/firestore";
-import { LabelDetail } from "../labels/labelTypes";
+import { LabelDetail } from "../../labels/labelTypes";
 
 export const getLabelIndex = async (labelId: string): Promise<any> => {
 	try {

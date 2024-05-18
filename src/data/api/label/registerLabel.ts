@@ -1,5 +1,5 @@
 import { FireBaseError, doCreateUserWithEmailAndPassword } from "@/auth/auth";
-import imgbbUpload from "@/data/api/imgbbUpload";
+import imgbbUpload from "@/data/api/other/imgbbUpload";
 import { db } from "@/auth/firebase";
 import { collection, addDoc, setDoc, doc, updateDoc } from "firebase/firestore";
 import { UserCredential } from "firebase/auth";
@@ -28,24 +28,24 @@ export const registerLabel = async (data: LabelRegistrationData): Promise<any> =
 				message: result.message,
 			};
 		}
-		
+
 		let bannerPicture;
 		if (data.bannerPicture) {
-		    try {
-		        bannerPicture = await imgbbUpload(data.bannerPicture!);
-		    } catch (error) {
-		        console.error(`Failed to upload banner picture: ${error}`);
-		        bannerPicture = "https://i.ibb.co/MM4463X/default-banner.jpg";
-		    }
+			try {
+				bannerPicture = await imgbbUpload(data.bannerPicture!);
+			} catch (error) {
+				console.error(`Failed to upload banner picture: ${error}`);
+				bannerPicture = "https://i.ibb.co/MM4463X/default-banner.jpg";
+			}
 		} else {
-		    bannerPicture = "https://i.ibb.co/MM4463X/default-banner.jpg";
+			bannerPicture = "https://i.ibb.co/MM4463X/default-banner.jpg";
 		}
 		let artistRefs = [];
 		for (let artist of data.artists) {
 			artistRefs.push(doc(db, "artists", artist.id!));
 		}
 		let createdArtists = [];
-		for(let artist of data.newArtists) {
+		for (let artist of data.newArtists) {
 			let profilePicture;
 			if (artist.profilePicture && typeof artist.profilePicture !== "string") {
 				try {
@@ -66,7 +66,6 @@ export const registerLabel = async (data: LabelRegistrationData): Promise<any> =
 
 		const allArtists = [...artistRefs, ...createdArtists];
 
-
 		const labelObject = {
 			name: data.labelname,
 			profilePicture: pfp,
@@ -76,6 +75,7 @@ export const registerLabel = async (data: LabelRegistrationData): Promise<any> =
 			releases: [],
 			genres: data.genreList,
 			socials: data.labelSocials,
+			contactEmail: data.contactEmail,
 		};
 		const docRef = await addDoc(collection(db, "labels"), labelObject);
 		for (let artist of artistRefs) {
@@ -92,6 +92,7 @@ export const registerLabel = async (data: LabelRegistrationData): Promise<any> =
 		};
 		await setDoc(doc(db, "userData", result.user.uid), userData);
 		localStorage.setItem("userData", JSON.stringify(userData));
+		localStorage.removeItem("userId");
 	} catch (error: any) {
 		toast.error("An unknown error occurred");
 		return {

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ValidationFieldErrorMap } from "@/components/form/useMultiStepForm";
-import { ArtistDetail, ArtistIndex } from "@/data/artists/artistTypes";
+import { ArtistDetail } from "@/data/artists/artistTypes";
 import ArtistSelectCard from "@/components/artists/ArtistSelectCard";
 import CreateArtist from "@/components/artists/CreateArtist";
 

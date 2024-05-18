@@ -10,6 +10,8 @@ import ReleaseCardLabelHover from "@/components/releases/ReleaseCardLabelHover";
 import { useNavigate } from "react-router-dom";
 import { formattedDateOptions } from "@/lib/formattedDateOptions";
 import { handleSocialLinkClick } from "@/lib/utils";
+import { ArtistDetail } from "@/data/artists/artistTypes";
+import { LabelDetail } from "@/data/labels/labelTypes";
 
 interface ReleaseCardProps {
 	release: ReleaseIndex;
@@ -82,11 +84,12 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 						<p className={`font-bold text-${fontSize}`}>{release.name}</p>
 						{isReleased && <p className="text-md leading-4">📅 {new Date(release.releaseDate).toLocaleDateString(locale, formattedDateOptions)}</p>}
 						<div className="flex flex-row flex-wrap justify-start items-center gap-x-1">
-							{release.artists.map((artist) => (
-								<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />
-							))}
+							{release.artists.map((artist) => {
+								artist = artist as ArtistDetail;
+								return <ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />;
+							})}
 						</div>
-						{release.label && <ReleaseCardLabelHover label={release.label} />}
+						{release.label && <ReleaseCardLabelHover label={release.label as LabelDetail} />}
 					</div>
 				</div>
 				<div className="flex flex-col justify-center items-center gap-2 w-full sm:hidden">
@@ -96,11 +99,12 @@ const ReleaseCard: React.FC<ReleaseCardProps> = (props: ReleaseCardProps) => {
 						<div className="flex flex-col items-start justify-center h-full gap-y-2">
 							{isReleased && <p className="text-md leading-4">📅 {new Date(release.releaseDate).toLocaleDateString(locale, formattedDateOptions)}</p>}
 							<div className="flex flex-row flex-wrap justify-start items-center gap-x-1">
-								{release.artists.map((artist) => (
-									<ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />
-								))}
+								{release.artists.map((artist) => {
+									artist = artist as ArtistDetail;
+									return <ReleaseCardArtistHover key={artist.id || `${artist.artistName}notfound`} artist={artist} />;
+								})}
 							</div>
-							{release.label && <ReleaseCardLabelHover label={release.label} />}
+							{release.label && <ReleaseCardLabelHover label={release.label as LabelDetail} />}
 						</div>
 					</div>
 				</div>

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
-import { Copy, MoreVertical, Pencil } from "lucide-react";
+import { Copy, MoreVertical, Pencil, Trash2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
 import { ReleaseIndex } from "@/data/releases/releaseTypes";
@@ -9,14 +9,41 @@ import { formattedDateOptions } from "@/lib/formattedDateOptions";
 import { getImageUrl } from "@/lib/utils";
 import ReleaseDetailArtistHover from "./ReleaseDetailArtistHover";
 import ReleaseDetailLabelHover from "./ReleaseDetailLabelHover";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { removeRelease } from "@/data/api/release/removeRelease";
+import toast from "react-hot-toast";
+import { ArtistDetail } from "@/data/artists/artistTypes";
+import { LabelDetail } from "@/data/labels/labelTypes";
 
 type DetailInfoProps = {
 	selected: ReleaseIndex | null;
+	handleRowDeleted: () => void;
 };
 
 export const DetailInfo = (props: DetailInfoProps) => {
-	const { selected } = props;
+	const { selected, handleRowDeleted } = props;
 	const locale = window.navigator.language;
+
+	async function handleDelete() {
+		try {
+			await removeRelease(selected!.id);
+			toast.success("Release deleted");
+			handleRowDeleted();
+		} catch (error: any) {
+			toast.error(error.message);
+		}
+	}
+
 	return (
 		<>
 			{selected ? (
@@ -42,6 +69,25 @@ export const DetailInfo = (props: DetailInfoProps) => {
 								<Pencil className="h-3.5 w-3.5" />
 								<span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Edit</span>
 							</Button>
+							<AlertDialog>
+								<AlertDialogTrigger asChild>
+									<Button size="sm" className="h-8 gap-1 bg-red-500 hover:bg-red-700">
+										<Trash2 className="h-3.5 w-3.5 " />
+									</Button>
+								</AlertDialogTrigger>
+								<AlertDialogContent>
+									<AlertDialogHeader>
+										<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+										<AlertDialogDescription>This action cannot be undone. This will permanently delete this release and remove it from the server.</AlertDialogDescription>
+									</AlertDialogHeader>
+									<AlertDialogFooter>
+										<AlertDialogCancel>Cancel</AlertDialogCancel>
+										<AlertDialogAction className="bg-red-500 hover:bg-red-700" onClick={handleDelete}>
+											Delete
+										</AlertDialogAction>
+									</AlertDialogFooter>
+								</AlertDialogContent>
+							</AlertDialog>
 							<DropdownMenu>
 								<DropdownMenuTrigger asChild>
 									<Button size="icon" variant="outline" className="h-8 w-8">
@@ -55,7 +101,6 @@ export const DetailInfo = (props: DetailInfoProps) => {
 									</Link>
 									<DropdownMenuItem>Export to csv</DropdownMenuItem>
 									<DropdownMenuSeparator />
-									<DropdownMenuItem className="text-red-500">Delete</DropdownMenuItem>
 								</DropdownMenuContent>
 							</DropdownMenu>
 						</div>
@@ -78,19 +123,30 @@ export const DetailInfo = (props: DetailInfoProps) => {
 								</li>
 							</ul>
 							<Separator className="my-2" />
+							{selected.description && (
+								<>
+									<div className="flex flex-col items-start justify-center gap-4">
+										<div className="font-bold">Description</div>
+										<span className="text-muted-foreground">{selected.description}</span>
+									</div>
+									<Separator className="my-2" />
+								</>
+							)}
 							<div className="flex flex-col items-start justify-center gap-4">
 								<div className="font-bold">Artists</div>
 								<div className="flex flex-row gap-4 flex-wrap">
-									{selected.artists.map((artist) => (
-										<ReleaseDetailArtistHover artist={artist} key={artist.id} />
-									))}
+									{selected.artists.map((artist) => {
+										if (!artist) return null;
+										artist = artist as ArtistDetail;
+										return <ReleaseDetailArtistHover artist={artist} key={`${artist.artistName}${artist.id}`} />;
+									})}
 								</div>
 							</div>
 						</div>
 						<Separator className="my-4" />
 						<div className="flex flex-col items-start justify-center gap-4">
 							<div className="font-bold">Label</div>
-							<div className="flex flex-row gap-4 flex-wrap">{selected.label ? <ReleaseDetailLabelHover label={selected.label} /> : <></>}</div>
+							<div className="flex flex-row gap-4 flex-wrap">{selected.label ? <ReleaseDetailLabelHover label={selected.label as LabelDetail} /> : <p>Independantly Released</p>}</div>
 						</div>
 						<Separator className="my-4" />
 						<div className="grid grid-cols-2 gap-4">

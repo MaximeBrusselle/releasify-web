@@ -60,6 +60,7 @@ export function GeneralInfo({ profilePicture, description, contactEmail, updateF
 						<Label htmlFor="description" className="font-bold text-lg">
 							Description
 						</Label>
+						<p className=" font-extralight ml-1 text-sm">(max 100 characters)</p>
 					</div>
 					<Input
 						type="text"
@@ -73,7 +74,7 @@ export function GeneralInfo({ profilePicture, description, contactEmail, updateF
 				<div className="flex flex-col gap-2 w-full">
 					<div className="flex flex-row justify-start items-center m-0 p-0">
 						<Label htmlFor="contactEmail" className="font-bold text-lg">
-							Bookings Email
+							Contact Email
 						</Label>
 					</div>
 					<Input

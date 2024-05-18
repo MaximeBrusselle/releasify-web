@@ -1,6 +1,6 @@
 import { FireBaseError, doCreateUserWithEmailAndPassword } from "@/auth/auth";
 import { ArtistRegistrationData } from "@/pages/account/register/ArtistRegistration";
-import imgbbUpload from "@/data/api/imgbbUpload";
+import imgbbUpload from "@/data/api/other/imgbbUpload";
 import { db } from "@/auth/firebase";
 import { collection, addDoc, setDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { UserCredential } from "firebase/auth";
@@ -28,7 +28,7 @@ export const registerArtist = async (data: ArtistRegistrationData): Promise<any>
 				message: result.message,
 			};
 		}
-		
+
 		let banner;
 		if (data.bannerPicture) {
 			try {
@@ -43,13 +43,27 @@ export const registerArtist = async (data: ArtistRegistrationData): Promise<any>
 
 		let labelRef;
 		if (data.labelType.viewType === "label") {
-			 labelRef = doc(db, "labels", data.label!.id!);
+			labelRef = doc(db, "labels", data.label!.id!);
 		}
 		let createdLabel;
 		if (data.labelType.viewType === "labelNotOnPlatform") {
-			createdLabel = data.label;
+			let labelPfp;
+			if (data.label!.profilePicture) {
+				try {
+					labelPfp = await imgbbUpload(data.label!.profilePicture!);
+				} catch (error) {
+					console.error(`Failed to upload label picture: ${error}`);
+					labelPfp = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
+				}
+			} else {
+				labelPfp = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
+			}
+			const labelObject = {
+				name: data.label!.name,
+				profilePicture: labelPfp,
+			};
+			createdLabel = labelObject;
 		}
-
 
 		const artistObject: any = {
 			artistName: data.artistname,
@@ -62,14 +76,14 @@ export const registerArtist = async (data: ArtistRegistrationData): Promise<any>
 			socials: data.artistSocials,
 			releases: [],
 		};
-		if(labelRef){
+		if (labelRef) {
 			artistObject.label = labelRef;
-		} else if (createdLabel){
+		} else if (createdLabel) {
 			artistObject.label = createdLabel;
 		}
 		const docRef = await addDoc(collection(db, "artists"), artistObject);
-		if(data.labelType.viewType === "label"){
-			await updateDoc(labelRef!, {artists: arrayUnion(docRef)});
+		if (data.labelType.viewType === "label") {
+			await updateDoc(labelRef!, { artists: arrayUnion(docRef) });
 		}
 		const newDocId = docRef.id;
 		await updateDoc(docRef, { id: newDocId });
@@ -82,6 +96,7 @@ export const registerArtist = async (data: ArtistRegistrationData): Promise<any>
 		};
 		await setDoc(doc(db, "userData", result.user.uid), userData);
 		localStorage.setItem("userData", JSON.stringify(userData));
+		localStorage.removeItem("userId");
 	} catch (error) {
 		toast.error("Failed to register artist");
 		return {

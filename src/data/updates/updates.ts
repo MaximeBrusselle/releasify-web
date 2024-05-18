@@ -118,8 +118,8 @@ const updates: Update[] = [
     },
     {
         version: "0.7.0",
-        date: new Date("2024-05-13"),
-        name: "Artist Dashboard",
+        date: new Date("2024-05-18"),
+        name: "Add releases",
         changes: [
             "Fixed profile picture not showing after registration/login",
             "Fixed getting releases for label in dashboard",
@@ -127,6 +127,17 @@ const updates: Update[] = [
         ],
         addedFeatures: [
             "You can now add releases from the dashboard as an artist",
+        ],
+    },
+    {
+        version: "0.7.1",
+        date: new Date("2024-05-19"),
+        name: "Remove releases",
+        changes: [
+            "Lots of bugfixes"
+        ],
+        addedFeatures: [
+            "You can now remove releases from the dashboard as an artist",
         ],
     },
 ];

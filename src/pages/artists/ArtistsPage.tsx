@@ -1,4 +1,4 @@
-import { getArtists } from "@/data/api/getArtists";
+import { getArtists } from "@/data/api/artist/getArtists";
 import { ArtistDetail } from "@/data/artists/artistTypes";
 import ArtistComponent from "@/pages/artists/ArtistComponent";
 import { useEffect, useRef, useState } from "react";
@@ -32,12 +32,14 @@ const ArtistsPage: React.FC = () => {
 			}
 		}
 	}, []);
+	if (error) {
+		return <p>Error fetching artists</p>;
+	}
 	return (
 		<div>
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-center">
-				{artists.map((artist) => (
-					<ArtistComponent key={artist.id} artist={artist} />
-				))}
+				{artists.length === 0 && <p className="text-[24px] text-center">No artists found</p>}
+				{!error && artists.length > 0 && artists.map((artist) => <ArtistComponent key={artist.id} artist={artist} />)}
 			</div>
 		</div>
 	);

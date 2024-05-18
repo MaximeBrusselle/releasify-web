@@ -1,4 +1,4 @@
-import imgbbUpload from "@/data/api/imgbbUpload";
+import imgbbUpload from "@/data/api/other/imgbbUpload";
 import { db, auth } from "@/auth/firebase";
 import { doc, getDoc, addDoc, collection, updateDoc, arrayUnion } from "firebase/firestore";
 import { AddReleaseData } from "@/pages/dashboard/artist/forms/ArtistAddRelease";

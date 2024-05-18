@@ -1,11 +1,11 @@
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { ReleaseArtist } from "@/data/releases/releaseTypes";
 import { useNavigate } from "react-router-dom";
 import { ignoreClick } from "@/lib/utils";
+import { ArtistDetail } from "@/data/artists/artistTypes";
 
 
 interface ReleaseArtistProps {
-	artist: ReleaseArtist;
+	artist: ArtistDetail;
 }
 
 const ReleaseCardArtistHover: React.FC<ReleaseArtistProps> = (props: ReleaseArtistProps) => {

@@ -1,7 +1,7 @@
 import { auth, db } from "@/auth/firebase";
 import { getDoc, doc } from "firebase/firestore";
-import { ArtistDetail } from "../artists/artistTypes";
-import { UserData } from "./getLoginUserReleases";
+import { ArtistDetail } from "../../artists/artistTypes";
+import { UserData } from "../release/getLoginUserReleases";
 
 export const getLoggedInArtist = async (): Promise<ArtistDetail[]> => {
 	try {

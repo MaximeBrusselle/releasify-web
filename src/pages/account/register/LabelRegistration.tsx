@@ -10,13 +10,14 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { ValidationFieldErrorMap, ValidationReturn } from "@/components/form/useMultiStepForm";
 import { useNavigate } from "react-router-dom";
 import { ArtistDetail } from "@/data/artists/artistTypes";
-import { registerLabel } from "@/data/api/registerLabel";
+import { registerLabel } from "@/data/api/label/registerLabel";
 import { AuthContext } from "@/auth/AuthProvider";
 import { doSignOut } from "@/auth/auth";
 import { validateAccountData, validateBannerAndGenres, validateChooseArtists, validateGeneralInfo, validateSocials } from "@/components/form/validations";
 import toast from "react-hot-toast";
-import { getArtists } from "@/data/api/getArtists";
+import { getArtists } from "@/data/api/artist/getArtists";
 import { GeneralInfo } from "@/components/form/registration/Label/GeneralInfo";
+import { deleteCreatedUser } from "@/data/api/other/deleteCreatedUser";
 
 interface LabelRegistrationData {
 	labelname: string;
@@ -104,6 +105,7 @@ function LabelRegistration() {
 				if (result?.message) {
 					toast.error(result.message);
 					setErrors({ all: result.message });
+					await deleteCreatedUser();
 					return;
 				}
 			} catch (error: any) {
@@ -112,6 +114,7 @@ function LabelRegistration() {
 				setErrors({ all: error.message });
 				return;
 			}
+			toast.success("Label created successfully");
 			navigate("/");
 		} else {
 			setErrors(errors!);

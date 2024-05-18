@@ -1,6 +1,6 @@
 "use client";
-import { getLabels } from "@/data/api/getLabels";
-import { LabelDetail, LabelIndex } from "@/data/labels/labelTypes";
+import { getLabels } from "@/data/api/label/getLabels";
+import { LabelDetail } from "@/data/labels/labelTypes";
 import LabelComponent from "@/pages/labels/LabelComponent";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -33,12 +33,14 @@ const LabelsPage: React.FC = () => {
 			}
 		}
 	}, []);
+	if (error) {
+		return <p>Error fetching labels</p>;
+	}
 	return (
 		<div>
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-center">
-				{labels.map((label) => (
-					<LabelComponent key={label.id} label={label} />
-				))}
+				{labels.length === 0 && <p className="text-[24px] text-center">No labels found</p>}
+				{!error && labels.length > 0 && labels.map((label) => <LabelComponent key={label.id} label={label} />)}
 			</div>
 		</div>
 	);

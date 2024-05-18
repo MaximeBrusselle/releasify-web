@@ -1,6 +1,6 @@
 import { ValidationFieldErrorMap, ValidationReturn, useMultiStepForm } from "@/components/form/useMultiStepForm";
 import { Progress } from "@/components/ui/progress";
-import { addRelease } from "@/data/api/addRelease";
+import { addRelease } from "@/data/api/release/addRelease";
 import { Genre } from "@/data/genres/genreTypes";
 import { LabelDetail } from "@/data/labels/labelTypes";
 import { ReleasePlatform } from "@/data/releases/releaseTypes";
@@ -15,8 +15,8 @@ import { ChooseLabelViewType } from "@/components/form/registration/Artist/Choos
 import { ChooseLabel } from "@/components/form/release/artist/ChooseLabel";
 import { Socials } from "@/components/form/release/artist/Socials";
 import toast from "react-hot-toast";
-import { getArtists } from "@/data/api/getArtists";
-import { getLabels } from "@/data/api/getLabels";
+import { getArtists } from "@/data/api/artist/getArtists";
+import { getLabels } from "@/data/api/label/getLabels";
 import { CreatedArtist } from "@/components/form/registration/Label/ChooseArtists";
 
 type AddReleaseData = {
@@ -49,7 +49,6 @@ export const ArtistAddRelease = () => {
 		fetchData();
 	}, []);
 
-
 	const INITIAL_DATA: AddReleaseData = {
 		name: "",
 		description: "",
@@ -78,8 +77,8 @@ export const ArtistAddRelease = () => {
 	const { steps, goToStep, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep } = useMultiStepForm([
 		<ReleaseGeneral {...data} updateFields={updateFields} errors={errors} />,
 		<PfpAndGenres {...data} updateFields={updateFields} errors={errors} />,
-		<ChooseArtists {...data} updateFields={updateFields} errors={errors} firebaseArtists={firebaseArtists}/>,
-		<ChooseLabel {...data} updateFields={updateFields} errors={errors} firebaseLabels={firebaseLabels}/>,
+		<ChooseArtists {...data} updateFields={updateFields} errors={errors} firebaseArtists={firebaseArtists} />,
+		<ChooseLabel {...data} updateFields={updateFields} errors={errors} firebaseLabels={firebaseLabels} />,
 		<Socials {...data} updateFields={updateFields} errors={errors} />,
 	]);
 
