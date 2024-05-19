@@ -1,6 +1,6 @@
 "use client";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowLeftToLine, Home, LineChart, PanelLeft, Search, Settings, Disc3, MailPlus, User } from "lucide-react";
+import { ArrowLeftToLine, Home, LineChart, PanelLeft, Search, Settings, Disc3, MailPlus, User, Users } from "lucide-react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -36,7 +36,7 @@ export function DashboardContainer(props: DashboardProps) {
 	const location = useLocation();
 	const { isLoggedIn, currentUser } = useContext(AuthContext);
 	const [pfpUrl, setPfpUrl] = useState<string>("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
-	// const [userType, setUserType] = useState<string>("user");
+	const [userType, setUserType] = useState<string>("user");
 	useEffect(() => {
 		if (isLoggedIn) {
 			if (currentUser.photoURL === null) {
@@ -50,13 +50,12 @@ export function DashboardContainer(props: DashboardProps) {
 				setPfpUrl(currentUser.photoURL);
 			}
 			if (localStorage.getItem("userType") !== null) {
-				// setUserType(localStorage.getItem("userType")!);
+				setUserType(localStorage.getItem("userType")!);
 				localStorage.removeItem("userType");
+			} else {
+				const userData: any = JSON.parse(localStorage.getItem("userData")!);
+				setUserType(userData!.type);
 			}
-			// } else {
-			// 	// const userData: any = JSON.parse(localStorage.getItem("userData")!);
-			// 	// setUserType(userData!.type);
-			// }
 		} else {
 			setPfpUrl("https://i.ibb.co/nPh6PCt/default-pfp.jpg");
 		}
@@ -65,11 +64,16 @@ export function DashboardContainer(props: DashboardProps) {
 	const navigationItems: NavigationItem[] = [
 		{ name: "Dashboard", href: "/profile", current: false, icon: <Home className="h-5 w-5" /> },
 		{ name: "User", href: "/profile/user", current: false, icon: <User className="h-5 w-5" /> },
-		{ name: "Releases", href: "/profile/releases", current: false, icon: <Disc3 className="h-5 w-5" /> },
-		{ name: "Requests", href: "/profile/requests", current: false, icon: <MailPlus className="h-5 w-5" /> },
-		{ name: "Analytics", href: "/profile/analytics", current: false, icon: <LineChart className="h-5 w-5" /> },
-		{ name: "Settings", href: "/profile/settings", current: false, icon: <Settings className="h-5 w-5" /> },
 	];
+	if(userType === "label"){
+		navigationItems.push({ name: "Artists", href: "/profile/artists", current: false, icon: <Users className="h-5 w-5" /> })
+	}
+	if(userType !== "user"){
+		navigationItems.push({ name: "Releases", href: "/profile/releases", current: false, icon: <Disc3 className="h-5 w-5" /> })
+		navigationItems.push({ name: "Requests", href: "/profile/requests", current: false, icon: <MailPlus className="h-5 w-5" /> })
+		navigationItems.push({ name: "Analytics", href: "/profile/analytics", current: false, icon: <LineChart className="h-5 w-5" /> })
+	}
+	navigationItems.push({ name: "Settings", href: "/profile/settings", current: false, icon: <Settings className="h-5 w-5" /> });
 
 	const breadCrumbMap: BreadCrumbMap = {
 		profile: {
@@ -99,6 +103,10 @@ export function DashboardContainer(props: DashboardProps) {
 		settings: {
 			name: "Settings",
 			href: "/profile/settings",
+		},
+		artists: {
+			name: "Artists",
+			href: "/profile/artists",
 		},
 	};
 

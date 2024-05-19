@@ -1,5 +1,5 @@
 import { Genre } from "@/data/genres/genreTypes"
-import { LabelIndex } from "@/data/labels/labelTypes"
+import { LabelDetail, LabelIndex } from "@/data/labels/labelTypes"
 import { SocialInfo } from "@/data/other/socialTypes"
 import { ReleaseIndex } from "@/data/releases/releaseTypes"
 
@@ -9,19 +9,19 @@ interface ArtistIndex {
     profilePicture: string,
     description?: string,
     genres: Genre[],
-    label?: LabelIndex
+    label?: LabelDetail
 }
 
 interface ArtistDetail {
     id: string,
     artistName: string,
     realName?: string,
-    description: string
+    description?: string
     profilePicture: string,
     bannerPicture: string,
     socials: SocialInfo[],
     genres: Genre[],
-    label?: LabelIndex,
+    label?: LabelDetail,
     releases: ReleaseIndex[]
     bookingEmail?: string
 }

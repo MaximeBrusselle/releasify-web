@@ -29,6 +29,7 @@ import { AuthProvider } from "@/auth/AuthProvider";
 import { Toaster } from "react-hot-toast";
 import { ArtistAddRelease } from "@/pages/dashboard/artist/forms/ArtistAddRelease";
 import { ReleaseDetails } from "@/pages/releases/ReleaseDetails";
+import { DashboardArtists } from "./pages/dashboard/label/DashboardArtists";
 // Import other pages
 
 const Layout: React.FC = () => {
@@ -87,6 +88,7 @@ const App: React.FC = () => {
 					<Route path="profile" element={<DashboardLayout />}>
 						<Route index element={<ArtistDashboardHome />} />
 						<Route path="user" element={<ArtistDashboardUser />} />
+						<Route path="artists" element={<DashboardArtists />} />
 						<Route path="releases">
 							<Route index element={<ArtistDashboardReleases />} />
 							<Route path="add" element={<ArtistAddRelease />} />

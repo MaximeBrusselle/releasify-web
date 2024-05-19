@@ -81,8 +81,8 @@ export const doSignOut = async (): Promise<void | FireBaseError> => {
 		localStorage.removeItem("userData");
 	} catch (error: any) {
 		return {
-			code: error.code ? error.code : "unknown",
-			message: error.message ? error.message : "An unknown error occurred",
+			code: error.code || "unknown",
+			message: error.message || "An unknown error occurred",
 		};
 	}
 };

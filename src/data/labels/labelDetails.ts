@@ -1,12 +1,12 @@
 // import { genres } from "@/data/genres/genres";
-import { LabelDetail } from "@/data/labels/labelTypes";
+// import { LabelDetail } from "@/data/labels/labelTypes";
 // import { artists } from "@/data/artists/artists";
 // import { releases } from "@/data/releases/releases";
 // import { socialsUnfoldRecords, socialsNewWave, socialsApexRecords, socialsSpoontech } from "@/data/other/socialsLabels";
 
-type LabelDetailMap = { [key: string]: LabelDetail };
+// type LabelDetailMap = { [key: string]: LabelDetail };
 
-const labelDetails: LabelDetailMap = {
+// const labelDetails: LabelDetailMap = {
 	// "1": {
 	// 	id: "1",
 	// 	name: "Unfold Records",
@@ -51,6 +51,6 @@ const labelDetails: LabelDetailMap = {
 	// 	description: "🥄 Representing our Underground Identity",
 	// 	genres: [genres[4], genres[5], genres[6]],
 	// },
-};
+// };
 
-export { labelDetails };
+// export { labelDetails };
