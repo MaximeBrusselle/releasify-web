@@ -10,25 +10,11 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { useContext, useEffect, useState } from "react";
 import { doSignOut } from "@/auth/auth";
 import { AuthContext } from "@/auth/AuthProvider";
+import { breadCrumbMap } from "./breadCrumpMap";
+import { DashboardNotLoggedIn } from "./DashboardNotLoggedIn";
 
 type DashboardProps = {
 	children: React.ReactNode;
-};
-
-type NavigationItem = {
-	name: string;
-	href: string;
-	current: boolean;
-	icon: React.ReactNode;
-};
-
-type BreadCrumbMap = {
-	[key: string]: BreadCrumbEntry;
-};
-
-type BreadCrumbEntry = {
-	name: string;
-	href: string;
 };
 
 export function DashboardContainer(props: DashboardProps) {
@@ -61,55 +47,7 @@ export function DashboardContainer(props: DashboardProps) {
 		}
 	}, [currentUser]);
 
-	const navigationItems: NavigationItem[] = [
-		{ name: "Dashboard", href: "/profile", current: false, icon: <Home className="h-5 w-5" /> },
-		{ name: "User", href: "/profile/user", current: false, icon: <User className="h-5 w-5" /> },
-	];
-	if(userType === "label"){
-		navigationItems.push({ name: "Artists", href: "/profile/artists", current: false, icon: <Users className="h-5 w-5" /> })
-	}
-	if(userType !== "user"){
-		navigationItems.push({ name: "Releases", href: "/profile/releases", current: false, icon: <Disc3 className="h-5 w-5" /> })
-		navigationItems.push({ name: "Requests", href: "/profile/requests", current: false, icon: <MailPlus className="h-5 w-5" /> })
-		navigationItems.push({ name: "Analytics", href: "/profile/analytics", current: false, icon: <LineChart className="h-5 w-5" /> })
-	}
-	navigationItems.push({ name: "Settings", href: "/profile/settings", current: false, icon: <Settings className="h-5 w-5" /> });
-
-	const breadCrumbMap: BreadCrumbMap = {
-		profile: {
-			name: "Dashboard",
-			href: "/profile",
-		},
-		releases: {
-			name: "Releases",
-			href: "/profile/releases",
-		},
-		add: {
-			name: "Add Release",
-			href: "/profile/releases/add",
-		},
-		user: {
-			name: "User",
-			href: "/profile/user",
-		},
-		requests: {
-			name: "Requests",
-			href: "/profile/requests",
-		},
-		analytics: {
-			name: "Analytics",
-			href: "/profile/analytics",
-		},
-		settings: {
-			name: "Settings",
-			href: "/profile/settings",
-		},
-		artists: {
-			name: "Artists",
-			href: "/profile/artists",
-		},
-	};
-
+	const navigationItems = createNavigationItems(userType);
 	navigationItems.forEach((item) => {
 		item.current = location.pathname === item.href;
 	});
@@ -247,22 +185,32 @@ export function DashboardContainer(props: DashboardProps) {
 						)}
 					</DropdownMenu>
 				</header>
-				{isLoggedIn ? (
-					children
-				) : (
-					<main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
-						<div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-							<div className="p-4 bg-white rounded-lg shadow-sm">
-								<h2 className="text-2xl font-semibold text-foreground">Welcome to your dashboard!</h2>
-								<p className="mt-2 text-lg text-muted-foreground">Please log in to access your dashboard.</p>
-								<Link to="/login">
-									<Button className="mt-4">Log in</Button>
-								</Link>
-							</div>
-						</div>
-					</main>
-				)}
+				{isLoggedIn ? children : <DashboardNotLoggedIn />}
 			</div>
 		</div>
 	);
+}
+
+type NavigationItem = {
+	name: string;
+	href: string;
+	current: boolean;
+	icon: React.ReactNode;
+};
+
+function createNavigationItems(userType: string) {
+	const navigationItems: NavigationItem[] = [
+		{ name: "Dashboard", href: "/profile", current: false, icon: <Home className="h-5 w-5" /> },
+		{ name: "User", href: "/profile/user", current: false, icon: <User className="h-5 w-5" /> },
+	];
+	if (userType === "label") {
+		navigationItems.push({ name: "Artists", href: "/profile/artists", current: false, icon: <Users className="h-5 w-5" /> });
+	}
+	if (userType !== "user") {
+		navigationItems.push({ name: "Releases", href: "/profile/releases", current: false, icon: <Disc3 className="h-5 w-5" /> });
+		navigationItems.push({ name: "Requests", href: "/profile/requests", current: false, icon: <MailPlus className="h-5 w-5" /> });
+		navigationItems.push({ name: "Analytics", href: "/profile/analytics", current: false, icon: <LineChart className="h-5 w-5" /> });
+	}
+	navigationItems.push({ name: "Settings", href: "/profile/settings", current: false, icon: <Settings className="h-5 w-5" /> });
+	return navigationItems;
 }
