@@ -2,7 +2,8 @@ import { ArtistRegistrationData } from "@/pages/account/register/ArtistRegistrat
 import { ValidationFieldErrorMap, ValidationReturn } from "./useMultiStepForm";
 import { LabelRegistrationData } from "@/pages/account/register/LabelRegistration";
 import { UserRegistrationData } from "@/pages/account/register/UserRegistration";
-import { AddReleaseData } from "@/pages/dashboard/artist/forms/ArtistAddRelease";
+import { AddReleaseData } from "@/pages/dashboard/forms/ArtistAddRelease";
+import { LabelAddReleaseData } from "@/pages/dashboard/forms/LabelAddRelease";
 
 function validateAccountData(data: ArtistRegistrationData | LabelRegistrationData | UserRegistrationData): ValidationReturn {
 	let isValid = true;
@@ -126,7 +127,7 @@ function validateSocials(_: ArtistRegistrationData | LabelRegistrationData): Val
 	return { isValid: true };
 }
 
-function validateReleaseGeneral(data: AddReleaseData): ValidationReturn {
+function validateReleaseGeneral(data: AddReleaseData | LabelAddReleaseData): ValidationReturn {
 	let isValid = true;
 	const errors: ValidationFieldErrorMap = {};
 	if (data.name.length < 1 || data.name.length > 50) {
@@ -144,7 +145,7 @@ function validateReleaseGeneral(data: AddReleaseData): ValidationReturn {
 	return { isValid: isValid, errors: errors };
 }
 
-function validateReleaseArtists(data: AddReleaseData): ValidationReturn {
+function validateReleaseArtists(data: AddReleaseData | LabelAddReleaseData): ValidationReturn {
 	let isValid = true;
 	const errors: ValidationFieldErrorMap = {};
 	data.newArtists.forEach((artist, index) => {
@@ -174,7 +175,7 @@ function validateReleaseUrls(_: any): ValidationReturn {
 	return { isValid: true };
 }
 
-function validateReleasePfpAndGenres(data: AddReleaseData): ValidationReturn {
+function validateReleasePfpAndGenres(data: AddReleaseData | LabelAddReleaseData): ValidationReturn {
 	let isValid = true;
 	const errors: ValidationFieldErrorMap = {};
 	if (data.genreList.length === 0) {

@@ -4,7 +4,7 @@ import socialPlatforms from "@/data/other/socialPlatforms";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { getImageUrl } from "@/lib/utils";
-import { ValidationFieldErrorMap } from "../../useMultiStepForm";
+import { ValidationFieldErrorMap } from "../useMultiStepForm";
 
 type SocialsData = {
 	urls: SocialInfo[];
@@ -41,7 +41,13 @@ export function Socials({ urls, updateFields, errors }: SocialsProps) {
 										{platform.name}
 									</Label>
 								</div>
-								<Input type="text" id="artistname" className="border-[1px] border-grey-200 border-solid w-full" onChange={(e) => addOrEditSocial(platform, e.target.value)} placeholder="Enter url..."/>
+								<Input
+									type="text"
+									id="artistname"
+									className="border-[1px] border-grey-200 border-solid w-full"
+									onChange={(e) => addOrEditSocial(platform, e.target.value)}
+									placeholder="Enter url..."
+								/>
 							</div>
 						);
 					})}

@@ -16,9 +16,13 @@ export const breadCrumbMap: BreadCrumbMap = {
         name: "Releases",
         href: "/profile/releases",
     },
-    add: {
+    addAsArtist: {
         name: "Add Release",
-        href: "/profile/releases/add",
+        href: "/profile/releases/addAsArtist",
+    },
+    addAsLabel: {
+        name: "Add Release",
+        href: "/profile/releases/addAsLabel",
     },
     user: {
         name: "User",

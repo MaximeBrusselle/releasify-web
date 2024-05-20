@@ -18,7 +18,7 @@ import React from "react";
 import Registration from "@/pages/account/register/Registration";
 import UserRegistration from "@/pages/account/register/UserRegistration";
 import { DashboardContainer } from "@/pages/dashboard/DashboardContainer";
-import { ArtistDashboardHome } from "@/pages/dashboard/artist/ArtistDashboardHome";
+import { DashboardHome } from "@/pages/dashboard/shared/DashboardHome";
 import ArtistDashboardReleases from "@/pages/dashboard/artist/ArtistDashboardReleases";
 import { ArtistDashboardUser } from "@/pages/dashboard/artist/ArtistDashboardUser";
 import { ArtistDashboardRequests } from "@/pages/dashboard/artist/ArtistDashboardRequests";
@@ -27,9 +27,10 @@ import { ArtistDashboardSettings } from "@/pages/dashboard/artist/ArtistDashboar
 import { LoginPage } from "@/pages/account/login/LoginPage";
 import { AuthProvider } from "@/auth/AuthProvider";
 import { Toaster } from "react-hot-toast";
-import { ArtistAddRelease } from "@/pages/dashboard/artist/forms/ArtistAddRelease";
+import { ArtistAddRelease } from "@/pages/dashboard/forms/ArtistAddRelease";
 import { ReleaseDetails } from "@/pages/releases/ReleaseDetails";
 import { DashboardArtists } from "./pages/dashboard/label/DashboardArtists";
+import { LabelAddRelease } from "./pages/dashboard/forms/LabelAddRelease";
 // Import other pages
 
 const Layout: React.FC = () => {
@@ -51,7 +52,7 @@ const DashboardLayout: React.FC = () => {
 const App: React.FC = () => {
 	return (
 		<AuthProvider>
-			<Toaster position="top-center" reverseOrder={false}/>
+			<Toaster position="top-center" reverseOrder={false} />
 			<Router>
 				<Routes>
 					<Route path="/" element={<Layout />}>
@@ -86,12 +87,13 @@ const App: React.FC = () => {
 						{/* Define other nested routes */}
 					</Route>
 					<Route path="profile" element={<DashboardLayout />}>
-						<Route index element={<ArtistDashboardHome />} />
+						<Route index element={<DashboardHome />} />
 						<Route path="user" element={<ArtistDashboardUser />} />
 						<Route path="artists" element={<DashboardArtists />} />
 						<Route path="releases">
 							<Route index element={<ArtistDashboardReleases />} />
-							<Route path="add" element={<ArtistAddRelease />} />
+							<Route path="addAsArtist" element={<ArtistAddRelease />} />
+							<Route path="addAsLabel" element={<LabelAddRelease />} />
 						</Route>
 						<Route path="requests" element={<ArtistDashboardRequests />} />
 						<Route path="analytics" element={<ArtistDashboardAnalytics />} />

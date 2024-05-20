@@ -1,11 +1,11 @@
 import imgbbUpload from "@/data/api/other/imgbbUpload";
 import { db, auth } from "@/auth/firebase";
 import { doc, getDoc, addDoc, collection, updateDoc, arrayUnion } from "firebase/firestore";
-import { AddReleaseData } from "@/pages/dashboard/forms/ArtistAddRelease";
 import { UserData } from "./getLoginUserReleases";
 import { formatDateToYYYYMMDD } from "@/lib/utils";
+import { LabelAddReleaseData } from "@/pages/dashboard/forms/LabelAddRelease";
 
-export const addRelease = async (data: AddReleaseData): Promise<any> => {
+export const addReleaseAsLabel = async (data: LabelAddReleaseData): Promise<any> => {
 	const user = auth.currentUser;
 	if (!user) {
 		return {
@@ -16,14 +16,14 @@ export const addRelease = async (data: AddReleaseData): Promise<any> => {
 	//get artist object
 	const userData = localStorage.getItem("userData");
 	const parsedUserData: UserData = userData ? JSON.parse(userData) : null;
-	const segments = parsedUserData?.artistObject._key.path.segments;
+	const segments = parsedUserData?.labelObject._key.path.segments;
 	const artistId = segments[segments.length - 1];
-	const currentArtistRef = doc(db, "artists", artistId);
-	const artistBefore = await getDoc(currentArtistRef);
-	if (!artistBefore) {
+	const currentLabelRef = doc(db, "labels", artistId);
+	const labelBefore = await getDoc(currentLabelRef);
+	if (!labelBefore) {
 		return {
-			code: "artist/not-found",
-			message: "Artist not found",
+			code: "label/not-found",
+			message: "Label not found",
 		};
 	}
 	//upload cover picture
@@ -38,44 +38,22 @@ export const addRelease = async (data: AddReleaseData): Promise<any> => {
 	} else {
 		coverPicture = "https://i.ibb.co/8m050zG/default.png";
 	}
-
-	//if createdLabel
-	let createdLabel;
-	if (data.newLabel) {
-		//upload label picture
-		let labelPicture;
-		if (data.newLabel.profilePicture) {
-			try {
-				labelPicture = await imgbbUpload(data.newLabel.profilePicture!);
-			} catch (error) {
-				console.error(`Failed to upload label picture: ${error}`);
-				labelPicture = "https://i.ibb.co/8m050zG/default.png";
-			}
-		} else {
-			labelPicture = "https://i.ibb.co/8m050zG/default.png";
-		}
-		createdLabel = {
-			name: data.newLabel.name,
-			profilePicture: labelPicture,
-			genres: data.newLabel.genres,
+	let myArtists = [];
+	for (const artist of data.myArtists) {
+		if(artist.id.startsWith("notExists")) {
+			myArtists.push({
+				artistName: artist.artistName,
+				profilePicture: artist.profilePicture,
+			})
+			continue;
 		};
-	}
-	let chosenLabelRef;
-	if (data.label) {
-		try {
-			chosenLabelRef = doc(db, "labels", data.label);
-		} catch (error) {
-			console.error(`Failed to get label: ${error}`);
-			return {
-				code: "label/not-found",
-				message: "Label not found",
-			};
-		}
+		const artistRef = doc(db, "artists", artist.id);
+		myArtists.push(artistRef);
 	}
 
 	//get artist references
 	let artistRefs = [];
-	for (const artistId of data.releaseArtists) {
+	for (const artistId of data.otherArtists) {
 		const artist = doc(db, "artists", artistId);
 		artistRefs.push(artist);
 	}
@@ -101,7 +79,7 @@ export const addRelease = async (data: AddReleaseData): Promise<any> => {
 		newArtists.push(newArtist);
 	}
 
-	const releaseArtists = artistRefs.concat(newArtists).concat([currentArtistRef] as any[]);
+	const releaseArtists = artistRefs.concat(newArtists).concat(myArtists as any[]);
 	const newRelease: any = {
 		name: data.name,
 		picture: coverPicture,
@@ -111,23 +89,16 @@ export const addRelease = async (data: AddReleaseData): Promise<any> => {
 		description: data.description,
 		artists: releaseArtists,
 		urls: data.urls,
+		label: currentLabelRef,
 	};
-	if (data.label) {
-		newRelease.label = chosenLabelRef;
-	} else if (createdLabel) {
-		newRelease.label = createdLabel;
-	}
 	const releaseRef = await addDoc(collection(db, "releases"), newRelease);
 	const createdId = releaseRef.id;
 	await updateDoc(releaseRef, { id: createdId });
 
 	try {
-		await updateDoc(currentArtistRef, { releases: arrayUnion(releaseRef) });
+		await updateDoc(currentLabelRef, { releases: arrayUnion(releaseRef) });
 		for (const artistRef of artistRefs) {
 			await updateDoc(artistRef, { releases: arrayUnion(releaseRef) });
-		}
-		if (data.label) {
-			await updateDoc(chosenLabelRef!, { releases: arrayUnion(releaseRef) });
 		}
 
 		return {
@@ -136,7 +107,7 @@ export const addRelease = async (data: AddReleaseData): Promise<any> => {
 		};
 	} catch (error: any) {
 		return {
-			code: "artist/update-failed",
+			code: "label/update-failed",
 			message: error,
 		};
 	}

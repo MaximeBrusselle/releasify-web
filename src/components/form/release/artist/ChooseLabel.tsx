@@ -11,13 +11,13 @@ import { ChooseLabelViewType } from "../../registration/Artist/ChooseLabel";
 type LabelData = {
 	labelType: ChooseLabelViewType;
 	label: string | null;
-    newLabel: LabelIndex | null;
+	newLabel: LabelIndex | null;
 };
 
 type LabelProps = LabelData & {
 	updateFields: (newData: Partial<LabelData>) => void;
 	errors: ValidationFieldErrorMap;
-    firebaseLabels: LabelDetail[];
+	firebaseLabels: LabelDetail[];
 };
 
 export function ChooseLabel({ label, labelType, updateFields, errors, firebaseLabels }: LabelProps) {

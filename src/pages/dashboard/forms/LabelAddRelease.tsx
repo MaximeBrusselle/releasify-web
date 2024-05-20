@@ -1,73 +1,81 @@
 import { ValidationFieldErrorMap, ValidationReturn, useMultiStepForm } from "@/components/form/useMultiStepForm";
 import { Progress } from "@/components/ui/progress";
-import { addRelease } from "@/data/api/release/addRelease";
 import { Genre } from "@/data/genres/genreTypes";
-import { LabelDetail } from "@/data/labels/labelTypes";
 import { ReleasePlatform } from "@/data/releases/releaseTypes";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { validateReleaseGeneral, validateReleaseArtists, validateReleaseLabel, validateReleaseUrls, validateReleasePfpAndGenres } from "@/components/form/validations";
-import { PfpAndGenres } from "@/components/form/release/artist/PfpAndGenres";
-import { ReleaseGeneral } from "@/components/form/release/artist/ReleaseGeneral";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { validateReleaseGeneral, validateReleaseArtists, validateReleaseUrls, validateReleasePfpAndGenres } from "@/components/form/validations";
+import { PfpAndGenres } from "@/components/form/release/PfpAndGenres";
+import { ReleaseGeneral } from "@/components/form/release/ReleaseGeneral";
 import { ArtistDetail } from "@/data/artists/artistTypes";
-import { ChooseArtists } from "@/components/form/release/artist/ChooseArtists";
-import { ChooseLabelViewType } from "@/components/form/registration/Artist/ChooseLabel";
-import { ChooseLabel } from "@/components/form/release/artist/ChooseLabel";
-import { Socials } from "@/components/form/release/artist/Socials";
+import { Socials } from "@/components/form/release/Socials";
 import toast from "react-hot-toast";
 import { getArtists } from "@/data/api/artist/getArtists";
-import { getLabels } from "@/data/api/label/getLabels";
 import { CreatedArtist } from "@/components/form/registration/Label/ChooseArtists";
+import { addReleaseAsLabel } from "@/data/api/release/addReleaseAsLabel";
+import { ChooseArtistsAsLabel } from "@/components/form/release/label/ChooseArtists";
+import { getLoginLabelArtists } from "@/data/api/label/getLoginLabelArtists";
 
-type AddReleaseData = {
+type LabelAddReleaseData = {
 	name: string;
 	description: string;
-	releaseArtists: string[];
+	myArtists: ArtistDetail[];
+	otherArtists: string[];
 	newArtists: CreatedArtist[];
 	picture: File | null;
 	urls: ReleasePlatform[];
 	genreList: Genre[];
 	releaseDate: Date | undefined;
 	announcementDate: Date;
-	labelType: ChooseLabelViewType;
-	label: string | null;
-	newLabel: any;
 };
 
-export type { AddReleaseData };
+export type { LabelAddReleaseData };
 
-export const ArtistAddRelease = () => {
+export const LabelAddRelease = () => {
+	let initialized = useRef(false);
+	const navigate = useNavigate();
 	const [firebaseArtists, setFirebaseArtists] = useState<ArtistDetail[]>([]);
-	const [firebaseLabels, setFirebaseLabels] = useState<LabelDetail[]>([]);
+	const [myArtists, setMyArtists] = useState<ArtistDetail[]>([]);
+	const userType = JSON.parse(localStorage.getItem("userData")!).type;
+
 	useEffect(() => {
+		if(initialized.current) return;
+		if (userType === "artist") {
+			initialized.current = true;
+			toast.error("You are not a label, redirected to add release as an artist.")
+			navigate("/profile/releases/addAsArtist");
+		}
+	}, [userType, navigate]);
+	useEffect(() => {
+		if (initialized.current) return;
+		initialized.current = true;
 		async function fetchData() {
 			const fetchedArtists = await getArtists();
 			setFirebaseArtists(fetchedArtists);
-			const fetchedLabels = await getLabels();
-			setFirebaseLabels(fetchedLabels);
+
+			const fetchedMyArtists = await getLoginLabelArtists(userType);
+			setMyArtists(fetchedMyArtists);
 		}
 		fetchData();
 	}, []);
 
-	const INITIAL_DATA: AddReleaseData = {
+	const INITIAL_DATA: LabelAddReleaseData = {
 		name: "",
 		description: "",
-		releaseArtists: [],
+		myArtists: [],
+		otherArtists: [],
 		newArtists: [],
 		picture: null,
 		urls: [],
 		genreList: [],
 		releaseDate: new Date(),
 		announcementDate: new Date(),
-		labelType: { text: "Release is on a label", viewType: "label" },
-		label: null,
-		newLabel: null,
 	};
-	const [data, setData] = useState<AddReleaseData>(INITIAL_DATA);
+	const [data, setData] = useState<LabelAddReleaseData>(INITIAL_DATA);
 	const [errors, setErrors] = useState<ValidationFieldErrorMap>({});
 	const [done, setDone] = useState(false);
 
-	function updateFields(newData: Partial<AddReleaseData>) {
+	function updateFields(newData: Partial<LabelAddReleaseData>) {
 		setData((prevData) => ({
 			...prevData,
 			...newData,
@@ -77,8 +85,7 @@ export const ArtistAddRelease = () => {
 	const { steps, goToStep, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep } = useMultiStepForm([
 		<ReleaseGeneral {...data} updateFields={updateFields} errors={errors} />,
 		<PfpAndGenres {...data} updateFields={updateFields} errors={errors} />,
-		<ChooseArtists {...data} updateFields={updateFields} errors={errors} firebaseArtists={firebaseArtists} />,
-		<ChooseLabel {...data} updateFields={updateFields} errors={errors} firebaseLabels={firebaseLabels} />,
+		<ChooseArtistsAsLabel {...data} updateFields={updateFields} errors={errors} firebaseArtists={firebaseArtists} firebaseMyArtists={myArtists} />,
 		<Socials {...data} updateFields={updateFields} errors={errors} />,
 	]);
 
@@ -86,7 +93,7 @@ export const ArtistAddRelease = () => {
 		event.preventDefault();
 
 		// Validate the current step before allowing submission
-		const validationFunctions = [validateReleaseGeneral, validateReleasePfpAndGenres, validateReleaseArtists, validateReleaseLabel, validateReleaseUrls];
+		const validationFunctions = [validateReleaseGeneral, validateReleasePfpAndGenres, validateReleaseArtists, validateReleaseUrls];
 		const { isValid, errors }: ValidationReturn = validationFunctions[currentStepIndex](data);
 
 		if (isValid) {
@@ -96,7 +103,7 @@ export const ArtistAddRelease = () => {
 			}
 			toast.promise(
 				new Promise(async (resolve, reject) => {
-					const result = await addRelease(data);
+					const result = await addReleaseAsLabel(data);
 					if (result?.code !== "success") {
 						setErrors({ all: result.message });
 						reject(result.message);

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardFooter, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { capitalizeFirstLetter } from "@/lib/utils";
 import { Link } from "react-router-dom";
 
 type GeneralInfoProps = {
@@ -9,6 +10,7 @@ type GeneralInfoProps = {
 };
 
 export const GeneralInfo = (props: GeneralInfoProps) => {
+	const userType = JSON.parse(localStorage.getItem("userData")!).type;
 	const { announcedAmount, releasedAmount } = props;
 	const total = announcedAmount + releasedAmount;
 	return (
@@ -19,7 +21,7 @@ export const GeneralInfo = (props: GeneralInfoProps) => {
 					<CardDescription className="max-w-lg text-balance leading-relaxed">Get an overview of your releases and create new ones, manage old ones, and more.</CardDescription>
 				</CardHeader>
 				<CardFooter>
-					<Link to={"/profile/releases/add"}>
+					<Link to={`/profile/releases/addAs${capitalizeFirstLetter(userType)}`}>
 						<Button>Add new release</Button>
 					</Link>
 				</CardFooter>
