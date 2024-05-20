@@ -195,6 +195,16 @@ function validateGeneralInfo(data: ArtistRegistrationData | LabelRegistrationDat
 	return { isValid: isValid, errors: errors };
 }
 
+function validateLabelReleaseArtists(data: LabelAddReleaseData): ValidationReturn {
+	let isValid = true;
+	const errors: ValidationFieldErrorMap = {};
+	if(data.myArtists.length === 0 && data.otherArtists.length === 0 && data.newArtists.length === 0) {
+		isValid = false;
+		errors["allFields"] = "At least one artist is required.";
+	}
+	return { isValid: isValid, errors: errors };
+}
+
 export {
 	validateAccountData,
 	validateBannerAndGenres,
@@ -208,4 +218,5 @@ export {
 	validateReleaseLabel,
 	validateReleaseUrls,
 	validateReleasePfpAndGenres,
+	validateLabelReleaseArtists,
 };

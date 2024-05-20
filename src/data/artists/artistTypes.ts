@@ -1,5 +1,5 @@
 import { Genre } from "@/data/genres/genreTypes"
-import { LabelDetail, LabelIndex } from "@/data/labels/labelTypes"
+import { LabelDetail } from "@/data/labels/labelTypes"
 import { SocialInfo } from "@/data/other/socialTypes"
 import { ReleaseIndex } from "@/data/releases/releaseTypes"
 

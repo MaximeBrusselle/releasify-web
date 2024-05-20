@@ -19,7 +19,6 @@ import { getArtists } from "@/data/api/artist/getArtists";
 import { getLabels } from "@/data/api/label/getLabels";
 import { CreatedArtist } from "@/components/form/registration/Label/ChooseArtists";
 import { useNavigate } from "react-router-dom";
-import { LabelAddRelease } from "./LabelAddRelease";
 
 type AddReleaseData = {
 	name: string;

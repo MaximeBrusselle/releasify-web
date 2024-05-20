@@ -1,16 +1,13 @@
 import { FormWrapper } from "@/components/form/FormWrapper";
 import { Label } from "@/components/ui/label";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ValidationFieldErrorMap } from "@/components/form/useMultiStepForm";
 import { ArtistDetail } from "@/data/artists/artistTypes";
 import ArtistSelectCard from "@/components/artists/ArtistSelectCard";
 import CreateArtist from "@/components/artists/CreateArtist";
-import { AuthContext } from "@/auth/AuthProvider";
-import { UserData } from "@/data/api/release/getLoginUserReleases";
 import { CreatedArtist } from "../../registration/Label/ChooseArtists";
-import { Card, CardContent } from "@/components/ui/card";
 import LabelArtistSelectCard from "@/components/artists/LabelArtistSelectCard";
 
 type ChooseArtistsAsLabelView = "myArtists" | "otherArtists" | "newArtists";
@@ -33,7 +30,6 @@ type ChooseArtistsAsLabelProps = ChooseArtistData & {
 };
 
 export function ChooseArtistsAsLabel({ myArtists, otherArtists, newArtists, updateFields, errors, firebaseArtists, firebaseMyArtists }: ChooseArtistsAsLabelProps) {
-	const { isLoggedIn } = useContext(AuthContext);
 	function updateArtists(newArtists: string[]) {
 		updateFields({
 			otherArtists: newArtists,

@@ -4,7 +4,7 @@ import { Genre } from "@/data/genres/genreTypes";
 import { ReleasePlatform } from "@/data/releases/releaseTypes";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { validateReleaseGeneral, validateReleaseArtists, validateReleaseUrls, validateReleasePfpAndGenres } from "@/components/form/validations";
+import { validateReleaseGeneral, validateLabelReleaseArtists, validateReleaseUrls, validateReleasePfpAndGenres } from "@/components/form/validations";
 import { PfpAndGenres } from "@/components/form/release/PfpAndGenres";
 import { ReleaseGeneral } from "@/components/form/release/ReleaseGeneral";
 import { ArtistDetail } from "@/data/artists/artistTypes";
@@ -51,10 +51,9 @@ export const LabelAddRelease = () => {
 		initialized.current = true;
 		async function fetchData() {
 			const fetchedArtists = await getArtists();
-			setFirebaseArtists(fetchedArtists);
-
 			const fetchedMyArtists = await getLoginLabelArtists(userType);
 			setMyArtists(fetchedMyArtists);
+			setFirebaseArtists(fetchedArtists.filter((artist) => !fetchedMyArtists.find((myArtist: ArtistDetail) => myArtist.id === artist.id)));
 		}
 		fetchData();
 	}, []);
@@ -93,7 +92,7 @@ export const LabelAddRelease = () => {
 		event.preventDefault();
 
 		// Validate the current step before allowing submission
-		const validationFunctions = [validateReleaseGeneral, validateReleasePfpAndGenres, validateReleaseArtists, validateReleaseUrls];
+		const validationFunctions = [validateReleaseGeneral, validateReleasePfpAndGenres, validateLabelReleaseArtists, validateReleaseUrls];
 		const { isValid, errors }: ValidationReturn = validationFunctions[currentStepIndex](data);
 
 		if (isValid) {

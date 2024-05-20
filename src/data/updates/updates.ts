@@ -140,6 +140,22 @@ const updates: Update[] = [
             "You can now remove releases from the dashboard as an artist",
         ],
     },
+    {
+        version: "0.7.2",
+        date: new Date("2024-05-19"),
+        name: "Add and remove releases as a label",
+        addedFeatures: [
+            "You can now add and remove releases from the dashboard as a label",
+        ],
+    },
+    {
+        version: "0.8.0",
+        date: new Date("2024-05-20"),
+        name: "Overview of Artists",
+        addedFeatures: [
+            "You can now see an overview of all artists on your label",
+        ],
+    },
 ];
 
 export default updates;
