@@ -20,6 +20,7 @@ import {
 import toast from "react-hot-toast";
 import { ArtistDetail } from "@/data/artists/artistTypes";
 import { LabelDetail } from "@/data/labels/labelTypes";
+import { removeArtistFromLabel } from "@/data/api/label/removeArtistFromLabel";
 
 type DetailInfoProps = {
 	selected: ArtistDetail | null;
@@ -29,10 +30,18 @@ type DetailInfoProps = {
 export const DetailInfo = (props: DetailInfoProps) => {
 	let { selected } = props;
 	const { handleRowDeleted } = props;
+	const userType = JSON.parse(localStorage.getItem("userData")!).type;
 
 	async function handleDelete() {
 		try {
-			// await removeRelease(selected!.id);
+			if (!selected) {
+				throw new Error("No artist selected");
+			}
+			if(selected.id.startsWith("notExists")) {
+				await removeArtistFromLabel({ userType: userType, artist: selected })
+			} else {
+				await removeArtistFromLabel({ userType: userType, artistId: selected.id });
+			}
 			toast.success("Artist removed from label");
 			handleRowDeleted();
 		} catch (error: any) {
@@ -74,7 +83,7 @@ export const DetailInfo = (props: DetailInfoProps) => {
 								<AlertDialogContent>
 									<AlertDialogHeader>
 										<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-										<AlertDialogDescription>This action cannot be undone. This will permanently remove this artists from your label</AlertDialogDescription>
+										<AlertDialogDescription>This action cannot be undone. This will permanently remove this artist from your label</AlertDialogDescription>
 									</AlertDialogHeader>
 									<AlertDialogFooter>
 										<AlertDialogCancel>Cancel</AlertDialogCancel>

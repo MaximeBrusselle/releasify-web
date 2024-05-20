@@ -8,13 +8,13 @@ import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { ArtistDetail } from "@/data/artists/artistTypes";
 
-interface ReleaseDataProps {
+interface ArtistDataProps {
 	artists: ArtistDetail[];
 	selectedRow: ArtistDetail | null;
 	handleSelectRow: (row?: ArtistDetail) => void;
 }
 
-export const ReleaseData = (props: ReleaseDataProps) => {
+export const ArtistData = (props: ArtistDataProps) => {
 	const { handleSelectRow, selectedRow, artists } = props;
 	const all = artists;
 

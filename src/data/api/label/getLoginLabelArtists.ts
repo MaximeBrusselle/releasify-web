@@ -28,7 +28,7 @@ export const getLoginLabelArtists = async (userType: string): Promise<any> => {
 	const parsedUserData: UserData = userData ? JSON.parse(userData) : null;
 	const segments = parsedUserData?.labelObject._key.path.segments;
 	const objectId = segments[segments.length - 1];
-	const result = await getDoc(doc(db, `${userType}s`, objectId));
+	const result = await getDoc(doc(db, "labels", objectId));
 	if (result.exists()) {
 		const artistRefs = result.data().artists;
 		const artists: ArtistDetail[] = [];
