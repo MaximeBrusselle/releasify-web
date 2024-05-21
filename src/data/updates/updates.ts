@@ -164,6 +164,14 @@ const updates: Update[] = [
             "You can now add and remove artists from your label",
         ],
     },
+    {
+        version: "0.9.0",
+        date: new Date("2024-05-21"),
+        name: "User Info",
+        addedFeatures: [
+            "You can now see your user info",
+        ],
+    }
 ];
 
 export default updates;

@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { DashboardNotAllowed } from "../DashboardNotAllowed";
 
-const ArtistDashboardReleases = () => {
+const DashboardReleases = () => {
 	let initialized = useRef(false);
 	const [releases, setReleases] = useState<ReleaseIndex[]>([]);
 	const [selectedRow, setSelectedRow] = useState<ReleaseIndex | null>(null);
@@ -61,4 +61,4 @@ const ArtistDashboardReleases = () => {
 		</main>
 	);
 };
-export default ArtistDashboardReleases;
+export default DashboardReleases;

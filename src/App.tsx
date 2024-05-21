@@ -19,8 +19,7 @@ import Registration from "@/pages/account/register/Registration";
 import UserRegistration from "@/pages/account/register/UserRegistration";
 import { DashboardContainer } from "@/pages/dashboard/DashboardContainer";
 import { DashboardHome } from "@/pages/dashboard/shared/DashboardHome";
-import ArtistDashboardReleases from "@/pages/dashboard/artist/ArtistDashboardReleases";
-import { ArtistDashboardUser } from "@/pages/dashboard/artist/ArtistDashboardUser";
+import DashboardReleases from "@/pages/dashboard/shared/DashboardReleases";
 import { ArtistDashboardRequests } from "@/pages/dashboard/artist/ArtistDashboardRequests";
 import { ArtistDashboardAnalytics } from "@/pages/dashboard/artist/ArtistDashboardAnalytics";
 import { ArtistDashboardSettings } from "@/pages/dashboard/artist/ArtistDashboardSettings";
@@ -32,6 +31,7 @@ import { ReleaseDetails } from "@/pages/releases/ReleaseDetails";
 import { DashboardArtists } from "./pages/dashboard/label/DashboardArtists";
 import { LabelAddRelease } from "./pages/dashboard/forms/LabelAddRelease";
 import { LabelAddArtist } from "./pages/dashboard/forms/LabelAddArtist";
+import { DashboardUser } from "./pages/dashboard/shared/DashboardUser";
 // Import other pages
 
 const Layout: React.FC = () => {
@@ -89,13 +89,13 @@ const App: React.FC = () => {
 					</Route>
 					<Route path="profile" element={<DashboardLayout />}>
 						<Route index element={<DashboardHome />} />
-						<Route path="user" element={<ArtistDashboardUser />} />
+						<Route path="user" element={<DashboardUser />} />
 						<Route path="artists">
 							<Route index element={<DashboardArtists />} />
 							<Route path="addArtist" element={<LabelAddArtist />} />
 						</Route>
 						<Route path="releases">
-							<Route index element={<ArtistDashboardReleases />} />
+							<Route index element={<DashboardReleases />} />
 							<Route path="addAsArtist" element={<ArtistAddRelease />} />
 							<Route path="addAsLabel" element={<LabelAddRelease />} />
 						</Route>
