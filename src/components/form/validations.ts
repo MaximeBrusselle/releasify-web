@@ -5,6 +5,7 @@ import { UserRegistrationData } from "@/pages/account/register/UserRegistration"
 import { AddReleaseData } from "@/pages/dashboard/forms/ArtistAddRelease";
 import { LabelAddReleaseData } from "@/pages/dashboard/forms/LabelAddRelease";
 import { LabelAddArtistData } from "@/pages/dashboard/forms/LabelAddArtist";
+import { UserObjectDetails } from "@/pages/dashboard/forms/EditUserObjectDetails";
 
 function validateAccountData(data: ArtistRegistrationData | LabelRegistrationData | UserRegistrationData): ValidationReturn {
 	let isValid = true;
@@ -199,7 +200,7 @@ function validateGeneralInfo(data: ArtistRegistrationData | LabelRegistrationDat
 function validateLabelReleaseArtists(data: LabelAddReleaseData): ValidationReturn {
 	let isValid = true;
 	const errors: ValidationFieldErrorMap = {};
-	if(data.myArtists.length === 0 && data.otherArtists.length === 0 && data.newArtists.length === 0) {
+	if (data.myArtists.length === 0 && data.otherArtists.length === 0 && data.newArtists.length === 0) {
 		isValid = false;
 		errors["allFields"] = "At least one artist is required.";
 	}
@@ -209,11 +210,48 @@ function validateLabelReleaseArtists(data: LabelAddReleaseData): ValidationRetur
 function validateAddArtistToLabel(data: LabelAddArtistData): ValidationReturn {
 	let isValid = true;
 	const errors: ValidationFieldErrorMap = {};
-	if(data.newArtists.length === 0 && data.otherArtists.length === 0) {
+	if (data.newArtists.length === 0 && data.otherArtists.length === 0) {
 		isValid = false;
 		errors["allFields"] = "At least one artist is required.";
 	}
 	return { isValid: isValid, errors: errors };
+}
+
+function valideEditObjectGeneralInfo(data: UserObjectDetails, userType: string): ValidationReturn {
+	let isValid = true;
+	const errors: ValidationFieldErrorMap = {};
+	if (data.name.length > 50) {
+		isValid = false;
+		errors["name"] = "Name must be less than 50 characters.";
+	}
+	if (userType === "label" && data.realName.length > 0) {
+		isValid = false;
+		errors["realName"] = "Real name is not allowed for labels.";
+	}
+	if (data.description && data.description.length > 100) {
+		isValid = false;
+		errors["description"] = "Description must be less than 100 characters.";
+	}
+	if(data.contactEmail && data.contactEmail.length > 0) {
+		const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+		if (!emailRegex.test(data.contactEmail)) {
+			isValid = false;
+			errors["contactemail"] = "Invalid email format.";
+		}
+	}
+	if(data.genreList.length === 0) {
+		isValid = false;
+		errors["genres"] = "At least one genre is required.";
+	}
+	return { isValid: isValid, errors: errors };
+}
+
+function validatePfpAndBanner(_: UserObjectDetails, __: string): ValidationReturn {
+	return { isValid: true };
+}
+
+function validateEditUserObjectSocials(_: UserObjectDetails, __: string): ValidationReturn {
+	return { isValid: true };
 }
 
 export {
@@ -231,4 +269,7 @@ export {
 	validateReleasePfpAndGenres,
 	validateLabelReleaseArtists,
 	validateAddArtistToLabel,
+	valideEditObjectGeneralInfo,
+	validatePfpAndBanner,
+	validateEditUserObjectSocials,
 };

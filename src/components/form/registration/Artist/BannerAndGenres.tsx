@@ -37,10 +37,10 @@ export function BannerAndGenres({ bannerPicture, genreList, updateFields, errors
 	const sortedGenres = genres.sort((a, b) => a.name.localeCompare(b.name));
 	const handleGenreClicked = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, newGenre: Genre) => {
 		event.preventDefault();
-		if(genreList.includes(newGenre)){
-			updateFields({genreList: genreList.filter(genre => genre !== newGenre)});
+		if (genreList.includes(newGenre)) {
+			updateFields({ genreList: genreList.filter((genre) => genre !== newGenre) });
 		} else {
-			updateFields({genreList: [...genreList, newGenre]});
+			updateFields({ genreList: [...genreList, newGenre] });
 		}
 	};
 	return (
@@ -48,7 +48,9 @@ export function BannerAndGenres({ bannerPicture, genreList, updateFields, errors
 			<div className="flex flex-col items-start justify-center w-full h-full gap-8 sm:max-w-[30vw]">
 				<div className="flex flex-col gap-2 w-full">
 					<div className="flex flex-row justify-start items-center m-0 p-0">
-						<Label htmlFor="banner" className="font-bold text-lg">Banner</Label>
+						<Label htmlFor="banner" className="font-bold text-lg">
+							Banner
+						</Label>
 						<p className=" font-extralight ml-1 text-sm">(max 32MB)</p>
 					</div>
 					<Input id="banner" className="border-[1px] border-grey-200 border-solid" type="file" accept="image/*" ref={fileInputRef} onChange={handleImageUploaded} />
@@ -58,7 +60,9 @@ export function BannerAndGenres({ bannerPicture, genreList, updateFields, errors
 				</div>
 				{bannerPicture && (
 					<div className="flex flex-col gap-2 w-full justify-center items-center">
-						<Label htmlFor="bannerPicturePreview" className="font-bold text-lg">Preview</Label>
+						<Label htmlFor="bannerPicturePreview" className="font-bold text-lg">
+							Preview
+						</Label>
 						<img
 							id="bannerPicturePreview"
 							src={URL.createObjectURL(bannerPicture)}
@@ -78,7 +82,9 @@ export function BannerAndGenres({ bannerPicture, genreList, updateFields, errors
 					</div>
 					<div className="flex flex-row gap-2 flex-wrap">
 						{sortedGenres.map((genre) => (
-							<Badge variant={genreList.includes(genre) ? "default" : "outline"} onClick={(event) => handleGenreClicked(event, genre)} key={genre.id} className="hover:cursor-pointer">{genre.name}</Badge>
+							<Badge variant={genreList.includes(genre) ? "default" : "outline"} onClick={(event) => handleGenreClicked(event, genre)} key={genre.id} className="hover:cursor-pointer">
+								{genre.name}
+							</Badge>
 						))}
 					</div>
 				</div>

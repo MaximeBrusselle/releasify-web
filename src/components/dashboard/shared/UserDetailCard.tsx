@@ -26,7 +26,7 @@ export const UserDetailCard = (props: UserDetailCardProps) => {
 			<CardHeader className="flex flex-row items-start bg-muted/50">
 				<div className="grid gap-0.5">
 					<CardTitle className="group flex items-center gap-2 text-lg font-extrabold">
-						{currentUser.displayName}
+						{currentUser.displayName || currentUser.email}
 						<Button
 							size="icon"
 							variant="outline"
@@ -45,10 +45,12 @@ export const UserDetailCard = (props: UserDetailCardProps) => {
 					{data.realName && <CardDescription>{data.realName}</CardDescription>}
 				</div>
 				<div className="ml-auto flex items-center gap-1">
-					<Button size="sm" variant="outline" className="h-8 gap-1">
-						<Pencil className="h-3.5 w-3.5" />
-						<span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Edit</span>
-					</Button>
+					<Link to={"/profile/user/editObject"}>
+						<Button size="sm" variant="outline" className="h-8 gap-1">
+							<Pencil className="h-3.5 w-3.5" />
+							<span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Edit</span>
+						</Button>
+					</Link>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<Button size="icon" variant="outline" className="h-8 w-8">
@@ -100,6 +102,18 @@ export const UserDetailCard = (props: UserDetailCardProps) => {
 							<span className="text-muted-foreground">Email</span>
 							<span>{currentUser.email}</span>
 						</li>
+						{userData.type === "artist" && (
+							<li className="flex items-center justify-between">
+								<span className="text-muted-foreground">Bookings Email</span>
+								<span>{data.bookingEmail}</span>
+							</li>
+						)}
+						{userData.type === "label" && (
+							<li className="flex items-center justify-between">
+								<span className="text-muted-foreground">Contact Email</span>
+								<span>{data.contactEmail}</span>
+							</li>
+						)}
 						<li className="flex items-center justify-between">
 							<span className="text-muted-foreground">UserType</span>
 							<span>{userData.type}</span>
