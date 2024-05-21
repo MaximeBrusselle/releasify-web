@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { getArtists } from "@/data/api/artist/getArtists";
 import { CreatedArtist } from "@/components/form/registration/Label/ChooseArtists";
 import { getLoginLabelArtists } from "@/data/api/label/getLoginLabelArtists";
-import { DocumentReference } from "firebase/firestore";
 import { AddArtistAsLabel } from "@/components/form/label/AddArtists";
 import { addArtistToLabel } from "@/data/api/label/addArtistToLabel";
 

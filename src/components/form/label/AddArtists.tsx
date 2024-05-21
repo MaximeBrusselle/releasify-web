@@ -8,7 +8,6 @@ import { ArtistDetail } from "@/data/artists/artistTypes";
 import ArtistSelectCard from "@/components/artists/ArtistSelectCard";
 import CreateArtist from "@/components/artists/CreateArtist";
 import { CreatedArtist } from "../registration/Label/ChooseArtists";
-import { DocumentReference } from "firebase/firestore";
 
 type AddArtistAsLabelView = "otherArtists" | "newArtists";
 type AddArtistAsLabelViewType = {
