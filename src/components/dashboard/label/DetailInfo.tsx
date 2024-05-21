@@ -102,7 +102,7 @@ export const DetailInfo = (props: DetailInfoProps) => {
 								</DropdownMenuTrigger>
 								<DropdownMenuContent align="end">
 									{selected.id !== "" && (
-										<Link to={`/releases/${selected.id}`}>
+										<Link to={`/artists/${selected.id}`}>
 											<DropdownMenuItem>Go to Page</DropdownMenuItem>
 										</Link>
 									)}

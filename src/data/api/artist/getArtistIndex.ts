@@ -10,7 +10,7 @@ export const getArtistIndex = async (artistId: string): Promise<any> => {
 		} else {
 			return {
 				code: 404,
-				message: "Label not found",
+				message: "Artist not found",
 			};
 		}
 	} catch (error: any) {

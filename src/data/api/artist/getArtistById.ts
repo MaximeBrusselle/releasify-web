@@ -24,6 +24,19 @@ export const getArtistById = async (artistId: string): Promise<any> => {
 					if (artistRefId === artistId) {
 						continue;
 					}
+					if(!artistRefId) {
+						const tmp = artistRef as any;
+						artists.push({
+							id: `notExists${tmp.artistName}`,
+							artistName: tmp.artistName,
+							profilePicture: tmp.profilePicture,
+							bannerPicture: "",
+							socials: [],
+							releases: [],
+							genres: [],
+						});
+						continue;
+					}
 					const artist = await getArtistIndex(artistRefId!);
 					if (artist.code) {
 						throw new Error(artist.message);

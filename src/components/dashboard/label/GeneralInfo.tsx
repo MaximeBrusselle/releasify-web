@@ -19,7 +19,7 @@ export const GeneralInfo = (props: GeneralInfoProps) => {
 					<CardDescription className="max-w-lg text-balance leading-relaxed">Get an overview of your artists and add new ones, manage existing ones, and more.</CardDescription>
 				</CardHeader>
 				<CardFooter>
-					<Link to={"#"}>
+					<Link to={"/profile/artists/addArtist"}>
 						<Button>Add new Artist</Button>
 					</Link>
 				</CardFooter>

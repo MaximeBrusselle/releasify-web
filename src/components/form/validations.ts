@@ -4,6 +4,7 @@ import { LabelRegistrationData } from "@/pages/account/register/LabelRegistratio
 import { UserRegistrationData } from "@/pages/account/register/UserRegistration";
 import { AddReleaseData } from "@/pages/dashboard/forms/ArtistAddRelease";
 import { LabelAddReleaseData } from "@/pages/dashboard/forms/LabelAddRelease";
+import { LabelAddArtistData } from "@/pages/dashboard/forms/LabelAddArtist";
 
 function validateAccountData(data: ArtistRegistrationData | LabelRegistrationData | UserRegistrationData): ValidationReturn {
 	let isValid = true;
@@ -205,6 +206,16 @@ function validateLabelReleaseArtists(data: LabelAddReleaseData): ValidationRetur
 	return { isValid: isValid, errors: errors };
 }
 
+function validateAddArtistToLabel(data: LabelAddArtistData): ValidationReturn {
+	let isValid = true;
+	const errors: ValidationFieldErrorMap = {};
+	if(data.newArtists.length === 0 && data.otherArtists.length === 0) {
+		isValid = false;
+		errors["allFields"] = "At least one artist is required.";
+	}
+	return { isValid: isValid, errors: errors };
+}
+
 export {
 	validateAccountData,
 	validateBannerAndGenres,
@@ -219,4 +230,5 @@ export {
 	validateReleaseUrls,
 	validateReleasePfpAndGenres,
 	validateLabelReleaseArtists,
+	validateAddArtistToLabel,
 };

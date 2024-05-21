@@ -31,6 +31,7 @@ import { ArtistAddRelease } from "@/pages/dashboard/forms/ArtistAddRelease";
 import { ReleaseDetails } from "@/pages/releases/ReleaseDetails";
 import { DashboardArtists } from "./pages/dashboard/label/DashboardArtists";
 import { LabelAddRelease } from "./pages/dashboard/forms/LabelAddRelease";
+import { LabelAddArtist } from "./pages/dashboard/forms/LabelAddArtist";
 // Import other pages
 
 const Layout: React.FC = () => {
@@ -89,7 +90,10 @@ const App: React.FC = () => {
 					<Route path="profile" element={<DashboardLayout />}>
 						<Route index element={<DashboardHome />} />
 						<Route path="user" element={<ArtistDashboardUser />} />
-						<Route path="artists" element={<DashboardArtists />} />
+						<Route path="artists">
+							<Route index element={<DashboardArtists />} />
+							<Route path="addArtist" element={<LabelAddArtist />} />
+						</Route>
 						<Route path="releases">
 							<Route index element={<ArtistDashboardReleases />} />
 							<Route path="addAsArtist" element={<ArtistAddRelease />} />
