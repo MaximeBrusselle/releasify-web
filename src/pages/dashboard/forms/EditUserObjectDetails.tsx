@@ -104,7 +104,7 @@ export const EditUserObjectDetails = () => {
 		}));
 	}
 
-	const { steps, goToStep, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep } = useMultiStepForm([
+	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep } = useMultiStepForm([
 		<GeneralInfo {...data} updateFields={updateFields} errors={errors} userType={userType} />,
 		<PfpAndBanner {...data} updateFields={updateFields} errors={errors} />,
 		<Socials {...data} updateFields={updateFields} errors={errors} />,
