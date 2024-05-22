@@ -7,6 +7,7 @@ import { LabelAddReleaseData } from "@/pages/dashboard/forms/LabelAddRelease";
 import { LabelAddArtistData } from "@/pages/dashboard/forms/LabelAddArtist";
 import { UserObjectDetails } from "@/pages/dashboard/forms/EditUserObjectDetails";
 import { UserDetails } from "@/pages/dashboard/forms/EditUserDetails";
+import { EditArtistDetails } from "@/pages/dashboard/forms/EditArtist";
 
 function validateAccountData(data: ArtistRegistrationData | LabelRegistrationData | UserRegistrationData): ValidationReturn {
 	let isValid = true;
@@ -265,6 +266,49 @@ function validateUserDetails(data: UserDetails): ValidationReturn {
 	return { isValid: isValid, errors: errors };
 }
 
+function validateEditArtistGeneralInfo(data: EditArtistDetails): ValidationReturn {
+	let isValid = true;
+	const errors: ValidationFieldErrorMap = {};
+	if (data.name.length > 50) {
+		isValid = false;
+		errors["name"] = "Name must be less than 50 characters.";
+	}
+	if(data.description.length > 300) {
+		isValid = false;
+		errors["description"] = "Description must be less than 300 characters.";
+	}
+	if(data.bookingEmail && data.bookingEmail.length > 0) {
+		const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+		if (!emailRegex.test(data.bookingEmail)) {
+			isValid = false;
+			errors["bookingEmail"] = "Invalid email format.";
+		}
+	}
+	if(data.genreList.length === 0) {
+		isValid = false;
+		errors["genres"] = "At least one genre is required.";
+	}
+	return { isValid: isValid, errors: errors };
+}
+
+function validateEditArtistPfpAndBanner(_: EditArtistDetails): ValidationReturn {
+	return { isValid: true };
+}
+
+function validateEditArtistSocials(_: EditArtistDetails): ValidationReturn {
+	return { isValid: true };
+}
+
+function validateEditArtistNameAndPfp(data: EditArtistDetails): ValidationReturn {
+	let isValid = true;
+	const errors: ValidationFieldErrorMap = {};
+	if (data.name.length > 50) {
+		isValid = false;
+		errors["name"] = "Name must be less than 50 characters.";
+	}
+	return { isValid: isValid, errors: errors };
+}
+
 export {
 	validateAccountData,
 	validateBannerAndGenres,
@@ -284,4 +328,8 @@ export {
 	validatePfpAndBanner,
 	validateEditUserObjectSocials,
 	validateUserDetails,
+	validateEditArtistGeneralInfo,
+	validateEditArtistPfpAndBanner,
+	validateEditArtistSocials,
+	validateEditArtistNameAndPfp,
 };

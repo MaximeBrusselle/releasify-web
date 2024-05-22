@@ -21,6 +21,7 @@ import toast from "react-hot-toast";
 import { ArtistDetail } from "@/data/artists/artistTypes";
 import { LabelDetail } from "@/data/labels/labelTypes";
 import { removeArtistFromLabel } from "@/data/api/label/removeArtistFromLabel";
+import { useNavigate } from "react-router-dom";
 
 type DetailInfoProps = {
 	selected: ArtistDetail | null;
@@ -28,6 +29,7 @@ type DetailInfoProps = {
 };
 
 export const DetailInfo = (props: DetailInfoProps) => {
+	const navigate = useNavigate();
 	let { selected } = props;
 	const { handleRowDeleted } = props;
 	const userType = JSON.parse(localStorage.getItem("userData")!).type;
@@ -37,8 +39,8 @@ export const DetailInfo = (props: DetailInfoProps) => {
 			if (!selected) {
 				throw new Error("No artist selected");
 			}
-			if(selected.id.startsWith("notExists")) {
-				await removeArtistFromLabel({ userType: userType, artist: selected })
+			if (selected.id.startsWith("notExists")) {
+				await removeArtistFromLabel({ userType: userType, artist: selected });
 			} else {
 				await removeArtistFromLabel({ userType: userType, artistId: selected.id });
 			}
@@ -47,6 +49,12 @@ export const DetailInfo = (props: DetailInfoProps) => {
 		} catch (error: any) {
 			toast.error(error.message);
 		}
+	}
+
+	function handleEditArtist() {
+		if (!selected) return;
+		localStorage.setItem("artistData", JSON.stringify(selected));
+		navigate(`/profile/artists/editArtist`);
 	}
 
 	return (
@@ -70,7 +78,7 @@ export const DetailInfo = (props: DetailInfoProps) => {
 							<CardDescription>{selected.description || "n/a"}</CardDescription>
 						</div>
 						<div className="ml-auto flex items-center gap-1">
-							<Button size="sm" variant="outline" className="h-8 gap-1">
+							<Button size="sm" variant="outline" className="h-8 gap-1" onClick={handleEditArtist}>
 								<Pencil className="h-3.5 w-3.5" />
 								<span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Edit</span>
 							</Button>
@@ -183,12 +191,13 @@ export const DetailInfo = (props: DetailInfoProps) => {
 							<div className="font-bold">Social links</div>
 							<div className="flex flex-row gap-4 flex-wrap">
 								{selected.socials.length === 0 && <p>No socials found</p>}
-								{selected.socials.length > 0 && selected.socials.map((url) => (
-									<a href={url.url} target="_blank" className="flex items-center gap-1 text-muted-foreground hover:underline" key={url.platform.name}>
-										<img src={getImageUrl("socialplatforms", url.platform.logo)} alt={url.platform.name} className="h-4 w-4" />
-										{url.platform.name}
-									</a>
-								))}
+								{selected.socials.length > 0 &&
+									selected.socials.map((url) => (
+										<a href={url.url} target="_blank" className="flex items-center gap-1 text-muted-foreground hover:underline" key={url.platform.name}>
+											<img src={getImageUrl("socialplatforms", url.platform.logo)} alt={url.platform.name} className="h-4 w-4" />
+											{url.platform.name}
+										</a>
+									))}
 							</div>
 						</div>
 					</CardContent>
