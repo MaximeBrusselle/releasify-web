@@ -6,6 +6,7 @@ import { AddReleaseData } from "@/pages/dashboard/forms/ArtistAddRelease";
 import { LabelAddReleaseData } from "@/pages/dashboard/forms/LabelAddRelease";
 import { LabelAddArtistData } from "@/pages/dashboard/forms/LabelAddArtist";
 import { UserObjectDetails } from "@/pages/dashboard/forms/EditUserObjectDetails";
+import { UserDetails } from "@/pages/dashboard/forms/EditUserDetails";
 
 function validateAccountData(data: ArtistRegistrationData | LabelRegistrationData | UserRegistrationData): ValidationReturn {
 	let isValid = true;
@@ -254,6 +255,16 @@ function validateEditUserObjectSocials(_: UserObjectDetails, __: string): Valida
 	return { isValid: true };
 }
 
+function validateUserDetails(data: UserDetails): ValidationReturn {
+	let isValid = true;
+	const errors: ValidationFieldErrorMap = {};
+	if (data.name.length > 50) {
+		isValid = false;
+		errors["name"] = "Name must be less than 50 characters.";
+	}
+	return { isValid: isValid, errors: errors };
+}
+
 export {
 	validateAccountData,
 	validateBannerAndGenres,
@@ -272,4 +283,5 @@ export {
 	valideEditObjectGeneralInfo,
 	validatePfpAndBanner,
 	validateEditUserObjectSocials,
+	validateUserDetails,
 };

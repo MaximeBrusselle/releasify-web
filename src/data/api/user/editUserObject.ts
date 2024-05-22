@@ -1,6 +1,6 @@
 import { auth, db } from "@/auth/firebase";
 import { UserObjectDetails } from "@/pages/dashboard/forms/EditUserObjectDetails";
-import imgbbUpload from "./imgbbUpload";
+import imgbbUpload from "../other/imgbbUpload";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 
@@ -10,9 +10,9 @@ export async function editUserObject(data: UserObjectDetails, userType: string):
 		if (!user) {
 			throw new Error("User not logged in.");
 		}
-        if(userType === "user") {
-            throw new Error("User cannot edit user object.");
-        }
+		if (userType === "user") {
+			throw new Error("User cannot edit user object.");
+		}
 		const objectRef = doc(db, `${userType}s`, data.objectId);
 		const object = await getDoc(objectRef);
 		if (!object.exists()) {
@@ -20,7 +20,7 @@ export async function editUserObject(data: UserObjectDetails, userType: string):
 		}
 		const objectData = object.data();
 		let pfp: string = "https://i.ibb.co/8m050zG/default.png";
-		if (typeof data.profilePicture === 'string' && objectData.profilePicture === data.profilePicture) {
+		if (typeof data.profilePicture === "string" && objectData.profilePicture === data.profilePicture) {
 			pfp = data.profilePicture as string;
 		} else if (data.profilePicture instanceof File) {
 			try {
@@ -31,7 +31,7 @@ export async function editUserObject(data: UserObjectDetails, userType: string):
 			}
 		}
 		let banner: string = "https://i.ibb.co/yBvCgT5/default-banner.jpg";
-		if (typeof data.bannerPicture === 'string' && objectData.bannerPicture === data.bannerPicture) {
+		if (typeof data.bannerPicture === "string" && objectData.bannerPicture === data.bannerPicture) {
 			banner = data.bannerPicture as string;
 		} else if (data.bannerPicture instanceof File) {
 			try {
@@ -41,20 +41,20 @@ export async function editUserObject(data: UserObjectDetails, userType: string):
 				banner = "https://i.ibb.co/yBvCgT5/default-banner.jpg";
 			}
 		}
-        let newObject: any = {
-            socials: data.urls,
+		let newObject: any = {
+			socials: data.urls,
 			genres: data.genreList,
-            profilePicture: pfp,
+			profilePicture: pfp,
 			bannerPicture: banner,
-        };
-        if(userType === "artist") {
-            newObject["artistName"] = data.name;
-            newObject["bookingEmail"] = data.contactEmail;
-        }
-        if(userType === "label") {
-            newObject["name"] = data.name;
-            newObject["contactEmail"] = data.contactEmail;
-        }
+		};
+		if (userType === "artist") {
+			newObject["artistName"] = data.name;
+			newObject["bookingEmail"] = data.contactEmail;
+		}
+		if (userType === "label") {
+			newObject["name"] = data.name;
+			newObject["contactEmail"] = data.contactEmail;
+		}
 		if (userType === "artist" && data.realName !== "") {
 			newObject["realName"] = data.realName;
 		}
@@ -68,7 +68,7 @@ export async function editUserObject(data: UserObjectDetails, userType: string):
 			displayName: data.name,
 			photoURL: pfp,
 		});
-        return { code: "success", message: "User object updated." };
+		return { code: "success", message: "User object updated." };
 	} catch (error: any) {
 		return { code: "error", message: error.message };
 	}

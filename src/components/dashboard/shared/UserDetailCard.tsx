@@ -20,6 +20,7 @@ type UserDetailCardProps = {
 export const UserDetailCard = (props: UserDetailCardProps) => {
 	const { data, userData } = props;
 	const currentUser = useContext(AuthContext).currentUser as User;
+	const userType = JSON.parse(localStorage.getItem("userData")!).type;
 
 	return (
 		<Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
@@ -45,7 +46,7 @@ export const UserDetailCard = (props: UserDetailCardProps) => {
 					{data.realName && <CardDescription>{data.realName}</CardDescription>}
 				</div>
 				<div className="ml-auto flex items-center gap-1">
-					<Link to={"/profile/user/editObject"}>
+					<Link to={userType === "user" ? "/profile/user/editUser" : "/profile/user/editObject"}>
 						<Button size="sm" variant="outline" className="h-8 gap-1">
 							<Pencil className="h-3.5 w-3.5" />
 							<span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Edit</span>

@@ -1,80 +1,41 @@
 import { ValidationFieldErrorMap, ValidationReturn, useMultiStepForm } from "@/components/form/useMultiStepForm";
 import { Progress } from "@/components/ui/progress";
-import { Genre } from "@/data/genres/genreTypes";
-import { ReleasePlatform } from "@/data/releases/releaseTypes";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { ArtistDetail } from "@/data/artists/artistTypes";
-import { LabelDetail } from "@/data/labels/labelTypes";
-import { getArtistIndex } from "@/data/api/artist/getArtistIndex";
-import { getLabelIndex } from "@/data/api/label/getLabelIndex";
-import { Socials } from "@/components/form/edituser/Socials";
-import { PfpAndBanner } from "@/components/form/edituser/PfpAndBanner";
-import { GeneralInfo } from "@/components/form/edituser/GeneralInfo";
-import { validateEditUserObjectSocials, validatePfpAndBanner, valideEditObjectGeneralInfo } from "@/components/form/validations";
-import { editUserObject } from "@/data/api/user/editUserObject";
+import { validateUserDetails } from "@/components/form/validations";
+import { AuthContext } from "@/auth/AuthProvider";
+import { User } from "firebase/auth";
+import { UserPfpAndName } from "@/components/form/edituser/UserPfpAndName";
+import { editNormalUser } from "@/data/api/user/editNormalUser";
 
-type UserObjectDetails = {
-	objectId: string;
+type UserDetails = {
 	name: string;
-	realName: string;
-	description: string | undefined;
-	urls: ReleasePlatform[];
-	genreList: Genre[];
 	profilePicture: File | string;
-	bannerPicture: File | string;
-	contactEmail: string;
 };
 
-export type { UserObjectDetails };
+export type { UserDetails };
 
-export const EditUserObjectDetails = () => {
+export const EditUserDetails = () => {
 	let initialized = useRef(false);
 	const navigate = useNavigate();
+	const currentUser = useContext(AuthContext).currentUser as User;
 	useEffect(() => {
 		if (initialized.current) return;
 		initialized.current = true;
 		async function fetchData() {
 			const userData = JSON.parse(localStorage.getItem("userData")!);
-			switch (userData.type) {
-				case "artist":
-					const artistSegments = userData.artistObject._key.path.segments;
-					const artistObj: ArtistDetail = await getArtistIndex(artistSegments[artistSegments.length - 1]);
-					setData({
-						objectId: artistObj.id,
-						name: artistObj.artistName,
-						realName: artistObj.realName || "",
-						description: artistObj.description,
-						urls: artistObj.socials,
-						genreList: artistObj.genres,
-						profilePicture: artistObj.profilePicture,
-						bannerPicture: artistObj.bannerPicture,
-						contactEmail: artistObj.bookingEmail || "",
-					});
-					break;
-				case "label":
-					const labelSegments = userData.labelObject._key.path.segments;
-					const labelObject: LabelDetail = await getLabelIndex(labelSegments[labelSegments.length - 1]);
-					setData({
-						objectId: labelObject.id,
-						name: labelObject.name,
-						realName: "",
-						description: labelObject.description,
-						urls: labelObject.socials,
-						genreList: labelObject.genres,
-						profilePicture: labelObject.profilePicture,
-						bannerPicture: labelObject.bannerPicture,
-						contactEmail: labelObject.contactEmail || "",
-					});
-					break;
-				default:
-					toast("You are a normal user, redirected to correct page.", {
-						icon: "🚫",
-					});
-					navigate("/profile/user/editUser");
-					break;
+			if (userData.type === "user") {
+				setData({
+					name: currentUser.displayName || "",
+					profilePicture: currentUser.photoURL || "",
+				});
+			} else {
+				toast("You are not a normal user, redirected to correct page.", {
+					icon: "🚫",
+				});
+				navigate("/profile/user/editObject");
 			}
 		}
 		try {
@@ -86,21 +47,14 @@ export const EditUserObjectDetails = () => {
 	}, []);
 
 	const userType = JSON.parse(localStorage.getItem("userData")!).type;
-	const INITIAL_DATA: UserObjectDetails = {
-		objectId: "",
+	const INITIAL_DATA: UserDetails = {
 		name: "",
-		realName: "",
-		description: "",
-		urls: [],
-		genreList: [],
 		profilePicture: "",
-		bannerPicture: "",
-		contactEmail: "",
 	};
-	const [data, setData] = useState<UserObjectDetails>(INITIAL_DATA);
+	const [data, setData] = useState<UserDetails>(INITIAL_DATA);
 	const [errors, setErrors] = useState<ValidationFieldErrorMap>({});
 	const [done, setDone] = useState(false);
-	function updateFields(newData: Partial<UserObjectDetails>) {
+	function updateFields(newData: Partial<UserDetails>) {
 		setData((prevData) => ({
 			...prevData,
 			...newData,
@@ -108,17 +62,16 @@ export const EditUserObjectDetails = () => {
 	}
 
 	const { steps, currentStepIndex, currentStep, isFirstStep, isLastStep, nextStep, prevStep } = useMultiStepForm([
-		<GeneralInfo {...data} updateFields={updateFields} errors={errors} userType={userType} />,
-		<PfpAndBanner {...data} updateFields={updateFields} errors={errors} />,
-		<Socials {...data} updateFields={updateFields} errors={errors} />,
+		//TODO: add the page
+		<UserPfpAndName {...data} updateFields={updateFields} errors={errors} />,
 	]);
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		// Validate the current step before allowing submission
-		const validationFunctions = [valideEditObjectGeneralInfo, validatePfpAndBanner, validateEditUserObjectSocials];
-		const { isValid, errors }: ValidationReturn = validationFunctions[currentStepIndex](data, userType);
+		const validationFunctions = [validateUserDetails];
+		const { isValid, errors }: ValidationReturn = validationFunctions[currentStepIndex](data);
 
 		if (isValid) {
 			if (!isLastStep) {
@@ -127,7 +80,7 @@ export const EditUserObjectDetails = () => {
 			}
 			toast.promise(
 				new Promise(async (resolve, reject) => {
-					const result = await editUserObject(data, userType);
+					const result = await editNormalUser(data, userType);
 					if (result?.code !== "success") {
 						setErrors({ all: result.message });
 						reject(result.message);

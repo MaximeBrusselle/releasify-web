@@ -179,6 +179,14 @@ const updates: Update[] = [
         addedFeatures: [
             "You can now edit your user info as an artist or label",
         ],
+    },
+    {
+        version: "0.9.2",
+        date: new Date("2024-05-22"),
+        name: "Edit User Info as user",
+        addedFeatures: [
+            "You can now edit your user info as a normal user",
+        ],
     }
 ];
 
