@@ -12,7 +12,7 @@ export async function editNormalUser(data: UserDetails, userType: string): Promi
 		if (userType !== "user") {
 			throw new Error("Account type is not user");
 		}
-		let pfp: string = "https://i.ibb.co/8m050zG/default.png";
+		let pfp: string = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 		if (typeof data.profilePicture === "string" && user.photoURL === data.profilePicture) {
 			pfp = data.profilePicture as string;
 		} else if (data.profilePicture instanceof File) {
@@ -20,7 +20,7 @@ export async function editNormalUser(data: UserDetails, userType: string): Promi
 				pfp = await imgbbUpload(data.profilePicture);
 			} catch (error: any) {
 				console.error(`Failed to upload profile: ${error}`);
-				pfp = "https://i.ibb.co/8m050zG/default.png";
+				pfp = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 			}
 		}
 		await updateProfile(auth.currentUser!, {

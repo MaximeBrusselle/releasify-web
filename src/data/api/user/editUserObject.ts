@@ -19,7 +19,7 @@ export async function editUserObject(data: UserObjectDetails, userType: string):
 			throw new Error("User object not found.");
 		}
 		const objectData = object.data();
-		let pfp: string = "https://i.ibb.co/8m050zG/default.png";
+		let pfp: string = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 		if (typeof data.profilePicture === "string" && objectData.profilePicture === data.profilePicture) {
 			pfp = data.profilePicture as string;
 		} else if (data.profilePicture instanceof File) {
@@ -27,7 +27,7 @@ export async function editUserObject(data: UserObjectDetails, userType: string):
 				pfp = await imgbbUpload(data.profilePicture);
 			} catch (error: any) {
 				console.error(`Failed to upload profile: ${error}`);
-				pfp = "https://i.ibb.co/8m050zG/default.png";
+				pfp = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 			}
 		}
 		let banner: string = "https://i.ibb.co/yBvCgT5/default-banner.jpg";

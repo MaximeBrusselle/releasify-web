@@ -17,7 +17,7 @@ export async function editLabelArtist(data: EditArtistDetails, originalData: Edi
 		const labelDoc = await getDoc(doc(db, "labels", objectId));
 		if (labelDoc.exists()) {
 			const label = labelDoc.data();
-			let pfp: string = "https://i.ibb.co/8m050zG/default.png";
+			let pfp: string = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 			if (typeof data.profilePicture === "string" && originalData.profilePicture === data.profilePicture) {
 				pfp = data.profilePicture as string;
 			} else if (data.profilePicture instanceof File) {
@@ -25,7 +25,7 @@ export async function editLabelArtist(data: EditArtistDetails, originalData: Edi
 					pfp = await imgbbUpload(data.profilePicture);
 				} catch (error: any) {
 					console.error(`Failed to upload profile: ${error}`);
-					pfp = "https://i.ibb.co/8m050zG/default.png";
+					pfp = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 				}
 			}
 			if (data.id.startsWith("notExists")) {

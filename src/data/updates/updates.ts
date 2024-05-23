@@ -187,7 +187,23 @@ const updates: Update[] = [
         addedFeatures: [
             "You can now edit your user info as a normal user",
         ],
-    }
+    },
+    {
+        version: "0.10.0",
+        date: new Date("2024-05-22"),
+        name: "Edit artist from label",
+        addedFeatures: [
+            "You can now edit artists from your label",
+        ],
+    },
+    {
+        version: "0.10.0",
+        date: new Date("2024-05-22"),
+        name: "Edit releases",
+        addedFeatures: [
+            "You can now edit releases",
+        ],
+    },
 ];
 
 export default updates;

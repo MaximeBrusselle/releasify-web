@@ -8,6 +8,7 @@ import { LabelAddArtistData } from "@/pages/dashboard/forms/LabelAddArtist";
 import { UserObjectDetails } from "@/pages/dashboard/forms/EditUserObjectDetails";
 import { UserDetails } from "@/pages/dashboard/forms/EditUserDetails";
 import { EditArtistDetails } from "@/pages/dashboard/forms/EditArtist";
+import { EditReleaseDetails } from "@/pages/dashboard/forms/EditRelease";
 
 function validateAccountData(data: ArtistRegistrationData | LabelRegistrationData | UserRegistrationData): ValidationReturn {
 	let isValid = true;
@@ -309,6 +310,52 @@ function validateEditArtistNameAndPfp(data: EditArtistDetails): ValidationReturn
 	return { isValid: isValid, errors: errors };
 }
 
+function validateEditReleaseGeneralInfo(data: EditReleaseDetails): ValidationReturn {
+	let isValid = true;
+	const errors: ValidationFieldErrorMap = {};
+	if (data.name.length > 50) {
+		isValid = false;
+		errors["name"] = "Name must be less than 50 characters.";
+	}
+	if(data.description.length > 300) {
+		isValid = false;
+		errors["description"] = "Description must be less than 300 characters.";
+	}
+	if(!data.releaseDate) {
+		isValid = false;
+		errors["releaseDate"] = "Release date is required.";
+	}
+	return { isValid: isValid, errors: errors };
+}
+
+function validateEditReleasePictureAndGenres(data: EditReleaseDetails): ValidationReturn {
+	let isValid = true;
+	const errors: ValidationFieldErrorMap = {};
+	if(data.genreList.length === 0) {
+		isValid = false;
+		errors["genres"] = "At least one genre is required.";
+	}
+	return { isValid: isValid, errors: errors };
+}
+
+function validateEditReleaseArtistsLabel(data: EditReleaseDetails): ValidationReturn {
+	let isValid = true;
+	const errors: ValidationFieldErrorMap = {};
+	if(data.artists.length === 0 && data.newArtists.length === 0) {
+		isValid = false;
+		errors["allFields"] = "At least one artist is required.";
+	}
+	return { isValid: isValid, errors: errors };
+}
+
+function validateEditReleaseArtistsArtist(_: EditReleaseDetails): ValidationReturn {
+	return { isValid: true };
+}
+
+function validateEditReleaseSocials(_: EditReleaseDetails): ValidationReturn {
+	return { isValid: true };
+}
+
 export {
 	validateAccountData,
 	validateBannerAndGenres,
@@ -332,4 +379,9 @@ export {
 	validateEditArtistPfpAndBanner,
 	validateEditArtistSocials,
 	validateEditArtistNameAndPfp,
+	validateEditReleaseGeneralInfo,
+	validateEditReleasePictureAndGenres,
+	validateEditReleaseArtistsLabel,
+	validateEditReleaseSocials,
+	validateEditReleaseArtistsArtist,
 };

@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
 import { ReleaseIndex } from "@/data/releases/releaseTypes";
 import { formattedDateOptions } from "@/lib/formattedDateOptions";
-import { getImageUrl } from "@/lib/utils";
+import { formatDateToYYYYMMDD, getImageUrl } from "@/lib/utils";
 import ReleaseDetailArtistHover from "./ReleaseDetailArtistHover";
 import ReleaseDetailLabelHover from "./ReleaseDetailLabelHover";
 import {
@@ -24,6 +24,7 @@ import { removeRelease } from "@/data/api/release/removeRelease";
 import toast from "react-hot-toast";
 import { ArtistDetail } from "@/data/artists/artistTypes";
 import { LabelDetail } from "@/data/labels/labelTypes";
+import { useNavigate } from "react-router-dom";
 
 type DetailInfoProps = {
 	selected: ReleaseIndex | null;
@@ -33,6 +34,7 @@ type DetailInfoProps = {
 export const DetailInfo = (props: DetailInfoProps) => {
 	const { selected, handleRowDeleted } = props;
 	const locale = window.navigator.language;
+	const navigate = useNavigate();
 
 	async function handleDelete() {
 		try {
@@ -42,6 +44,13 @@ export const DetailInfo = (props: DetailInfoProps) => {
 		} catch (error: any) {
 			toast.error(error.message);
 		}
+	}
+
+	function handleEditRelease() {
+		if (!selected) return;
+		localStorage.setItem("releaseData", JSON.stringify(selected));	
+		localStorage.setItem("releaseDate", formatDateToYYYYMMDD(new Date(selected.releaseDate)));
+		navigate(`/profile/releases/editRelease`);
 	}
 
 	return (
@@ -65,7 +74,7 @@ export const DetailInfo = (props: DetailInfoProps) => {
 							<CardDescription>📆 {new Date(selected.releaseDate).toLocaleDateString(locale, formattedDateOptions)}</CardDescription>
 						</div>
 						<div className="ml-auto flex items-center gap-1">
-							<Button size="sm" variant="outline" className="h-8 gap-1">
+							<Button size="sm" variant="outline" className="h-8 gap-1" onClick={handleEditRelease}>
 								<Pencil className="h-3.5 w-3.5" />
 								<span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Edit</span>
 							</Button>

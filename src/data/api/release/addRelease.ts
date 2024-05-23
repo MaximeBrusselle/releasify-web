@@ -49,10 +49,10 @@ export const addRelease = async (data: AddReleaseData): Promise<any> => {
 				labelPicture = await imgbbUpload(data.newLabel.profilePicture!);
 			} catch (error) {
 				console.error(`Failed to upload label picture: ${error}`);
-				labelPicture = "https://i.ibb.co/8m050zG/default.png";
+				labelPicture = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 			}
 		} else {
-			labelPicture = "https://i.ibb.co/8m050zG/default.png";
+			labelPicture = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
 		}
 		createdLabel = {
 			name: data.newLabel.name,

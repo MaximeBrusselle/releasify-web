@@ -60,4 +60,8 @@ export const breadCrumbMap: BreadCrumbMap = {
         name: "Edit Artist",
         href: "/profile/artists/editArtist",
     },
+    editRelease: {
+        name: "Edit Release",
+        href: "/profile/releases/editRelease",
+    }
 };

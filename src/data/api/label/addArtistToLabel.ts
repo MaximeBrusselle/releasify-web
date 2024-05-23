@@ -54,10 +54,10 @@ export async function addArtistToLabel(userType: string, data: LabelAddArtistDat
                     profilePicture = await imgbbUpload(artist.profilePicture);
                 } catch (error) {
                     console.error(`Failed to upload artist picture: ${error}`);
-                    profilePicture = "https://i.ibb.co/8m050zG/default.png";
+                    profilePicture = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
                 }
             } else {
-                profilePicture = "https://i.ibb.co/8m050zG/default.png";
+                profilePicture = "https://i.ibb.co/nPh6PCt/default-pfp.jpg";
             }
             const newArtist = {
                 artistName: artist.artistName,

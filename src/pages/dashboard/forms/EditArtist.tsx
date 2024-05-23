@@ -6,8 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { validateEditArtistGeneralInfo, validateEditArtistNameAndPfp, validateEditArtistPfpAndBanner, validateEditArtistSocials, validateEditUserObjectSocials, validatePfpAndBanner, valideEditObjectGeneralInfo } from "@/components/form/validations";
-import { editUserObject } from "@/data/api/user/editUserObject";
+import { validateEditArtistGeneralInfo, validateEditArtistNameAndPfp, validateEditArtistPfpAndBanner, validateEditArtistSocials } from "@/components/form/validations";
 import { Socials } from "@/components/form/artist/Socials";
 import { GeneralInfo } from "@/components/form/artist/GeneralInfo";
 import { PfpAndBanner } from "@/components/form/artist/PfpAndBanner";
@@ -132,9 +131,7 @@ export const EditArtist = () => {
 					<PfpAndBanner {...data} updateFields={updateFields} errors={errors} />,
 					<Socials {...data} updateFields={updateFields} errors={errors} />,
 			  ]
-			: [
-					<NameAndPfp {...data} updateFields={updateFields} errors={errors} />,
-			]
+			: [<NameAndPfp {...data} updateFields={updateFields} errors={errors} />]
 	);
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -158,6 +155,7 @@ export const EditArtist = () => {
 						return;
 					}
 					setDone(true);
+					localStorage.removeItem("artistData");
 					resolve(result);
 				}),
 				{
@@ -198,7 +196,7 @@ export const EditArtist = () => {
 								</button>
 							)}
 							<button className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-								{isLastStep ? "Edit User" : "Next"}
+								{isLastStep ? "Edit Artist" : "Next"}
 							</button>
 						</div>
 					</form>
