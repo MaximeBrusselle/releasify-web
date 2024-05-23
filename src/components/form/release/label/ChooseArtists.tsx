@@ -111,7 +111,7 @@ export function ChooseArtistsAsLabel({ myArtists, otherArtists, newArtists, upda
 	}
 
 	return (
-		<FormWrapper title="Collab with..." allError={errors["allFields"]}>
+		<FormWrapper title="Artists" allError={errors["allFields"]}>
 			<div className="flex flex-col items-start justify-center w-full h-full gap-8 sm:max-w-[70vw]">
 				<div className="flex flex-col gap-2 w-full">
 					<div className="flex flex-row justify-center items-center m-0 p-0">

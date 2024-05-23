@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import ArtistDetailInfo from "@/pages/artists/artistDetail/ArtistDetailInfo";
 import { getArtistById } from "@/data/api/artist/getArtistById";
 import toast from "react-hot-toast";
+import { followArtist } from "@/data/api/user/followArtist";
+import { notificationsArtist } from "@/data/api/user/notificationsArtist";
 
 const ArtistDetailPage: React.FC = () => {
 	const initialized = useRef(false);
@@ -42,14 +44,23 @@ const ArtistDetailPage: React.FC = () => {
 		}
 	}, []);
 
-	const [following, setFollowing] = useState(false);
-	const [notification, setNotification] = useState(false);
+	const userData = JSON.parse(localStorage.getItem("userData")!);
 
-	const handleFollow = () => {
+	const [following, setFollowing] = useState(userData.following.some((followedArtist: string) => followedArtist === artistId));
+	const [notification, setNotification] = useState(userData.notifications.some((notifiedArtist: string) => notifiedArtist === artistId));
+
+	const handleFollow = async () => {
+		const result = await followArtist(artistId!, following);
+		if (result.code === "success") {
+			toast.success(result.message);
+		} else {
+			toast.error(result.message);
+		}
 		setFollowing(!following);
 	};
 
-	const handleNotification = () => {
+	const handleNotification = async () => {
+		await notificationsArtist(artistId!, notification);
 		setNotification(!notification);
 	};
 

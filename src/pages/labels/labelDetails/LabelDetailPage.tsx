@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import ArtistCard from "@/components/artists/ArtistCard";
 import { getLabelById } from "@/data/api/label/getLabelById";
 import toast from "react-hot-toast";
+import { followLabel } from "@/data/api/label/followLabel";
+import { notificationsLabel } from "@/data/api/label/notificationsLabel";
 
 const LabelDetailPage: React.FC = () => {
 	const initialized = useRef(false);
@@ -30,14 +32,27 @@ const LabelDetailPage: React.FC = () => {
 		}
 	}, []);
 
-	const [following, setFollowing] = useState(false);
-	const [notification, setNotification] = useState(false);
+	const userData = JSON.parse(localStorage.getItem("userData")!);
+	const [following, setFollowing] = useState(userData.following.some((followedLabel: string) => followedLabel === labelId));
+	const [notification, setNotification] = useState(userData.notifications.some((notifiedLabel: string) => notifiedLabel === labelId));
 
-	const handleFollow = () => {
+	const handleFollow = async () => {
+		const result = await followLabel(labelId!, following);
+		if (result.code === "success") {
+			toast.success(result.message);
+		} else {
+			toast.error(result.message);
+		}
 		setFollowing(!following);
 	};
 
-	const handleNotification = () => {
+	const handleNotification = async () => {
+		const result = await notificationsLabel(labelId!, notification);
+		if (result.code === "success") {
+			toast.success(result.message);
+		} else {
+			toast.error(result.message);
+		}
 		setNotification(!notification);
 	};
 
